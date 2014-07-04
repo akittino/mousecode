@@ -1,5 +1,7 @@
 Specyfikacja wymagań
 
+
+
 Scenariusze gry 
 
 Gra nr 1 - kolory:
@@ -13,6 +15,11 @@ Podobna do gry przedstawionej John’a Freemana (Mouse Tracker) użytkownik otrz
 Gra nr 4 - refleks:
 
 Na ekranie będzie wyświetlała się czerwone kółko, w momencie zmiany koloru na zielony, gracz będzie musiał jak najszybciej kliknąć przycisk na przeciwległym końcu planszy. W tym momencie zostanie zapisany czas reakcji. Z każdym kolejnym poziomem, będzie się zmniejszał limit czasu dozwolonego na kliknięcie przycisku. W momencie kiedy wyjedzie myszą za szybko z wyznaczonego obszaru lub nie zdąży kliknąć przycisku w wyznaczonym czasie, przegra.
+
+
+
+
+
 
 
 Konfiguracja

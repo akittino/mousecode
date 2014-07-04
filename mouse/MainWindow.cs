@@ -15,10 +15,14 @@ namespace mysz
     {
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
+        const int GRANULATION = 5;
+        int lastX = 0;
+        int lastY = 0;
         Thread coordinateUpdater;
         Thread coordinateSaver;
         List<String> coordsList;
         public main_form()
+        // main form - main function in app
         {
             InitializeComponent();
             coordinateUpdater = new Thread(updateCoordinates);
@@ -28,7 +32,8 @@ namespace mysz
             coordinateUpdater.Start();
         }
 
-        public int getX()
+        public int getX() 
+        // return X mouse position
         {
            int X = MousePosition.X - this.Left - pictureBox.Location.X - 8;
             // -8 is shifted because of strange window coordinates
@@ -40,6 +45,7 @@ namespace mysz
         }
 
         public int getY()
+        // return Y mouse position
         {
             int Y = MousePosition.Y - this.Top - pictureBox.Location.Y - 30;
             // -30 is shifted because of strange window coordinates
@@ -51,6 +57,7 @@ namespace mysz
         }
 
         public string getXstring()
+        // return X mouse position as String
         {
             int x = getX();
             if (x < 10)
@@ -62,6 +69,7 @@ namespace mysz
         }
 
         public string getYstring()
+        // return Y mouse position as String
         {
             int y = getY();
             if (y < 10)
@@ -73,6 +81,7 @@ namespace mysz
         }
 
         void updateCoordinates()
+        // updating coordinates on GUI in left top
         {
             while (true)
             {
@@ -91,31 +100,39 @@ namespace mysz
         }
 
         void saveCoordinates()
+        // writing coordinates to list of coords
         {
             while (true)
             {
-                coordsList.Add(string.Format("    {0}            {1}", getXstring(), getYstring()));
-                if (this.coordinates_list.InvokeRequired)
+                if (!(lastX + GRANULATION > getX() && lastX - GRANULATION < getX() && lastY + GRANULATION > getY() && lastY - GRANULATION < getY()))
                 {
-                    this.coordinates_list.BeginInvoke((MethodInvoker)delegate() {
+                    coordsList.Add(string.Format("    {0}            {1}", getXstring(), getYstring()));
+                    if (this.coordinates_list.InvokeRequired)
+                    {
+                        this.coordinates_list.BeginInvoke((MethodInvoker)delegate()
+                        {
+                            this.coordinates_list.DataSource = null;
+                            this.coordinates_list.Items.Clear();
+                            this.coordinates_list.DataSource = coordsList;
+                            int VisibleCoordsNumber = coordinates_list.ClientSize.Height / coordinates_list.ItemHeight;
+                            coordinates_list.TopIndex = Math.Max(coordinates_list.Items.Count - VisibleCoordsNumber + 1, 0);
+                        });
+                    }
+                    else
+                    {
                         this.coordinates_list.DataSource = null;
                         this.coordinates_list.Items.Clear();
                         this.coordinates_list.DataSource = coordsList;
-                        int VisibleCoordsNumber = coordinates_list.ClientSize.Height / coordinates_list.ItemHeight;
-                        coordinates_list.TopIndex = Math.Max(coordinates_list.Items.Count - VisibleCoordsNumber + 1, 0);
-                   });
-                }
-                else
-                {
-                    this.coordinates_list.DataSource = null;
-                    this.coordinates_list.Items.Clear();
-                    this.coordinates_list.DataSource = coordsList; 
+                    }
+                    lastX = getX();
+                    lastY = getY();
                 }
                 Thread.Sleep(10);
             }
         }
 
         private void start_button_Click(object sender, EventArgs e)
+        // button starting coords save
         {
             coordsList.Clear();
             coordsList.Add(string.Format("    {0}            {1}", getXstring(), getYstring()));
@@ -127,13 +144,15 @@ namespace mysz
         }
 
         private void stop_button_Click(object sender, EventArgs e)
+        // button stoping coords save
         {
             if (coordinateSaver.IsAlive)
                 coordinateSaver.Abort();
-            /*TODO zmienic watki zeby nie rzucalo wyjatkow*/
+            /*TODO zmienic watki zeby nie rzucalo wyjatkow (???)*/
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        // killing alive threads when closing window
         {
             if(coordinateUpdater.IsAlive) 
                 coordinateUpdater.Abort();
@@ -141,9 +160,10 @@ namespace mysz
                 coordinateSaver.Abort();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void chart_draw_button_click(object sender, EventArgs e)
+        // button drawing a path of mouse move
         {
-        //    //TODO ustalić odpowiednią skalę i odległość, zależną od okna!
+        //    //TODO ustalić odpowiednią skalę i odległość, zależną od okna! (???)
             //pictureBox;
             if (coordsList.Count < 2)
                 return;

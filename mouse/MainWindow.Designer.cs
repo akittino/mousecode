@@ -112,7 +112,7 @@
             this.chart_button.TabIndex = 9;
             this.chart_button.Text = "Fill picture";
             this.chart_button.UseVisualStyleBackColor = true;
-            this.chart_button.Click += new System.EventHandler(this.button1_Click_1);
+            this.chart_button.Click += new System.EventHandler(this.chart_draw_button_click);
             // 
             // pictureBox
             // 
