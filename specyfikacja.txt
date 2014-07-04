@@ -1,0 +1,28 @@
+Specyfikacja wymagań
+
+Scenariusze gry 
+
+Gra nr 1 - kolory:
+
+Prosta gra w której użytkownik mając podany okrąg pomalowany na kolor A, musi sprawdzić czy tekst wpisany w okrąg opisujący kolor B jest równy kolorowi A, jeśli tak wybiera jeden z przycisków wyświetlonych, poniżej obrazka z okręgiem i tekstem - z odpowiedziami “Tak” oraz “Nie”, jeśli kolory są takie same to powinien wybrać “Tak”, jeśli nie to analogicznie odpowiedź “Nie”. Na przykład jeżeli pojawi się niebieski okrąg, a napis wewnątrz będzie brzmiał “zielony”, gracz powinien wciśnąć “Nie”. Czas na odpowiedź nie będzie się skracała, czas gry jest stały (1min), to od użytkownika zależy jego czas reakcji i wynik gry. Im więcej poprawnych odpowiedzi udzieli, tym więcej zdobędzie punktów.
+
+Gra nr 3 - przynależność:
+
+Podobna do gry przedstawionej John’a Freemana (Mouse Tracker) użytkownik otrzyma obrazek, a w górnych rogach gry będą 2 odpowiedzi, np. rysunek kota i odpowiedź “ssak” i “gad”. Ograniczeniem będzie czas wyboru danej opcji i będzie się zmniejszać wraz z każdym kolejnym pytaniem. 
+
+Gra nr 4 - refleks:
+
+Na ekranie będzie wyświetlała się czerwone kółko, w momencie zmiany koloru na zielony, gracz będzie musiał jak najszybciej kliknąć przycisk na przeciwległym końcu planszy. W tym momencie zostanie zapisany czas reakcji. Z każdym kolejnym poziomem, będzie się zmniejszał limit czasu dozwolonego na kliknięcie przycisku. W momencie kiedy wyjedzie myszą za szybko z wyznaczonego obszaru lub nie zdąży kliknąć przycisku w wyznaczonym czasie, przegra.
+
+
+Konfiguracja
+
+W każdej z gier konfiguracji będzie podlegać sposób pomiaru i limitu czasu. Możliwe będzie ustawienie nieskończonej ilości czasu, dowolnej stałej ilości czasu lub zmniejszającej się z każdym kolejnym poziomem gry.
+
+Pobierane dane i sposób ich zapisywania.
+
+Rejestrowane będą punkty-współrzędne przez który przechodzi mysz, próbkowane co 10ms, lub w momencie dłuższego przystanku w jednym miejscu, przy zmianie położenia o więcej niż 2 piksele. Dodatkowo do każdego rekordu będzie zapisywany numer wybranej gry i jej poziom, nazwa użytkownika, numer porządkowy wybranej przez niego emotikonki odwzorowującej jego emocje i czas gry lub wynik, w zależności od gry. Wszystkie dane z jednego poziomu będą zapisywane w jednej linii w pliku .csv czyli poszczególne dane będą rodzielone przecinkami:
+
+<id_gry>,<poziom_gry>,<nazwa_uzytkownika>,<id_emotikonki>,<czas_gry>,<wspolrzedne>
+
+Podczas wyświetlania w programie będzie możliwe automatyczne wyselekcjonowanie z pliku csv danych dotyczących tylko jednej gry bądź tylko jednego gracza.
