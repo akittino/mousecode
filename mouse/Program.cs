@@ -15,7 +15,7 @@ namespace mysz
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new main_form());
+            Application.Run(new login_main_window());
         }
     }
 }

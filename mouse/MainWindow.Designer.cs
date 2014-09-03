@@ -36,8 +36,8 @@
             this.stop_button = new System.Windows.Forms.Button();
             this.coordinates_list = new System.Windows.Forms.ListBox();
             this.chart_button = new System.Windows.Forms.Button();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.picture_box = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picture_box)).BeginInit();
             this.SuspendLayout();
             // 
             // start_button
@@ -114,14 +114,14 @@
             this.chart_button.UseVisualStyleBackColor = true;
             this.chart_button.Click += new System.EventHandler(this.chart_draw_button_click);
             // 
-            // pictureBox
+            // picture_box
             // 
-            this.pictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox.Location = new System.Drawing.Point(160, 39);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(800, 600);
-            this.pictureBox.TabIndex = 10;
-            this.pictureBox.TabStop = false;
+            this.picture_box.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.picture_box.Location = new System.Drawing.Point(160, 39);
+            this.picture_box.Name = "picture_box";
+            this.picture_box.Size = new System.Drawing.Size(800, 600);
+            this.picture_box.TabIndex = 10;
+            this.picture_box.TabStop = false;
             // 
             // main_form
             // 
@@ -136,13 +136,13 @@
             this.Controls.Add(this.X_label);
             this.Controls.Add(this.Y_value);
             this.Controls.Add(this.X_value);
-            this.Controls.Add(this.pictureBox);
+            this.Controls.Add(this.picture_box);
             this.MaximumSize = new System.Drawing.Size(1000, 700);
             this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "main_form";
             this.Text = "MouseTracker v2.0 by D&O";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picture_box)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,7 +158,7 @@
         private System.Windows.Forms.Button stop_button;
         private System.Windows.Forms.ListBox coordinates_list;
         private System.Windows.Forms.Button chart_button;
-        private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.PictureBox picture_box;
     }
 }
 

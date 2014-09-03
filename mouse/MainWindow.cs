@@ -35,7 +35,7 @@ namespace mysz
         public int getX() 
         // return X mouse position
         {
-           int X = MousePosition.X - this.Left - pictureBox.Location.X - 8;
+           int X = MousePosition.X - this.Left - picture_box.Location.X - 8;
             // -8 is shifted because of strange window coordinates
            if (X < 0)
                return 0;
@@ -47,7 +47,7 @@ namespace mysz
         public int getY()
         // return Y mouse position
         {
-            int Y = MousePosition.Y - this.Top - pictureBox.Location.Y - 30;
+            int Y = MousePosition.Y - this.Top - picture_box.Location.Y - 30;
             // -30 is shifted because of strange window coordinates
             if (Y < 0)
                 return 0;
@@ -165,7 +165,7 @@ namespace mysz
             if (coordsList.Count < 2)
                 return;
             Pen p = new Pen(Color.Blue, 2f);
-            Graphics g = pictureBox.CreateGraphics();
+            Graphics g = picture_box.CreateGraphics();
             g.Clear(Color.White);
             int lastx = Convert.ToInt32(coordsList[0].Substring(0, 10));
             int lasty = Convert.ToInt32(coordsList[0].Substring(10));
