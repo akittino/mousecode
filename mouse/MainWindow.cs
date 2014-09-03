@@ -148,7 +148,6 @@ namespace mysz
         {
             if (coordinateSaver.IsAlive)
                 coordinateSaver.Abort();
-            /*TODO zmienic watki zeby nie rzucalo wyjatkow (???)*/
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -163,8 +162,6 @@ namespace mysz
         private void chart_draw_button_click(object sender, EventArgs e)
         // button drawing a path of mouse move
         {
-        //    //TODO ustalić odpowiednią skalę i odległość, zależną od okna! (???)
-            //pictureBox;
             if (coordsList.Count < 2)
                 return;
             Pen p = new Pen(Color.Blue, 2f);
