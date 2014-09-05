@@ -1,6 +1,6 @@
 ﻿namespace mysz
 {
-    partial class main_form
+    partial class AdminPanel
     {
         /// <summary>
         /// Required designer variable.
@@ -48,7 +48,7 @@
             this.start_button.TabIndex = 0;
             this.start_button.Text = "Start";
             this.start_button.UseVisualStyleBackColor = true;
-            this.start_button.Click += new System.EventHandler(this.start_button_Click);
+            this.start_button.Click += new System.EventHandler(this.StartButtonClick);
             // 
             // X_value
             // 
@@ -94,7 +94,7 @@
             this.stop_button.TabIndex = 7;
             this.stop_button.Text = "Stop";
             this.stop_button.UseVisualStyleBackColor = true;
-            this.stop_button.Click += new System.EventHandler(this.stop_button_Click);
+            this.stop_button.Click += new System.EventHandler(this.StopButtonClick);
             // 
             // coordinates_list
             // 
@@ -112,7 +112,7 @@
             this.chart_button.TabIndex = 9;
             this.chart_button.Text = "Fill picture";
             this.chart_button.UseVisualStyleBackColor = true;
-            this.chart_button.Click += new System.EventHandler(this.chart_draw_button_click);
+            this.chart_button.Click += new System.EventHandler(this.ChartDrawButtonClick);
             // 
             // picture_box
             // 
@@ -123,7 +123,7 @@
             this.picture_box.TabIndex = 10;
             this.picture_box.TabStop = false;
             // 
-            // main_form
+            // AdminPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -139,9 +139,9 @@
             this.Controls.Add(this.picture_box);
             this.MaximumSize = new System.Drawing.Size(1000, 700);
             this.MinimumSize = new System.Drawing.Size(1000, 700);
-            this.Name = "main_form";
+            this.Name = "AdminPanel";
             this.Text = "MouseTracker v2.0 by D&O";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminPanelClosing);
             ((System.ComponentModel.ISupportInitialize)(this.picture_box)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

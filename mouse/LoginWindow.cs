@@ -20,7 +20,7 @@ namespace mysz
         {
             admin_panel_button.Enabled = false;
             //TODO enable button when close admin panel
-            new main_form().Show();
+            new AdminPanel().Show();
         }
     }
 }

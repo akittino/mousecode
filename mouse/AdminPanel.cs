@@ -11,7 +11,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace mysz
 {
-    public partial class main_form : Form
+    public partial class AdminPanel : Form
     {
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
@@ -21,18 +21,18 @@ namespace mysz
         Thread coordinateUpdater;
         Thread coordinateSaver;
         List<String> coordsList;
-        public main_form()
+        public AdminPanel()
         // main form - main function in app
         {
             InitializeComponent();
-            coordinateUpdater = new Thread(updateCoordinates);
-            coordinateSaver = new Thread(saveCoordinates);
+            coordinateUpdater = new Thread(UpdateCoordinates);
+            coordinateSaver = new Thread(SaveCoordinates);
             coordsList = new List<String>();
             coordinates_list.DataSource = coordsList;  
             coordinateUpdater.Start();
         }
 
-        public int getX() 
+        public int GetX() 
         // return X mouse position
         {
            int X = MousePosition.X - this.Left - picture_box.Location.X - 8;
@@ -44,7 +44,7 @@ namespace mysz
            return X;
         }
 
-        public int getY()
+        public int GetY()
         // return Y mouse position
         {
             int Y = MousePosition.Y - this.Top - picture_box.Location.Y - 30;
@@ -56,10 +56,10 @@ namespace mysz
             return Y;
         }
 
-        public string getXstring()
+        public string GetXString()
         // return X mouse position as String
         {
-            int x = getX();
+            int x = GetX();
             if (x < 10)
                 return "    " + x.ToString();
             else if (x < 100)
@@ -68,10 +68,10 @@ namespace mysz
                 return x.ToString();
         }
 
-        public string getYstring()
+        public string GetYString()
         // return Y mouse position as String
         {
-            int y = getY();
+            int y = GetY();
             if (y < 10)
                 return "    " + y.ToString();
             else if (y < 100)
@@ -80,33 +80,33 @@ namespace mysz
                 return y.ToString();
         }
 
-        void updateCoordinates()
+        void UpdateCoordinates()
         // updating coordinates on GUI in left top
         {
             while (true)
             {
                 if (this.X_value.InvokeRequired || this.Y_value.InvokeRequired)
                 {
-                    this.X_value.BeginInvoke((MethodInvoker)delegate() { this.X_value.Text = getXstring(); ;});
-                    this.Y_value.BeginInvoke((MethodInvoker)delegate() { this.Y_value.Text = getYstring(); ;});
+                    this.X_value.BeginInvoke((MethodInvoker)delegate() { this.X_value.Text = GetXString(); ;});
+                    this.Y_value.BeginInvoke((MethodInvoker)delegate() { this.Y_value.Text = GetYString(); ;});
                 }
                 else
                 {
-                    this.X_value.Text = getXstring();
-                    this.Y_value.Text = getYstring();
+                    this.X_value.Text = GetXString();
+                    this.Y_value.Text = GetYString();
                 }
                 Thread.Sleep(10);
             }
         }
 
-        void saveCoordinates()
+        void SaveCoordinates()
         // writing coordinates to list of coords
         {
             while (true)
             {
-                if (!(lastX + GRANULATION > getX() && lastX - GRANULATION < getX() && lastY + GRANULATION > getY() && lastY - GRANULATION < getY()))
+                if (!(lastX + GRANULATION > GetX() && lastX - GRANULATION < GetX() && lastY + GRANULATION > GetY() && lastY - GRANULATION < GetY()))
                 {
-                    coordsList.Add(string.Format("    {0}            {1}", getXstring(), getYstring()));
+                    coordsList.Add(string.Format("    {0}            {1}", GetXString(), GetYString()));
                     if (this.coordinates_list.InvokeRequired)
                     {
                         this.coordinates_list.BeginInvoke((MethodInvoker)delegate()
@@ -124,33 +124,33 @@ namespace mysz
                         this.coordinates_list.Items.Clear();
                         this.coordinates_list.DataSource = coordsList;
                     }
-                    lastX = getX();
-                    lastY = getY();
+                    lastX = GetX();
+                    lastY = GetY();
                 }
                 Thread.Sleep(10);
             }
         }
 
-        private void start_button_Click(object sender, EventArgs e)
+        private void StartButtonClick(object sender, EventArgs e)
         // button starting coords save
         {
             coordsList.Clear();
-            coordsList.Add(string.Format("    {0}            {1}", getXstring(), getYstring()));
+            coordsList.Add(string.Format("    {0}            {1}", GetXString(), GetYString()));
             if (!coordinateSaver.IsAlive)
             {
-                coordinateSaver = new Thread(saveCoordinates);
+                coordinateSaver = new Thread(SaveCoordinates);
                 coordinateSaver.Start();
             }
         }
 
-        private void stop_button_Click(object sender, EventArgs e)
+        private void StopButtonClick(object sender, EventArgs e)
         // button stoping coords save
         {
             if (coordinateSaver.IsAlive)
                 coordinateSaver.Abort();
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void AdminPanelClosing(object sender, FormClosingEventArgs e)
         // killing alive threads when closing window
         {
             if(coordinateUpdater.IsAlive) 
@@ -159,7 +159,7 @@ namespace mysz
                 coordinateSaver.Abort();
         }
 
-        private void chart_draw_button_click(object sender, EventArgs e)
+        private void ChartDrawButtonClick(object sender, EventArgs e)
         // button drawing a path of mouse move
         {
             if (coordsList.Count < 2)
