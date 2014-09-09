@@ -175,6 +175,7 @@
             this.things_button.TabIndex = 13;
             this.things_button.Text = "Things";
             this.things_button.UseVisualStyleBackColor = true;
+            this.things_button.Click += new System.EventHandler(this.things_button_Click);
             // 
             // games_group_box
             // 

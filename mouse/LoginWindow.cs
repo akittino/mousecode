@@ -82,5 +82,11 @@ namespace mysz
         {
             login_status_label.Text = message;
         }
+
+        private void things_button_Click(object sender, EventArgs e)
+        {
+            var ThingsWindow = new ThingsGameWindow();
+            ThingsWindow.Show();
+        }
     }
 }
