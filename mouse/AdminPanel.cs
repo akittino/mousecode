@@ -16,20 +16,20 @@ namespace mysz
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
-        int lastX = 0;
-        int lastY = 0;
-        Thread coordinateUpdater;
-        Thread coordinateSaver;
-        List<String> coordsList;
+        int LastX = 0;
+        int LastY = 0;
+        Thread CoordinateUpdater;
+        Thread CoordinateSaver;
+        List<String> CoordsList;
         public AdminPanel()
         // main form - main function in app
         {
             InitializeComponent();
-            coordinateUpdater = new Thread(UpdateCoordinates);
-            coordinateSaver = new Thread(SaveCoordinates);
-            coordsList = new List<String>();
-            coordinates_list.DataSource = coordsList;  
-            coordinateUpdater.Start();
+            CoordinateUpdater = new Thread(UpdateCoordinates);
+            CoordinateSaver = new Thread(SaveCoordinates);
+            CoordsList = new List<String>();
+            coordinates_list.DataSource = CoordsList;  
+            CoordinateUpdater.Start();
         }
 
         public int GetX() 
@@ -104,16 +104,16 @@ namespace mysz
         {
             while (true)
             {
-                if (!(lastX + GRANULATION > GetX() && lastX - GRANULATION < GetX() && lastY + GRANULATION > GetY() && lastY - GRANULATION < GetY()))
+                if (!(LastX + GRANULATION > GetX() && LastX - GRANULATION < GetX() && LastY + GRANULATION > GetY() && LastY - GRANULATION < GetY()))
                 {
-                    coordsList.Add(string.Format("    {0}            {1}", GetXString(), GetYString()));
+                    CoordsList.Add(string.Format("    {0}            {1}", GetXString(), GetYString()));
                     if (this.coordinates_list.InvokeRequired)
                     {
                         this.coordinates_list.BeginInvoke((MethodInvoker)delegate()
                         {
                             this.coordinates_list.DataSource = null;
                             this.coordinates_list.Items.Clear();
-                            this.coordinates_list.DataSource = coordsList;
+                            this.coordinates_list.DataSource = CoordsList;
                             int VisibleCoordsNumber = coordinates_list.ClientSize.Height / coordinates_list.ItemHeight;
                             coordinates_list.TopIndex = Math.Max(coordinates_list.Items.Count - VisibleCoordsNumber + 1, 0);
                         });
@@ -122,10 +122,10 @@ namespace mysz
                     {
                         this.coordinates_list.DataSource = null;
                         this.coordinates_list.Items.Clear();
-                        this.coordinates_list.DataSource = coordsList;
+                        this.coordinates_list.DataSource = CoordsList;
                     }
-                    lastX = GetX();
-                    lastY = GetY();
+                    LastX = GetX();
+                    LastY = GetY();
                 }
                 Thread.Sleep(10);
             }
@@ -134,54 +134,54 @@ namespace mysz
         private void StartButtonClick(object sender, EventArgs e)
         // button starting coords save
         {
-            coordsList.Clear();
-            coordsList.Add(string.Format("    {0}            {1}", GetXString(), GetYString()));
-            if (!coordinateSaver.IsAlive)
+            CoordsList.Clear();
+            CoordsList.Add(string.Format("    {0}            {1}", GetXString(), GetYString()));
+            if (!CoordinateSaver.IsAlive)
             {
-                coordinateSaver = new Thread(SaveCoordinates);
-                coordinateSaver.Start();
+                CoordinateSaver = new Thread(SaveCoordinates);
+                CoordinateSaver.Start();
             }
         }
 
         private void StopButtonClick(object sender, EventArgs e)
         // button stoping coords save
         {
-            if (coordinateSaver.IsAlive)
-                coordinateSaver.Abort();
+            if (CoordinateSaver.IsAlive)
+                CoordinateSaver.Abort();
         }
 
         private void AdminPanelClosing(object sender, FormClosingEventArgs e)
         // killing alive threads when closing window
         {
-            if(coordinateUpdater.IsAlive) 
-                coordinateUpdater.Abort();
-            if (coordinateSaver.IsAlive)
-                coordinateSaver.Abort();
+            if(CoordinateUpdater.IsAlive) 
+                CoordinateUpdater.Abort();
+            if (CoordinateSaver.IsAlive)
+                CoordinateSaver.Abort();
         }
 
         private void ChartDrawButtonClick(object sender, EventArgs e)
         // button drawing a path of mouse move
         {
-            if (coordsList.Count < 2)
+            if (CoordsList.Count < 2)
                 return;
             Pen p = new Pen(Color.Blue, 2f);
             Graphics g = picture_box.CreateGraphics();
             g.Clear(Color.White);
-            int lastx = Convert.ToInt32(coordsList[0].Substring(0, 10));
-            int lasty = Convert.ToInt32(coordsList[0].Substring(10));
-            g.DrawEllipse(p, lastx-1, lasty-1, 2, 2);
-            int x = Convert.ToInt32(coordsList[1].Substring(0, 10));
-            int y = Convert.ToInt32(coordsList[1].Substring(10));
+            int LastX = Convert.ToInt32(CoordsList[0].Substring(0, 10));
+            int lasty = Convert.ToInt32(CoordsList[0].Substring(10));
+            g.DrawEllipse(p, LastX-1, lasty-1, 2, 2);
+            int x = Convert.ToInt32(CoordsList[1].Substring(0, 10));
+            int y = Convert.ToInt32(CoordsList[1].Substring(10));
             g.DrawEllipse(p, x - 1, y - 1, 2, 2);
-            g.DrawLine(p, new Point(lastx, lasty), new Point(x, y));
-            for (int i = 2; i < coordsList.Count; i++)
+            g.DrawLine(p, new Point(LastX, lasty), new Point(x, y));
+            for (int i = 2; i < CoordsList.Count; i++)
             {
-                lastx = x;
+                LastX = x;
                 lasty = y;
-                x = Convert.ToInt32(coordsList[i].Substring(0, 10));
-                y = Convert.ToInt32(coordsList[i].Substring(10));
+                x = Convert.ToInt32(CoordsList[i].Substring(0, 10));
+                y = Convert.ToInt32(CoordsList[i].Substring(10));
                 g.DrawEllipse(p, x - 1, y - 1, 2, 2);
-                g.DrawLine(p, new Point(lastx, lasty), new Point(x, y));
+                g.DrawLine(p, new Point(LastX, lasty), new Point(x, y));
             }
 
         }
