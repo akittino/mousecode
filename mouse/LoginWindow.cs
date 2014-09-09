@@ -11,6 +11,8 @@ namespace mysz
 {
     public partial class login_main_window : Form
     {
+        AdminPanel AP;
+        String UserName;
         public login_main_window()
         {
             InitializeComponent();
@@ -18,9 +20,67 @@ namespace mysz
 
         private void admin_panel_button_Click(object sender, EventArgs e)
         {
+            switch(admin_password_textbox.Text)
+            {
+                case "":
+                    logThis("Please enter password to use admin panel.");
+                break;
+
+                case "admin":
+                    logThis("Password correct. Access granted.");
+                    AP = new AdminPanel();
+                    AP.Activated += new EventHandler(AP_Activated);
+                    AP.FormClosed += new FormClosedEventHandler(AP_FormClosed);
+                    AP.Show();
+                break;
+
+                default:
+                    logThis("Password incorrect. Access denied.");
+                break;
+            }
+
+        }
+
+        void AP_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            admin_panel_button.Enabled = true;
+            this.Show();
+        }
+
+        void AP_Activated(object sender, EventArgs e)
+        {
             admin_panel_button.Enabled = false;
-            //TODO enable button when close admin panel
-            new AdminPanel().Show();
+            this.Hide();
+        }
+
+        private void admin_password_textbox_Click(object sender, EventArgs e)
+        {
+            admin_password_textbox.Clear();
+        }
+
+        private void login_button_Click(object sender, EventArgs e)
+        {
+            if (user_name_textbox.Text == "")
+            {
+                logThis("Please enter name before login.");
+            }
+            else if (user_name_textbox.Text.Length > 15)
+            {
+                logThis("User name is too long. Please use valid name.");
+            }
+            else
+            {
+                UserName = user_name_textbox.Text;
+                logThis("Access to games granted. Hello " + UserName + "!");
+                things_button.Enabled = true;
+                colors_button.Enabled = true;
+                reflex_button.Enabled = true;
+            }
+        }
+
+        private void logThis(String message)
+        {
+            login_status_label.Text = message;
         }
     }
 }

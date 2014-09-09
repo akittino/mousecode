@@ -43,6 +43,7 @@
             this.reflex_button = new System.Windows.Forms.Button();
             this.things_button = new System.Windows.Forms.Button();
             this.games_group_box = new System.Windows.Forms.GroupBox();
+            this.admin_password_textbox = new System.Windows.Forms.TextBox();
             this.games_group_box.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,16 +119,17 @@
             // 
             // login_button
             // 
-            this.login_button.Location = new System.Drawing.Point(67, 139);
+            this.login_button.Location = new System.Drawing.Point(206, 124);
             this.login_button.Name = "login_button";
             this.login_button.Size = new System.Drawing.Size(75, 23);
             this.login_button.TabIndex = 8;
             this.login_button.Text = "Log in";
             this.login_button.UseVisualStyleBackColor = true;
+            this.login_button.Click += new System.EventHandler(this.login_button_Click);
             // 
             // admin_panel_button
             // 
-            this.admin_panel_button.Location = new System.Drawing.Point(179, 139);
+            this.admin_panel_button.Location = new System.Drawing.Point(9, 124);
             this.admin_panel_button.Name = "admin_panel_button";
             this.admin_panel_button.Size = new System.Drawing.Size(102, 23);
             this.admin_panel_button.TabIndex = 9;
@@ -137,12 +139,12 @@
             // 
             // login_status_label
             // 
-            this.login_status_label.AutoSize = true;
-            this.login_status_label.Location = new System.Drawing.Point(90, 176);
+            this.login_status_label.Location = new System.Drawing.Point(12, 216);
             this.login_status_label.Name = "login_status_label";
-            this.login_status_label.Size = new System.Drawing.Size(144, 13);
+            this.login_status_label.Size = new System.Drawing.Size(310, 13);
             this.login_status_label.TabIndex = 10;
             this.login_status_label.Text = "Log in before choosing game";
+            this.login_status_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // colors_button
             // 
@@ -179,18 +181,29 @@
             this.games_group_box.Controls.Add(this.colors_button);
             this.games_group_box.Controls.Add(this.things_button);
             this.games_group_box.Controls.Add(this.reflex_button);
-            this.games_group_box.Location = new System.Drawing.Point(12, 220);
+            this.games_group_box.Location = new System.Drawing.Point(12, 255);
             this.games_group_box.Name = "games_group_box";
             this.games_group_box.Size = new System.Drawing.Size(310, 80);
             this.games_group_box.TabIndex = 14;
             this.games_group_box.TabStop = false;
             this.games_group_box.Text = "Games";
             // 
+            // admin_password_textbox
+            // 
+            this.admin_password_textbox.Location = new System.Drawing.Point(9, 154);
+            this.admin_password_textbox.Name = "admin_password_textbox";
+            this.admin_password_textbox.Size = new System.Drawing.Size(100, 20);
+            this.admin_password_textbox.TabIndex = 15;
+            this.admin_password_textbox.Text = "admin";
+            this.admin_password_textbox.UseSystemPasswordChar = true;
+            this.admin_password_textbox.Click += new System.EventHandler(this.admin_password_textbox_Click);
+            // 
             // login_main_window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 312);
+            this.ClientSize = new System.Drawing.Size(334, 345);
+            this.Controls.Add(this.admin_password_textbox);
             this.Controls.Add(this.games_group_box);
             this.Controls.Add(this.login_status_label);
             this.Controls.Add(this.admin_panel_button);
@@ -228,5 +241,6 @@
         private System.Windows.Forms.Button reflex_button;
         private System.Windows.Forms.Button things_button;
         private System.Windows.Forms.GroupBox games_group_box;
+        private System.Windows.Forms.TextBox admin_password_textbox;
     }
 }
