@@ -53,6 +53,8 @@
             this.user_name_textbox.Name = "user_name_textbox";
             this.user_name_textbox.Size = new System.Drawing.Size(150, 20);
             this.user_name_textbox.TabIndex = 0;
+            this.user_name_textbox.Text = "D&O";
+            this.user_name_textbox.TextChanged += new System.EventHandler(this.user_name_textbox_TextChanged);
             // 
             // user_name_label
             // 
