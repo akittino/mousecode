@@ -219,6 +219,10 @@
             this.Controls.Add(this.mood_label);
             this.Controls.Add(this.user_name_label);
             this.Controls.Add(this.user_name_textbox);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(350, 383);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(350, 383);
             this.Name = "login_main_window";
             this.Text = "LoginWindow";
             this.games_group_box.ResumeLayout(false);

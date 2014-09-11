@@ -18,7 +18,7 @@ namespace mysz
         {
             InitializeComponent();
         }
-
+        //TODO if can resize window. mustn't
         private void admin_panel_button_Click(object sender, EventArgs e)
         {
             switch(admin_password_textbox.Text)
