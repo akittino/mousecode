@@ -13,6 +13,7 @@ namespace mysz
     {
         AdminPanel AP;
         ThingsGameWindow ThingsWindow;
+        ReflexGameWindow ReflexWindow;
         String UserName;
         public login_main_window()
         {
@@ -93,6 +94,7 @@ namespace mysz
             colors_button.Enabled = false;
             reflex_button.Enabled = false;
             things_button.Enabled = false;
+            login_button.Enabled = false;
             ThingsWindow.Show();
         }
 
@@ -101,12 +103,34 @@ namespace mysz
             colors_button.Enabled = true;
             reflex_button.Enabled = true;
             things_button.Enabled = true;
+            login_button.Enabled = true;
             logThis("Things game ended.");
         }
 
         private void user_name_textbox_TextChanged(object sender, EventArgs e)
         {
             user_name_textbox.Clear();
+        }
+
+        private void reflex_button_Click(object sender, EventArgs e)
+        {
+            ReflexWindow = new ReflexGameWindow();
+            logThis("Reflex game is running now...");
+            ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
+            colors_button.Enabled = false;
+            reflex_button.Enabled = false;
+            things_button.Enabled = false;
+            login_button.Enabled = false;
+            ReflexWindow.Show();
+        }
+
+        void ReflexWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            colors_button.Enabled = true;
+            reflex_button.Enabled = true;
+            things_button.Enabled = true;
+            login_button.Enabled = true;
+            logThis("Reflex game ended.");
         }
     }
 }

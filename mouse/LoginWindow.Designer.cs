@@ -167,6 +167,7 @@
             this.reflex_button.TabIndex = 12;
             this.reflex_button.Text = "Reflex";
             this.reflex_button.UseVisualStyleBackColor = true;
+            this.reflex_button.Click += new System.EventHandler(this.reflex_button_Click);
             // 
             // things_button
             // 
