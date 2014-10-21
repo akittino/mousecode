@@ -42,8 +42,8 @@
             // playButton
             // 
             this.playButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.playButton.Font = new System.Drawing.Font("Iskoola Pota", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playButton.ForeColor = System.Drawing.Color.Indigo;
+            this.playButton.Font = new System.Drawing.Font("Iskoola Pota", 35.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playButton.ForeColor = System.Drawing.Color.Black;
             this.playButton.Image = ((System.Drawing.Image)(resources.GetObject("playButton.Image")));
             this.playButton.Location = new System.Drawing.Point(266, 31);
             this.playButton.Name = "playButton";
