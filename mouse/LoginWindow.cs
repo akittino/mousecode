@@ -132,5 +132,11 @@ namespace mysz
             login_button.Enabled = true;
             logThis("Reflex game ended.");
         }
+
+        private void colors_button_Click(object sender, EventArgs e)
+        {
+            ColorsGameWindow cgw = new ColorsGameWindow();
+            cgw.Show();
+        }
     }
 }

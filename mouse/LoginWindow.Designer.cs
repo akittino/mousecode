@@ -157,6 +157,7 @@
             this.colors_button.TabIndex = 11;
             this.colors_button.Text = "Colors";
             this.colors_button.UseVisualStyleBackColor = true;
+            this.colors_button.Click += new System.EventHandler(this.colors_button_Click);
             // 
             // reflex_button
             // 
