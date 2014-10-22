@@ -53,7 +53,7 @@
             this.user_name_textbox.Name = "user_name_textbox";
             this.user_name_textbox.Size = new System.Drawing.Size(150, 20);
             this.user_name_textbox.TabIndex = 0;
-            this.user_name_textbox.Text = "D&O";
+            this.user_name_textbox.Text = "DO";
             this.user_name_textbox.TextChanged += new System.EventHandler(this.user_name_textbox_TextChanged);
             // 
             // user_name_label
@@ -206,7 +206,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 345);
+            this.ClientSize = new System.Drawing.Size(334, 344);
             this.Controls.Add(this.admin_password_textbox);
             this.Controls.Add(this.games_group_box);
             this.Controls.Add(this.login_status_label);

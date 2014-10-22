@@ -127,7 +127,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 662);
+            this.ClientSize = new System.Drawing.Size(984, 661);
             this.Controls.Add(this.chart_button);
             this.Controls.Add(this.stop_button);
             this.Controls.Add(this.start_button);
@@ -140,7 +140,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 700);
             this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "AdminPanel";
-            this.Text = "MouseTracker v2.0 by D&O";
+            this.Text = "Admin Panel";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminPanelClosing);
             ((System.ComponentModel.ISupportInitialize)(this.picture_box)).EndInit();
             this.ResumeLayout(false);

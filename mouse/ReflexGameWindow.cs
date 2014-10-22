@@ -15,6 +15,7 @@ namespace mysz
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
+        bool firstRun = true;
         List<string> CoordsList;
         Thread CoordinateSaver;
         DateTime startTime;
@@ -24,8 +25,7 @@ namespace mysz
             InitializeComponent();
             CoordsList = new List<String>();
             CoordinateSaver = new Thread(SaveCoordinates);
-            CoordinateSaver.Start();
-            CoordinateSaver.Suspend();
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -57,7 +57,13 @@ namespace mysz
             startTime = DateTime.Now;
             Cursor.Position = StartPoint;
             CoordsList.Clear();
-            CoordinateSaver.Resume();
+            if (firstRun)
+            {
+                CoordinateSaver.Start();
+                firstRun = false;
+            }
+            else
+                CoordinateSaver.Resume();
         }
 
         private void stop_button_Click(object sender, EventArgs e)
