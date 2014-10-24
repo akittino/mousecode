@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace mysz
 {
-    public partial class ReflexGameWindow : Form // TODO one Form with getX etc functions
+    public partial class ReflexGameWindow : MouseForm // TODO one Form with getX etc functions
     {
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
@@ -23,9 +23,9 @@ namespace mysz
         public ReflexGameWindow()
         {
             InitializeComponent();
+            SetMouseForm(picture_box, CHART_WIDTH, CHART_HEIGHT);
             CoordsList = new List<String>();
             CoordinateSaver = new Thread(SaveCoordinates);
-            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -76,58 +76,9 @@ namespace mysz
             //TODO implement game
             //TODO find better solution with threads
             //TODO find out what's wrong with time
-            //TODO find out what happened that sometimes it doesn't change to green circle
-            //TODO kill saveCoords threads when closing window
             //TODO save time to file
         }
-
-        public int GetX()
-        // return X mouse position
-        {
-            int X = MousePosition.X - this.Left - picture_box.Location.X - 8;
-            // -8 is shifted because of strange window coordinates
-            if (X < 0)
-                return 0;
-            if (X > CHART_WIDTH)
-                return CHART_WIDTH;
-            return X;
-        }
-
-        public int GetY()
-        // return Y mouse position
-        {
-            int Y = MousePosition.Y - this.Top - picture_box.Location.Y - 30;
-            // -30 is shifted because of strange window coordinates
-            if (Y < 0)
-                return 0;
-            if (Y > CHART_HEIGHT)
-                return CHART_HEIGHT;
-            return Y;
-        }
-
-        public string GetXString()
-        // return X mouse position as String
-        {
-            int x = GetX();
-            if (x < 10)
-                return "    " + x.ToString();
-            else if (x < 100)
-                return "  " + x.ToString();
-            else
-                return x.ToString();
-        }
-
-        public string GetYString()
-        // return Y mouse position as String
-        {
-            int y = GetY();
-            if (y < 10)
-                return "    " + y.ToString();
-            else if (y < 100)
-                return "  " + y.ToString();
-            else
-                return y.ToString();
-        }
+        
 
         void SaveCoordinates()
         // writing coordinates to list of coords
