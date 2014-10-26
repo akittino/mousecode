@@ -12,6 +12,7 @@ namespace mysz
         int CHART_HEIGHT = 0;
         PictureBox picture_box;
 
+        // this method must be called before using any of other methods from this class
         public void SetMouseForm(PictureBox _picture_box, int _chart_width, int _chart_height)
         {
             CHART_WIDTH = _chart_width;
