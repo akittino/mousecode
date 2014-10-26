@@ -11,7 +11,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace mysz
 {
-    public partial class AdminPanel : Form
+    public partial class AdminPanel : MouseForm
     {
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
@@ -25,59 +25,12 @@ namespace mysz
         // main form - main function in app
         {
             InitializeComponent();
+            SetMouseForm(picture_box, CHART_WIDTH, CHART_HEIGHT);
             CoordinateUpdater = new Thread(UpdateCoordinates);
             CoordinateSaver = new Thread(SaveCoordinates);
             CoordsList = new List<String>();
             coordinates_list.DataSource = CoordsList;  
             CoordinateUpdater.Start();
-        }
-
-        public int GetX() 
-        // return X mouse position
-        {
-           int X = MousePosition.X - this.Left - picture_box.Location.X - 8;
-            // -8 is shifted because of strange window coordinates
-           if (X < 0)
-               return 0;
-           if (X > CHART_WIDTH)
-               return CHART_WIDTH;
-           return X;
-        }
-
-        public int GetY()
-        // return Y mouse position
-        {
-            int Y = MousePosition.Y - this.Top - picture_box.Location.Y - 30;
-            // -30 is shifted because of strange window coordinates
-            if (Y < 0)
-                return 0;
-            if (Y > CHART_HEIGHT)
-                return CHART_HEIGHT;
-            return Y;
-        }
-
-        public string GetXString()
-        // return X mouse position as String
-        {
-            int x = GetX();
-            if (x < 10)
-                return "    " + x.ToString();
-            else if (x < 100)
-                return "  " + x.ToString();
-            else
-                return x.ToString();
-        }
-
-        public string GetYString()
-        // return Y mouse position as String
-        {
-            int y = GetY();
-            if (y < 10)
-                return "    " + y.ToString();
-            else if (y < 100)
-                return "  " + y.ToString();
-            else
-                return y.ToString();
         }
 
         void UpdateCoordinates()

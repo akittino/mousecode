@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace mysz
 {
-    public partial class ColorsGameWindow : Form
+    public partial class ColorsGameWindow : MouseForm
     {
         public ColorsGameWindow()
         {
