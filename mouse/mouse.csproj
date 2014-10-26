@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorsGameWindow.cs">
+    <Compile Include="ColorsGameMainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ColorsGameWindow.Designer.cs">
-      <DependentUpon>ColorsGameWindow.cs</DependentUpon>
+    <Compile Include="ColorsGameMainWindow.Designer.cs">
+      <DependentUpon>ColorsGameMainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginWindow.cs">
       <SubType>Form</SubType>
@@ -65,25 +65,37 @@
     <Compile Include="AdminPanel.Designer.cs">
       <DependentUpon>AdminPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainGameWindowBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainGameWindowBase.Designer.cs">
+      <DependentUpon>MainGameWindowBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="MouseForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflexGameMainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReflexGameMainWindow.Designer.cs">
+      <DependentUpon>ReflexGameMainWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReflexGameWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ReflexGameWindow.Designer.cs">
       <DependentUpon>ReflexGameWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="ThingsGameWindow.cs">
+    <Compile Include="ThingsGameMainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ThingsGameWindow.Designer.cs">
-      <DependentUpon>ThingsGameWindow.cs</DependentUpon>
+    <Compile Include="ThingsGameMainWindow.Designer.cs">
+      <DependentUpon>ThingsGameMainWindow.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ColorsGameWindow.resx">
-      <DependentUpon>ColorsGameWindow.cs</DependentUpon>
+    <EmbeddedResource Include="ColorsGameMainWindow.resx">
+      <DependentUpon>ColorsGameMainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
@@ -100,11 +112,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReflexGameMainWindow.resx">
+      <DependentUpon>ReflexGameMainWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReflexGameWindow.resx">
       <DependentUpon>ReflexGameWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ThingsGameWindow.resx">
-      <DependentUpon>ThingsGameWindow.cs</DependentUpon>
+    <EmbeddedResource Include="ThingsGameMainWindow.resx">
+      <DependentUpon>ThingsGameMainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

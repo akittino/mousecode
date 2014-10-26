@@ -12,8 +12,9 @@ namespace mysz
     public partial class login_main_window : Form
     {
         AdminPanel AP;
-        ThingsGameWindow ThingsWindow;
-        ReflexGameWindow ReflexWindow;
+        ThingsGameMainWindow ThingsWindow;
+        ReflexGameMainWindow ReflexWindow;
+        ColorsGameMainWindow ColorsWindow;
         String UserName;
         public login_main_window()
         {
@@ -87,7 +88,7 @@ namespace mysz
 
         private void things_button_Click(object sender, EventArgs e)
         {
-            ThingsWindow = new ThingsGameWindow();
+            ThingsWindow = new ThingsGameMainWindow();
             logThis("Things game is running now...");
             ThingsWindow.FormClosed += new FormClosedEventHandler(ThingsWindow_FormClosed);
             GamesButtonsOff();
@@ -107,7 +108,7 @@ namespace mysz
 
         private void reflex_button_Click(object sender, EventArgs e)
         {
-            ReflexWindow = new ReflexGameWindow();
+            ReflexWindow = new ReflexGameMainWindow();
             logThis("Reflex game is running now...");
             ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
             GamesButtonsOff();
@@ -136,8 +137,18 @@ namespace mysz
 
         private void colors_button_Click(object sender, EventArgs e)
         {
-            ColorsGameWindow cgw = new ColorsGameWindow();
-            cgw.Show();
+
+            ColorsWindow = new ColorsGameMainWindow();
+            logThis("Colors game is running now...");
+            ColorsWindow.FormClosed += new FormClosedEventHandler(ColorsWindow_FormClosed);
+            GamesButtonsOff();
+            ColorsWindow.Show();
+        }
+
+        void ColorsWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            GamesButtonsOn();
+            logThis("Colors game ended.");
         }
     }
 }

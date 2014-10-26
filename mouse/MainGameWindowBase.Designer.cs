@@ -1,6 +1,6 @@
 ﻿namespace mysz
 {
-    partial class ColorsGameWindow
+    partial class MainGameWindowBase
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "ColorsGameWindow";
+            this.Text = "MainGameWindowBase";
         }
 
         #endregion
