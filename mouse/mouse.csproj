@@ -53,6 +53,12 @@
     <Compile Include="ColorsGameMainWindow.Designer.cs">
       <DependentUpon>ColorsGameMainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="ColorsGameWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ColorsGameWindow.Designer.cs">
+      <DependentUpon>ColorsGameWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,12 @@
     </Compile>
     <Compile Include="ThingsGameMainWindow.Designer.cs">
       <DependentUpon>ThingsGameMainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThingsGameWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThingsGameWindow.Designer.cs">
+      <DependentUpon>ThingsGameWindow.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="ColorsGameMainWindow.resx">
       <DependentUpon>ColorsGameMainWindow.cs</DependentUpon>

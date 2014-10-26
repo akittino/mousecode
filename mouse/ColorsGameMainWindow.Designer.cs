@@ -143,6 +143,10 @@
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.helpLabel);
             this.Controls.Add(this.backLabel);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(676, 380);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(676, 380);
             this.Name = "ColorsGameMainWindow";
             this.Text = "ColorsGameWindow";
             this.ResumeLayout(false);
