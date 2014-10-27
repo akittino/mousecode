@@ -20,7 +20,8 @@ namespace mysz
        
         public void playButtonClick(object sender, EventArgs e)
         {
-            //TO DO : implement go to window
+            ColorsGameWindow ColorsWindow = new ColorsGameWindow();
+            ColorsWindow.Show();
         }
 
         public void exitClick(object sender, EventArgs e)

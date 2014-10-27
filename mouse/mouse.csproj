@@ -109,6 +109,9 @@
     <EmbeddedResource Include="ColorsGameMainWindow.resx">
       <DependentUpon>ColorsGameMainWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ColorsGameWindow.resx">
+      <DependentUpon>ColorsGameWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ThingsGameMainWindow.resx">
       <DependentUpon>ThingsGameMainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThingsGameWindow.resx">
+      <DependentUpon>ThingsGameWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

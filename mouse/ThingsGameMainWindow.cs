@@ -20,7 +20,8 @@ namespace mysz
 
         public void playButtonClick(object sender, EventArgs e)
         {
-            //TO DO : implement go to window
+            ThingsGameWindow ThingsWindow = new ThingsGameWindow();
+            ThingsWindow.Show();
         }
 
         public void exitClick(object sender, EventArgs e)

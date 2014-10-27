@@ -23,37 +23,37 @@ namespace mysz
         public ReflexGameWindow()
         {
             InitializeComponent();
-            SetMouseForm(picture_box, CHART_WIDTH, CHART_HEIGHT);
+            SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
             CoordsList = new List<String>();
             CoordinateSaver = new Thread(SaveCoordinates);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void startButton_Click(object sender, EventArgs e)
         {
             Point StartPoint = Cursor.Position;
             Pen p = new Pen(Color.Red, 2f);
             SolidBrush red = new SolidBrush(Color.Red);
             SolidBrush green = new SolidBrush(Color.Green);
-            Graphics g = picture_box.CreateGraphics();
+            Graphics g = gameWindow.CreateGraphics();
 
             g.Clear(Color.White);
             g.FillEllipse(red, -100, 500, 200, 200);
 
-            stop_button.Enabled = false;
-            start_button.Enabled = false;
+            stopButton.Enabled = false;
+            startButton.Enabled = false;
 
             Random rnd = new Random();
             int delay = rnd.Next(30);
             DateTime endTime = DateTime.Now;
-            endTime = endTime.AddMilliseconds(2000 + delay*100);
+            endTime = endTime.AddMilliseconds(2000 + delay * 100);
             DateTime currentTime = DateTime.Now;
 
             while (currentTime <= endTime) //TODO implement case to check if mouse is in red circle,
-            //now workaround with moving cursor
+                //now workaround with moving cursor
                 currentTime = DateTime.Now;
 
             g.FillEllipse(green, -100, 500, 200, 200);
-            stop_button.Enabled = true;
+            stopButton.Enabled = true;
             startTime = DateTime.Now;
             Cursor.Position = StartPoint;
             CoordsList.Clear();
@@ -66,11 +66,12 @@ namespace mysz
                 CoordinateSaver.Resume();
         }
 
-        private void stop_button_Click(object sender, EventArgs e)
+        private void stopButton_Click(object sender, EventArgs e)
         {
-            start_button.Enabled = true;
+            timeLabel.Visible = true;
+            startButton.Enabled = true;
             DateTime currentTime = DateTime.Now;
-            time_label.Text = (currentTime - startTime).TotalMilliseconds + " ms";
+            timeLabel.Text = (currentTime - startTime).TotalMilliseconds + " ms";
             if (CoordinateSaver.IsAlive)
                 CoordinateSaver.Suspend();
             //TODO implement game
@@ -94,6 +95,20 @@ namespace mysz
                 }
                 Thread.Sleep(10);
             }
+        }
+        public void highlightLabel(object sender, EventArgs e)
+        {
+            base.highlightLabel(sender, e);
+        }
+
+        public void removeHighlightLabel(object sender, EventArgs e)
+        {
+            base.removeHighlightLabel(sender, e);
+        }
+
+        private void exitGame(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

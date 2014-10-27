@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -66,6 +67,17 @@ namespace mysz
                 return "  " + y.ToString();
             else
                 return y.ToString();
+        }
+        public void highlightLabel(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            lbl.ForeColor = Color.BlueViolet;
+        }
+
+        public void removeHighlightLabel(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            lbl.ForeColor = Color.Black;
         }
     }
 }
