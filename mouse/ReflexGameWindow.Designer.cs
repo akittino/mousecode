@@ -111,6 +111,7 @@
             this.timeLabel.Size = new System.Drawing.Size(29, 15);
             this.timeLabel.TabIndex = 24;
             this.timeLabel.Text = "time";
+            this.timeLabel.Visible = false;
             // 
             // ReflexGameWindow
             // 

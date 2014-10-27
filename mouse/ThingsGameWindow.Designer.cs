@@ -57,6 +57,7 @@
             this.timeLabel.Size = new System.Drawing.Size(29, 15);
             this.timeLabel.TabIndex = 31;
             this.timeLabel.Text = "time";
+            this.timeLabel.Visible = false;
             // 
             // saveScoreLabel
             // 
