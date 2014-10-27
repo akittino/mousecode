@@ -79,7 +79,7 @@
             this.endGameLabel.Size = new System.Drawing.Size(85, 40);
             this.endGameLabel.TabIndex = 29;
             this.endGameLabel.Text = "End game";
-            this.endGameLabel.Click += new System.EventHandler(this.exitGame);
+            this.endGameLabel.Click += new System.EventHandler(this.endGame);
             this.endGameLabel.MouseEnter += new System.EventHandler(this.highlightLabel);
             this.endGameLabel.MouseLeave += new System.EventHandler(this.removeHighlightLabel);
             // 

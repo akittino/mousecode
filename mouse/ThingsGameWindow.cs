@@ -22,11 +22,11 @@ namespace mysz
 
         public ThingsGameWindow()
         {
+            InitializeComponent();
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
             CoordsList = new List<String>();
             CoordinateSaver = new Thread(SaveCoordinates);
         }
-
         private void startButton_Click(object sender, EventArgs e)
         {
             Point StartPoint = Cursor.Position;
@@ -105,11 +105,9 @@ namespace mysz
             base.removeHighlightLabel(sender, e);
         }
 
-        private void exitGame(object sender, EventArgs e)
+        private void endGame(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        
     }
 }
