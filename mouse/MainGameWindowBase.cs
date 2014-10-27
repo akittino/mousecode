@@ -17,7 +17,6 @@ namespace mysz
         public MainGameWindowBase(Label helpLabel, Label titleLabel, Label exitLabel, Label backLabel, Label settingsLabel,
             Button playButton, TextBox instructionTextBox)
         {
-            InitializeComponent();
             this.helpLabel = helpLabel;
             this.titleLabel = titleLabel;
             this.exitLabel = exitLabel;

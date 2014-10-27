@@ -11,6 +11,8 @@ namespace mysz
 {
     public partial class ColorsGameMainWindow : MainGameWindowBase
     {
+        ColorsGameWindow ColorsWindow;
+
         public ColorsGameMainWindow()
         {
             InitializeComponent();
@@ -20,8 +22,15 @@ namespace mysz
        
         public void playButtonClick(object sender, EventArgs e)
         {
-            ColorsGameWindow ColorsWindow = new ColorsGameWindow();
+            ColorsWindow = new ColorsGameWindow();
+            ColorsWindow.FormClosed += new FormClosedEventHandler(ColorsWindow_FormClosed);
             ColorsWindow.Show();
+            this.Hide();
+        }
+
+        void ColorsWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
         }
 
         public void exitClick(object sender, EventArgs e)
@@ -69,22 +78,22 @@ namespace mysz
             exitLabel.Visible = true;
             backLabel.Visible = false;
         }
-        public void highlightLabel(object sender, EventArgs e)
+        public new void highlightLabel(object sender, EventArgs e)
         {
             base.highlightLabel(sender, e);
         }
 
-        public void removeHighlightLabel(object sender, EventArgs e)
+        public new void removeHighlightLabel(object sender, EventArgs e)
         {
             base.removeHighlightLabel(sender, e);
         }
 
-        public void buttonHighlight(object sender, EventArgs e)
+        public new void buttonHighlight(object sender, EventArgs e)
         {
             base.buttonHighlight(sender, e);
         }
 
-        public void removeHighlightButton(object sender, EventArgs e)
+        public new void removeHighlightButton(object sender, EventArgs e)
         {
             base.removeHighlightButton(sender, e);
         }

@@ -22,7 +22,14 @@ namespace mysz
         private void playButton_Click(object sender, EventArgs e)
         {
             ReflexWindow = new ReflexGameWindow();
+            ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
             ReflexWindow.Show();
+            this.Hide();
+        }
+
+        void ReflexWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
         }
 
         public void exitClick(object sender, EventArgs e)
@@ -55,22 +62,22 @@ namespace mysz
             };
         }
 
-        public void highlightLabel(object sender, EventArgs e)
+        public new void highlightLabel(object sender, EventArgs e)
         {
             base.highlightLabel(sender, e);
         }
 
-        public void removeHighlightLabel(object sender, EventArgs e)
+        public new void removeHighlightLabel(object sender, EventArgs e)
         {
             base.removeHighlightLabel(sender, e);
         }
 
-        public void buttonHighlight(object sender, EventArgs e)
+        public new void buttonHighlight(object sender, EventArgs e)
         {
             base.buttonHighlight(sender, e);
         }
 
-        public void removeHighlightButton(object sender, EventArgs e)
+        public new void removeHighlightButton(object sender, EventArgs e)
         {
             base.removeHighlightButton(sender, e);
         }

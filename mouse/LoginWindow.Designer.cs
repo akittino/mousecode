@@ -54,7 +54,6 @@
             this.user_name_textbox.Size = new System.Drawing.Size(150, 20);
             this.user_name_textbox.TabIndex = 0;
             this.user_name_textbox.Text = "DO";
-            this.user_name_textbox.TextChanged += new System.EventHandler(this.user_name_textbox_TextChanged);
             // 
             // user_name_label
             // 
@@ -201,7 +200,6 @@
             this.admin_password_textbox.TabIndex = 15;
             this.admin_password_textbox.Text = "admin";
             this.admin_password_textbox.UseSystemPasswordChar = true;
-            this.admin_password_textbox.Click += new System.EventHandler(this.admin_password_textbox_Click);
             // 
             // login_main_window
             // 

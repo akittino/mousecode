@@ -11,16 +11,21 @@ namespace mysz
 {
     public partial class login_main_window : Form
     {
-        AdminPanel AP;
+        const String AdminPassword = "admin";
+        
+        AdminPanel AdminWindow;
         ThingsGameMainWindow ThingsWindow;
         ReflexGameMainWindow ReflexWindow;
         ColorsGameMainWindow ColorsWindow;
         String UserName;
+
+
         public login_main_window()
         {
             InitializeComponent();
         }
-        //TODO if can resize window. mustn't
+
+        //TODO if can resize window. mustn't. ALL WINDOWS!!!
         private void admin_panel_button_Click(object sender, EventArgs e)
         {
             switch(admin_password_textbox.Text)
@@ -29,12 +34,12 @@ namespace mysz
                     logThis("Please enter password to use admin panel.");
                 break;
 
-                case "admin":
+                case AdminPassword:
                     logThis("Password correct. Access granted.");
-                    AP = new AdminPanel();
-                    AP.Activated += new EventHandler(AP_Activated);
-                    AP.FormClosed += new FormClosedEventHandler(AP_FormClosed);
-                    AP.Show();
+                    AdminWindow = new AdminPanel();
+                    AdminWindow.FormClosed += new FormClosedEventHandler(AdminWindow_FormClosed);
+                    AdminWindow.Show();
+                    this.Hide();
                 break;
 
                 default:
@@ -44,22 +49,12 @@ namespace mysz
 
         }
 
-        void AP_FormClosed(object sender, FormClosedEventArgs e)
+        private void logThis(String message)
         {
-            admin_panel_button.Enabled = true;
-            this.Show();
+            login_status_label.Text = message;
         }
 
-        void AP_Activated(object sender, EventArgs e)
-        {
-            admin_panel_button.Enabled = false;
-            this.Hide();
-        }
 
-        private void admin_password_textbox_Click(object sender, EventArgs e)
-        {
-            admin_password_textbox.Clear();
-        }
 
         private void login_button_Click(object sender, EventArgs e)
         {
@@ -78,12 +73,6 @@ namespace mysz
                 GamesButtonsOn();
             }
             //TODO name verification -> failes when & in name
-            //TODO can't write !!!
-        }
-
-        private void logThis(String message)
-        {
-            login_status_label.Text = message;
         }
 
         private void things_button_Click(object sender, EventArgs e)
@@ -93,17 +82,7 @@ namespace mysz
             ThingsWindow.FormClosed += new FormClosedEventHandler(ThingsWindow_FormClosed);
             GamesButtonsOff();
             ThingsWindow.Show();
-        }
-
-        void ThingsWindow_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            GamesButtonsOn();
-            logThis("Things game ended.");
-        }
-
-        private void user_name_textbox_TextChanged(object sender, EventArgs e)
-        {
-            user_name_textbox.Clear();
+            this.Hide();
         }
 
         private void reflex_button_Click(object sender, EventArgs e)
@@ -113,13 +92,52 @@ namespace mysz
             ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
             GamesButtonsOff();
             ReflexWindow.Show();
+            this.Hide();
         }
+
+        private void colors_button_Click(object sender, EventArgs e)
+        {
+
+            ColorsWindow = new ColorsGameMainWindow();
+            logThis("Colors game is running now...");
+            ColorsWindow.FormClosed += new FormClosedEventHandler(ColorsWindow_FormClosed);
+            GamesButtonsOff();
+            ColorsWindow.Show();
+            this.Hide();
+        }
+
+
+
+
 
         void ReflexWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
+            this.Show();
             GamesButtonsOn();
             logThis("Reflex game ended.");
         }
+
+        void ColorsWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+            GamesButtonsOn();
+            logThis("Colors game ended.");
+        }
+
+        void ThingsWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+            GamesButtonsOn();
+            logThis("Things game ended.");
+        }
+
+        void AdminWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            admin_panel_button.Enabled = true;
+            this.Show();
+        }
+
+
 
         void GamesButtonsOn()
         {
@@ -133,22 +151,6 @@ namespace mysz
             colors_button.Enabled = false;
             reflex_button.Enabled = false;
             things_button.Enabled = false;
-        }
-
-        private void colors_button_Click(object sender, EventArgs e)
-        {
-
-            ColorsWindow = new ColorsGameMainWindow();
-            logThis("Colors game is running now...");
-            ColorsWindow.FormClosed += new FormClosedEventHandler(ColorsWindow_FormClosed);
-            GamesButtonsOff();
-            ColorsWindow.Show();
-        }
-
-        void ColorsWindow_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            GamesButtonsOn();
-            logThis("Colors game ended.");
         }
     }
 }

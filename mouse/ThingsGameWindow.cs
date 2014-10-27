@@ -95,12 +95,12 @@ namespace mysz
                 Thread.Sleep(10);
             }
         }
-        public void highlightLabel(object sender, EventArgs e)
+        public new void highlightLabel(object sender, EventArgs e)
         {
             base.highlightLabel(sender, e);
         }
 
-        public void removeHighlightLabel(object sender, EventArgs e)
+        public new void removeHighlightLabel(object sender, EventArgs e)
         {
             base.removeHighlightLabel(sender, e);
         }

@@ -11,6 +11,8 @@ namespace mysz
 {
     public partial class ThingsGameMainWindow : MainGameWindowBase
     {
+        ThingsGameWindow ThingsWindow;
+
         public ThingsGameMainWindow()
         {
             InitializeComponent();
@@ -20,8 +22,15 @@ namespace mysz
 
         public void playButtonClick(object sender, EventArgs e)
         {
-            ThingsGameWindow ThingsWindow = new ThingsGameWindow();
+            ThingsWindow = new ThingsGameWindow();
+            ThingsWindow.FormClosed += new FormClosedEventHandler(ThingsWindow_FormClosed);
             ThingsWindow.Show();
+            this.Hide();
+        }
+
+        void ThingsWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
         }
 
         public void exitClick(object sender, EventArgs e)
@@ -70,22 +79,17 @@ namespace mysz
             backLabel.Visible = false;
         }
 
-        public void highlightLabel(object sender, EventArgs e)
+        public new void highlightLabel(object sender, EventArgs e)
         {
             base.highlightLabel(sender, e);
         }
 
-        public void removeHighlightLabel(object sender, EventArgs e)
+        public new void removeHighlightLabel(object sender, EventArgs e)
         {
             base.removeHighlightLabel(sender, e);
         }
 
-        public void buttonHighlight(object sender, EventArgs e)
-        {
-            base.buttonHighlight(sender, e);
-        }
-
-        public void removeHighlightButton(object sender, EventArgs e)
+        public new void removeHighlightButton(object sender, EventArgs e)
         {
             base.removeHighlightButton(sender, e);
         }
