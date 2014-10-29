@@ -28,24 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.stopButton = new System.Windows.Forms.Button();
+            this.stopRButton = new System.Windows.Forms.Button();
             this.gameWindow = new System.Windows.Forms.PictureBox();
             this.startButton = new System.Windows.Forms.Button();
             this.endGameLabel = new System.Windows.Forms.Label();
             this.timeTextLabel = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
+            this.stopLButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).BeginInit();
             this.SuspendLayout();
             // 
-            // stopButton
+            // stopRButton
             // 
-            this.stopButton.Location = new System.Drawing.Point(915, 31);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(57, 23);
-            this.stopButton.TabIndex = 17;
-            this.stopButton.Text = "Stop";
-            this.stopButton.UseVisualStyleBackColor = true;
-            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            this.stopRButton.Location = new System.Drawing.Point(915, 31);
+            this.stopRButton.Name = "stopRButton";
+            this.stopRButton.Size = new System.Drawing.Size(57, 23);
+            this.stopRButton.TabIndex = 17;
+            this.stopRButton.Text = "Stop";
+            this.stopRButton.UseVisualStyleBackColor = true;
+            this.stopRButton.Click += new System.EventHandler(this.stopRButton_Click);
             // 
             // gameWindow
             // 
@@ -58,7 +59,7 @@
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(172, 607);
+            this.startButton.Location = new System.Drawing.Point(542, 607);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(60, 24);
             this.startButton.TabIndex = 12;
@@ -100,16 +101,27 @@
             this.timeLabel.Text = "time";
             this.timeLabel.Visible = false;
             // 
+            // stopLButton
+            // 
+            this.stopLButton.Location = new System.Drawing.Point(172, 31);
+            this.stopLButton.Name = "stopLButton";
+            this.stopLButton.Size = new System.Drawing.Size(57, 23);
+            this.stopLButton.TabIndex = 26;
+            this.stopLButton.Text = "Stop";
+            this.stopLButton.UseVisualStyleBackColor = true;
+            this.stopLButton.Click += new System.EventHandler(this.stopLButton_Click);
+            // 
             // ReflexGameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.stopLButton);
             this.Controls.Add(this.timeTextLabel);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.endGameLabel);
             this.Controls.Add(this.startButton);
-            this.Controls.Add(this.stopButton);
+            this.Controls.Add(this.stopRButton);
             this.Controls.Add(this.gameWindow);
             this.Location = new System.Drawing.Point(172, 41);
             this.MaximizeBox = false;
@@ -127,11 +139,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button stopButton;
+        private System.Windows.Forms.Button stopRButton;
         private System.Windows.Forms.PictureBox gameWindow;
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Label endGameLabel;
         private System.Windows.Forms.Label timeTextLabel;
         private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.Button stopLButton;
     }
 }

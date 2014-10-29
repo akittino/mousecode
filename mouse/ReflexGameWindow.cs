@@ -22,6 +22,7 @@ namespace mysz
         DateTime startTime;
         SolidBrush redBrush, greenBrush, blueBrush;
         Graphics graphics;
+        bool useLeftButton = true;
 
         public ReflexGameWindow()
         {
@@ -37,15 +38,19 @@ namespace mysz
             blueBrush = new SolidBrush(Color.Blue);
             graphics = gameWindow.CreateGraphics();
 
-            stopButton.Enabled = false;
+            stopRButton.Enabled = false;
+            stopLButton.Enabled = false;
 
             graphics.Clear(Color.White);//TODO why nothing appears?
-            graphics.FillEllipse(blueBrush, -100, 500, 200, 200);//TODO why nothing appears?
+            drawEllipse(blueBrush);//TODO why nothing appears?
         }
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            stopButton.Enabled = false;
+            stopRButton.Enabled = false;
+            stopRButton.Visible = false;
+            stopLButton.Enabled = false;
+            stopLButton.Visible = false;
             startButton.Enabled = false;
 
             Random rnd = new Random();
@@ -55,14 +60,16 @@ namespace mysz
             DateTime currentTime = DateTime.Now;
 
             graphics.Clear(Color.White);
-            graphics.FillEllipse(redBrush, -100, 500, 200, 200);
-            writeToPictureBox("Don't move mouse cursor out of Start button until corner color change to green.", 150, 280);
+            drawEllipse(redBrush);
+            writeToPictureBox("Don't move mouse cursor out of Start button until circle color change to green.", 150, 280);
 
             bool waitingFailed = false;
             while (currentTime <= endTime)
             {
-                if ((GetX() > 59 || GetX() < 1) ||
-                    (GetY() > 599 || GetY() < 576))
+                int a = GetX();
+                int b = GetY();
+                if ((GetX() > 429 || GetX() < 370) ||
+                    (GetY() > 599 || GetY() < 577)) // TODO it's very ugly way to do this
                 {
                     waitingFailed = true;
                     break;
@@ -72,17 +79,28 @@ namespace mysz
             if (waitingFailed)
             {
                 graphics.Clear(Color.White);
-                graphics.FillEllipse(blueBrush, -100, 500, 200, 200);
+                drawEllipse(blueBrush);
                 startButton.Enabled = true;
                 writeToPictureBox("Game failed.", 350, 250);
-                writeToPictureBox("Moved out from Start button before corner changed to green.", 200, 280);
+                writeToPictureBox("Moved out from Start button before circle changed to green.", 200, 280);
             }
             else
             {
                 graphics.Clear(Color.White);
-                graphics.FillEllipse(greenBrush, -100, 500, 200, 200);
+                drawEllipse(greenBrush);
                 writeToPictureBox("Now! Push Stop button as fast as you can!", 250, 280);
-                stopButton.Enabled = true;
+                if (rnd.Next(100) >= 50)
+                {
+                    useLeftButton = true;
+                    stopLButton.Visible = true;
+                    stopLButton.Enabled = true;
+                }
+                else
+                {
+                    useLeftButton = false;
+                    stopRButton.Visible = true;
+                    stopRButton.Enabled = true;
+                }
 
                 CoordsList.Clear();
                 if (firstRun)
@@ -102,7 +120,10 @@ namespace mysz
         {
             timeLabel.Visible = true;
             startButton.Enabled = true;
-            stopButton.Enabled = false;
+            stopRButton.Enabled = false;
+            stopRButton.Visible = false;
+            stopLButton.Enabled = false;
+            stopLButton.Visible = false;
             DateTime currentTime = DateTime.Now;
 
             timeLabel.Text = (currentTime - startTime).TotalMilliseconds.ToString() + " ms";
@@ -111,7 +132,7 @@ namespace mysz
             WriteCoordinatesToFile(timeLabel.Text);
 
             graphics.Clear(Color.White);
-            graphics.FillEllipse(blueBrush, -100, 500, 200, 200);
+            drawEllipse(blueBrush);
             writeToPictureBox("Great job! Your game data was just save to file.", 250, 280);
             //TODO decide about feelings
             //TODO find out if something's wrong with time
@@ -124,15 +145,19 @@ namespace mysz
             if (!Directory.Exists(dirPath))
             {
                 Directory.CreateDirectory(dirPath);
-                name = dirPath + @"\data0.csv";
+                if (useLeftButton)  name = dirPath + @"\dataL0.csv";
+                else                name = dirPath + @"\dataR0.csv";
             }
             else
             {
                 DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
-                name = dirPath + @"\data" + dirInfo.GetFiles().Length.ToString() + ".csv";
+                if(useLeftButton)   name = dirPath + @"\dataL" + dirInfo.GetFiles().Length.ToString() + ".csv";
+                else                name = dirPath + @"\dataR" + dirInfo.GetFiles().Length.ToString() + ".csv";
                 while (File.Exists(name))
                 {   // very bad idea, but just to be sure TODO talk about this
-                    name = dirPath + @"\data" + dirInfo.GetFiles().Length.ToString() + 1 + ".csv";
+                    //TODO talk how to save L & R
+                    if(useLeftButton)   name = dirPath + @"\dataL" + dirInfo.GetFiles().Length.ToString() + 1 + ".csv";
+                    else                name = dirPath + @"\dataR" + dirInfo.GetFiles().Length.ToString() + 1 + ".csv";
                 }
             }
             using (StreamWriter sw = new StreamWriter(name))
@@ -174,6 +199,11 @@ namespace mysz
             }
         }
 
+        public void drawEllipse(SolidBrush brush)
+        {
+            graphics.FillEllipse(brush, 300, 500, 200, 200);
+        }
+
         public new void highlightLabel(object sender, EventArgs e)
         {
             base.highlightLabel(sender, e);
@@ -197,6 +227,16 @@ namespace mysz
                 CoordinateSaver.Abort();
             }
              */
+        }
+
+        private void stopRButton_Click(object sender, EventArgs e)
+        {
+            stopButton_Click(sender, e);
+        }
+
+        private void stopLButton_Click(object sender, EventArgs e)
+        {
+            stopButton_Click(sender, e);
         }
     }
 }
