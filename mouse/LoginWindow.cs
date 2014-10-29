@@ -19,7 +19,7 @@ namespace mysz
         ColorsGameMainWindow ColorsWindow;
         String UserName;
 
-
+        //TODO close all threads in other windows
         public login_main_window()
         {
             InitializeComponent();

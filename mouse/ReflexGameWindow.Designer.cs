@@ -31,7 +31,6 @@
             this.stopButton = new System.Windows.Forms.Button();
             this.gameWindow = new System.Windows.Forms.PictureBox();
             this.startButton = new System.Windows.Forms.Button();
-            this.saveScoreLabel = new System.Windows.Forms.Label();
             this.endGameLabel = new System.Windows.Forms.Label();
             this.timeTextLabel = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
@@ -66,18 +65,6 @@
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
-            // 
-            // saveScoreLabel
-            // 
-            this.saveScoreLabel.AutoSize = true;
-            this.saveScoreLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveScoreLabel.Location = new System.Drawing.Point(9, 551);
-            this.saveScoreLabel.Name = "saveScoreLabel";
-            this.saveScoreLabel.Size = new System.Drawing.Size(85, 40);
-            this.saveScoreLabel.TabIndex = 23;
-            this.saveScoreLabel.Text = "Save score";
-            this.saveScoreLabel.MouseEnter += new System.EventHandler(this.highlightLabel);
-            this.saveScoreLabel.MouseLeave += new System.EventHandler(this.removeHighlightLabel);
             // 
             // endGameLabel
             // 
@@ -117,10 +104,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 662);
+            this.ClientSize = new System.Drawing.Size(984, 661);
             this.Controls.Add(this.timeTextLabel);
             this.Controls.Add(this.timeLabel);
-            this.Controls.Add(this.saveScoreLabel);
             this.Controls.Add(this.endGameLabel);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.stopButton);
@@ -132,6 +118,7 @@
             this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "ReflexGameWindow";
             this.Text = "ReflexGameWindow";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReflexGameWindow_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -143,7 +130,6 @@
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.PictureBox gameWindow;
         private System.Windows.Forms.Button startButton;
-        private System.Windows.Forms.Label saveScoreLabel;
         private System.Windows.Forms.Label endGameLabel;
         private System.Windows.Forms.Label timeTextLabel;
         private System.Windows.Forms.Label timeLabel;

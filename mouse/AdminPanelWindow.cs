@@ -120,6 +120,7 @@ namespace mysz
             Pen p = new Pen(Color.Blue, 2f);
             Graphics g = picture_box.CreateGraphics();
             g.Clear(Color.White);
+            //stupid idea, TODO change string to point!
             int LastX = Convert.ToInt32(CoordsList[0].Substring(0, 10));
             int lasty = Convert.ToInt32(CoordsList[0].Substring(10));
             g.DrawEllipse(p, LastX-1, lasty-1, 2, 2);
