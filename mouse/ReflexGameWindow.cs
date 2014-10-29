@@ -113,6 +113,7 @@ namespace mysz
             graphics.Clear(Color.White);
             graphics.FillEllipse(blueBrush, -100, 500, 200, 200);
             writeToPictureBox("Great job! Your game data was just save to file.", 250, 280);
+            //TODO decide about feelings
             //TODO find out if something's wrong with time
         }
 
