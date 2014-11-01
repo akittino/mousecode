@@ -93,5 +93,10 @@ namespace mysz
         {
             base.removeHighlightButton(sender, e);
         }
+
+        public new void buttonHighlight(object sender, EventArgs e)
+        {
+            base.buttonHighlight(sender, e);
+        }
     }
 }

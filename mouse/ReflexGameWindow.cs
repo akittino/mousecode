@@ -126,7 +126,7 @@ namespace mysz
             stopLButton.Visible = false;
             DateTime currentTime = DateTime.Now;
 
-            timeLabel.Text = (currentTime - startTime).TotalMilliseconds.ToString() + " ms";
+            timeLabel.Text = (currentTime - startTime).TotalMilliseconds.ToString("0") + " ms";
 
             if (CoordinateSaver.IsAlive)    CoordinateSaver.Suspend();
             WriteCoordinatesToFile(timeLabel.Text);
