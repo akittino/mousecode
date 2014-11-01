@@ -14,6 +14,7 @@ namespace mysz
 {
     public partial class ThingsGameWindow : MouseForm
     {
+        //TODO add green OK when game completed, and red warning when failed
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
