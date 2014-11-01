@@ -138,7 +138,7 @@ namespace mysz
             //TODO find out if something's wrong with time
         }
 
-        void WriteCoordinatesToFile(String gameTime)
+        void WriteCoordinatesToFile(String gameTimeString)
         {
             String name;
             String dirPath = @".\ReflexGame";
@@ -163,7 +163,7 @@ namespace mysz
             using (StreamWriter sw = new StreamWriter(name))
             {
                 sw.WriteLine(DateTime.Now.ToString());
-                sw.WriteLine(gameTime + " ms");
+                sw.WriteLine(gameTimeString);
                 foreach(Point p in CoordsList)
                 {
                     sw.WriteLine(p.X + " , " + p.Y); 
