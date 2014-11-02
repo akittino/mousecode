@@ -105,16 +105,16 @@ namespace mysz
         private void animation()
         {
             graphics.Clear(Color.White);
-            writeToPictureBox("3", 320, 180, 100);
+            writeToPictureBox(graphics, "3", 320, 180, 100);
             Thread.Sleep(1000);
             graphics.Clear(Color.White);
-            writeToPictureBox("2", 320, 180, 100);
+            writeToPictureBox(graphics, "2", 320, 180, 100);
             Thread.Sleep(1000);
             graphics.Clear(Color.White);
-            writeToPictureBox("1", 320, 180, 100);
+            writeToPictureBox(graphics, "1", 320, 180, 100);
             Thread.Sleep(1000);
             graphics.Clear(Color.White);
-            writeToPictureBox("GO!", 280, 180, 100);
+            writeToPictureBox(graphics, "GO!", 280, 180, 100);
             Thread.Sleep(1000);
             graphics.Clear(Color.White);
             moveCursor();
@@ -155,12 +155,9 @@ namespace mysz
             
         }
 
-        public void writeToPictureBox(String text, int X, int Y, int fontSize)
+        public void writeToPictureBox(Graphics graphics, String text, int X, int Y, int fontSize)
         {
-            using (Font myFont = new Font("Gabriola", fontSize))
-            {
-                graphics.DrawString(text, myFont, Brushes.Black, new Point(X, Y));
-            }
+            base.writeToPictureBox(graphics, text, X, Y, fontSize);
         }
 
         private void yesButton_Click(object sender, EventArgs e)
@@ -222,7 +219,7 @@ namespace mysz
                 playButton.Text = "PLAY AGAIN";
                 
                 playButton.Visible = true;
-                writeToPictureBox("Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
+                writeToPictureBox(graphics, "Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
                 
                 yesButton.Visible = false;
                 noButton.Visible = false;

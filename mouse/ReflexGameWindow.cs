@@ -59,7 +59,7 @@ namespace mysz
 
             graphics.Clear(Color.White);
             drawEllipse(redBrush);
-            writeToPictureBox("Don't move mouse cursor out of Start button until circle color change to green.", 150, 280);
+            writeToPictureBox(graphics, "Don't move mouse cursor out of Start button until circle color change to green.", 150, 280, 15);
 
             bool waitingFailed = false;
             while (currentTime <= endTime)
@@ -79,14 +79,14 @@ namespace mysz
                 graphics.Clear(Color.White);
                 drawEllipse(blueBrush);
                 startButton.Enabled = true;
-                writeToPictureBox("Game failed.", 350, 250);
-                writeToPictureBox("Moved out from Start button before circle changed to green.", 200, 280);
+                writeToPictureBox(graphics,"Game failed.", 350, 250,15);
+                writeToPictureBox(graphics,"Moved out from Start button before circle changed to green.", 200, 280,15);
             }
             else
             {
                 graphics.Clear(Color.White);
                 drawEllipse(greenBrush);
-                writeToPictureBox("Now! Push Stop button as fast as you can!", 250, 280);
+                writeToPictureBox(graphics,"Now! Push Stop button as fast as you can!", 250, 280,15);
                 if (rnd.Next(100) >= 50)
                 {
                     useLeftButton = true;
@@ -131,7 +131,7 @@ namespace mysz
 
             graphics.Clear(Color.White);
             drawEllipse(blueBrush);
-            writeToPictureBox("Great job! Your game data was just save to file.", 250, 280);
+            writeToPictureBox(graphics, "Great job! Your game data was just save to file.", 250, 280, 15);
             //TODO decide about feelings
             //TODO find out if something's wrong with time
         }
@@ -173,28 +173,12 @@ namespace mysz
         void SaveCoordinates()
         // writing coordinates to list of coords
         {
-            int LastX = 0, LastY = 0;
-            while (true)
-            {
-                if (!( LastX + GRANULATION > GetX() 
-                    && LastX - GRANULATION < GetX() 
-                    && LastY + GRANULATION > GetY() 
-                    && LastY - GRANULATION < GetY() ))
-                {
-                    CoordsList.Add(new Point(GetX(), GetY()));
-                    LastX = GetX();
-                    LastY = GetY();
-                }
-                Thread.Sleep(10);
-            }
+           base.SaveCoordinates(GRANULATION, CoordsList);
         }
 
-        public void writeToPictureBox(String text, int X, int Y)
+        public void writeToPictureBox(Graphics graphics, String text, int X, int Y, int fontSize)
         {
-            using (Font myFont = new Font("Gabriola", 15))
-            {
-                graphics.DrawString(text, myFont, Brushes.Black, new Point(X, Y));
-            }
+            base.writeToPictureBox(graphics, text, X, Y, fontSize);
         }
 
         public void drawEllipse(SolidBrush brush)

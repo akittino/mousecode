@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace mysz
@@ -75,6 +77,32 @@ namespace mysz
         {
             Label lbl = (Label)sender;
             lbl.ForeColor = Color.Black;
+        }
+
+        public void writeToPictureBox(Graphics graphics, String text, int X, int Y, int fontSize)
+        {
+            using (Font myFont = new Font("Gabriola", fontSize))
+            {
+                graphics.DrawString(text, myFont, Brushes.Black, new Point(X, Y));
+            }
+        }
+        public void SaveCoordinates(int GRANULATION, List<Point> CoordsList)
+        // writing coordinates to list of coords
+        {
+            int LastX = 0, LastY = 0;
+            while (true)
+            {
+                if (!(LastX + GRANULATION > GetX()
+                    && LastX - GRANULATION < GetX()
+                    && LastY + GRANULATION > GetY()
+                    && LastY - GRANULATION < GetY()))
+                {
+                    CoordsList.Add(new Point(GetX(), GetY()));
+                    LastX = GetX();
+                    LastY = GetY();
+                }
+                Thread.Sleep(10);
+            }
         }
     }
 }
