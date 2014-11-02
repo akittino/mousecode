@@ -111,6 +111,7 @@ namespace mysz
 
             graphics.FillEllipse(circleBrush, 200, 80, 400, 400);
             textColor = textColorsBase[rnd.Next(0, 5)];
+            //TODO first it should be randomized if the colors should be different or no, cuz now there 1% chance to be the same!
             graphics.DrawString(textColor, new Font("Gabriola", 80), Brushes.White, new Point(280, 180));
         }
 
@@ -181,7 +182,12 @@ namespace mysz
         private void moveCursor()
         {
             this.Cursor = new Cursor(Cursor.Current.Handle);
-            Cursor.Position = new Point(640, 400);
+            //TODO make dependency on where the window is docked, cuz when move the window, it move cursor to wrong place
+            //possible fix below
+            Cursor.Position = new Point((gameWindow.Size.Width / 2) + gameWindow.Location.X + this.Location.X, 
+                (gameWindow.Size.Height / 2) + gameWindow.Location.Y + this.Location.Y);    
+            //Cursor.Position = new Point(640, 400);       
+
         }
     }
 }
