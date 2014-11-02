@@ -21,6 +21,9 @@ namespace mysz
         int minutes = 0, seconds = 0;
         Thread CoordinateSaver;
         List<Point> CoordsList;
+        bool firstRun = true;
+        string userName;
+        int quantityOfAnswers = 0;
 
         public ColorsGameWindow(string userName)
         {
@@ -40,6 +43,8 @@ namespace mysz
             textColorsBase.Add("Yellow");
             textColorsBase.Add("Pink");
             CoordsList = new List<Point>();
+            CoordinateSaver = new Thread(SaveCoordinates);
+            this.userName = userName;
         }
 
         public new void highlightLabel(object sender, EventArgs e)
@@ -80,6 +85,16 @@ namespace mysz
 
             timer1.Start();
             drawEclipse();
+            CoordsList.Clear();
+            if (firstRun)
+            {
+                CoordinateSaver.Start();
+                firstRun = false;
+            }
+            else
+            {
+                CoordinateSaver.Resume();
+            }
         }
         public void setTime()
         {
@@ -161,6 +176,7 @@ namespace mysz
                 moveCursor();
                 drawEclipse();
             }
+            quantityOfAnswers++;
         }
 
         private void noButton_Click(object sender, EventArgs e)
@@ -176,6 +192,7 @@ namespace mysz
                 moveCursor();
                 drawEclipse();
             }
+            quantityOfAnswers++;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -209,6 +226,8 @@ namespace mysz
                 
                 yesButton.Visible = false;
                 noButton.Visible = false;
+                if (CoordinateSaver.IsAlive) CoordinateSaver.Suspend();
+                WriteCoordinatesToFile();
             }
         }
 
@@ -237,37 +256,29 @@ namespace mysz
             }
         }
 
-        void WriteCoordinatesToFile(String gameTimeString)
+        void WriteCoordinatesToFile()
         {
             String name;
-            String dirPath = @".\ColorsGame";
+            DateTime dateDT = DateTime.Now;
+            string date = dateDT.ToString().Substring(0, 10);
+            string time = dateDT.ToString().Substring(10,9);
+            time = time.Replace(":", " ");
+            String dirPath = @".\ColorsGame\" + userName + "\\" + date;
+
+            name = dirPath + "\\" + time + ".csv";
+
             if (!Directory.Exists(dirPath))
             {
                 Directory.CreateDirectory(dirPath);
-                //if (useLeftButton) name = dirPath + @"\dataL0.csv";
-                //else name = dirPath + @"\dataR0.csv";
             }
-            else
+            
+            using (StreamWriter sw = new StreamWriter(name))
             {
-                DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
-                //if (useLeftButton) name = dirPath + @"\dataL" + dirInfo.GetFiles().Length.ToString() + ".csv";
-                //else name = dirPath + @"\dataR" + dirInfo.GetFiles().Length.ToString() + ".csv";
-                //while (File.Exists(name))
-                //{   // very bad idea, but just to be sure TODO talk about this
-                //    //TODO talk how to save L & R
-                //    //if (useLeftButton) name = dirPath + @"\dataL" + dirInfo.GetFiles().Length.ToString() + 1 + ".csv";
-                //    //else name = dirPath + @"\dataR" + dirInfo.GetFiles().Length.ToString() + 1 + ".csv";
-                //}
+                foreach (Point p in CoordsList)
+                {
+                    sw.WriteLine(p.X + " , " + p.Y);
+                }
             }
-            //using (StreamWriter sw = new StreamWriter(name))
-            //{
-            //    sw.WriteLine(DateTime.Now.ToString());
-            //    sw.WriteLine(gameTimeString);
-            //    foreach (Point p in CoordsList)
-            //    {
-            //        sw.WriteLine(p.X + " , " + p.Y);
-            //    }
-            //}
 
         }
     }
