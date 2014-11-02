@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -15,22 +12,20 @@ namespace mysz
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
-        List<string> CoordsList;
         Graphics graphics;
         List<Color> circleColorsBase = new List<Color>();
         List<string> textColorsBase = new List<string>();
         int gameScore = 0;
         Color circleBrushColor;
         String textColor;
-        public static AutoResetEvent arEvent = new AutoResetEvent(false);
         int minutes = 0, seconds = 0;
+        Thread CoordinateSaver;
+        List<Point> CoordsList;
 
-
-        public ColorsGameWindow()
+        public ColorsGameWindow(string userName)
         {
             InitializeComponent();
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
-            CoordsList = new List<String>();
             graphics = gameWindow.CreateGraphics();
             circleColorsBase.Add(Color.Red);
             circleColorsBase.Add(Color.Green);
@@ -44,6 +39,7 @@ namespace mysz
             textColorsBase.Add("Purple");
             textColorsBase.Add("Yellow");
             textColorsBase.Add("Pink");
+            CoordsList = new List<Point>();
         }
 
         public new void highlightLabel(object sender, EventArgs e)
@@ -63,6 +59,9 @@ namespace mysz
 
         private void playButton_Click(object sender, EventArgs e)
         {
+            gameScore = 0;
+            scoreNumber.Text = "0";
+            scoreNumber.Refresh();
             playButton.Visible = false;
             animation();
 
@@ -70,8 +69,7 @@ namespace mysz
             noButton.Visible = true;
 
             // this must be convertible from settings (default 1minute)
-            minutes = 1;
-            seconds = 0;
+            setTime();
 
             minutesLabel.Text = minutes.ToString();
             minutesLabel.Visible = true;
@@ -83,6 +81,12 @@ namespace mysz
             timer1.Start();
             drawEclipse();
         }
+        public void setTime()
+        {
+            minutes = 1;
+            seconds = 0;
+        }
+
         private void animation()
         {
             graphics.Clear(Color.White);
@@ -98,6 +102,7 @@ namespace mysz
             writeToPictureBox("GO!", 280, 180, 100);
             Thread.Sleep(1000);
             graphics.Clear(Color.White);
+            moveCursor();
         }
 
         private void drawEclipse()
@@ -106,13 +111,33 @@ namespace mysz
             scoreNumber.Visible = true;
             gameScore = Convert.ToInt32(scoreNumber.Text);
             Random rnd = new Random();
-            circleBrushColor = circleColorsBase[rnd.Next(0, 5)];
-            SolidBrush circleBrush = new SolidBrush(circleBrushColor);
-
-            graphics.FillEllipse(circleBrush, 200, 80, 400, 400);
-            textColor = textColorsBase[rnd.Next(0, 5)];
-            //TODO first it should be randomized if the colors should be different or no, cuz now there 1% chance to be the same!
-            graphics.DrawString(textColor, new Font("Gabriola", 80), Brushes.White, new Point(280, 180));
+            // case if colors of text and eclipse are equal
+            if (rnd.Next(0, 100) > 50)
+            {
+                int r = rnd.Next(0, 5);
+                circleBrushColor = circleColorsBase[r];
+                graphics.FillEllipse(new SolidBrush(circleBrushColor), 200, 80, 400, 400);
+                textColor = textColorsBase[r];
+                graphics.DrawString(textColor, new Font("Gabriola", 80), Brushes.White, new Point(280, 180));
+            }
+            //case when colors of text and eclipse are different
+            else
+            {
+                int r1 = rnd.Next(0, 5);
+                int r2 = rnd.Next(0, 5);
+                if (r2 == r1)
+                {
+                    while (r2 == r1)
+                    {
+                        r2 = rnd.Next(0, 5);
+                    }
+                }
+                circleBrushColor = circleColorsBase[r1];
+                graphics.FillEllipse(new SolidBrush(circleBrushColor), 200, 80, 400, 400);
+                textColor = textColorsBase[r2];
+                graphics.DrawString(textColor, new Font("Gabriola", 80), Brushes.White, new Point(280, 180));
+            }
+            
         }
 
         public void writeToPictureBox(String text, int X, int Y, int fontSize)
@@ -176,17 +201,73 @@ namespace mysz
             if (seconds == 0)
             {
                 gameWindow.Refresh();
-                writeToPictureBox("Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 250, 300, 20);
+                playButton.Location = new Point(450, 148);
+                playButton.Text = "PLAY AGAIN";
+                
+                playButton.Visible = true;
+                writeToPictureBox("Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
+                
+                yesButton.Visible = false;
+                noButton.Visible = false;
             }
         }
+
         private void moveCursor()
         {
             this.Cursor = new Cursor(Cursor.Current.Handle);
-            //TODO make dependency on where the window is docked, cuz when move the window, it move cursor to wrong place
-            //possible fix below
             Cursor.Position = new Point((gameWindow.Size.Width / 2) + gameWindow.Location.X + this.Location.X, 
                 (gameWindow.Size.Height / 2) + gameWindow.Location.Y + this.Location.Y);    
-            //Cursor.Position = new Point(640, 400);       
+        }
+        void SaveCoordinates()
+        // writing coordinates to list of coords
+        {
+            int LastX = 0, LastY = 0;
+            while (true)
+            {
+                if (!(LastX + GRANULATION > GetX()
+                    && LastX - GRANULATION < GetX()
+                    && LastY + GRANULATION > GetY()
+                    && LastY - GRANULATION < GetY()))
+                {
+                    CoordsList.Add(new Point(GetX(), GetY()));
+                    LastX = GetX();
+                    LastY = GetY();
+                }
+                Thread.Sleep(10);
+            }
+        }
+
+        void WriteCoordinatesToFile(String gameTimeString)
+        {
+            String name;
+            String dirPath = @".\ColorsGame";
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+                //if (useLeftButton) name = dirPath + @"\dataL0.csv";
+                //else name = dirPath + @"\dataR0.csv";
+            }
+            else
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
+                //if (useLeftButton) name = dirPath + @"\dataL" + dirInfo.GetFiles().Length.ToString() + ".csv";
+                //else name = dirPath + @"\dataR" + dirInfo.GetFiles().Length.ToString() + ".csv";
+                //while (File.Exists(name))
+                //{   // very bad idea, but just to be sure TODO talk about this
+                //    //TODO talk how to save L & R
+                //    //if (useLeftButton) name = dirPath + @"\dataL" + dirInfo.GetFiles().Length.ToString() + 1 + ".csv";
+                //    //else name = dirPath + @"\dataR" + dirInfo.GetFiles().Length.ToString() + 1 + ".csv";
+                //}
+            }
+            //using (StreamWriter sw = new StreamWriter(name))
+            //{
+            //    sw.WriteLine(DateTime.Now.ToString());
+            //    sw.WriteLine(gameTimeString);
+            //    foreach (Point p in CoordsList)
+            //    {
+            //        sw.WriteLine(p.X + " , " + p.Y);
+            //    }
+            //}
 
         }
     }

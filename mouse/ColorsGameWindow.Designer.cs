@@ -93,8 +93,8 @@
             this.playButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.playButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("playButton.BackgroundImage")));
             this.playButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.playButton.Font = new System.Drawing.Font("Iskoola Pota", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playButton.Location = new System.Drawing.Point(480, 270);
+            this.playButton.Font = new System.Drawing.Font("Iskoola Pota", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playButton.Location = new System.Drawing.Point(490, 268);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(198, 136);
             this.playButton.TabIndex = 31;

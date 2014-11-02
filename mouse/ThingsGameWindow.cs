@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.IO;
@@ -28,6 +24,7 @@ namespace mysz
         bool inGame = false;
         bool leftButtonCorrect = true;
         bool leftButtonClicked = true;
+        string userName;
 
         class question
         {
@@ -58,7 +55,7 @@ namespace mysz
             }
         };
 
-        public ThingsGameWindow()
+        public ThingsGameWindow(string userName)
         {
             //TODO save status of picturebox, and check minimalizing window
             InitializeComponent();
@@ -85,6 +82,7 @@ namespace mysz
 
 
             graphics.Clear(Color.White);//TODO why nothing appears?
+            this.userName = userName;
         }
 
         private void setNewQuestion()

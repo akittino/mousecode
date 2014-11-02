@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace mysz
@@ -12,16 +7,19 @@ namespace mysz
     public partial class ReflexGameMainWindow : MainGameWindowBase
     {
         ReflexGameWindow ReflexWindow;
-        public ReflexGameMainWindow()
+        string userName;
+        public ReflexGameMainWindow(string userName)
         {
             InitializeComponent();
-            MainGameWindowBase BaseWindow = new MainGameWindowBase(helpLabel, titleLabel, exitLabel, backLabel, settingsLabel,
+            MainGameWindowBase BaseWindow = new MainGameWindowBase(helpLabel, titleLabel1, exitLabel, backLabel, settingsLabel,
             playButton, instructionTextBox);
+            this.userName = userName;
+            titleLabel1.Text = "Welcome " + userName + "!";
         }
 
         private void playButton_Click(object sender, EventArgs e)
         {
-            ReflexWindow = new ReflexGameWindow();
+            ReflexWindow = new ReflexGameWindow(userName);
             ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
             ReflexWindow.Show();
             this.Hide();
@@ -41,7 +39,7 @@ namespace mysz
         {
             playButton.Visible = false;
             helpLabel.Visible = false;
-            titleLabel.Visible = false;
+            titleLabel1.Visible = false;
             exitLabel.Visible = false;
             backLabel.Visible = true;
             instructionTextBox.Visible = false;
@@ -51,7 +49,7 @@ namespace mysz
         {
             playButton.Visible = false;
             settingsLabel.Visible = false;
-            titleLabel.Visible = false;
+            titleLabel1.Visible = false;
             exitLabel.Visible = false;
             backLabel.Visible = true;
             instructionTextBox.Visible = true;
@@ -93,7 +91,7 @@ namespace mysz
             {
                 helpLabel.Visible = true;
             }
-            titleLabel.Visible = true;
+            titleLabel1.Visible = true;
             exitLabel.Visible = true;
             backLabel.Visible = false;
         }

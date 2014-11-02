@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace mysz
@@ -18,11 +12,13 @@ namespace mysz
         ReflexGameMainWindow ReflexWindow;
         ColorsGameMainWindow ColorsWindow;
         String UserName;
+        public string userName;
 
         //TODO close all threads in other windows
         public login_main_window()
         {
             InitializeComponent();
+            userName = user_name_textbox.Text;
         }
 
         //TODO if can resize window. mustn't. ALL WINDOWS!!!
@@ -77,7 +73,8 @@ namespace mysz
 
         private void things_button_Click(object sender, EventArgs e)
         {
-            ThingsWindow = new ThingsGameMainWindow();
+            userName = user_name_textbox.Text;
+            ThingsWindow = new ThingsGameMainWindow(userName);
             logThis("Things game is running now...");
             ThingsWindow.FormClosed += new FormClosedEventHandler(ThingsWindow_FormClosed);
             GamesButtonsOff();
@@ -87,7 +84,8 @@ namespace mysz
 
         private void reflex_button_Click(object sender, EventArgs e)
         {
-            ReflexWindow = new ReflexGameMainWindow();
+            userName = user_name_textbox.Text;
+            ReflexWindow = new ReflexGameMainWindow(userName);
             logThis("Reflex game is running now...");
             ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
             GamesButtonsOff();
@@ -97,18 +95,14 @@ namespace mysz
 
         private void colors_button_Click(object sender, EventArgs e)
         {
-
-            ColorsWindow = new ColorsGameMainWindow();
+            userName = user_name_textbox.Text;
+            ColorsWindow = new ColorsGameMainWindow(userName);
             logThis("Colors game is running now...");
             ColorsWindow.FormClosed += new FormClosedEventHandler(ColorsWindow_FormClosed);
             GamesButtonsOff();
             ColorsWindow.Show();
             this.Hide();
         }
-
-
-
-
 
         void ReflexWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -136,8 +130,6 @@ namespace mysz
             admin_panel_button.Enabled = true;
             this.Show();
         }
-
-
 
         void GamesButtonsOn()
         {

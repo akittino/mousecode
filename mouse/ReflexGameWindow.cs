@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.IO;
@@ -23,8 +19,9 @@ namespace mysz
         SolidBrush redBrush, greenBrush, blueBrush;
         Graphics graphics;
         bool useLeftButton = true;
+        string userName;
 
-        public ReflexGameWindow()
+        public ReflexGameWindow(string userName)
         {
             //TODO save status of picturebox, and check minimalizing window
             InitializeComponent();
@@ -43,6 +40,7 @@ namespace mysz
 
             graphics.Clear(Color.White);//TODO why nothing appears?
             drawEllipse(blueBrush);//TODO why nothing appears?
+            this.userName = userName; // TODO add user differentation in dir like in Colors Game
         }
 
         private void startButton_Click(object sender, EventArgs e)

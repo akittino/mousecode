@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThingsGameMainWindow));
             this.playButton = new System.Windows.Forms.Button();
-            this.titleLabel = new System.Windows.Forms.Label();
+            this.titleLabel1 = new System.Windows.Forms.Label();
             this.settingsLabel = new System.Windows.Forms.Label();
             this.helpLabel = new System.Windows.Forms.Label();
             this.exitLabel = new System.Windows.Forms.Label();
@@ -55,15 +55,15 @@
             this.playButton.MouseEnter += new System.EventHandler(this.buttonHighlight);
             this.playButton.MouseLeave += new System.EventHandler(this.removeHighlightButton);
             // 
-            // titleLabel
+            // titleLabel1
             // 
-            this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("Gabriola", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(36, 31);
-            this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(207, 45);
-            this.titleLabel.TabIndex = 1;
-            this.titleLabel.Text = "Welcome to Things Game";
+            this.titleLabel1.AutoSize = true;
+            this.titleLabel1.Font = new System.Drawing.Font("Gabriola", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel1.Location = new System.Drawing.Point(12, 31);
+            this.titleLabel1.Name = "titleLabel1";
+            this.titleLabel1.Size = new System.Drawing.Size(86, 45);
+            this.titleLabel1.TabIndex = 1;
+            this.titleLabel1.Text = "Welcome";
             // 
             // settingsLabel
             // 
@@ -141,7 +141,7 @@
             this.Controls.Add(this.exitLabel);
             this.Controls.Add(this.helpLabel);
             this.Controls.Add(this.settingsLabel);
-            this.Controls.Add(this.titleLabel);
+            this.Controls.Add(this.titleLabel1);
             this.Controls.Add(this.instructionTextBox);
             this.Controls.Add(this.backLabel);
             this.MaximizeBox = false;
@@ -158,7 +158,7 @@
         #endregion
 
         private System.Windows.Forms.Button playButton;
-        private System.Windows.Forms.Label titleLabel;
+        private System.Windows.Forms.Label titleLabel1;
         private System.Windows.Forms.Label settingsLabel;
         private System.Windows.Forms.Label helpLabel;
         private System.Windows.Forms.Label exitLabel;
