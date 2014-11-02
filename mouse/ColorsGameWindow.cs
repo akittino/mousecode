@@ -28,6 +28,7 @@ namespace mysz
         Color circleBrushColor;
         String textColor;
         public static AutoResetEvent arEvent = new AutoResetEvent(false);
+        int minutes = 0, seconds = 0;
 
 
         public ColorsGameWindow()
@@ -88,23 +89,27 @@ namespace mysz
         {
             playButton.Visible = false;
             animation();
+            
             yesButton.Visible = true;
             noButton.Visible = true;
+            minutes = 1;
+            seconds = 0;
 
+            minutesLabel.Text = minutes.ToString();
+            minutesLabel.Visible = true;
+            label1.Visible = true;
+            if(seconds<10)
+                secondsLabel.Text = "0" + seconds.ToString();
+            secondsLabel.Visible = true;
+
+            timer1.Start();
             drawEclipse();
             yesButtonClicked = false;
             noButtonClicked = false;
             //TODO cursor back to middle of the circle
             //TODO wait for button to be clicked
 
-            if ((textColor == circleBrushColor.ToString() && yesButtonClicked == true)
-                || (textColor != circleBrushColor.ToString() && noButtonClicked == true))
-            {
-                gameScore++;
-                scoreNumber.Text = gameScore.ToString();
-                scoreNumber.Refresh();
-            }
-
+            
 
         }
         private void animation()
@@ -126,18 +131,24 @@ namespace mysz
 
         private void drawEclipse()
         {
-            // TODO sth is wrong with random - always textColor == eclipseColor
             gameWindow.Refresh();
             scoreNumber.Visible = true;
             gameScore = Convert.ToInt32(scoreNumber.Text);
-            Random rEclipse = new Random();
-            Random rText = new Random();
-            circleBrushColor = circleColorsBase[rEclipse.Next(0, 5)];
+            Random rnd = new Random();
+            circleBrushColor = circleColorsBase[rnd.Next(0, 5)];
             SolidBrush circleBrush = new SolidBrush(circleBrushColor);
 
             graphics.FillEllipse(circleBrush, 200, 80, 400, 400);
-            textColor = textColorsBase[rText.Next(0, 5)];
+            textColor = textColorsBase[rnd.Next(0, 5)];
             graphics.DrawString(textColor, new Font("Gabriola", 80), Brushes.White, new Point(280, 180));
+            if ((textColor == circleBrushColor.ToString())
+                || (textColor != circleBrushColor.ToString()))
+            {
+                gameScore++;
+                scoreNumber.Text = gameScore.ToString();
+                scoreNumber.Refresh();
+            }
+
 
         }
 
@@ -159,6 +170,27 @@ namespace mysz
         {
             yesButtonClicked = false;
             noButtonClicked = true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            seconds -= 1;
+            if (seconds == -1)
+            {
+                minutes -= 1;
+                seconds = 59;
+            }
+            if (minutes == 0 && seconds == 0)
+                timer1.Stop();
+
+            string minutesS = minutes.ToString();
+            string secondsS = seconds.ToString();
+
+            minutesLabel.Text = minutesS;
+            if (seconds < 10)
+                secondsLabel.Text = "0" + secondsS;
+            else
+                secondsLabel.Text = secondsS;
         }
     }
 }
