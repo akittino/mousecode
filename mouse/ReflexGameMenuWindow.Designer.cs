@@ -1,6 +1,6 @@
 ﻿namespace mysz
 {
-    partial class ReflexGameMainWindow
+    partial class ReflexGameMenuWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReflexGameMainWindow));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReflexGameMenuWindow));
             this.playButton = new System.Windows.Forms.Button();
             this.exitLabel = new System.Windows.Forms.Label();
             this.helpLabel = new System.Windows.Forms.Label();

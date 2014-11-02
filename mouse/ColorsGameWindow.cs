@@ -25,7 +25,7 @@ namespace mysz
         string userName;
         int quantityOfAnswers = 0;
 
-        public ColorsGameWindow(string userName)
+        public ColorsGameWindow(string userName, int seconds, int minutes)
         {
             InitializeComponent();
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
@@ -45,6 +45,11 @@ namespace mysz
             CoordsList = new List<Point>();
             CoordinateSaver = new Thread(SaveCoordinates);
             this.userName = userName;
+            if (minutes * 60 + seconds != 0)
+            {
+                this.seconds = seconds;
+                this.minutes = minutes;
+            }
         }
 
         public new void highlightLabel(object sender, EventArgs e)
@@ -98,8 +103,9 @@ namespace mysz
         }
         public void setTime()
         {
-            minutes = 1;
-            seconds = 0;
+            int gameTime = base.setTime(seconds, minutes);
+            minutes = gameTime / 60;
+            seconds = gameTime % 60;
         }
 
         private void animation()
@@ -152,7 +158,7 @@ namespace mysz
                 textColor = textColorsBase[r2];
                 graphics.DrawString(textColor, new Font("Gabriola", 80), Brushes.White, new Point(280, 180));
             }
-            
+
         }
 
         public void writeToPictureBox(Graphics graphics, String text, int X, int Y, int fontSize)
@@ -217,10 +223,10 @@ namespace mysz
                 gameWindow.Refresh();
                 playButton.Location = new Point(450, 148);
                 playButton.Text = "PLAY AGAIN";
-                
+
                 playButton.Visible = true;
                 writeToPictureBox(graphics, "Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
-                
+
                 yesButton.Visible = false;
                 noButton.Visible = false;
                 if (CoordinateSaver.IsAlive) CoordinateSaver.Suspend();
@@ -231,26 +237,13 @@ namespace mysz
         private void moveCursor()
         {
             this.Cursor = new Cursor(Cursor.Current.Handle);
-            Cursor.Position = new Point((gameWindow.Size.Width / 2) + gameWindow.Location.X + this.Location.X, 
-                (gameWindow.Size.Height / 2) + gameWindow.Location.Y + this.Location.Y);    
+            Cursor.Position = new Point((gameWindow.Size.Width / 2) + gameWindow.Location.X + this.Location.X,
+                (gameWindow.Size.Height / 2) + gameWindow.Location.Y + this.Location.Y);
         }
         void SaveCoordinates()
         // writing coordinates to list of coords
         {
-            int LastX = 0, LastY = 0;
-            while (true)
-            {
-                if (!(LastX + GRANULATION > GetX()
-                    && LastX - GRANULATION < GetX()
-                    && LastY + GRANULATION > GetY()
-                    && LastY - GRANULATION < GetY()))
-                {
-                    CoordsList.Add(new Point(GetX(), GetY()));
-                    LastX = GetX();
-                    LastY = GetY();
-                }
-                Thread.Sleep(10);
-            }
+            base.SaveCoordinates(GRANULATION, CoordsList);
         }
 
         void WriteCoordinatesToFile()
@@ -258,7 +251,7 @@ namespace mysz
             String name;
             DateTime dateDT = DateTime.Now;
             string date = dateDT.ToString().Substring(0, 10);
-            string time = dateDT.ToString().Substring(10,9);
+            string time = dateDT.ToString().Substring(10, 9);
             time = time.Replace(":", " ");
             String dirPath = @".\ColorsGame\" + userName + "\\" + date;
 
@@ -268,9 +261,10 @@ namespace mysz
             {
                 Directory.CreateDirectory(dirPath);
             }
-            
+
             using (StreamWriter sw = new StreamWriter(name))
             {
+                sw.WriteLine("Correct answers: " + scoreNumber.Text + "/" + quantityOfAnswers.ToString());
                 foreach (Point p in CoordsList)
                 {
                     sw.WriteLine(p.X + " , " + p.Y);

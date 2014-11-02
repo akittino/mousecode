@@ -4,12 +4,12 @@ using System.Windows.Forms;
 
 namespace mysz
 {
-    public partial class ThingsGameMainWindow : MainGameWindowBase
+    public partial class ThingsGameMenuWindow : MainGameWindowBase
     {
         ThingsGameWindow ThingsWindow;
         public string userName;
 
-        public ThingsGameMainWindow(string userName)
+        public ThingsGameMenuWindow(string userName)
         {
             InitializeComponent();
             MainGameWindowBase BaseWindow = new MainGameWindowBase(helpLabel, titleLabel1, exitLabel, backLabel, settingsLabel,

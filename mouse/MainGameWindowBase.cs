@@ -49,6 +49,8 @@ namespace mysz
             btn.ForeColor = Color.Indigo;
         }
 
+
+
        
     }
 }

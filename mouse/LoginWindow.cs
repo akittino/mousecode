@@ -8,9 +8,9 @@ namespace mysz
         const String AdminPassword = "admin";
         
         AdminPanel AdminWindow;
-        ThingsGameMainWindow ThingsWindow;
-        ReflexGameMainWindow ReflexWindow;
-        ColorsGameMainWindow ColorsWindow;
+        ThingsGameMenuWindow ThingsWindow;
+        ReflexGameMenuWindow ReflexWindow;
+        ColorsGameMenuWindow ColorsWindow;
         String UserName;
         public string userName;
 
@@ -74,7 +74,7 @@ namespace mysz
         private void things_button_Click(object sender, EventArgs e)
         {
             userName = user_name_textbox.Text;
-            ThingsWindow = new ThingsGameMainWindow(userName);
+            ThingsWindow = new ThingsGameMenuWindow(userName);
             logThis("Things game is running now...");
             ThingsWindow.FormClosed += new FormClosedEventHandler(ThingsWindow_FormClosed);
             GamesButtonsOff();
@@ -85,7 +85,7 @@ namespace mysz
         private void reflex_button_Click(object sender, EventArgs e)
         {
             userName = user_name_textbox.Text;
-            ReflexWindow = new ReflexGameMainWindow(userName);
+            ReflexWindow = new ReflexGameMenuWindow(userName);
             logThis("Reflex game is running now...");
             ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
             GamesButtonsOff();
@@ -96,7 +96,7 @@ namespace mysz
         private void colors_button_Click(object sender, EventArgs e)
         {
             userName = user_name_textbox.Text;
-            ColorsWindow = new ColorsGameMainWindow(userName);
+            ColorsWindow = new ColorsGameMenuWindow(userName);
             logThis("Colors game is running now...");
             ColorsWindow.FormClosed += new FormClosedEventHandler(ColorsWindow_FormClosed);
             GamesButtonsOff();

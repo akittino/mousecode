@@ -4,29 +4,28 @@ using System.Windows.Forms;
 
 namespace mysz
 {
-    public partial class ColorsGameMainWindow : MainGameWindowBase
+    public partial class ReflexGameMenuWindow : MainGameWindowBase
     {
-        ColorsGameWindow ColorsWindow;
+        ReflexGameWindow ReflexWindow;
         string userName;
-
-        public ColorsGameMainWindow(string userName)
+        public ReflexGameMenuWindow(string userName)
         {
             InitializeComponent();
             MainGameWindowBase BaseWindow = new MainGameWindowBase(helpLabel, titleLabel1, exitLabel, backLabel, settingsLabel,
             playButton, instructionTextBox);
             this.userName = userName;
-            titleLabel1.Text = "Welcome " + userName +"!";
+            titleLabel1.Text = "Welcome " + userName + "!";
         }
-       
-        public void playButtonClick(object sender, EventArgs e)
+
+        private void playButton_Click(object sender, EventArgs e)
         {
-            ColorsWindow = new ColorsGameWindow(userName);
-            ColorsWindow.FormClosed += new FormClosedEventHandler(ColorsWindow_FormClosed);
-            ColorsWindow.Show();
+            ReflexWindow = new ReflexGameWindow(userName);
+            ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
+            ReflexWindow.Show();
             this.Hide();
         }
 
-        void ColorsWindow_FormClosed(object sender, FormClosedEventArgs e)
+        void ReflexWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
         }
@@ -61,21 +60,6 @@ namespace mysz
             };
         }
 
-        public void backGameWindow(object sender, MouseEventArgs e)
-        {
-            playButton.Visible = true;
-            if (helpLabel.Visible == true)
-            {
-                settingsLabel.Visible = true;
-            }
-            else
-            {
-                helpLabel.Visible = true;
-            }
-            titleLabel1.Visible = true;
-            exitLabel.Visible = true;
-            backLabel.Visible = false;
-        }
         public new void highlightLabel(object sender, EventArgs e)
         {
             base.highlightLabel(sender, e);
@@ -95,5 +79,22 @@ namespace mysz
         {
             base.removeHighlightButton(sender, e);
         }
+
+        private void backGameWindow(object sender, EventArgs e)
+        {
+            playButton.Visible = true;
+            if (helpLabel.Visible == true)
+            {
+                settingsLabel.Visible = true;
+            }
+            else
+            {
+                helpLabel.Visible = true;
+            }
+            titleLabel1.Visible = true;
+            exitLabel.Visible = true;
+            backLabel.Visible = false;
+        }
+
     }
 }

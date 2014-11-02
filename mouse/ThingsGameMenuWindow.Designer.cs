@@ -1,6 +1,6 @@
 ﻿namespace mysz
 {
-    partial class ThingsGameMainWindow
+    partial class ThingsGameMenuWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThingsGameMainWindow));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThingsGameMenuWindow));
             this.playButton = new System.Windows.Forms.Button();
             this.titleLabel1 = new System.Windows.Forms.Label();
             this.settingsLabel = new System.Windows.Forms.Label();
