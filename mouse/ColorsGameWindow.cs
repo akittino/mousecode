@@ -19,6 +19,16 @@ namespace mysz
         List<string> CoordsList;
         Thread CoordinateSaver;
         DateTime startTime;
+        Graphics graphics;
+        List<Color> circleColorsBase = new List<Color>();
+        List<string> textColorsBase = new List<string>();
+        Boolean yesButtonClicked = false;
+        Boolean noButtonClicked = false;
+        int gameScore = 0;
+        Color circleBrushColor;
+        String textColor;
+        public static AutoResetEvent arEvent = new AutoResetEvent(false);
+
 
         public ColorsGameWindow()
         {
@@ -26,60 +36,23 @@ namespace mysz
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
             CoordsList = new List<String>();
             CoordinateSaver = new Thread(SaveCoordinates);
+            graphics = gameWindow.CreateGraphics();
+            circleColorsBase.Add(Color.Red);
+            circleColorsBase.Add(Color.Green);
+            circleColorsBase.Add(Color.Blue);
+            circleColorsBase.Add(Color.Purple);
+            circleColorsBase.Add(Color.Yellow);
+            circleColorsBase.Add(Color.Pink);
+            textColorsBase.Add("Red");
+            textColorsBase.Add("Green");
+            textColorsBase.Add("Blue");
+            textColorsBase.Add("Purple");
+            textColorsBase.Add("Yellow");
+            textColorsBase.Add("Pink");
+
+
+
         }
-
-        private void startButton_Click(object sender, EventArgs e)
-        {
-            Point StartPoint = Cursor.Position;
-            Pen p = new Pen(Color.Red, 2f);
-            SolidBrush red = new SolidBrush(Color.Red);
-            SolidBrush green = new SolidBrush(Color.Green);
-            Graphics g = gameWindow.CreateGraphics();
-
-            g.Clear(Color.White);
-            g.FillEllipse(red, -100, 500, 200, 200);
-
-            stopButton.Enabled = false;
-            startButton.Enabled = false;
-
-            Random rnd = new Random();
-            int delay = rnd.Next(30);
-            DateTime endTime = DateTime.Now;
-            endTime = endTime.AddMilliseconds(2000 + delay*100);
-            DateTime currentTime = DateTime.Now;
-
-            while (currentTime <= endTime) //TODO implement case to check if mouse is in red circle,
-            //now workaround with moving cursor
-                currentTime = DateTime.Now;
-
-            g.FillEllipse(green, -100, 500, 200, 200);
-            stopButton.Enabled = true;
-            startTime = DateTime.Now;
-            Cursor.Position = StartPoint;
-            CoordsList.Clear();
-            if (firstRun)
-            {
-                CoordinateSaver.Start();
-                firstRun = false;
-            }
-            else
-                CoordinateSaver.Resume();
-        }
-
-        private void stopButton_Click(object sender, EventArgs e)
-        {
-            timeLabel.Visible = true;
-            startButton.Enabled = true;
-            DateTime currentTime = DateTime.Now;
-            timeLabel.Text = (currentTime - startTime).TotalMilliseconds + " ms";
-            if (CoordinateSaver.IsAlive)
-                CoordinateSaver.Suspend();
-            //TODO implement game
-            //TODO find better solution with threads
-            //TODO find out what's wrong with time
-            //TODO save time to file
-        }
-        
 
         void SaveCoordinates()
         // writing coordinates to list of coords
@@ -109,6 +82,83 @@ namespace mysz
         private void endGame(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void playButton_Click(object sender, EventArgs e)
+        {
+            playButton.Visible = false;
+            animation();
+            yesButton.Visible = true;
+            noButton.Visible = true;
+
+            drawEclipse();
+            yesButtonClicked = false;
+            noButtonClicked = false;
+            //TODO cursor back to middle of the circle
+            //TODO wait for button to be clicked
+
+            if ((textColor == circleBrushColor.ToString() && yesButtonClicked == true)
+                || (textColor != circleBrushColor.ToString() && noButtonClicked == true))
+            {
+                gameScore++;
+                scoreNumber.Text = gameScore.ToString();
+                scoreNumber.Refresh();
+            }
+
+
+        }
+        private void animation()
+        {
+            graphics.Clear(Color.White);
+            writeToPictureBox("3", 320, 180, 100);
+            Thread.Sleep(1000);
+            graphics.Clear(Color.White);
+            writeToPictureBox("2", 320, 180, 100);
+            Thread.Sleep(1000);
+            graphics.Clear(Color.White);
+            writeToPictureBox("1", 320, 180, 100);
+            Thread.Sleep(1000);
+            graphics.Clear(Color.White);
+            writeToPictureBox("GO!", 280, 180, 100);
+            Thread.Sleep(1000);
+            graphics.Clear(Color.White);
+        }
+
+        private void drawEclipse()
+        {
+            // TODO sth is wrong with random - always textColor == eclipseColor
+            gameWindow.Refresh();
+            scoreNumber.Visible = true;
+            gameScore = Convert.ToInt32(scoreNumber.Text);
+            Random rEclipse = new Random();
+            Random rText = new Random();
+            circleBrushColor = circleColorsBase[rEclipse.Next(0, 5)];
+            SolidBrush circleBrush = new SolidBrush(circleBrushColor);
+
+            graphics.FillEllipse(circleBrush, 200, 80, 400, 400);
+            textColor = textColorsBase[rText.Next(0, 5)];
+            graphics.DrawString(textColor, new Font("Gabriola", 80), Brushes.White, new Point(280, 180));
+
+        }
+
+        public void writeToPictureBox(String text, int X, int Y, int fontSize)
+        {
+            using (Font myFont = new Font("Gabriola", fontSize))
+            {
+                graphics.DrawString(text, myFont, Brushes.Black, new Point(X, Y));
+            }
+        }
+
+        private void yesButton_Click(object sender, EventArgs e)
+        {
+            yesButtonClicked = true;
+            noButtonClicked = false;
+        }
+
+        private void noButton_Click(object sender, EventArgs e)
+        {
+            yesButtonClicked = false;
+            noButtonClicked = true;
         }
     }
 }

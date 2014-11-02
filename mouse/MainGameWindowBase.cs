@@ -26,8 +26,10 @@ namespace mysz
             this.instructionTextBox = instructionTextBox;
 
         }
+
         public MainGameWindowBase()
         { }
+
         public void highlightLabel(object sender, EventArgs e)
         {
             Label lbl = (Label)sender;
