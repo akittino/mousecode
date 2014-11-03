@@ -133,16 +133,17 @@ namespace mysz
 
         void GamesButtonsOn()
         {
-            colors_button.Enabled = true;
-            reflex_button.Enabled = true;
-            things_button.Enabled = true;
+            colorsButton.Enabled = true;
+            reflexButton.Enabled = true;
+            thingsButton.Enabled = true;
         }
 
         void GamesButtonsOff()
         {
-            colors_button.Enabled = false;
-            reflex_button.Enabled = false;
-            things_button.Enabled = false;
+            colorsButton.Enabled = false;
+            reflexButton.Enabled = false;
+            thingsButton.Enabled = false;
         }
+
     }
 }
