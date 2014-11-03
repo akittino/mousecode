@@ -20,12 +20,13 @@ namespace mysz
             this.userName = userName;
             titleLabel1.Text = "Welcome " + userName +"!";
             this.mood = mood;
+            //TODO not working properly - the mood is like in loginWindow declared
             //MessageBox.Show(mood.ToString()); for testing only - to show that the mood parameter was passed through
         }
 
         public void playButtonClick(object sender, EventArgs e)
         {
-            ColorsWindow = new ColorsGameWindow(userName, seconds, minutes);
+            ColorsWindow = new ColorsGameWindow(userName, seconds, minutes, mood);
             ColorsWindow.FormClosed += new FormClosedEventHandler(ColorsWindow_FormClosed);
             ColorsWindow.Show();
             this.Hide();
@@ -145,7 +146,6 @@ namespace mysz
         {
             MoodWindow = new MoodWindow(MoodWindow.GameType.ColorsWindow, userName);
             MoodWindow.Show();
-            this.Hide();
             //TODO unable game if mood is not choosen
             //TODO GUI changes - visibility when Settings etc clicked
         }

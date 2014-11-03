@@ -18,13 +18,14 @@ namespace mysz
             this.userName = userName;
             titleLabel1.Text = "Welcome " + userName + "!";
             this.mood = mood;
+            //TODO not working properly - the mood is like in loginWindow declared
             //MessageBox.Show(mood.ToString()); for testing only - to show that the mood parameter was passed through
         }
 
        
         private void playButton_Click(object sender, EventArgs e)
         {
-            ReflexWindow = new ReflexGameWindow(userName);
+            ReflexWindow = new ReflexGameWindow(userName, mood);
             ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
             ReflexWindow.Show();
             this.Hide();

@@ -20,8 +20,9 @@ namespace mysz
         bool useLeftButton = true;
         string userName;
         TimeSpan startTime;
+        MoodWindow.Mood mood;
 
-        public ReflexGameWindow(string userName)
+        public ReflexGameWindow(string userName, MoodWindow.Mood mood)
         {
             //TODO save status of picturebox, and check minimalizing window
             InitializeComponent();
@@ -41,6 +42,7 @@ namespace mysz
             graphics.Clear(Color.White);//TODO why nothing appears?
             drawEllipse(blueBrush);//TODO why nothing appears?
             this.userName = userName; // TODO add user differentation in dir like in Colors Game
+            this.mood = mood;
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -160,6 +162,7 @@ namespace mysz
             {
                 sw.WriteLine(DateTime.Now.ToString());
                 sw.WriteLine(gameTimeString);
+                sw.WriteLine("Mood: "+ mood);
                 foreach(Point p in CoordsList)
                 {
                     sw.WriteLine(p.X + " , " + p.Y); 

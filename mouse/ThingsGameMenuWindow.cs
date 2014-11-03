@@ -19,6 +19,7 @@ namespace mysz
             this.userName = userName;
             titleLabel1.Text = "Welcome " + userName + "!";
             this.mood = mood;
+            //TODO not working properly - the mood is like in loginWindow declared
             //MessageBox.Show(mood.ToString()); for testing only - to show that the mood parameter was passed through        
         }
 
@@ -107,7 +108,6 @@ namespace mysz
         {
             MoodWindow = new MoodWindow(MoodWindow.GameType.ThingsWindow, userName);
             MoodWindow.Show();
-            this.Hide();
             //TODO unable game if mood is not choosen
             //TODO GUI changes - visibility when Settings etc clicked
         }

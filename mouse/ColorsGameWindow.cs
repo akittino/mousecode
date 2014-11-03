@@ -24,8 +24,9 @@ namespace mysz
         bool firstRun = true;
         string userName;
         int quantityOfAnswers = 0;
+        MoodWindow.Mood mood;
 
-        public ColorsGameWindow(string userName, int seconds, int minutes)
+        public ColorsGameWindow(string userName, int seconds, int minutes, MoodWindow.Mood mood)
         {
             InitializeComponent();
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
@@ -50,6 +51,7 @@ namespace mysz
                 this.seconds = seconds;
                 this.minutes = minutes;
             }
+            this.mood = mood;
         }
 
         public new void highlightLabel(object sender, EventArgs e)
@@ -265,6 +267,7 @@ namespace mysz
             using (StreamWriter sw = new StreamWriter(name))
             {
                 sw.WriteLine("Correct answers: " + scoreNumber.Text + "/" + quantityOfAnswers.ToString());
+                sw.WriteLine("Mood: " + mood);
                 foreach (Point p in CoordsList)
                 {
                     sw.WriteLine(p.X + " , " + p.Y);
