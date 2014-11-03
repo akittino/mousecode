@@ -7,25 +7,19 @@ namespace mysz
     public partial class ReflexGameMenuWindow : MainGameWindowBase
     {
         ReflexGameWindow ReflexWindow;
-        MoodWindow MoodWindow;
         string userName;
-        MoodWindow.Mood mood;
-        public ReflexGameMenuWindow(MoodWindow.Mood mood, string userName)
+        public ReflexGameMenuWindow(string userName)
         {
             InitializeComponent();
             MainGameWindowBase BaseWindow = new MainGameWindowBase(helpLabel, titleLabel1, exitLabel, backLabel, settingsLabel,
             playButton, instructionTextBox);
             this.userName = userName;
             titleLabel1.Text = "Welcome " + userName + "!";
-            this.mood = mood;
-            //TODO not working properly - the mood is like in loginWindow declared
-            //MessageBox.Show(mood.ToString()); for testing only - to show that the mood parameter was passed through
         }
-
        
         private void playButton_Click(object sender, EventArgs e)
         {
-            ReflexWindow = new ReflexGameWindow(userName, mood);
+            ReflexWindow = new ReflexGameWindow(userName);
             ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
             ReflexWindow.Show();
             this.Hide();
@@ -43,7 +37,6 @@ namespace mysz
 
         public void settingsClick(object sender, EventArgs e)
         {
-            chooseMoodLabel.Visible = true;
             playButton.Visible = false;
             helpLabel.Visible = false;
             titleLabel1.Visible = false;
@@ -60,11 +53,10 @@ namespace mysz
             exitLabel.Visible = false;
             backLabel.Visible = true;
             instructionTextBox.Visible = true;
-            chooseMoodLabel.Visible = true;
             backLabel.Location = new Point
             {
                 X = 96,
-                Y = 260
+                Y = 226
             };
         }
 
@@ -102,17 +94,6 @@ namespace mysz
             titleLabel1.Visible = true;
             exitLabel.Visible = true;
             backLabel.Visible = false;
-            chooseMoodLabel.Visible = true;
         }
-
-        private void chooseMoodLabel_Click(object sender, EventArgs e)
-        {
-            MoodWindow = new MoodWindow(MoodWindow.GameType.ReflexWindow, userName);
-            MoodWindow.Show();
-            
-            //TODO unable game if mood is not choosen
-            //TODO GUI changes - visibility when Settings etc clicked
-        }
-
     }
 }

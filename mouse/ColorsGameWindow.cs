@@ -13,6 +13,7 @@ namespace mysz
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
         Graphics graphics;
+        MoodWindow.Mood mood;
         List<Color> circleColorsBase = new List<Color>();
         List<string> textColorsBase = new List<string>();
         int gameScore = 0;
@@ -24,9 +25,8 @@ namespace mysz
         bool firstRun = true;
         string userName;
         int quantityOfAnswers = 0;
-        MoodWindow.Mood mood;
 
-        public ColorsGameWindow(string userName, int seconds, int minutes, MoodWindow.Mood mood)
+        public ColorsGameWindow(string userName, int seconds, int minutes)
         {
             InitializeComponent();
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
@@ -51,7 +51,6 @@ namespace mysz
                 this.seconds = seconds;
                 this.minutes = minutes;
             }
-            this.mood = mood;
         }
 
         public new void highlightLabel(object sender, EventArgs e)
@@ -103,7 +102,7 @@ namespace mysz
                 CoordinateSaver.Resume();
             }
         }
-        public void setTime()
+        public void setTime() //TODO bug -time from settings works only in firstGame 
         {
             int gameTime = base.setTime(seconds, minutes);
             minutes = gameTime / 60;
@@ -232,9 +231,14 @@ namespace mysz
                 yesButton.Visible = false;
                 noButton.Visible = false;
                 if (CoordinateSaver.IsAlive) CoordinateSaver.Suspend();
+
+                mood = getMood();
+
                 WriteCoordinatesToFile();
             }
         }
+
+        
 
         private void moveCursor()
         {
@@ -267,7 +271,7 @@ namespace mysz
             using (StreamWriter sw = new StreamWriter(name))
             {
                 sw.WriteLine("Correct answers: " + scoreNumber.Text + "/" + quantityOfAnswers.ToString());
-                sw.WriteLine("Mood: " + mood);
+                sw.WriteLine("Mood: "+ mood);
                 foreach (Point p in CoordsList)
                 {
                     sw.WriteLine(p.X + " , " + p.Y);

@@ -9,18 +9,14 @@ namespace mysz
         ThingsGameWindow ThingsWindow;
         MoodWindow MoodWindow;        
         public string userName;
-        MoodWindow.Mood mood;
 
-        public ThingsGameMenuWindow(MoodWindow.Mood mood, string userName)
+        public ThingsGameMenuWindow(string userName)
         {
             InitializeComponent();
             MainGameWindowBase BaseWindow = new MainGameWindowBase(helpLabel, titleLabel1, exitLabel, backLabel, settingsLabel,
             playButton, instructionTextBox);
             this.userName = userName;
             titleLabel1.Text = "Welcome " + userName + "!";
-            this.mood = mood;
-            //TODO not working properly - the mood is like in loginWindow declared
-            //MessageBox.Show(mood.ToString()); for testing only - to show that the mood parameter was passed through        
         }
 
         public void playButtonClick(object sender, EventArgs e)
@@ -49,7 +45,6 @@ namespace mysz
             exitLabel.Visible = false;
             backLabel.Visible = true;
             instructionTextBox.Visible = false;
-            chooseMoodLabel.Visible = true;
         }
 
         public void helpClick(object sender, EventArgs e)
@@ -60,11 +55,10 @@ namespace mysz
             exitLabel.Visible = false;
             backLabel.Visible = true;
             instructionTextBox.Visible = true;
-            chooseMoodLabel.Visible = true;
             backLabel.Location = new Point
             {
                 X = 96,
-                Y = 260
+                Y = 226
             };
         }
 
@@ -82,7 +76,6 @@ namespace mysz
             titleLabel1.Visible = true;
             exitLabel.Visible = true;
             backLabel.Visible = false;
-            chooseMoodLabel.Visible = true;
         }
 
         public new void highlightLabel(object sender, EventArgs e)
@@ -103,13 +96,6 @@ namespace mysz
         public new void buttonHighlight(object sender, EventArgs e)
         {
             base.buttonHighlight(sender, e);
-        }
-        private void chooseMoodLabel_Click(object sender, EventArgs e)
-        {
-            MoodWindow = new MoodWindow(MoodWindow.GameType.ThingsWindow, userName);
-            MoodWindow.Show();
-            //TODO unable game if mood is not choosen
-            //TODO GUI changes - visibility when Settings etc clicked
         }
 
     }

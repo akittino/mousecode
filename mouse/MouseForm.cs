@@ -8,6 +8,8 @@ namespace mysz
 {
     public class MouseForm : Form
     {
+        MoodWindow MoodWindow;
+        MoodWindow.Mood mood;
         int CHART_WIDTH = 0;
         int CHART_HEIGHT = 0;
         PictureBox picture_box;
@@ -113,6 +115,12 @@ namespace mysz
                 seconds = 0;
             }
             return minutes * 60 + seconds;
+        }
+        public MoodWindow.Mood getMood()
+        {
+            MoodWindow = new MoodWindow();
+            MoodWindow.ShowDialog();
+            return mood = MoodWindow.GetMood();
         }
     }
 }

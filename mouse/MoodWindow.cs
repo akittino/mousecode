@@ -11,25 +11,12 @@ namespace mysz
 {
     public partial class MoodWindow : Form
     {
-        ThingsGameMenuWindow ThingsWindow;
-        ReflexGameMenuWindow ReflexWindow;
-        ColorsGameMenuWindow ColorsWindow;
         Mood mood;
-        string userName;
-        GameType type;
-        public MoodWindow(GameType type, string userName)
+        public MoodWindow()
         {
             InitializeComponent();
-            this.type = type;
-            this.userName = userName;
+            
         }
-
-        public enum GameType
-        {
-            ThingsWindow = 1,
-            ReflexWindow = 2,
-            ColorsWindow = 3
-        };
 
         public enum Mood
         {
@@ -44,48 +31,37 @@ namespace mysz
         private void veryHappyButton_Click(object sender, EventArgs e)
         {
             mood = Mood.Very_Happy;
-            openGame(mood);
-        }
-
-        private void openGame(Mood moodKind)
-        {
-            if (type == GameType.ColorsWindow)
-            {
-                ColorsWindow = new ColorsGameMenuWindow(moodKind, userName);
-            }
-            else if (type == GameType.ReflexWindow)
-            {
-                ReflexWindow = new ReflexGameMenuWindow(moodKind, userName);
-            }
-            else
-            {
-                ThingsWindow = new ThingsGameMenuWindow(moodKind, userName);
-            }
             this.Close();
         }
 
         private void happyButton_Click(object sender, EventArgs e)
         {
             mood = Mood.Happy;
-            openGame(mood);
+            this.Close();
         }
 
         private void normalButton_Click(object sender, EventArgs e)
         {
             mood = Mood.Normal;
-            openGame(mood);
+            this.Close();
         }
 
         private void sadButton_Click(object sender, EventArgs e)
         {
             mood = Mood.Sad;
-            openGame(mood);
+            this.Close();
         }
 
         private void verySadButton_Click(object sender, EventArgs e)
         {
             mood = Mood.Very_Sad;
-            openGame(mood);
+            this.Close();
+        }
+
+        public Mood GetMood()
+        { 
+            Mood get = mood;
+            return get;
         }
 
     }

@@ -14,6 +14,7 @@ namespace mysz
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
+        MoodWindow.Mood mood;
         double roundTime = 10; // in seconds
         List<Point> CoordsList;
         Thread CoordinateSaver;
@@ -25,6 +26,7 @@ namespace mysz
         bool leftButtonCorrect = true;
         bool leftButtonClicked = true;
         string userName;
+        bool firstRun = true;
 
         class question
         {
@@ -111,6 +113,11 @@ namespace mysz
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            if (firstRun == true)
+            {
+                mood = getMood();
+                firstRun = false;
+            }
             answerRButton.Enabled = false;
             answerRButton.Visible = true;
             answerLButton.Enabled = false;
@@ -153,12 +160,14 @@ namespace mysz
                 {
                     WriteCoordinatesToFile();
                     CoordsList.Clear();
-                    writeToPictureBox("Great job! Your move data was just save to file. The game is ended!", 190, 280);
+                    writeToPictureBox("Great job! Your move data was just save to file. The game has ended!", 190, 280);
+                    firstRun = true;
                 }
                 else
                 {
                     CoordsList.Clear();
-                    writeToPictureBox("Your last answer wasn't correct. The game is ended!", 230, 280);
+                    writeToPictureBox("Your last answer wasn't correct. Game over!", 230, 280);
+                    firstRun = true;
                 }
                 startButton.Text = "Start new game";
                 inGame = false;
@@ -213,6 +222,7 @@ namespace mysz
             using (StreamWriter sw = new StreamWriter(name))
             {
                 sw.WriteLine(DateTime.Now.ToString());
+                sw.WriteLine("Mood: " + mood);
                 foreach(Point p in CoordsList)
                 {
                     sw.WriteLine(p.X + " , " + p.Y); 

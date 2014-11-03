@@ -22,7 +22,7 @@ namespace mysz
         TimeSpan startTime;
         MoodWindow.Mood mood;
 
-        public ReflexGameWindow(string userName, MoodWindow.Mood mood)
+        public ReflexGameWindow(string userName)
         {
             //TODO save status of picturebox, and check minimalizing window
             InitializeComponent();
@@ -42,7 +42,6 @@ namespace mysz
             graphics.Clear(Color.White);//TODO why nothing appears?
             drawEllipse(blueBrush);//TODO why nothing appears?
             this.userName = userName; // TODO add user differentation in dir like in Colors Game
-            this.mood = mood;
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -128,6 +127,7 @@ namespace mysz
             timeLabel.Text = (currentTime - startTime).ToString();
             timeLabel.Text = timeLabel.Text.Substring(6,6) + " s";
             if (CoordinateSaver.IsAlive)    CoordinateSaver.Suspend();
+            mood = getMood();
             WriteCoordinatesToFile(timeLabel.Text);
 
             graphics.Clear(Color.White);
