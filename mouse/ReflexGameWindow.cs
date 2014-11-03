@@ -15,11 +15,11 @@ namespace mysz
         bool firstRun = true;
         List<Point> CoordsList;
         Thread CoordinateSaver;
-        DateTime startTime;
         SolidBrush redBrush, greenBrush, blueBrush;
         Graphics graphics;
         bool useLeftButton = true;
         string userName;
+        TimeSpan startTime;
 
         public ReflexGameWindow(string userName)
         {
@@ -99,7 +99,7 @@ namespace mysz
                     stopRButton.Visible = true;
                     stopRButton.Enabled = true;
                 }
-
+                startTime = DateTime.Now.TimeOfDay;
                 CoordsList.Clear();
                 if (firstRun)
                 {
@@ -110,7 +110,6 @@ namespace mysz
                 {
                     CoordinateSaver.Resume();
                 }
-                startTime = DateTime.Now;
             }
         }
 
@@ -122,10 +121,10 @@ namespace mysz
             stopRButton.Visible = false;
             stopLButton.Enabled = false;
             stopLButton.Visible = false;
-            DateTime currentTime = DateTime.Now;
+            TimeSpan currentTime = DateTime.Now.TimeOfDay;
 
-            timeLabel.Text = (currentTime - startTime).TotalMilliseconds.ToString("0") + " ms";
-
+            timeLabel.Text = (currentTime - startTime).ToString();
+            timeLabel.Text = timeLabel.Text.Substring(6,6) + " s";
             if (CoordinateSaver.IsAlive)    CoordinateSaver.Suspend();
             WriteCoordinatesToFile(timeLabel.Text);
 
