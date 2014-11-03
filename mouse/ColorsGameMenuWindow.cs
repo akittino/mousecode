@@ -7,18 +7,22 @@ namespace mysz
     public partial class ColorsGameMenuWindow : MainGameWindowBase
     {
         ColorsGameWindow ColorsWindow;
+        MoodWindow MoodWindow;
         string userName;
         int seconds = 0, minutes = 0;
+        MoodWindow.Mood mood;
 
-        public ColorsGameMenuWindow(string userName)
+        public ColorsGameMenuWindow(MoodWindow.Mood mood, string userName) // TODO bad way to do it, don't have time for this right now, should talk about it
         {
             InitializeComponent();
             MainGameWindowBase BaseWindow = new MainGameWindowBase(helpLabel, titleLabel1, exitLabel, backLabel, settingsLabel,
             playButton, instructionTextBox);
             this.userName = userName;
             titleLabel1.Text = "Welcome " + userName +"!";
+            this.mood = mood;
+            //MessageBox.Show(mood.ToString()); for testing only - to show that the mood parameter was passed through
         }
-       
+
         public void playButtonClick(object sender, EventArgs e)
         {
             ColorsWindow = new ColorsGameWindow(userName, seconds, minutes);
@@ -39,6 +43,7 @@ namespace mysz
 
         public void settingsClick(object sender, EventArgs e)
         {
+            chooseMoodLabel.Visible = false;
             playButton.Visible = false;
             helpLabel.Visible = false;
             titleLabel1.Visible = false;
@@ -56,6 +61,7 @@ namespace mysz
 
         public void helpClick(object sender, EventArgs e)
         {
+            chooseMoodLabel.Visible = false;
             playButton.Visible = false;
             settingsLabel.Visible = false;
             titleLabel1.Visible = false;
@@ -65,7 +71,7 @@ namespace mysz
             backLabel.Location = new Point
             {
                 X = 96,
-                Y = 226
+                Y = 260
             };
             settingsComponents();
         }
@@ -84,6 +90,7 @@ namespace mysz
             titleLabel1.Visible = true;
             exitLabel.Visible = true;
             backLabel.Visible = false;
+            chooseMoodLabel.Visible = true;
             settingsComponents();
         }
         public new void highlightLabel(object sender, EventArgs e)
@@ -132,6 +139,15 @@ namespace mysz
         {
             seconds = Convert.ToInt32(secondsTextbox.Text);
             minutes = Convert.ToInt32(minutesTextbox.Text);
+        }
+
+        private void chooseMoodLabel_Click(object sender, EventArgs e)
+        {
+            MoodWindow = new MoodWindow(MoodWindow.GameType.ColorsWindow, userName);
+            MoodWindow.Show();
+            this.Hide();
+            //TODO unable game if mood is not choosen
+            //TODO GUI changes - visibility when Settings etc clicked
         }
     }
 

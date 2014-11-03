@@ -74,7 +74,7 @@ namespace mysz
         private void things_button_Click(object sender, EventArgs e)
         {
             userName = userNameTextbox.Text;
-            ThingsWindow = new ThingsGameMenuWindow(userName);
+            ThingsWindow = new ThingsGameMenuWindow(MoodWindow.Mood.Normal, userName);
             logThis("Things game is running now...");
             ThingsWindow.FormClosed += new FormClosedEventHandler(ThingsWindow_FormClosed);
             GamesButtonsOff();
@@ -85,7 +85,7 @@ namespace mysz
         private void reflex_button_Click(object sender, EventArgs e)
         {
             userName = userNameTextbox.Text;
-            ReflexWindow = new ReflexGameMenuWindow(userName);
+            ReflexWindow = new ReflexGameMenuWindow(MoodWindow.Mood.Normal, userName);
             logThis("Reflex game is running now...");
             ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
             GamesButtonsOff();
@@ -96,7 +96,7 @@ namespace mysz
         private void colors_button_Click(object sender, EventArgs e)
         {
             userName = userNameTextbox.Text;
-            ColorsWindow = new ColorsGameMenuWindow(userName);
+            ColorsWindow = new ColorsGameMenuWindow(MoodWindow.Mood.Normal, userName);
             logThis("Colors game is running now...");
             ColorsWindow.FormClosed += new FormClosedEventHandler(ColorsWindow_FormClosed);
             GamesButtonsOff();

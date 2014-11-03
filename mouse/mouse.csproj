@@ -59,6 +59,12 @@
     <Compile Include="ColorsGameWindow.Designer.cs">
       <DependentUpon>ColorsGameWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="MoodWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MoodWindow.Designer.cs">
+      <DependentUpon>MoodWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="ThingsGameWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +116,9 @@
     <EmbeddedResource Include="ColorsGameWindow.resx">
       <DependentUpon>ColorsGameWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoodWindow.resx">
+      <DependentUpon>MoodWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThingsGameWindow.resx">
       <DependentUpon>ThingsGameWindow.cs</DependentUpon>

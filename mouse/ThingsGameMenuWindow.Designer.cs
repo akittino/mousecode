@@ -36,6 +36,7 @@
             this.exitLabel = new System.Windows.Forms.Label();
             this.backLabel = new System.Windows.Forms.Label();
             this.instructionTextBox = new System.Windows.Forms.TextBox();
+            this.chooseMoodLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // playButton
@@ -69,7 +70,7 @@
             // 
             this.settingsLabel.AutoSize = true;
             this.settingsLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.settingsLabel.Location = new System.Drawing.Point(96, 122);
+            this.settingsLabel.Location = new System.Drawing.Point(96, 156);
             this.settingsLabel.Name = "settingsLabel";
             this.settingsLabel.Size = new System.Drawing.Size(69, 40);
             this.settingsLabel.TabIndex = 2;
@@ -82,7 +83,7 @@
             // 
             this.helpLabel.AutoSize = true;
             this.helpLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helpLabel.Location = new System.Drawing.Point(96, 174);
+            this.helpLabel.Location = new System.Drawing.Point(96, 208);
             this.helpLabel.Name = "helpLabel";
             this.helpLabel.Size = new System.Drawing.Size(49, 40);
             this.helpLabel.TabIndex = 3;
@@ -95,7 +96,7 @@
             // 
             this.exitLabel.AutoSize = true;
             this.exitLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitLabel.Location = new System.Drawing.Point(96, 226);
+            this.exitLabel.Location = new System.Drawing.Point(96, 260);
             this.exitLabel.Name = "exitLabel";
             this.exitLabel.Size = new System.Drawing.Size(43, 40);
             this.exitLabel.TabIndex = 4;
@@ -108,7 +109,7 @@
             // 
             this.backLabel.AutoSize = true;
             this.backLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.backLabel.Location = new System.Drawing.Point(96, 174);
+            this.backLabel.Location = new System.Drawing.Point(96, 208);
             this.backLabel.Name = "backLabel";
             this.backLabel.Size = new System.Drawing.Size(51, 40);
             this.backLabel.TabIndex = 5;
@@ -132,11 +133,23 @@
             this.instructionTextBox.Text = resources.GetString("instructionTextBox.Text");
             this.instructionTextBox.Visible = false;
             // 
-            // ThingsGameMainWindow
+            // chooseMoodLabel
+            // 
+            this.chooseMoodLabel.AutoSize = true;
+            this.chooseMoodLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chooseMoodLabel.Location = new System.Drawing.Point(74, 110);
+            this.chooseMoodLabel.Name = "chooseMoodLabel";
+            this.chooseMoodLabel.Size = new System.Drawing.Size(109, 40);
+            this.chooseMoodLabel.TabIndex = 21;
+            this.chooseMoodLabel.Text = "Choose mood";
+            this.chooseMoodLabel.Click += new System.EventHandler(this.chooseMoodLabel_Click);
+            // 
+            // ThingsGameMenuWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 342);
+            this.Controls.Add(this.chooseMoodLabel);
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.exitLabel);
             this.Controls.Add(this.helpLabel);
@@ -148,7 +161,7 @@
             this.MaximumSize = new System.Drawing.Size(676, 380);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(676, 380);
-            this.Name = "ThingsGameMainWindow";
+            this.Name = "ThingsGameMenuWindow";
             this.Text = "Things Game";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -164,5 +177,6 @@
         private System.Windows.Forms.Label exitLabel;
         private System.Windows.Forms.Label backLabel;
         private System.Windows.Forms.TextBox instructionTextBox;
+        private System.Windows.Forms.Label chooseMoodLabel;
     }
 }

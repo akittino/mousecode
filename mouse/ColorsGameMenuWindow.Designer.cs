@@ -42,13 +42,14 @@
             this.secondsLabel = new System.Windows.Forms.Label();
             this.secondsTextbox = new System.Windows.Forms.TextBox();
             this.setTimeButton = new System.Windows.Forms.Button();
+            this.chooseMoodLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // exitLabel
             // 
             this.exitLabel.AutoSize = true;
             this.exitLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitLabel.Location = new System.Drawing.Point(96, 226);
+            this.exitLabel.Location = new System.Drawing.Point(96, 260);
             this.exitLabel.Name = "exitLabel";
             this.exitLabel.Size = new System.Drawing.Size(43, 40);
             this.exitLabel.TabIndex = 9;
@@ -61,7 +62,7 @@
             // 
             this.helpLabel.AutoSize = true;
             this.helpLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helpLabel.Location = new System.Drawing.Point(96, 174);
+            this.helpLabel.Location = new System.Drawing.Point(96, 208);
             this.helpLabel.Name = "helpLabel";
             this.helpLabel.Size = new System.Drawing.Size(49, 40);
             this.helpLabel.TabIndex = 8;
@@ -74,7 +75,7 @@
             // 
             this.settingsLabel.AutoSize = true;
             this.settingsLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.settingsLabel.Location = new System.Drawing.Point(96, 122);
+            this.settingsLabel.Location = new System.Drawing.Point(96, 156);
             this.settingsLabel.Name = "settingsLabel";
             this.settingsLabel.Size = new System.Drawing.Size(69, 40);
             this.settingsLabel.TabIndex = 7;
@@ -127,7 +128,7 @@
             // 
             this.backLabel.AutoSize = true;
             this.backLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.backLabel.Location = new System.Drawing.Point(96, 174);
+            this.backLabel.Location = new System.Drawing.Point(96, 208);
             this.backLabel.Name = "backLabel";
             this.backLabel.Size = new System.Drawing.Size(51, 40);
             this.backLabel.TabIndex = 13;
@@ -201,11 +202,25 @@
             this.setTimeButton.Visible = false;
             this.setTimeButton.Click += new System.EventHandler(this.setTimeButton_Click);
             // 
+            // chooseMoodLabel
+            // 
+            this.chooseMoodLabel.AutoSize = true;
+            this.chooseMoodLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chooseMoodLabel.Location = new System.Drawing.Point(74, 110);
+            this.chooseMoodLabel.Name = "chooseMoodLabel";
+            this.chooseMoodLabel.Size = new System.Drawing.Size(109, 40);
+            this.chooseMoodLabel.TabIndex = 20;
+            this.chooseMoodLabel.Text = "Choose mood";
+            this.chooseMoodLabel.Click += new System.EventHandler(this.chooseMoodLabel_Click);
+            this.chooseMoodLabel.MouseEnter += new System.EventHandler(this.highlightLabel);
+            this.chooseMoodLabel.MouseLeave += new System.EventHandler(this.removeHighlightLabel);
+            // 
             // ColorsGameMenuWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 342);
+            this.Controls.Add(this.chooseMoodLabel);
             this.Controls.Add(this.setTimeButton);
             this.Controls.Add(this.secondsTextbox);
             this.Controls.Add(this.secondsLabel);
@@ -245,5 +260,6 @@
         private System.Windows.Forms.Label secondsLabel;
         private System.Windows.Forms.TextBox secondsTextbox;
         private System.Windows.Forms.Button setTimeButton;
+        private System.Windows.Forms.Label chooseMoodLabel;
     }
 }
