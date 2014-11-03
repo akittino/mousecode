@@ -19,7 +19,8 @@ namespace mysz
             this.userName = userName;
             titleLabel1.Text = "Welcome " + userName + "!";
             this.mood = mood;
-            //MessageBox.Show(mood.ToString()); for testing only - to show that the mood parameter was passed through        }
+            //MessageBox.Show(mood.ToString()); for testing only - to show that the mood parameter was passed through        
+        }
 
         public void playButtonClick(object sender, EventArgs e)
         {
