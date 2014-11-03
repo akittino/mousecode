@@ -29,78 +29,80 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(login_main_window));
-            this.user_name_textbox = new System.Windows.Forms.TextBox();
-            this.user_name_label = new System.Windows.Forms.Label();
-            this.login_button = new System.Windows.Forms.Button();
-            this.admin_panel_button = new System.Windows.Forms.Button();
-            this.login_status_label = new System.Windows.Forms.Label();
+            this.userNameTextbox = new System.Windows.Forms.TextBox();
+            this.userNameLabel = new System.Windows.Forms.Label();
+            this.loginButton = new System.Windows.Forms.Button();
+            this.adminPanelButton = new System.Windows.Forms.Button();
+            this.loginStatusLabel = new System.Windows.Forms.Label();
             this.colorsButton = new System.Windows.Forms.Button();
             this.reflexButton = new System.Windows.Forms.Button();
             this.thingsButton = new System.Windows.Forms.Button();
             this.gamesGroupBox = new System.Windows.Forms.GroupBox();
-            this.colorsLabel = new System.Windows.Forms.Label();
-            this.admin_password_textbox = new System.Windows.Forms.TextBox();
-            this.reflexLabel = new System.Windows.Forms.Label();
             this.thingsLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.reflexLabel = new System.Windows.Forms.Label();
+            this.colorsLabel = new System.Windows.Forms.Label();
+            this.adminPasswordTextbox = new System.Windows.Forms.TextBox();
+            this.titleLabel = new System.Windows.Forms.Label();
             this.gamesGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // user_name_textbox
+            // userNameTextbox
             // 
-            this.user_name_textbox.Location = new System.Drawing.Point(115, 63);
-            this.user_name_textbox.Name = "user_name_textbox";
-            this.user_name_textbox.Size = new System.Drawing.Size(150, 20);
-            this.user_name_textbox.TabIndex = 0;
-            this.user_name_textbox.Text = "DO";
+            this.userNameTextbox.Location = new System.Drawing.Point(115, 63);
+            this.userNameTextbox.Name = "userNameTextbox";
+            this.userNameTextbox.Size = new System.Drawing.Size(150, 20);
+            this.userNameTextbox.TabIndex = 0;
+            this.userNameTextbox.Text = "DO";
+            this.userNameTextbox.TextChanged += new System.EventHandler(this.userNameTextbox_TextChanged);
             // 
-            // user_name_label
+            // userNameLabel
             // 
-            this.user_name_label.AutoSize = true;
-            this.user_name_label.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.user_name_label.Location = new System.Drawing.Point(48, 66);
-            this.user_name_label.Name = "user_name_label";
-            this.user_name_label.Size = new System.Drawing.Size(61, 15);
-            this.user_name_label.TabIndex = 1;
-            this.user_name_label.Text = "User name:";
+            this.userNameLabel.AutoSize = true;
+            this.userNameLabel.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameLabel.Location = new System.Drawing.Point(48, 66);
+            this.userNameLabel.Name = "userNameLabel";
+            this.userNameLabel.Size = new System.Drawing.Size(61, 15);
+            this.userNameLabel.TabIndex = 1;
+            this.userNameLabel.Text = "User name:";
             // 
-            // login_button
+            // loginButton
             // 
-            this.login_button.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.login_button.Location = new System.Drawing.Point(209, 123);
-            this.login_button.Name = "login_button";
-            this.login_button.Size = new System.Drawing.Size(75, 23);
-            this.login_button.TabIndex = 8;
-            this.login_button.Text = "Log in";
-            this.login_button.UseVisualStyleBackColor = true;
-            this.login_button.Click += new System.EventHandler(this.login_button_Click);
+            this.loginButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginButton.Location = new System.Drawing.Point(209, 123);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(75, 23);
+            this.loginButton.TabIndex = 8;
+            this.loginButton.Text = "Log in";
+            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.login_button_Click);
             // 
-            // admin_panel_button
+            // adminPanelButton
             // 
-            this.admin_panel_button.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admin_panel_button.Location = new System.Drawing.Point(12, 123);
-            this.admin_panel_button.Name = "admin_panel_button";
-            this.admin_panel_button.Size = new System.Drawing.Size(102, 23);
-            this.admin_panel_button.TabIndex = 9;
-            this.admin_panel_button.Text = "Run admin panel";
-            this.admin_panel_button.UseVisualStyleBackColor = true;
-            this.admin_panel_button.Click += new System.EventHandler(this.admin_panel_button_Click);
+            this.adminPanelButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.adminPanelButton.Location = new System.Drawing.Point(12, 123);
+            this.adminPanelButton.Name = "adminPanelButton";
+            this.adminPanelButton.Size = new System.Drawing.Size(102, 23);
+            this.adminPanelButton.TabIndex = 9;
+            this.adminPanelButton.Text = "Run admin panel";
+            this.adminPanelButton.UseVisualStyleBackColor = true;
+            this.adminPanelButton.Click += new System.EventHandler(this.admin_panel_button_Click);
             // 
-            // login_status_label
+            // loginStatusLabel
             // 
-            this.login_status_label.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.login_status_label.Location = new System.Drawing.Point(9, 183);
-            this.login_status_label.Name = "login_status_label";
-            this.login_status_label.Size = new System.Drawing.Size(310, 23);
-            this.login_status_label.TabIndex = 10;
-            this.login_status_label.Text = "Log in before choosing game";
-            this.login_status_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.loginStatusLabel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginStatusLabel.Location = new System.Drawing.Point(9, 183);
+            this.loginStatusLabel.Name = "loginStatusLabel";
+            this.loginStatusLabel.Size = new System.Drawing.Size(310, 23);
+            this.loginStatusLabel.TabIndex = 10;
+            this.loginStatusLabel.Text = "Log in before choosing game";
+            this.loginStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // colorsButton
             // 
             this.colorsButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("colorsButton.BackgroundImage")));
             this.colorsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.colorsButton.Enabled = false;
+            this.colorsButton.ForeColor = System.Drawing.Color.White;
             this.colorsButton.Location = new System.Drawing.Point(6, 42);
             this.colorsButton.Name = "colorsButton";
             this.colorsButton.Size = new System.Drawing.Size(81, 47);
@@ -140,6 +142,7 @@
             this.gamesGroupBox.Controls.Add(this.colorsButton);
             this.gamesGroupBox.Controls.Add(this.thingsButton);
             this.gamesGroupBox.Controls.Add(this.reflexButton);
+            this.gamesGroupBox.Enabled = false;
             this.gamesGroupBox.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gamesGroupBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.gamesGroupBox.Location = new System.Drawing.Point(9, 219);
@@ -148,37 +151,6 @@
             this.gamesGroupBox.TabIndex = 14;
             this.gamesGroupBox.TabStop = false;
             this.gamesGroupBox.Text = "Games";
-            // 
-            // colorsLabel
-            // 
-            this.colorsLabel.AutoSize = true;
-            this.colorsLabel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colorsLabel.Location = new System.Drawing.Point(24, 24);
-            this.colorsLabel.Name = "colorsLabel";
-            this.colorsLabel.Size = new System.Drawing.Size(42, 15);
-            this.colorsLabel.TabIndex = 39;
-            this.colorsLabel.Text = "Colors";
-            this.colorsLabel.Visible = false;
-            // 
-            // admin_password_textbox
-            // 
-            this.admin_password_textbox.Location = new System.Drawing.Point(12, 153);
-            this.admin_password_textbox.Name = "admin_password_textbox";
-            this.admin_password_textbox.Size = new System.Drawing.Size(100, 20);
-            this.admin_password_textbox.TabIndex = 15;
-            this.admin_password_textbox.Text = "admin";
-            this.admin_password_textbox.UseSystemPasswordChar = true;
-            // 
-            // reflexLabel
-            // 
-            this.reflexLabel.AutoSize = true;
-            this.reflexLabel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reflexLabel.Location = new System.Drawing.Point(134, 24);
-            this.reflexLabel.Name = "reflexLabel";
-            this.reflexLabel.Size = new System.Drawing.Size(39, 15);
-            this.reflexLabel.TabIndex = 40;
-            this.reflexLabel.Text = "Reflex";
-            this.reflexLabel.Visible = false;
             // 
             // thingsLabel
             // 
@@ -191,29 +163,60 @@
             this.thingsLabel.Text = "Things";
             this.thingsLabel.Visible = false;
             // 
-            // label1
+            // reflexLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(108, 2);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(115, 40);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Mouse Tracker";
+            this.reflexLabel.AutoSize = true;
+            this.reflexLabel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reflexLabel.Location = new System.Drawing.Point(134, 24);
+            this.reflexLabel.Name = "reflexLabel";
+            this.reflexLabel.Size = new System.Drawing.Size(39, 15);
+            this.reflexLabel.TabIndex = 40;
+            this.reflexLabel.Text = "Reflex";
+            this.reflexLabel.Visible = false;
+            // 
+            // colorsLabel
+            // 
+            this.colorsLabel.AutoSize = true;
+            this.colorsLabel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colorsLabel.Location = new System.Drawing.Point(24, 24);
+            this.colorsLabel.Name = "colorsLabel";
+            this.colorsLabel.Size = new System.Drawing.Size(42, 15);
+            this.colorsLabel.TabIndex = 39;
+            this.colorsLabel.Text = "Colors";
+            this.colorsLabel.Visible = false;
+            // 
+            // adminPasswordTextbox
+            // 
+            this.adminPasswordTextbox.Location = new System.Drawing.Point(12, 153);
+            this.adminPasswordTextbox.Name = "adminPasswordTextbox";
+            this.adminPasswordTextbox.Size = new System.Drawing.Size(100, 20);
+            this.adminPasswordTextbox.TabIndex = 15;
+            this.adminPasswordTextbox.Text = "admin";
+            this.adminPasswordTextbox.UseSystemPasswordChar = true;
+            // 
+            // titleLabel
+            // 
+            this.titleLabel.AutoSize = true;
+            this.titleLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.Location = new System.Drawing.Point(108, 2);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(115, 40);
+            this.titleLabel.TabIndex = 16;
+            this.titleLabel.Text = "Mouse Tracker";
             // 
             // login_main_window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 345);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.admin_password_textbox);
+            this.Controls.Add(this.titleLabel);
+            this.Controls.Add(this.adminPasswordTextbox);
             this.Controls.Add(this.gamesGroupBox);
-            this.Controls.Add(this.login_status_label);
-            this.Controls.Add(this.admin_panel_button);
-            this.Controls.Add(this.login_button);
-            this.Controls.Add(this.user_name_label);
-            this.Controls.Add(this.user_name_textbox);
+            this.Controls.Add(this.loginStatusLabel);
+            this.Controls.Add(this.adminPanelButton);
+            this.Controls.Add(this.loginButton);
+            this.Controls.Add(this.userNameLabel);
+            this.Controls.Add(this.userNameTextbox);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(350, 400);
@@ -230,19 +233,19 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox user_name_textbox;
-        private System.Windows.Forms.Label user_name_label;
-        private System.Windows.Forms.Button login_button;
-        private System.Windows.Forms.Button admin_panel_button;
-        private System.Windows.Forms.Label login_status_label;
+        private System.Windows.Forms.TextBox userNameTextbox;
+        private System.Windows.Forms.Label userNameLabel;
+        private System.Windows.Forms.Button loginButton;
+        private System.Windows.Forms.Button adminPanelButton;
+        private System.Windows.Forms.Label loginStatusLabel;
         private System.Windows.Forms.Button colorsButton;
         private System.Windows.Forms.Button reflexButton;
         private System.Windows.Forms.Button thingsButton;
         private System.Windows.Forms.GroupBox gamesGroupBox;
-        private System.Windows.Forms.TextBox admin_password_textbox;
+        private System.Windows.Forms.TextBox adminPasswordTextbox;
         private System.Windows.Forms.Label colorsLabel;
         private System.Windows.Forms.Label thingsLabel;
         private System.Windows.Forms.Label reflexLabel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label titleLabel;
     }
 }

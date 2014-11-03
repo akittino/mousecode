@@ -18,13 +18,13 @@ namespace mysz
         public login_main_window()
         {
             InitializeComponent();
-            userName = user_name_textbox.Text;
+            userName = userNameTextbox.Text;
         }
 
         //TODO if can resize window. mustn't. ALL WINDOWS!!!
         private void admin_panel_button_Click(object sender, EventArgs e)
         {
-            switch(admin_password_textbox.Text)
+            switch(adminPasswordTextbox.Text)
             {
                 case "":
                     logThis("Please enter password to use admin panel.");
@@ -47,24 +47,24 @@ namespace mysz
 
         private void logThis(String message)
         {
-            login_status_label.Text = message;
+            loginStatusLabel.Text = message;
         }
 
 
 
         private void login_button_Click(object sender, EventArgs e)
         {
-            if (user_name_textbox.Text == "")
+            if (userNameTextbox.Text == "")
             {
                 logThis("Please enter name before login.");
             }
-            else if (user_name_textbox.Text.Length > 15)
+            else if (userNameTextbox.Text.Length > 15)
             {
                 logThis("User name is too long. Please use valid name.");
             }
             else
             {
-                UserName = user_name_textbox.Text;
+                UserName = userNameTextbox.Text;
                 logThis("Access to games granted. Hello " + UserName + "!");
                 GamesButtonsOn();
             }
@@ -73,7 +73,7 @@ namespace mysz
 
         private void things_button_Click(object sender, EventArgs e)
         {
-            userName = user_name_textbox.Text;
+            userName = userNameTextbox.Text;
             ThingsWindow = new ThingsGameMenuWindow(userName);
             logThis("Things game is running now...");
             ThingsWindow.FormClosed += new FormClosedEventHandler(ThingsWindow_FormClosed);
@@ -84,7 +84,7 @@ namespace mysz
 
         private void reflex_button_Click(object sender, EventArgs e)
         {
-            userName = user_name_textbox.Text;
+            userName = userNameTextbox.Text;
             ReflexWindow = new ReflexGameMenuWindow(userName);
             logThis("Reflex game is running now...");
             ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
@@ -95,7 +95,7 @@ namespace mysz
 
         private void colors_button_Click(object sender, EventArgs e)
         {
-            userName = user_name_textbox.Text;
+            userName = userNameTextbox.Text;
             ColorsWindow = new ColorsGameMenuWindow(userName);
             logThis("Colors game is running now...");
             ColorsWindow.FormClosed += new FormClosedEventHandler(ColorsWindow_FormClosed);
@@ -127,12 +127,13 @@ namespace mysz
 
         void AdminWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            admin_panel_button.Enabled = true;
+            adminPanelButton.Enabled = true;
             this.Show();
         }
 
         void GamesButtonsOn()
         {
+            gamesGroupBox.Enabled = true;
             colorsButton.Enabled = true;
             reflexButton.Enabled = true;
             thingsButton.Enabled = true;
@@ -145,5 +146,13 @@ namespace mysz
             thingsButton.Enabled = false;
         }
 
+        private void userNameTextbox_TextChanged(object sender, EventArgs e)
+        {
+            if(userNameTextbox.Text.Equals(""))
+            {
+                GamesButtonsOff();
+                login_button_Click(sender, e);
+            }
+        }
     }
 }

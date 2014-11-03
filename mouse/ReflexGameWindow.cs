@@ -132,7 +132,6 @@ namespace mysz
             drawEllipse(blueBrush);
             writeToPictureBox(graphics, "Great job! Your game data was just save to file.", 250, 280, 15);
             //TODO decide about feelings
-            //TODO find out if something's wrong with time
         }
 
         void WriteCoordinatesToFile(String gameTimeString)
