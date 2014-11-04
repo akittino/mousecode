@@ -10,6 +10,8 @@ namespace mysz
 {
     public partial class ThingsGameWindow : MouseForm
     {
+        //TODO change moment when asking about mood
+        //TODO fix some fuckup when wrong answer (ask again about mood)
         //TODO add green OK when game completed, and red warning when failed
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
@@ -90,6 +92,7 @@ namespace mysz
         private void setNewQuestion()
         {
             //TODO get better solution to get random next question
+            //depends on current question (to not show the same)
             question currentQuestion = (question)questions[rnd.Next(questions.Count)];
             
             if (rnd.Next(100) > 50)
@@ -128,7 +131,7 @@ namespace mysz
             startButton.Enabled = false;
 
             graphics.Clear(Color.White);
-            writeToPictureBox("Now quick, answer the question!", 310, 280);
+            writeToPictureBox("Now quick, answer the question!", 310, 550);
 
             if (! inGame)
             {
@@ -160,13 +163,13 @@ namespace mysz
                 {
                     WriteCoordinatesToFile();
                     CoordsList.Clear();
-                    writeToPictureBox("Great job! Your move data was just save to file. The game has ended!", 190, 280);
+                    writeToPictureBox("Great job! Your move data was just save to file. The game has ended!", 190, 550);
                     firstRun = true;
                 }
                 else
                 {
                     CoordsList.Clear();
-                    writeToPictureBox("Your last answer wasn't correct. Game over!", 230, 280);
+                    writeToPictureBox("Your last answer wasn't correct. Game over!", 230, 550);
                     firstRun = true;
                 }
                 startButton.Text = "Start new game";
@@ -180,13 +183,13 @@ namespace mysz
                     WriteCoordinatesToFile();
                     CoordsList.Clear();
                     CoordinateSaver.Resume();
-                    writeToPictureBox("Great job! Your move data was just save to file. Please take next question!", 180, 280);
+                    writeToPictureBox("Great job! Your move data was just save to file. Please take next question!", 180, 550);
                 }
                 else
                 {
                     CoordinateSaver.Abort();
                     CoordsList.Clear();
-                    writeToPictureBox("Your last answer wasn't correct. The game is ended!", 230, 280);
+                    writeToPictureBox("Your last answer wasn't correct. The game is ended!", 230, 550);
                     startButton.Text = "Start new game";
                     inGame = false;
                 }

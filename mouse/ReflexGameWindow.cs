@@ -9,6 +9,7 @@ namespace mysz
 {
     public partial class ReflexGameWindow : MouseForm
     {
+        //TODO change mood window from before to after game choose mood
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;

@@ -116,9 +116,9 @@
             // questionBox
             // 
             this.questionBox.BackColor = System.Drawing.Color.White;
-            this.questionBox.Location = new System.Drawing.Point(472, 50);
+            this.questionBox.Location = new System.Drawing.Point(322, 50);
             this.questionBox.Name = "questionBox";
-            this.questionBox.Size = new System.Drawing.Size(200, 200);
+            this.questionBox.Size = new System.Drawing.Size(500, 500);
             this.questionBox.TabIndex = 27;
             this.questionBox.TabStop = false;
             // 
@@ -126,7 +126,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 661);
+            this.ClientSize = new System.Drawing.Size(984, 662);
             this.Controls.Add(this.questionBox);
             this.Controls.Add(this.answerLButton);
             this.Controls.Add(this.timeTextLabel);
