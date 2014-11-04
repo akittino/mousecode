@@ -131,6 +131,16 @@ namespace mysz
                 MessageBox.Show("Please enter only numbers.");
                 secondsTextbox.Text = "";
             }
+            if (secondsTextbox.Text.Length > 2)
+            {
+                MessageBox.Show("Please enter only two numbers.");
+                secondsTextbox.Text = "";
+            }
+            if (minutesTextbox.Text.Length > 2)
+            {
+                MessageBox.Show("Please enter only two numbers.");
+                secondsTextbox.Text = "";
+            }
             base.textbox_TextChanged(sender, e, minutesTextbox, secondsTextbox, setTimeButton); 
         }
 

@@ -28,7 +28,6 @@ namespace mysz
         bool leftButtonCorrect = true;
         bool leftButtonClicked = true;
         string userName;
-        bool firstRun = true;
 
         class question
         {
@@ -156,16 +155,15 @@ namespace mysz
             {
                 if (leftButtonClicked == leftButtonCorrect)
                 {
+                    mood = getMood();
                     WriteCoordinatesToFile();
                     CoordsList.Clear();
                     writeToPictureBox("Great job! Your move data was just save to file. The game has ended!", 190, 550);
-                    firstRun = true;
                 }
                 else
                 {
                     CoordsList.Clear();
                     writeToPictureBox("Your last answer wasn't correct. Game over!", 230, 550);
-                    firstRun = true;
                 }
                 startButton.Text = "Start new game";
                 inGame = false;
@@ -179,7 +177,6 @@ namespace mysz
                     CoordsList.Clear();
                     CoordinateSaver.Resume();
                     writeToPictureBox("Great job! Your move data was just save to file. Please take next question!", 180, 550);
-                    mood = getMood();
                 }
                 else
                 {
