@@ -49,7 +49,27 @@ namespace mysz
             btn.ForeColor = Color.Indigo;
         }
 
+        public int setTimeButton_Click(object sender, EventArgs e, string secondsS, string minutesS, Button button)
+        {
+            int seconds = Convert.ToInt32(secondsS);
+            int minutes = Convert.ToInt32(minutesS);
+            button.BackColor = Color.ForestGreen;
+            return minutes * 60 + seconds;
+        }
 
+        public void textbox_TextChanged(object sender, EventArgs e, TextBox minutes, TextBox seconds, Button timeButton)
+        {
+            
+            timeButton.BackColor = Color.LightGray;
+            if (!minutes.Text.Equals("") && !seconds.Text.Equals(""))
+            {
+                timeButton.Enabled = true;
+            }
+            else
+            {
+                timeButton.Enabled = false;
+            }
+        }
 
        
     }

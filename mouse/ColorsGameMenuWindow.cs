@@ -9,7 +9,6 @@ namespace mysz
         ColorsGameWindow ColorsWindow;
         string userName;
         int seconds = 0, minutes = 0;
-        MoodWindow.Mood mood;
 
         public ColorsGameMenuWindow(string userName)
         {
@@ -52,7 +51,8 @@ namespace mysz
             minutesTextbox.Visible = true;
             secondsTextbox.Visible = true;
             setTimeButton.Visible = true;
-            
+            playButton.Enabled = false;
+            setTimeButton.BackColor = Color.LightGray;
         }
 
         public void helpClick(object sender, EventArgs e)
@@ -69,6 +69,7 @@ namespace mysz
                 Y = 226
             };
             settingsComponents();
+            playButton.Enabled = false;
         }
 
         public void backGameWindow(object sender, MouseEventArgs e)
@@ -86,6 +87,7 @@ namespace mysz
             exitLabel.Visible = true;
             backLabel.Visible = false;
             settingsComponents();
+            playButton.Enabled = true;
         }
         public new void highlightLabel(object sender, EventArgs e)
         {
@@ -119,20 +121,24 @@ namespace mysz
 
         private void textbox_TextChanged(object sender, EventArgs e)
         {
-            if (!minutesTextbox.Text.Equals("") && !secondsTextbox.Text.Equals(""))
+            if (System.Text.RegularExpressions.Regex.IsMatch(minutesTextbox.Text, "^[a-zA-Z]+$"))
             {
-                setTimeButton.Enabled = true;
+                MessageBox.Show("Please enter only numbers.");
+                minutesTextbox.Text = "";
             }
-            else
+            if (System.Text.RegularExpressions.Regex.IsMatch(secondsTextbox.Text, "^[a-zA-Z]+$"))
             {
-                setTimeButton.Enabled = false;
+                MessageBox.Show("Please enter only numbers.");
+                secondsTextbox.Text = "";
             }
+            base.textbox_TextChanged(sender, e, minutesTextbox, secondsTextbox, setTimeButton); 
         }
 
         private void setTimeButton_Click(object sender, EventArgs e)
         {
-            seconds = Convert.ToInt32(secondsTextbox.Text);
-            minutes = Convert.ToInt32(minutesTextbox.Text);
+            int time = base.setTimeButton_Click(sender, e, secondsTextbox.Text, minutesTextbox.Text, setTimeButton);
+            seconds = time % 60;
+            minutes = time / 60;
         }
     }
 

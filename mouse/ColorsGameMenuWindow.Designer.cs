@@ -139,7 +139,7 @@
             // 
             // minutesTextbox
             // 
-            this.minutesTextbox.Location = new System.Drawing.Point(421, 133);
+            this.minutesTextbox.Location = new System.Drawing.Point(428, 133);
             this.minutesTextbox.Name = "minutesTextbox";
             this.minutesTextbox.Size = new System.Drawing.Size(28, 20);
             this.minutesTextbox.TabIndex = 14;
@@ -150,7 +150,7 @@
             // 
             this.gameTimeLabel.AutoSize = true;
             this.gameTimeLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameTimeLabel.Location = new System.Drawing.Point(305, 122);
+            this.gameTimeLabel.Location = new System.Drawing.Point(312, 122);
             this.gameTimeLabel.Name = "gameTimeLabel";
             this.gameTimeLabel.Size = new System.Drawing.Size(95, 40);
             this.gameTimeLabel.TabIndex = 15;
@@ -161,7 +161,7 @@
             // 
             this.minutesLabel.AutoSize = true;
             this.minutesLabel.Font = new System.Drawing.Font("Gabriola", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minutesLabel.Location = new System.Drawing.Point(407, 101);
+            this.minutesLabel.Location = new System.Drawing.Point(414, 101);
             this.minutesLabel.Name = "minutesLabel";
             this.minutesLabel.Size = new System.Drawing.Size(54, 29);
             this.minutesLabel.TabIndex = 16;
@@ -172,7 +172,7 @@
             // 
             this.secondsLabel.AutoSize = true;
             this.secondsLabel.Font = new System.Drawing.Font("Gabriola", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.secondsLabel.Location = new System.Drawing.Point(461, 101);
+            this.secondsLabel.Location = new System.Drawing.Point(468, 101);
             this.secondsLabel.Name = "secondsLabel";
             this.secondsLabel.Size = new System.Drawing.Size(54, 29);
             this.secondsLabel.TabIndex = 17;
@@ -181,7 +181,7 @@
             // 
             // secondsTextbox
             // 
-            this.secondsTextbox.Location = new System.Drawing.Point(470, 133);
+            this.secondsTextbox.Location = new System.Drawing.Point(477, 133);
             this.secondsTextbox.Name = "secondsTextbox";
             this.secondsTextbox.Size = new System.Drawing.Size(28, 20);
             this.secondsTextbox.TabIndex = 18;
@@ -192,7 +192,7 @@
             // 
             this.setTimeButton.Enabled = false;
             this.setTimeButton.Font = new System.Drawing.Font("Gabriola", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.setTimeButton.Location = new System.Drawing.Point(523, 129);
+            this.setTimeButton.Location = new System.Drawing.Point(530, 129);
             this.setTimeButton.Name = "setTimeButton";
             this.setTimeButton.Size = new System.Drawing.Size(75, 33);
             this.setTimeButton.TabIndex = 19;

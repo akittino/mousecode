@@ -116,11 +116,6 @@ namespace mysz
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            if (firstRun == true)
-            {
-                mood = getMood();
-                firstRun = false;
-            }
             answerRButton.Enabled = false;
             answerRButton.Visible = true;
             answerLButton.Enabled = false;
@@ -184,6 +179,7 @@ namespace mysz
                     CoordsList.Clear();
                     CoordinateSaver.Resume();
                     writeToPictureBox("Great job! Your move data was just save to file. Please take next question!", 180, 550);
+                    mood = getMood();
                 }
                 else
                 {

@@ -8,6 +8,8 @@ namespace mysz
     {
         ReflexGameWindow ReflexWindow;
         string userName;
+        int seconds = 0, minutes = 0;
+
         public ReflexGameMenuWindow(string userName)
         {
             InitializeComponent();
@@ -43,6 +45,14 @@ namespace mysz
             exitLabel.Visible = false;
             backLabel.Visible = true;
             instructionTextBox.Visible = false;
+            gameTimeLabel.Visible = true;
+            minutesLabel.Visible = true;
+            secondsLabel.Visible = true;
+            minutesTextbox.Visible = true;
+            secondsTextbox.Visible = true;
+            setTimeButton.Visible = true;
+            playButton.Enabled = false;
+            setTimeButton.BackColor = Color.LightGray;
         }
 
         public void helpClick(object sender, EventArgs e)
@@ -58,6 +68,8 @@ namespace mysz
                 X = 96,
                 Y = 226
             };
+            settingsComponents();
+            playButton.Enabled = false;
         }
 
         public new void highlightLabel(object sender, EventArgs e)
@@ -94,6 +106,40 @@ namespace mysz
             titleLabel1.Visible = true;
             exitLabel.Visible = true;
             backLabel.Visible = false;
+            settingsComponents();
+            playButton.Enabled = true;
+        }
+
+        private void textbox_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(minutesTextbox.Text, "^[a-zA-Z]+$"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                minutesTextbox.Text = "";
+            }
+            if (System.Text.RegularExpressions.Regex.IsMatch(secondsTextbox.Text, "^[a-zA-Z]+$"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                secondsTextbox.Text = "";
+            }
+            base.textbox_TextChanged(sender, e, minutesTextbox, secondsTextbox, setTimeButton);
+        }
+
+        private void setTimeButton_Click(object sender, EventArgs e)
+        {
+            int time = base.setTimeButton_Click(sender, e, secondsTextbox.Text, minutesTextbox.Text, setTimeButton);
+            seconds = time % 60;
+            minutes = time / 60;
+        }
+
+        public void settingsComponents()
+        {
+            gameTimeLabel.Visible = false;
+            minutesLabel.Visible = false;
+            secondsLabel.Visible = false;
+            minutesTextbox.Visible = false;
+            secondsTextbox.Visible = false;
+            setTimeButton.Visible = false;
         }
     }
 }

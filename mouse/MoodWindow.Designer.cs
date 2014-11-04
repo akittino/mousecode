@@ -46,11 +46,11 @@
             // 
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(69, 19);
+            this.titleLabel.Location = new System.Drawing.Point(49, 21);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(227, 40);
+            this.titleLabel.Size = new System.Drawing.Size(275, 40);
             this.titleLabel.TabIndex = 21;
-            this.titleLabel.Text = "Before game choose your mood";
+            this.titleLabel.Text = "Now choose your mood after the game";
             // 
             // veryHappyButton
             // 
@@ -121,7 +121,6 @@
             this.colorsLabel.Size = new System.Drawing.Size(62, 14);
             this.colorsLabel.TabIndex = 40;
             this.colorsLabel.Text = "Very Happy";
-            this.colorsLabel.Visible = false;
             // 
             // label1
             // 
@@ -132,7 +131,6 @@
             this.label1.Size = new System.Drawing.Size(42, 14);
             this.label1.TabIndex = 41;
             this.label1.Text = "Normal";
-            this.label1.Visible = false;
             // 
             // label2
             // 
@@ -143,7 +141,6 @@
             this.label2.Size = new System.Drawing.Size(38, 14);
             this.label2.TabIndex = 42;
             this.label2.Text = "Happy";
-            this.label2.Visible = false;
             // 
             // label3
             // 
@@ -154,7 +151,6 @@
             this.label3.Size = new System.Drawing.Size(22, 14);
             this.label3.TabIndex = 43;
             this.label3.Text = "Sad";
-            this.label3.Visible = false;
             // 
             // label4
             // 
@@ -165,7 +161,6 @@
             this.label4.Size = new System.Drawing.Size(45, 14);
             this.label4.TabIndex = 44;
             this.label4.Text = "Very sad";
-            this.label4.Visible = false;
             // 
             // MoodWindow
             // 
