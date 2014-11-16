@@ -194,11 +194,6 @@ namespace mysz
            base.SaveCoordinates(GRANULATION, CoordsList);
         }
 
-        public void writeToPictureBox(Graphics graphics, String text, int X, int Y, int fontSize)
-        {
-            base.writeToPictureBox(graphics, text, X, Y, fontSize);
-        }
-
         public void drawEllipse(SolidBrush brush)
         {
             graphics.FillEllipse(brush, 300, 500, 200, 200);

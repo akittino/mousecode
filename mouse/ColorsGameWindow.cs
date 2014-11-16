@@ -162,11 +162,6 @@ namespace mysz
 
         }
 
-        public void writeToPictureBox(Graphics graphics, String text, int X, int Y, int fontSize)
-        {
-            base.writeToPictureBox(graphics, text, X, Y, fontSize);
-        }
-
         private void yesButton_Click(object sender, EventArgs e)
         {
             if ((textColor == circleBrushColor.Name.ToString()))

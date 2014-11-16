@@ -194,7 +194,7 @@ namespace mysz
             
             //TODO decide about feelings
         }
-
+        //void WriteCoordinatesToFile(string gameName, ref int gameId, MoodWindow.Mood mood, List<Point> CoordsList)
         void WriteCoordinatesToFile()
         {
             String name;
