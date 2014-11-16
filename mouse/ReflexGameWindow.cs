@@ -22,6 +22,7 @@ namespace mysz
         string userName;
         TimeSpan startTime;
         MoodWindow.Mood mood;
+        int gameId=0;
 
         public ReflexGameWindow(string userName)
         {
@@ -140,10 +141,25 @@ namespace mysz
         void WriteCoordinatesToFile(String gameTimeString)
         {
             String name;
-            String dirPath = @".\ReflexGame";
+            String dirPath = @".\ReflexGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
+
+            if (gameId == 0)
+            {
+                if (!Directory.Exists(dirPath))
+                {
+                    Directory.CreateDirectory(dirPath);
+                    gameId = 1;
+                }
+                else
+                {
+                    DirectoryInfo partDirInfo = new DirectoryInfo(dirPath);
+                    gameId = (partDirInfo.GetDirectories().Length + 1);
+                }
+            }
+            dirPath += @"\" + gameId.ToString();
             if (!Directory.Exists(dirPath))
             {
-                Directory.CreateDirectory(dirPath);
+                Directory.CreateDirectory(dirPath);//TODO make this safe to existing dirs
                 if (useLeftButton)  name = dirPath + @"\dataL0.csv";
                 else                name = dirPath + @"\dataR0.csv";
             }

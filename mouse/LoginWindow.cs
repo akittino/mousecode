@@ -11,14 +11,11 @@ namespace mysz
         ThingsGameMenuWindow ThingsWindow;
         ReflexGameMenuWindow ReflexWindow;
         ColorsGameMenuWindow ColorsWindow;
-        String UserName;
-        public string userName;
 
         //TODO close all threads in other windows
         public login_main_window()
         {
             InitializeComponent();
-            userName = userNameTextbox.Text;
         }
 
         //TODO if can resize window. mustn't. ALL WINDOWS!!!
@@ -51,30 +48,9 @@ namespace mysz
         }
 
 
-
-        private void login_button_Click(object sender, EventArgs e)
-        {
-            if (userNameTextbox.Text == "")
-            {
-                logThis("Please enter name before login.");
-            }
-            else if (userNameTextbox.Text.Length > 15)
-            {
-                logThis("User name is too long. Please use valid name.");
-            }
-            else
-            {
-                UserName = userNameTextbox.Text;
-                logThis("Access to games granted. Hello " + UserName + "!");
-                GamesButtonsOn();
-            }
-            //TODO name verification -> failes when & in name
-        }
-
         private void things_button_Click(object sender, EventArgs e)
         {
-            userName = userNameTextbox.Text;
-            ThingsWindow = new ThingsGameMenuWindow(userName);
+            ThingsWindow = new ThingsGameMenuWindow(userNameTextbox.Text);
             logThis("Things game is running now...");
             ThingsWindow.FormClosed += new FormClosedEventHandler(ThingsWindow_FormClosed);
             GamesButtonsOff();
@@ -84,8 +60,7 @@ namespace mysz
 
         private void reflex_button_Click(object sender, EventArgs e)
         {
-            userName = userNameTextbox.Text;
-            ReflexWindow = new ReflexGameMenuWindow(userName);
+            ReflexWindow = new ReflexGameMenuWindow(userNameTextbox.Text);
             logThis("Reflex game is running now...");
             ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
             GamesButtonsOff();
@@ -95,8 +70,7 @@ namespace mysz
 
         private void colors_button_Click(object sender, EventArgs e)
         {
-            userName = userNameTextbox.Text;
-            ColorsWindow = new ColorsGameMenuWindow(userName);
+            ColorsWindow = new ColorsGameMenuWindow(userNameTextbox.Text);
             logThis("Colors game is running now...");
             ColorsWindow.FormClosed += new FormClosedEventHandler(ColorsWindow_FormClosed);
             GamesButtonsOff();
@@ -137,6 +111,10 @@ namespace mysz
             colorsButton.Enabled = true;
             reflexButton.Enabled = true;
             thingsButton.Enabled = true;
+
+            colorsLabel.Enabled = true; 
+            reflexLabel.Enabled = true;
+            thingsLabel.Enabled = true;
         }
 
         void GamesButtonsOff()
@@ -144,15 +122,29 @@ namespace mysz
             colorsButton.Enabled = false;
             reflexButton.Enabled = false;
             thingsButton.Enabled = false;
+
+            colorsLabel.Enabled = false;
+            reflexLabel.Enabled = false;
+            thingsLabel.Enabled = false;
         }
 
         private void userNameTextbox_TextChanged(object sender, EventArgs e)
         {
-            if(userNameTextbox.Text.Equals(""))
+            if (userNameTextbox.Text == "")
             {
+                logThis("Please enter name before play.");
                 GamesButtonsOff();
-                login_button_Click(sender, e);
             }
+            else if (userNameTextbox.Text.Length > 13)
+            {
+                logThis("User name is too long. Please use valid name.");
+            }
+            else
+            {
+                logThis("Access to games granted. Hello " + userNameTextbox.Text + "!");
+                GamesButtonsOn();
+            }
+            //TODO name verification -> failes when & in name
         }
     }
 }

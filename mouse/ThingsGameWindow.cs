@@ -28,6 +28,7 @@ namespace mysz
         bool leftButtonCorrect = true;
         bool leftButtonClicked = true;
         string userName;
+        int gameId = 0;
 
         class question
         {
@@ -80,7 +81,7 @@ namespace mysz
             {
                 question tmp = new question(path);
                 if(tmp.name != "corrupted")
-                    questions.Add(tmp);
+                    questions.Add(tmp); //TODO check if there's any questions
             }
 
 
@@ -166,6 +167,7 @@ namespace mysz
                     writeToPictureBox("Your last answer wasn't correct. Game over!", 230, 550);
                 }
                 startButton.Text = "Start new game";
+                gameId = 0;
                 inGame = false;
             }
             else
@@ -184,6 +186,7 @@ namespace mysz
                     CoordsList.Clear();
                     writeToPictureBox("Your last answer wasn't correct. The game is ended!", 230, 550);
                     startButton.Text = "Start new game";
+                    gameId = 0;
                     inGame = false;
                 }
                 
@@ -195,10 +198,24 @@ namespace mysz
         void WriteCoordinatesToFile()
         {
             String name;
-            String dirPath = @".\ThingsGame";
+            String dirPath = @".\ThingsGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
+            if (gameId == 0)
+            {
+                if (!Directory.Exists(dirPath))
+                {
+                    Directory.CreateDirectory(dirPath);
+                    gameId = 1;
+                }
+                else
+                {
+                    DirectoryInfo partDirInfo = new DirectoryInfo(dirPath);
+                    gameId = (partDirInfo.GetDirectories().Length + 1);
+                }
+            }
+            dirPath += @"\" + gameId.ToString();
             if (!Directory.Exists(dirPath))
             {
-                Directory.CreateDirectory(dirPath);
+                Directory.CreateDirectory(dirPath); //TODO make this safe to existing dirs
                 if (leftButtonCorrect)  name = dirPath + @"\dataL0.csv";
                 else                name = dirPath + @"\dataR0.csv";
             }

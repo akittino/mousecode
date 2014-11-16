@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(login_main_window));
             this.userNameTextbox = new System.Windows.Forms.TextBox();
             this.userNameLabel = new System.Windows.Forms.Label();
-            this.loginButton = new System.Windows.Forms.Button();
             this.adminPanelButton = new System.Windows.Forms.Button();
             this.loginStatusLabel = new System.Windows.Forms.Label();
             this.colorsButton = new System.Windows.Forms.Button();
@@ -52,7 +51,6 @@
             this.userNameTextbox.Name = "userNameTextbox";
             this.userNameTextbox.Size = new System.Drawing.Size(150, 20);
             this.userNameTextbox.TabIndex = 0;
-            this.userNameTextbox.Text = "DO";
             this.userNameTextbox.TextChanged += new System.EventHandler(this.userNameTextbox_TextChanged);
             // 
             // userNameLabel
@@ -64,17 +62,6 @@
             this.userNameLabel.Size = new System.Drawing.Size(61, 15);
             this.userNameLabel.TabIndex = 1;
             this.userNameLabel.Text = "User name:";
-            // 
-            // loginButton
-            // 
-            this.loginButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginButton.Location = new System.Drawing.Point(209, 123);
-            this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(75, 23);
-            this.loginButton.TabIndex = 8;
-            this.loginButton.Text = "Log in";
-            this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.login_button_Click);
             // 
             // adminPanelButton
             // 
@@ -94,7 +81,7 @@
             this.loginStatusLabel.Name = "loginStatusLabel";
             this.loginStatusLabel.Size = new System.Drawing.Size(310, 23);
             this.loginStatusLabel.TabIndex = 10;
-            this.loginStatusLabel.Text = "Log in before choosing game";
+            this.loginStatusLabel.Text = "Please enter name before play.";
             this.loginStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // colorsButton
@@ -161,7 +148,6 @@
             this.thingsLabel.Size = new System.Drawing.Size(45, 15);
             this.thingsLabel.TabIndex = 41;
             this.thingsLabel.Text = "Things";
-            this.thingsLabel.Visible = false;
             // 
             // reflexLabel
             // 
@@ -172,7 +158,6 @@
             this.reflexLabel.Size = new System.Drawing.Size(39, 15);
             this.reflexLabel.TabIndex = 40;
             this.reflexLabel.Text = "Reflex";
-            this.reflexLabel.Visible = false;
             // 
             // colorsLabel
             // 
@@ -183,7 +168,6 @@
             this.colorsLabel.Size = new System.Drawing.Size(42, 15);
             this.colorsLabel.TabIndex = 39;
             this.colorsLabel.Text = "Colors";
-            this.colorsLabel.Visible = false;
             // 
             // adminPasswordTextbox
             // 
@@ -208,13 +192,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 345);
+            this.ClientSize = new System.Drawing.Size(334, 344);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.adminPasswordTextbox);
             this.Controls.Add(this.gamesGroupBox);
             this.Controls.Add(this.loginStatusLabel);
             this.Controls.Add(this.adminPanelButton);
-            this.Controls.Add(this.loginButton);
             this.Controls.Add(this.userNameLabel);
             this.Controls.Add(this.userNameTextbox);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -235,7 +218,6 @@
 
         private System.Windows.Forms.TextBox userNameTextbox;
         private System.Windows.Forms.Label userNameLabel;
-        private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.Button adminPanelButton;
         private System.Windows.Forms.Label loginStatusLabel;
         private System.Windows.Forms.Button colorsButton;
