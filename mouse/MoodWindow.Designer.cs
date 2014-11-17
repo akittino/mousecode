@@ -46,7 +46,7 @@
             // 
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(49, 21);
+            this.titleLabel.Location = new System.Drawing.Point(31, 21);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(275, 40);
             this.titleLabel.TabIndex = 21;
@@ -57,7 +57,7 @@
             this.veryHappyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("veryHappyButton.BackgroundImage")));
             this.veryHappyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.veryHappyButton.ForeColor = System.Drawing.Color.White;
-            this.veryHappyButton.Location = new System.Drawing.Point(76, 74);
+            this.veryHappyButton.Location = new System.Drawing.Point(12, 64);
             this.veryHappyButton.Name = "veryHappyButton";
             this.veryHappyButton.Size = new System.Drawing.Size(60, 60);
             this.veryHappyButton.TabIndex = 22;
@@ -69,7 +69,7 @@
             this.happyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("happyButton.BackgroundImage")));
             this.happyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.happyButton.ForeColor = System.Drawing.Color.White;
-            this.happyButton.Location = new System.Drawing.Point(226, 74);
+            this.happyButton.Location = new System.Drawing.Point(78, 64);
             this.happyButton.Name = "happyButton";
             this.happyButton.Size = new System.Drawing.Size(60, 60);
             this.happyButton.TabIndex = 23;
@@ -81,7 +81,7 @@
             this.verySadButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("verySadButton.BackgroundImage")));
             this.verySadButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.verySadButton.ForeColor = System.Drawing.Color.White;
-            this.verySadButton.Location = new System.Drawing.Point(226, 190);
+            this.verySadButton.Location = new System.Drawing.Point(210, 64);
             this.verySadButton.Name = "verySadButton";
             this.verySadButton.Size = new System.Drawing.Size(60, 60);
             this.verySadButton.TabIndex = 24;
@@ -93,7 +93,7 @@
             this.normalButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("normalButton.BackgroundImage")));
             this.normalButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.normalButton.ForeColor = System.Drawing.Color.White;
-            this.normalButton.Location = new System.Drawing.Point(151, 126);
+            this.normalButton.Location = new System.Drawing.Point(144, 64);
             this.normalButton.Name = "normalButton";
             this.normalButton.Size = new System.Drawing.Size(60, 60);
             this.normalButton.TabIndex = 25;
@@ -105,7 +105,7 @@
             this.sadButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("sadButton.BackgroundImage")));
             this.sadButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.sadButton.ForeColor = System.Drawing.Color.White;
-            this.sadButton.Location = new System.Drawing.Point(76, 190);
+            this.sadButton.Location = new System.Drawing.Point(276, 64);
             this.sadButton.Name = "sadButton";
             this.sadButton.Size = new System.Drawing.Size(60, 60);
             this.sadButton.TabIndex = 26;
@@ -116,7 +116,7 @@
             // 
             this.colorsLabel.AutoSize = true;
             this.colorsLabel.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colorsLabel.Location = new System.Drawing.Point(75, 137);
+            this.colorsLabel.Location = new System.Drawing.Point(10, 127);
             this.colorsLabel.Name = "colorsLabel";
             this.colorsLabel.Size = new System.Drawing.Size(62, 14);
             this.colorsLabel.TabIndex = 40;
@@ -126,7 +126,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(161, 189);
+            this.label1.Location = new System.Drawing.Point(153, 127);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 14);
             this.label1.TabIndex = 41;
@@ -136,7 +136,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(238, 137);
+            this.label2.Location = new System.Drawing.Point(88, 127);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 14);
             this.label2.TabIndex = 42;
@@ -146,7 +146,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(95, 253);
+            this.label3.Location = new System.Drawing.Point(293, 127);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(22, 14);
             this.label3.TabIndex = 43;
@@ -156,7 +156,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(233, 253);
+            this.label4.Location = new System.Drawing.Point(215, 127);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 14);
             this.label4.TabIndex = 44;
@@ -166,7 +166,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 288);
+            this.ClientSize = new System.Drawing.Size(348, 172);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
