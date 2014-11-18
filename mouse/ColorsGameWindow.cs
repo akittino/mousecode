@@ -188,10 +188,33 @@ namespace mysz
                 scoreNumber.Text = gameScore.ToString();
                 scoreNumber.Refresh();
             }
-            if (seconds >= 0)
+            if (timeLabel.Text.Equals("Time out!"))
             {
+                gameWindow.Refresh();
+                playButton.Location = new Point(450, 148);
+                playButton.Text = "PLAY AGAIN";
+
+                yesButton.Visible = false;
+                noButton.Visible = false;
+                if (CoordinateSaver.IsAlive) CoordinateSaver.Suspend();
+
+                playButton.Visible = true;
+                writeToPictureBox(graphics, "Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
+                writeGameDetails();
+
+                gameScore = 0;
+                gameId = 0;
+                maxGameTime = INITIAL_GAME_TIME;
+                scoreLabel.Text = gameScore.ToString();
+
+            }
+            else
+            {
+                decreaseGameTime();
+
                 moveCursor();
                 drawEclipse();
+
             }
             quantityOfAnswers++;
             useLeftButtonYES = true;
@@ -240,10 +263,7 @@ namespace mysz
                 drawEclipse();
 
             }
-            if (seconds >= 0)
-            {
-                
-            }
+            
             quantityOfAnswers++;
             useRightButtonNO = true;
             if (Timer.IsAlive)
