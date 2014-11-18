@@ -298,7 +298,6 @@ namespace mysz
                     sw.WriteLine(p.X + " , " + p.Y);
                 }
             }
-
         }
 
         private void saveCoordinates()
