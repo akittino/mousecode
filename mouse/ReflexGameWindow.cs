@@ -9,26 +9,34 @@ namespace mysz
 {
     public partial class ReflexGameWindow : MouseForm
     {
+        enum GameStates
+        {
+            OutOfGame = 0,
+            BeforeGame = 1,
+            Waiting = 2
+        };
+
+        const int GRANULATION = 5;
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
-        const int GRANULATION = 5;
+
+        readonly string USER_NAME;
+        readonly int INITIAL_GAME_TIME;
         readonly Color BACKGROUND_COLOR = Color.White;
+
+        SolidBrush redBrush, greenBrush, blueBrush;
         List<Point> CoordsList;
         Thread CoordinateSaver;
         Thread Timer;
-        SolidBrush redBrush, greenBrush, blueBrush;
-        Graphics graphics;
-        bool useLeftButton = true;
-        string userName;
-        TimeSpan startTime;
-        int gameId = 0;
         Random rnd;
-        readonly int INITIAL_GAME_TIME;
-        int gameTime;
+        Graphics graphics;
+        DateTime startTime;
         GameStates gameState;
+        
+        bool useLeftButton = true;        
+        int gameId = 0;        
+        int gameTime;        
         int score = 0;
-
-        enum GameStates { OutOfGame, BeforeGame, Waiting };
 
         public ReflexGameWindow(string userName, int initialGameTime)
         {
@@ -38,13 +46,16 @@ namespace mysz
 
             CoordsList = new List<Point>();
 
-            redBrush = new SolidBrush(Color.Red);
             greenBrush = new SolidBrush(Color.Green);
             blueBrush = new SolidBrush(Color.Blue);
-            graphics = gameWindow.CreateGraphics();
-            rnd = new Random();
-            gameState = GameStates.OutOfGame;
+            redBrush = new SolidBrush(Color.Red);
+
             gameTime = INITIAL_GAME_TIME = initialGameTime;
+            graphics = gameWindow.CreateGraphics();
+            gameState = GameStates.OutOfGame;
+            USER_NAME = userName;
+            rnd = new Random();
+            
             scoreLabel.Text = score.ToString();
 
             stopRButton.Enabled = false;
@@ -52,27 +63,9 @@ namespace mysz
 
             graphics.Clear(BACKGROUND_COLOR);//TODO why nothing appears?
             drawEllipse(blueBrush);//TODO why nothing appears?
-            this.userName = userName;
         }
 
-        bool waitingOnButton(DateTime endTime) //if return true that means waiting failed
-        {
-            DateTime currentTime = DateTime.Now;
-            while (currentTime <= endTime)
-            {
-                int a = GetX();
-                int b = GetY();
-                if ((GetX() > 429 || GetX() < 370) ||
-                    (GetY() > 599 || GetY() < 577)) // TODO it's very ugly way to do this
-                {
-                    return true;
-                }
-                currentTime = DateTime.Now;
-            }
-            return false;
-        }
-
-        void TimeCountdown()
+        private void TimeCountdown()
         {
             DateTime endTime = DateTime.Now.AddSeconds((double)gameTime);
 
@@ -80,10 +73,13 @@ namespace mysz
             {
                 this.timeLabel.BeginInvoke((MethodInvoker)delegate()
                 {
-                    this.timeLabel.Text = String.Format("{0:N2} s", (endTime - DateTime.Now).TotalSeconds);
+                    this.timeLabel.Text = String.Format("{0:N2} s",
+                        (endTime - DateTime.Now).TotalSeconds);
                 });
+
                 Thread.Sleep(10);
             }
+
             this.timeLabel.BeginInvoke((MethodInvoker)delegate()
             {
                 this.timeLabel.Text = "Time out!";
@@ -103,6 +99,7 @@ namespace mysz
                     gameState = GameStates.Waiting;
                     waitingCheck();
                     break;
+
                 case GameStates.Waiting:
                     startPush();
                     waitingCheck();
@@ -110,14 +107,51 @@ namespace mysz
             }
         }
 
-        void pushTheButton()
+        private bool waitingOnButton(DateTime endTime) //if return true that means waiting failed
+        {
+            while (DateTime.Now <= endTime)
+            {
+                int a = GetX();
+                int b = GetY();
+                if ((GetX() > 429 || GetX() < 370) ||
+                    (GetY() > 599 || GetY() < 577)) // TODO it's very ugly way to do this
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void firstStartPush()
+        {
+            stopRButton.Enabled = false;
+            stopRButton.Visible = false;
+            stopLButton.Enabled = false;
+            stopLButton.Visible = false;
+            startButton.Enabled = false;
+
+            startPush();
+        }
+
+        private void startPush()
+        {
+            graphics.Clear(BACKGROUND_COLOR);
+            drawEllipse(redBrush);
+            writeToPictureBox(graphics, "Don't move mouse cursor out of Start button until circle color change to green.", 150, 280, 15);
+
+        }
+
+        private void pushTheButton()
         {
             graphics.Clear(BACKGROUND_COLOR);
             drawEllipse(greenBrush);
             writeToPictureBox(graphics, "Now! Push Stop button as fast as you can!", 250, 280, 15);
+
             Timer = new Thread(TimeCountdown);
             Timer.Start();
+
             timeLabel.Visible = true;
+            
             if (rnd.Next(100) >= 50)
             {
                 useLeftButton = true;
@@ -130,32 +164,15 @@ namespace mysz
                 stopRButton.Visible = true;
                 stopRButton.Enabled = true;
             }
-            startTime = DateTime.Now.TimeOfDay;
-            CoordsList.Clear();
 
-            CoordinateSaver = new Thread(SaveCoordinates);
+            startTime = DateTime.Now;
+            
+            CoordsList.Clear();
+            CoordinateSaver = new Thread(saveCoordinates);
             CoordinateSaver.Start();
         }
 
-        void startPush()
-        {
-            graphics.Clear(BACKGROUND_COLOR);
-            drawEllipse(redBrush);
-            writeToPictureBox(graphics, "Don't move mouse cursor out of Start button until circle color change to green.", 150, 280, 15);
-
-        }
-        void firstStartPush()
-        {
-            stopRButton.Enabled = false;
-            stopRButton.Visible = false;
-            stopLButton.Enabled = false;
-            stopLButton.Visible = false;
-            startButton.Enabled = false;
-
-            startPush();
-        }
-
-        void waitingCheck()
+        private void waitingCheck()
         {
             bool waitingFailed = waitingOnButton(DateTime.Now.AddMilliseconds(2000 + rnd.Next(30) * 100));
 
@@ -163,7 +180,9 @@ namespace mysz
             {
                 graphics.Clear(BACKGROUND_COLOR);
                 drawEllipse(blueBrush);
+
                 startButton.Enabled = true;
+                
                 writeToPictureBox(graphics, "Game paused, please start again.", 270, 250, 15);
                 writeToPictureBox(graphics, "Moved out from Start button before circle changed to green.", 200, 280, 15);
             }
@@ -173,13 +192,7 @@ namespace mysz
                 gameState = GameStates.BeforeGame;
             }
         }
-        void changeGameTime()
-        {
-            if ((score % 10 == 0) && (gameTime > 2))
-            {
-                --gameTime;
-            }
-        }
+
         private void stopButton_Click(object sender, EventArgs e)
         {
             startButton.Enabled = true;
@@ -196,7 +209,7 @@ namespace mysz
             if (CoordinateSaver.IsAlive)
                 CoordinateSaver.Abort();
 
-            WriteCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now.TimeOfDay - startTime).TotalSeconds));
+            writeCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now - startTime).TotalSeconds));
 
             graphics.Clear(BACKGROUND_COLOR);
             drawEllipse(blueBrush);
@@ -205,25 +218,38 @@ namespace mysz
             {
                 writeToPictureBox(graphics, "Game has just ended due to time out!", 300, 280, 15);
                 writeGameDetails();
-                gameId = 0;
+                
                 score = 0;
+                gameId = 0;
                 gameTime = INITIAL_GAME_TIME;
-                scoreLabel.Text = score.ToString();
                 gameState = GameStates.OutOfGame;
+                scoreLabel.Text = score.ToString();
+                
             }
             else
             {
                 ++score;
                 scoreLabel.Text = score.ToString();
-                changeGameTime();
+
+                decreaseGameTime();
                 writeToPictureBox(graphics, "Great job! Play next level!", 315, 280, 15);
             }
         }
 
-        void writeGameDetails()
+        private void decreaseGameTime()
+        {
+            if ((score % 10 == 0) && (gameTime > 2))
+            {
+                --gameTime;
+            }
+        }
+
+        private void writeGameDetails()
         {
             MoodWindow.Mood mood = getMood();
-            String fileName = @".\ReflexGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) + @"\" + gameId.ToString() + @"\gameDetails.txt";
+            String fileName = @".\ReflexGame\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) + 
+                              @"\" + gameId.ToString() + @"\gameDetails.txt";
+
             using (StreamWriter sw = new StreamWriter(fileName))
             {
                 sw.WriteLine("Mood: " + mood.ToString());
@@ -232,10 +258,10 @@ namespace mysz
             }
         }
 
-        void WriteCoordinatesToFile(String gameTimeString)
+        private void writeCoordinatesToFile(String gameTimeString)
         {
             String name;
-            String dirPath = @".\ReflexGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
+            String dirPath = @".\ReflexGame\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
 
             if (gameId == 0)
             {
@@ -246,13 +272,14 @@ namespace mysz
                 }
                 else
                 {
-                    DirectoryInfo partDirInfo = new DirectoryInfo(dirPath);
-                    gameId = (partDirInfo.GetDirectories().Length + 1);
+                    gameId = ((new DirectoryInfo(dirPath)).GetDirectories().Length + 1);
                 }
             }
 
-            if (useLeftButton) dirPath += @"\" + gameId.ToString() + @"\L";
-            else dirPath += @"\" + gameId.ToString() + @"\P";
+            if (useLeftButton) 
+                dirPath += @"\" + gameId.ToString() + @"\L";
+            else 
+                dirPath += @"\" + gameId.ToString() + @"\P";
 
             if (!Directory.Exists(dirPath))
             {
@@ -265,6 +292,7 @@ namespace mysz
             {
                 sw.WriteLine(DateTime.Now.ToString());
                 sw.WriteLine(gameTimeString);
+                
                 foreach (Point p in CoordsList)
                 {
                     sw.WriteLine(p.X + " , " + p.Y);
@@ -273,13 +301,12 @@ namespace mysz
 
         }
 
-        void SaveCoordinates()
-        // writing coordinates to list of coords
+        private void saveCoordinates()
         {
             base.SaveCoordinates(GRANULATION, CoordsList);
         }
 
-        public void drawEllipse(SolidBrush brush)
+        private void drawEllipse(SolidBrush brush)
         {
             graphics.FillEllipse(brush, 300, 500, 200, 200);
         }
