@@ -25,8 +25,15 @@ namespace mysz
             ThingsWindow = new ThingsGameWindow(userName, 5); //TODO change to seconds readed from settings, instead of hardcoded
             /*** WORKAROUND ABOVE ***/
             ThingsWindow.FormClosed += new FormClosedEventHandler(ThingsWindow_FormClosed);
-            ThingsWindow.Show();
-            this.Hide();
+            if (!ThingsWindow.databaseCorrupted)
+            {
+                ThingsWindow.Show();
+                this.Hide();
+            }
+            else
+            {
+                ThingsWindow.Close();
+            }
         }
 
         void ThingsWindow_FormClosed(object sender, FormClosedEventArgs e)

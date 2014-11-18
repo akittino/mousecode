@@ -61,7 +61,7 @@ namespace mysz
             stopRButton.Enabled = false;
             stopLButton.Enabled = false;
 
-            graphics.Clear(BACKGROUND_COLOR);//TODO why nothing appears?
+            graphics.Clear(BACKGROUND_COLOR);
             drawEllipse(blueBrush);//TODO why nothing appears?
         }
 

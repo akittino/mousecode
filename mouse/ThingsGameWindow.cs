@@ -17,10 +17,11 @@ namespace mysz
         readonly string USER_NAME;
         readonly int INITIAL_QUESTION_TIME;
 
+        public bool databaseCorrupted;
+
         Graphics graphics, questionGraphics;
         List<Point> CoordsList;
         Thread CoordinateSaver;
-        GameStates gameState;
         ArrayList questions;        
         Thread Timer;
         Random rnd;
@@ -32,14 +33,6 @@ namespace mysz
         int questionTime = 5;
         int gameId = 0;
         int score = 0;
-        
-
-        enum GameStates
-        {
-            firstRun = 0,
-            beforeGame = 1,
-            inRound = 2
-        };
 
         class question
         {
@@ -79,6 +72,7 @@ namespace mysz
         {
             //TODO save status of picturebox, and check minimalizing window
             InitializeComponent();
+
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
 
             rnd = new Random();
@@ -88,17 +82,16 @@ namespace mysz
             questionGraphics = questionBox.CreateGraphics();
 
             USER_NAME = userName;
-            gameState = GameStates.firstRun; 
             questionTime = INITIAL_QUESTION_TIME = timePerQuestion;
             scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
 
             answerRButton.Enabled = false;
             answerLButton.Enabled = false;
-            
+
             if (Directory.Exists(DATABASE_PATH))
             {
                 string[] files = Directory.GetFiles(DATABASE_PATH, "*.jpg");
-                
+
                 foreach (string path in files)
                 {
                     question tmp = new question(path);
@@ -109,7 +102,19 @@ namespace mysz
                 }
             }
 
-            graphics.Clear(Color.White);//TODO why nothing appears?
+            if (!enoughQuestionsInDatabase())
+            {
+                databaseCorrupted = true;
+                this.Close();
+                return;
+            }
+            else
+            {
+                databaseCorrupted = false;
+            }
+
+            graphics.Clear(Color.Black);
+            writeToPictureBox("Please start a game!", 340, 550);//TODO why nothing appears!?
         }
 
         private void setNewQuestion()
@@ -140,7 +145,7 @@ namespace mysz
             answerLButton.Enabled = true;
         }
 
-        private bool databaseExists()
+        private bool enoughQuestionsInDatabase()
         {
             if (questions.ToArray().Length <= 2)
             {
@@ -169,12 +174,11 @@ namespace mysz
             timeLabel.Visible = true;
 
             startButton.Text = "Next question";
-            gameState = GameStates.inRound;
             ++questionCounter;
             decreaseGameTime();
 
             graphics.Clear(Color.White);
-            writeToPictureBox("Now quick, answer the question!", 310, 500);
+            writeToPictureBox("Now quick, answer the question!", 310, 550);
 
             Timer = new Thread(TimeCountdown);
             CoordinateSaver = new Thread(saveCoordinates);
@@ -188,25 +192,7 @@ namespace mysz
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            switch (gameState)
-            {
-                case GameStates.firstRun:
-                    if (!databaseExists())//TODO think about this ugly way; automatize it
-                    {
-                        this.Close();
-                        return;
-                    }
-                    playNewQuestion();
-                    break;
-
-                case GameStates.beforeGame:
-                    playNewQuestion();
-                    break;
-
-                case GameStates.inRound:
-                    playNewQuestion();
-                    break;
-            }
+            playNewQuestion();
         }
 
         private void stopButton_Click(object sender, EventArgs e)
@@ -226,25 +212,32 @@ namespace mysz
 
             if (timeLabel.Text == "Time out!")
             {
-                //TODO game lost
                 writeGameDetails();
-                gameState = GameStates.beforeGame;
-                startButton.Text = "Start new game";
+
+                score = 0; 
                 gameId = 0;
-                score = 0;
                 questionCounter = 0;
+                startButton.Text = "Start new game";
                 scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
+                writeToPictureBox("Please start a game!", 340, 550);
             }
             else
             {
                 if (leftButtonClicked == leftButtonCorrect)
                 {
-                    scoreLabel.Text = (++score).ToString() + " / " + questionCounter.ToString();
+                    ++score;
+                    writeToPictureBox("Good job! Please take next question!", 280, 550);
+                }
+                else
+                {
+                    writeToPictureBox("You were wrong! Please take next question!", 260, 550);
                 }
 
-                writeCoordinatesToFile();
+                scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
+
+                writeCoordinatesToFile(questionTime - double.Parse(timeLabel.Text.Remove(timeLabel.Text.Length - 1)));
+
                 CoordsList.Clear();
-                writeToPictureBox("Good job! Please take next question!", 280, 500);
             }
         }
 
@@ -257,14 +250,13 @@ namespace mysz
             using (StreamWriter sw = new StreamWriter(fileName))
             {
                 sw.WriteLine("Mood: " + mood.ToString());
-                sw.WriteLine("Score: " + score.ToString()+ " / " + questionCounter.ToString());
+                sw.WriteLine("Score: " + scoreLabel.Text);
                 sw.WriteLine("Initial game time: " + INITIAL_QUESTION_TIME.ToString());
             }
         }
 
-        //void WriteCoordinatesToFile(string gameName, ref int gameId, MoodWindow.Mood mood, List<Point> CoordsList)
         //TODO make one writeCoordinates for all windows
-        private void writeCoordinatesToFile()
+        private void writeCoordinatesToFile(double gameTime)
         {
             String name;
             String dirPath = @".\ThingsGame\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
@@ -296,12 +288,13 @@ namespace mysz
 
             using (StreamWriter sw = new StreamWriter(name))
             {
-                sw.WriteLine(DateTime.Now.ToString());
-                //sw.WriteLine(gameTimeString + " / " + maxGameTime);
                 if (leftButtonClicked == leftButtonCorrect) 
                     sw.WriteLine("Correct button");
                 else 
                     sw.WriteLine("Wrong button");
+
+                sw.WriteLine("Game time: " + gameTime.ToString());
+
                 foreach (Point p in CoordsList)
                 {
                     sw.WriteLine(p.X + " , " + p.Y);
@@ -369,6 +362,16 @@ namespace mysz
         {
             leftButtonClicked = true;
             stopButton_Click(sender, e);
+        }
+
+        private void ThingsGameWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Timer != null && Timer.IsAlive)
+                Timer.Abort();
+            if (CoordinateSaver != null && CoordinateSaver.IsAlive)
+                Timer.Abort();
+            if (questionCounter != 0)
+                writeGameDetails();
         }
     }
 }
