@@ -6,7 +6,6 @@ namespace mysz
     public partial class login_main_window : Form
     {
         const String AdminPassword = "admin";
-        //TODO check if path to readings isn't too long! can cause exception!
         AdminPanelAnalyzator AdminWindow;
         ThingsGameMenuWindow ThingsWindow;
         ReflexGameMenuWindow ReflexWindow;
@@ -15,7 +14,7 @@ namespace mysz
         //TODO close all threads in other windows
         public login_main_window()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         //TODO if can resize window. mustn't. ALL WINDOWS!!!
@@ -148,6 +147,16 @@ namespace mysz
             {
                 logThis("Access to games granted. Hello " + userNameTextbox.Text + "!");
                 GamesButtonsOn();
+            }
+        }
+
+        private void login_main_window_Load(object sender, EventArgs e)
+        {
+            String path = System.IO.Path.GetFullPath(".");
+            if (path.Length > 150)
+            {
+                MessageBox.Show("Please place this application in directory with shorter path!");
+                this.Close();
             }
         }
     }

@@ -293,7 +293,7 @@ namespace mysz
 
             name = dirPath + @"\" + String.Format("{0:HH-mm-ss}", DateTime.Now) + ".csv";
 
-            using (StreamWriter sw = new StreamWriter(name)) //TODO pathTooLongException
+            using (StreamWriter sw = new StreamWriter(name))
             {
                 sw.WriteLine(DateTime.Now.ToString());
                 sw.WriteLine(gameTimeString + " / " + maxGameTime);

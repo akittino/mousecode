@@ -207,6 +207,7 @@
             this.MinimumSize = new System.Drawing.Size(350, 383);
             this.Name = "login_main_window";
             this.Text = "LoginWindow";
+            this.Load += new System.EventHandler(this.login_main_window_Load);
             this.gamesGroupBox.ResumeLayout(false);
             this.gamesGroupBox.PerformLayout();
             this.ResumeLayout(false);
