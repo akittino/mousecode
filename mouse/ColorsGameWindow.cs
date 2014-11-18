@@ -23,7 +23,8 @@ namespace mysz
         List<string> textColorsBase = new List<string>();
         Color circleBrushColor;
         String textColor;
-        
+
+        bool correctAnswer = false;
         int gameScore = 0;
         bool firstRun = true;
         int quantityOfAnswers = 0;
@@ -32,7 +33,7 @@ namespace mysz
         bool useRightButtonNO = false;
         int minutes = 0, seconds = 0;
         int gameId = 0;
-        int maxGameTime = 5;        
+        int maxGameTime = 5;
 
 
         Thread CoordinateSaver;
@@ -60,12 +61,6 @@ namespace mysz
             CoordinateSaver = new Thread(SaveCoordinates);
             this.userName = userName;
             maxGameTime = INITIAL_GAME_TIME = initialGameTime;
-
-            if (minutes * 60 + seconds != 0)
-            {
-                this.seconds = seconds;
-                this.minutes = minutes;
-            }
         }
 
         public new void highlightLabel(object sender, EventArgs e)
@@ -100,7 +95,7 @@ namespace mysz
             timeLabel.Text = minutes.ToString();
             timeLabel.Visible = true;
             timeLabel.Visible = true;
-            
+
             startTime = DateTime.Now;
 
             Timer = new Thread(TimeCountdown);
@@ -115,7 +110,8 @@ namespace mysz
             }
             else
             {
-                CoordinateSaver.Resume();
+                CoordinateSaver.Abort();
+
             }
         }
         public void setTime() //TODO bug -time from settings works only in firstGame 
@@ -187,42 +183,26 @@ namespace mysz
                 gameScore++;
                 scoreNumber.Text = gameScore.ToString();
                 scoreNumber.Refresh();
-            }
-            if (timeLabel.Text.Equals("Time out!"))
-            {
-                gameWindow.Refresh();
-                playButton.Location = new Point(450, 148);
-                playButton.Text = "PLAY AGAIN";
-
-                yesButton.Visible = false;
-                noButton.Visible = false;
-                if (CoordinateSaver.IsAlive) CoordinateSaver.Suspend();
-
-                playButton.Visible = true;
-                writeToPictureBox(graphics, "Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
-                writeGameDetails();
-
-                gameScore = 0;
-                gameId = 0;
-                maxGameTime = INITIAL_GAME_TIME;
-                scoreLabel.Text = gameScore.ToString();
-
-            }
-            else
-            {
-                decreaseGameTime();
-
-                moveCursor();
-                drawEclipse();
-
+                correctAnswer = true;
             }
             quantityOfAnswers++;
             useLeftButtonYES = true;
             if (Timer.IsAlive)
                 Timer.Abort();
-            if (CoordinateSaver.IsAlive) CoordinateSaver.Suspend();
+
+            if (CoordinateSaver.IsAlive)
+                CoordinateSaver.Abort();
+
             WriteCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now - startTime).TotalSeconds));
 
+            decreaseGameTime();
+
+            moveCursor();
+            drawEclipse();
+
+
+            Timer = new Thread(TimeCountdown);
+            Timer.Start();
         }
 
         private void noButton_Click(object sender, EventArgs e)
@@ -235,41 +215,20 @@ namespace mysz
                 scoreNumber.Text = gameScore.ToString();
                 scoreNumber.Refresh();
             }
-            if (timeLabel.Text.Equals("Time out!"))
-            {
-                gameWindow.Refresh();
-                playButton.Location = new Point(450, 148);
-                playButton.Text = "PLAY AGAIN";
-                
-                yesButton.Visible = false;
-                noButton.Visible = false;
-                if (CoordinateSaver.IsAlive) CoordinateSaver.Suspend();
-
-                playButton.Visible = true;
-                writeToPictureBox(graphics, "Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
-                writeGameDetails();
-
-                gameScore = 0;
-                gameId = 0;
-                maxGameTime = INITIAL_GAME_TIME;
-                scoreLabel.Text = gameScore.ToString();
-
-            }
-            else
-            {
-                decreaseGameTime();
-
-                moveCursor();
-                drawEclipse();
-
-            }
-            
             quantityOfAnswers++;
             useRightButtonNO = true;
             if (Timer.IsAlive)
                 Timer.Abort();
-            if (CoordinateSaver.IsAlive) CoordinateSaver.Suspend();
+            if (CoordinateSaver.IsAlive) CoordinateSaver.Abort();
             WriteCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now - startTime).TotalSeconds));
+
+            decreaseGameTime();
+
+            moveCursor();
+            drawEclipse();
+
+            Timer = new Thread(TimeCountdown);
+            Timer.Start();
         }
 
         private void moveCursor()
@@ -286,7 +245,6 @@ namespace mysz
 
         void WriteCoordinatesToFile(String gameTimeString)
         {
-            //TODO change it -> line 277
             String name;
             String dirPath = @".\ColorsGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
 
@@ -316,6 +274,7 @@ namespace mysz
 
             using (StreamWriter sw = new StreamWriter(name))
             {
+                sw.WriteLine("Correct Answer: " + (correctAnswer==true ? "YES" : "NO"));
                 sw.WriteLine(gameTimeString + " / " + maxGameTime);
 
                 foreach (Point p in CoordsList)
@@ -323,6 +282,8 @@ namespace mysz
                     sw.WriteLine(p.X + " , " + p.Y);
                 }
             }
+            useRightButtonNO = false;
+            useLeftButtonYES = false;
         }
         private void TimeCountdown()
         {
@@ -341,12 +302,29 @@ namespace mysz
             this.timeLabel.BeginInvoke((MethodInvoker)delegate()
             {
                 this.timeLabel.Text = "Time out!";
+                gameWindow.Refresh();
+
+                playButton.Location = new Point(450, 148);
+                playButton.Text = "PLAY AGAIN";
+
+                yesButton.Visible = false;
+                noButton.Visible = false;
+                if (CoordinateSaver.IsAlive) CoordinateSaver.Abort();
+
+                playButton.Visible = true;
+                writeToPictureBox(graphics, "Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
+                writeGameDetails();
+
+                gameScore = 0;
+                gameId = 0;
+                maxGameTime = INITIAL_GAME_TIME;
+                scoreNumber.Text = gameScore.ToString();
             });
 
         }
         private void decreaseGameTime()
         {
-            if ((quantityOfAnswers % 10 == 0) && (maxGameTime > 2))
+            if ((quantityOfAnswers % 10 == 0) && (maxGameTime > 1))
             {
                 --maxGameTime;
             }
@@ -360,7 +338,7 @@ namespace mysz
             using (StreamWriter sw = new StreamWriter(fileName))
             {
                 sw.WriteLine("Mood: " + mood.ToString());
-                sw.WriteLine("Score: " + gameScore.ToString());
+                sw.WriteLine("Correct answers: " + scoreNumber.Text + "/" + quantityOfAnswers.ToString());
                 sw.WriteLine("Initial game time: " + INITIAL_GAME_TIME.ToString());
             }
         }
