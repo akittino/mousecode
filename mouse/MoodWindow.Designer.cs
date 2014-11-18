@@ -46,11 +46,11 @@
             // 
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(31, 21);
+            this.titleLabel.Location = new System.Drawing.Point(86, 21);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(275, 40);
+            this.titleLabel.Size = new System.Drawing.Size(178, 40);
             this.titleLabel.TabIndex = 21;
-            this.titleLabel.Text = "Now choose your mood after the game";
+            this.titleLabel.Text = "Now choose your mood:";
             // 
             // veryHappyButton
             // 
@@ -81,7 +81,7 @@
             this.verySadButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("verySadButton.BackgroundImage")));
             this.verySadButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.verySadButton.ForeColor = System.Drawing.Color.White;
-            this.verySadButton.Location = new System.Drawing.Point(210, 64);
+            this.verySadButton.Location = new System.Drawing.Point(276, 64);
             this.verySadButton.Name = "verySadButton";
             this.verySadButton.Size = new System.Drawing.Size(60, 60);
             this.verySadButton.TabIndex = 24;
@@ -105,7 +105,7 @@
             this.sadButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("sadButton.BackgroundImage")));
             this.sadButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.sadButton.ForeColor = System.Drawing.Color.White;
-            this.sadButton.Location = new System.Drawing.Point(276, 64);
+            this.sadButton.Location = new System.Drawing.Point(210, 64);
             this.sadButton.Name = "sadButton";
             this.sadButton.Size = new System.Drawing.Size(60, 60);
             this.sadButton.TabIndex = 26;
@@ -146,7 +146,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(293, 127);
+            this.label3.Location = new System.Drawing.Point(228, 127);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(22, 14);
             this.label3.TabIndex = 43;
@@ -156,7 +156,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(215, 127);
+            this.label4.Location = new System.Drawing.Point(282, 127);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 14);
             this.label4.TabIndex = 44;
@@ -178,6 +178,10 @@
             this.Controls.Add(this.happyButton);
             this.Controls.Add(this.veryHappyButton);
             this.Controls.Add(this.titleLabel);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(364, 211);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(364, 211);
             this.Name = "MoodWindow";
             this.Text = "MoodWindow";
             this.ResumeLayout(false);

@@ -9,62 +9,55 @@ namespace mysz
 {
     public partial class ReflexGameWindow : MouseForm
     {
-        //TODO change mood window from before to after game choose mood
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
-        bool firstRun = true;
+        readonly Color BACKGROUND_COLOR = Color.White;
         List<Point> CoordsList;
         Thread CoordinateSaver;
+        Thread Timer;
         SolidBrush redBrush, greenBrush, blueBrush;
         Graphics graphics;
         bool useLeftButton = true;
         string userName;
         TimeSpan startTime;
-        MoodWindow.Mood mood;
-        int gameId=0;
+        int gameId = 0;
+        Random rnd;
+        readonly int INITIAL_GAME_TIME;
+        int gameTime;
+        GameStates gameState;
+        int score = 0;
 
-        public ReflexGameWindow(string userName)
+        enum GameStates { OutOfGame, BeforeGame, Waiting };
+
+        public ReflexGameWindow(string userName, int initialGameTime)
         {
             //TODO save status of picturebox, and check minimalizing window
             InitializeComponent();
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
 
             CoordsList = new List<Point>();
-            CoordinateSaver = new Thread(SaveCoordinates);
 
             redBrush = new SolidBrush(Color.Red);
             greenBrush = new SolidBrush(Color.Green);
             blueBrush = new SolidBrush(Color.Blue);
             graphics = gameWindow.CreateGraphics();
+            rnd = new Random();
+            gameState = GameStates.OutOfGame;
+            gameTime = INITIAL_GAME_TIME = initialGameTime;
+            scoreLabel.Text = score.ToString();
 
             stopRButton.Enabled = false;
             stopLButton.Enabled = false;
 
-            graphics.Clear(Color.White);//TODO why nothing appears?
+            graphics.Clear(BACKGROUND_COLOR);//TODO why nothing appears?
             drawEllipse(blueBrush);//TODO why nothing appears?
-            this.userName = userName; // TODO add user differentation in dir like in Colors Game
+            this.userName = userName;
         }
 
-        private void startButton_Click(object sender, EventArgs e)
+        bool waitingOnButton(DateTime endTime) //if return true that means waiting failed
         {
-            stopRButton.Enabled = false;
-            stopRButton.Visible = false;
-            stopLButton.Enabled = false;
-            stopLButton.Visible = false;
-            startButton.Enabled = false;
-
-            Random rnd = new Random();
-            int delay = rnd.Next(30);
-            DateTime endTime = DateTime.Now;
-            endTime = endTime.AddMilliseconds(2000 + delay * 100);
             DateTime currentTime = DateTime.Now;
-
-            graphics.Clear(Color.White);
-            drawEllipse(redBrush);
-            writeToPictureBox(graphics, "Don't move mouse cursor out of Start button until circle color change to green.", 150, 280, 15);
-
-            bool waitingFailed = false;
             while (currentTime <= endTime)
             {
                 int a = GetX();
@@ -72,70 +65,171 @@ namespace mysz
                 if ((GetX() > 429 || GetX() < 370) ||
                     (GetY() > 599 || GetY() < 577)) // TODO it's very ugly way to do this
                 {
-                    waitingFailed = true;
-                    break;
+                    return true;
                 }
                 currentTime = DateTime.Now;
             }
-            if (waitingFailed)
+            return false;
+        }
+
+        void TimeCountdown()
+        {
+            DateTime endTime = DateTime.Now.AddSeconds((double)gameTime);
+
+            while (endTime >= DateTime.Now)
             {
-                graphics.Clear(Color.White);
-                drawEllipse(blueBrush);
-                startButton.Enabled = true;
-                writeToPictureBox(graphics,"Game failed.", 350, 250,15);
-                writeToPictureBox(graphics,"Moved out from Start button before circle changed to green.", 200, 280,15);
+                this.timeLabel.BeginInvoke((MethodInvoker)delegate()
+                {
+                    this.timeLabel.Text = String.Format("{0:N2} s", (endTime - DateTime.Now).TotalSeconds);
+                });
+                Thread.Sleep(10);
             }
-            else
+            this.timeLabel.BeginInvoke((MethodInvoker)delegate()
             {
-                graphics.Clear(Color.White);
-                drawEllipse(greenBrush);
-                writeToPictureBox(graphics,"Now! Push Stop button as fast as you can!", 250, 280,15);
-                if (rnd.Next(100) >= 50)
-                {
-                    useLeftButton = true;
-                    stopLButton.Visible = true;
-                    stopLButton.Enabled = true;
-                }
-                else
-                {
-                    useLeftButton = false;
-                    stopRButton.Visible = true;
-                    stopRButton.Enabled = true;
-                }
-                startTime = DateTime.Now.TimeOfDay;
-                CoordsList.Clear();
-                if (firstRun)
-                {
-                    CoordinateSaver.Start();
-                    firstRun = false;
-                }
-                else
-                {
-                    CoordinateSaver.Resume();
-                }
+                this.timeLabel.Text = "Time out!";
+            });
+
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            if (gameState == GameStates.OutOfGame)
+                gameState = GameStates.BeforeGame;
+
+            switch (gameState)
+            {
+                case GameStates.BeforeGame:
+                    firstStartPush();
+                    gameState = GameStates.Waiting;
+                    waitingCheck();
+                    break;
+                case GameStates.Waiting:
+                    startPush();
+                    waitingCheck();
+                    break;
             }
         }
 
-        private void stopButton_Click(object sender, EventArgs e)
+        void pushTheButton()
         {
+            graphics.Clear(BACKGROUND_COLOR);
+            drawEllipse(greenBrush);
+            writeToPictureBox(graphics, "Now! Push Stop button as fast as you can!", 250, 280, 15);
+            Timer = new Thread(TimeCountdown);
+            Timer.Start();
             timeLabel.Visible = true;
-            startButton.Enabled = true;
+            if (rnd.Next(100) >= 50)
+            {
+                useLeftButton = true;
+                stopLButton.Visible = true;
+                stopLButton.Enabled = true;
+            }
+            else
+            {
+                useLeftButton = false;
+                stopRButton.Visible = true;
+                stopRButton.Enabled = true;
+            }
+            startTime = DateTime.Now.TimeOfDay;
+            CoordsList.Clear();
+
+            CoordinateSaver = new Thread(SaveCoordinates);
+            CoordinateSaver.Start();
+        }
+
+        void startPush()
+        {
+            graphics.Clear(BACKGROUND_COLOR);
+            drawEllipse(redBrush);
+            writeToPictureBox(graphics, "Don't move mouse cursor out of Start button until circle color change to green.", 150, 280, 15);
+
+        }
+        void firstStartPush()
+        {
             stopRButton.Enabled = false;
             stopRButton.Visible = false;
             stopLButton.Enabled = false;
             stopLButton.Visible = false;
-            TimeSpan currentTime = DateTime.Now.TimeOfDay;
+            startButton.Enabled = false;
 
-            timeLabel.Text = (currentTime - startTime).ToString();
-            timeLabel.Text = timeLabel.Text.Substring(6,6) + " s";
-            if (CoordinateSaver.IsAlive)    CoordinateSaver.Suspend();
-            mood = getMood();
-            WriteCoordinatesToFile(timeLabel.Text);
+            startPush();
+        }
 
-            graphics.Clear(Color.White);
+        void waitingCheck()
+        {
+            bool waitingFailed = waitingOnButton(DateTime.Now.AddMilliseconds(2000 + rnd.Next(30) * 100));
+
+            if (waitingFailed)
+            {
+                graphics.Clear(BACKGROUND_COLOR);
+                drawEllipse(blueBrush);
+                startButton.Enabled = true;
+                writeToPictureBox(graphics, "Game paused, please start again.", 270, 250, 15);
+                writeToPictureBox(graphics, "Moved out from Start button before circle changed to green.", 200, 280, 15);
+            }
+            else
+            {
+                pushTheButton();
+                gameState = GameStates.BeforeGame;
+            }
+        }
+        void changeGameTime()
+        {
+            if ((score % 10 == 0) && (gameTime > 2))
+            {
+                --gameTime;
+            }
+        }
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            startButton.Enabled = true;
+            stopRButton.Enabled = false;
+            stopLButton.Enabled = false;
+
+            stopRButton.Visible = false;
+            stopLButton.Visible = false;
+            timeLabel.Visible = false;
+
+            if (Timer.IsAlive)
+                Timer.Abort();
+
+            if (CoordinateSaver.IsAlive)
+                CoordinateSaver.Abort();
+
+            WriteCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now.TimeOfDay - startTime).TotalSeconds));
+
+            graphics.Clear(BACKGROUND_COLOR);
             drawEllipse(blueBrush);
-            writeToPictureBox(graphics, "Great job! Your game data was just save to file.", 250, 280, 15);
-            //TODO decide about feelings
+
+            if (timeLabel.Text.Equals("Time out!"))
+            {
+                writeToPictureBox(graphics, "Game has just ended due to time out!", 300, 280, 15);
+                writeGameDetails();
+                gameId = 0;
+                score = 0;
+                gameTime = INITIAL_GAME_TIME;
+                scoreLabel.Text = score.ToString();
+                gameState = GameStates.OutOfGame;
+            }
+            else
+            {
+                ++score;
+                scoreLabel.Text = score.ToString();
+                changeGameTime();
+                writeToPictureBox(graphics, "Great job! Play next level!", 315, 280, 15);
+            }
+        }
+
+        void writeGameDetails()
+        {
+            MoodWindow.Mood mood = getMood();
+            String fileName = @".\ReflexGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) + @"\" + gameId.ToString() + @"\gameDetails.txt";
+            using (StreamWriter sw = new StreamWriter(fileName))
+            {
+                sw.WriteLine("Mood: " + mood.ToString());
+                sw.WriteLine("Score: " + score.ToString());
+                sw.WriteLine("Initial game time: " + INITIAL_GAME_TIME.ToString());
+            }
         }
 
         void WriteCoordinatesToFile(String gameTimeString)
@@ -156,33 +250,24 @@ namespace mysz
                     gameId = (partDirInfo.GetDirectories().Length + 1);
                 }
             }
-            dirPath += @"\" + gameId.ToString();
+
+            if (useLeftButton) dirPath += @"\" + gameId.ToString() + @"\L";
+            else dirPath += @"\" + gameId.ToString() + @"\P";
+
             if (!Directory.Exists(dirPath))
             {
-                Directory.CreateDirectory(dirPath);//TODO make this safe to existing dirs
-                if (useLeftButton)  name = dirPath + @"\dataL0.csv";
-                else                name = dirPath + @"\dataR0.csv";
+                Directory.CreateDirectory(dirPath);
             }
-            else
-            {
-                DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
-                if(useLeftButton)   name = dirPath + @"\dataL" + dirInfo.GetFiles().Length.ToString() + ".csv";
-                else                name = dirPath + @"\dataR" + dirInfo.GetFiles().Length.ToString() + ".csv";
-                while (File.Exists(name))
-                {   // very bad idea, but just to be sure TODO talk about this
-                    //TODO talk how to save L & R
-                    if(useLeftButton)   name = dirPath + @"\dataL" + dirInfo.GetFiles().Length.ToString() + 1 + ".csv";
-                    else                name = dirPath + @"\dataR" + dirInfo.GetFiles().Length.ToString() + 1 + ".csv";
-                }
-            }
-            using (StreamWriter sw = new StreamWriter(name))
+
+            name = dirPath + @"\" + String.Format("{0:hh-mm-ss tt}", DateTime.Now) + ".csv";
+
+            using (StreamWriter sw = new StreamWriter(name)) //TODO pathTooLongException
             {
                 sw.WriteLine(DateTime.Now.ToString());
                 sw.WriteLine(gameTimeString);
-                sw.WriteLine("Mood: "+ mood);
-                foreach(Point p in CoordsList)
+                foreach (Point p in CoordsList)
                 {
-                    sw.WriteLine(p.X + " , " + p.Y); 
+                    sw.WriteLine(p.X + " , " + p.Y);
                 }
             }
 
@@ -191,7 +276,7 @@ namespace mysz
         void SaveCoordinates()
         // writing coordinates to list of coords
         {
-           base.SaveCoordinates(GRANULATION, CoordsList);
+            base.SaveCoordinates(GRANULATION, CoordsList);
         }
 
         public void drawEllipse(SolidBrush brush)
@@ -214,16 +299,6 @@ namespace mysz
             this.Close();
         }
 
-        private void ReflexGameWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            /* TODO THIS!
-            if (CoordinateSaver.IsAlive)
-            {
-                CoordinateSaver.Abort();
-            }
-             */
-        }
-
         private void stopRButton_Click(object sender, EventArgs e)
         {
             stopButton_Click(sender, e);
@@ -232,6 +307,16 @@ namespace mysz
         private void stopLButton_Click(object sender, EventArgs e)
         {
             stopButton_Click(sender, e);
+        }
+
+        private void ReflexGameWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Timer != null && Timer.IsAlive)
+                Timer.Abort();
+            if (CoordinateSaver != null && CoordinateSaver.IsAlive)
+                CoordinateSaver.Abort();
+            if (gameState != GameStates.OutOfGame && score != 0)
+                writeGameDetails();
         }
     }
 }

@@ -35,11 +35,14 @@
             this.timeTextLabel = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
             this.stopLButton = new System.Windows.Forms.Button();
+            this.scoreTextLabel = new System.Windows.Forms.Label();
+            this.scoreLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).BeginInit();
             this.SuspendLayout();
             // 
             // stopRButton
             // 
+            this.stopRButton.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.stopRButton.Location = new System.Drawing.Point(915, 31);
             this.stopRButton.Name = "stopRButton";
             this.stopRButton.Size = new System.Drawing.Size(57, 23);
@@ -59,6 +62,7 @@
             // 
             // startButton
             // 
+            this.startButton.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.startButton.Location = new System.Drawing.Point(542, 607);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(60, 24);
@@ -93,16 +97,16 @@
             // timeLabel
             // 
             this.timeLabel.AutoSize = true;
-            this.timeLabel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeLabel.Location = new System.Drawing.Point(16, 71);
+            this.timeLabel.Font = new System.Drawing.Font("Gabriola", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.timeLabel.Location = new System.Drawing.Point(12, 71);
             this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(29, 15);
+            this.timeLabel.Size = new System.Drawing.Size(21, 39);
             this.timeLabel.TabIndex = 24;
-            this.timeLabel.Text = "time";
-            this.timeLabel.Visible = false;
+            this.timeLabel.Text = " ";
             // 
             // stopLButton
             // 
+            this.stopLButton.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.stopLButton.Location = new System.Drawing.Point(172, 31);
             this.stopLButton.Name = "stopLButton";
             this.stopLButton.Size = new System.Drawing.Size(57, 23);
@@ -111,11 +115,33 @@
             this.stopLButton.UseVisualStyleBackColor = true;
             this.stopLButton.Click += new System.EventHandler(this.stopLButton_Click);
             // 
+            // scoreTextLabel
+            // 
+            this.scoreTextLabel.AutoSize = true;
+            this.scoreTextLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scoreTextLabel.Location = new System.Drawing.Point(12, 110);
+            this.scoreTextLabel.Name = "scoreTextLabel";
+            this.scoreTextLabel.Size = new System.Drawing.Size(53, 40);
+            this.scoreTextLabel.TabIndex = 27;
+            this.scoreTextLabel.Text = "Score";
+            // 
+            // scoreLabel
+            // 
+            this.scoreLabel.AutoSize = true;
+            this.scoreLabel.Font = new System.Drawing.Font("Gabriola", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.scoreLabel.Location = new System.Drawing.Point(12, 150);
+            this.scoreLabel.Name = "scoreLabel";
+            this.scoreLabel.Size = new System.Drawing.Size(21, 39);
+            this.scoreLabel.TabIndex = 28;
+            this.scoreLabel.Text = " ";
+            // 
             // ReflexGameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.scoreLabel);
+            this.Controls.Add(this.scoreTextLabel);
             this.Controls.Add(this.stopLButton);
             this.Controls.Add(this.timeTextLabel);
             this.Controls.Add(this.timeLabel);
@@ -146,5 +172,7 @@
         private System.Windows.Forms.Label timeTextLabel;
         private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.Button stopLButton;
+        private System.Windows.Forms.Label scoreTextLabel;
+        private System.Windows.Forms.Label scoreLabel;
     }
 }

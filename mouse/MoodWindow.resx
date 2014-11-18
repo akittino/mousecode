@@ -121,7 +121,7 @@
   <data name="veryHappyButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAFEAAABKCAYAAADDnrhuAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAwDSURBVHhe7Vx5
+        vAAADrwBlbxySQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAwDSURBVHhe7Vx5
         UFXXGb/GPcYlsVbNxFRbtxhjjCapdkxMpjou1eq02tQmnWTMmKmpqTrtTKcZk4mIgkhEBYMZ4i4giBqN
         BFRccAsoCgiCGyqg4oIIuLJ+Pb/3eMM9y33rffig/c38/rnnO9/3ne/ec89+NPJR1NZWU3n5Nbp27QSd
         PbuDsrNjKD//EN25c4EqKx/USfkGfCKIt25l06FD/hQVNYG+/XYIBQd3p/nzn6KvvtIMGRDQkcLCXqL1
@@ -179,7 +179,7 @@
   <data name="happyButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEsAAABKCAYAAADzEqlPAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAsiSURBVHhe7Vx7
+        vAAADrwBlbxySQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAsiSURBVHhe7Vx7
         UFbHFV98JppRk2iS2lpj0iSOTtSCJtom5tHR6nQ601Gr6XTGjNPJTCcd+0imk7HaVEEUFAWjGDESNagR
         wVeiglFQUCCaRAXxEcUgGjSIgKCoIHC6v4ufubt7Pr43r/E38/vn2z1nz57v7u7Zs3uvoACjvPwc5eQs
         ptWrR9OcOR1p9mzhNSMjH6GtW6fSqVNbqLa2+m4LzYeAOOvKlXxKT/8vLV/+PNtpf3Du3Adpw4bf05Ej
@@ -233,7 +233,7 @@
   <data name="verySadButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAFoAAABVCAYAAADJ/vPXAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAyrSURBVHhe7VwL
+        vAAADrwBlbxySQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAyrSURBVHhe7VwL
         cBRFGh4UXyAP5XioKB7IcYK8wdedHhR61p2nHndYWlJ3lkd5VXhIweldAVUWQ54ECCEghEQOCOEtb4Ek
         GCAkJCEQFSpEEggQgYQQQp7kRR7/9bebwe2Zzu7M7uxkk8pX9aVS2z39//+3s93/9HS3RB2wBB1CW4QO
         oS1Ch9AWoUNoi9AhtEVoM0LX19dQaeklunXrAt25U9X8aduBTwldV1dJWVnbKSFhLu3e/SFt2PA6rVr1
@@ -294,7 +294,7 @@
   <data name="normalButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAE8AAABTCAYAAADeIFpmAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAp8SURBVHhe7Vx5
+        vAAADrwBlbxySQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAp8SURBVHhe7Vx5
         UFXXGb+GqElrql3SpO3EaTttYjNNTHWSNp1mOhnLtLa1bbqN7Yz5wxkm7bTTZdqZTif9I7IHiSIhAkNE
         A7KjBgMBUUxANLgAsoiK7IsoEUEQWYT39fzu45p7lsfbH++94Tfz++ed8y3nu++ec+453zkaLcJlLAbP
         DSwGzw0sBs8NLAbPDSwGzw34ZfBmZ6dpZKSbbty4TFNTo3O/+h8WLHgzM5PU2lpMx4//j4qKttL+/Rsp
@@ -345,7 +345,7 @@
   <data name="sadButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAFYAAABKCAYAAAAhQqMXAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAuNSURBVHhe7Vx5
+        vAAADrwBlbxySQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAuNSURBVHhe7Vx5
         cFXVHb6AKEhtFSlbsWxlUVzYFzs6paV0aKWOU7BDGWQcrMVhnNZpKXTGBcJOQpAQJIQghBCZABEJiwmg
         bIEQCJAQgoQ1CYQYMCSQff31fPfxZu4957y7vPduljd+M98/79zz29695/zOqlAzwv37N+nixR2UmhpG
         Bw/+j3bunE6bN/+e1qwZREuXPkULF7anVav60IYNv6Zt2ybT11//k5KTl1FGRgzl559mEhpcgpoBmjyw
