@@ -10,33 +10,46 @@ namespace mysz
 {
     public partial class ThingsGameWindow : MouseForm
     {
-        //TODO change moment when asking about mood
-        //TODO fix some fuckup when wrong answer (ask again about mood)
-        //TODO add green OK when game completed, and red warning when failed
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
-        MoodWindow.Mood mood;
-        double roundTime = 10; // in seconds
+        const string DATABASE_PATH = @"..\..\..\ThingsDatabase\"; //TODO change path when build .exe!!!
+        readonly string USER_NAME;
+        readonly int INITIAL_QUESTION_TIME;
+
+        Graphics graphics, questionGraphics;
         List<Point> CoordsList;
         Thread CoordinateSaver;
-        DateTime endGameTime;
-        Graphics graphics, questionGraphics;
+        GameStates gameState;
+        ArrayList questions;        
+        Thread Timer;
         Random rnd;
-        ArrayList questions;
-        bool inGame = false;
+
         bool leftButtonCorrect = true;
         bool leftButtonClicked = true;
-        string userName;
+        int lastQuestionNumber = 0;
+        int questionCounter = 0;
+        int questionTime = 5;
         int gameId = 0;
+        int score = 0;
+        
+
+        enum GameStates
+        {
+            firstRun = 0,
+            beforeGame = 1,
+            inRound = 2
+        };
 
         class question
         {
             public string name, correctAnswer, wrongAnswer;
             public Image image;
+
             public question(string filePath)
             {
                 bool imageFailed = false;
+
                 try
                 {
                     image = Image.FromFile(filePath);
@@ -46,54 +59,68 @@ namespace mysz
                     Console.WriteLine(e.Data);
                     imageFailed = true;
                 }
+
                 string[] slashList = filePath.Split('\\');
                 string[] commaList = slashList[slashList.Length - 1].Split(',');
+
                 if (commaList.Length != 3 || imageFailed)
                     name = correctAnswer = wrongAnswer = "corrupted";
                 else
                 {
                     name = commaList[0];
                     correctAnswer = commaList[1];
-                    wrongAnswer = commaList[2].Remove(commaList[2].Length - 4); // remove 4 because of deleting ".jpg"
+                    wrongAnswer = commaList[2].Remove(commaList[2].Length - 4); 
+                    //above remove 4 because of deleting ".jpg"
                 }
             }
         };
 
-        public ThingsGameWindow(string userName)
+        public ThingsGameWindow(string userName, int timePerQuestion)
         {
             //TODO save status of picturebox, and check minimalizing window
             InitializeComponent();
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
 
-            CoordsList = new List<Point>();
-
+            rnd = new Random();
+            questions = new ArrayList();
+            CoordsList = new List<Point>();           
             graphics = gameWindow.CreateGraphics();
             questionGraphics = questionBox.CreateGraphics();
-            rnd = new Random();
+
+            USER_NAME = userName;
+            gameState = GameStates.firstRun; 
+            questionTime = INITIAL_QUESTION_TIME = timePerQuestion;
+            scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
 
             answerRButton.Enabled = false;
             answerLButton.Enabled = false;
-
-            string[] files = Directory.GetFiles(@"..\..\..\ThingsDatabase\", "*.jpg");//TODO change path when build .exe!!!
-            questions = new ArrayList();
-
-            foreach (string path in files)
+            
+            if (Directory.Exists(DATABASE_PATH))
             {
-                question tmp = new question(path);
-                if(tmp.name != "corrupted")
-                    questions.Add(tmp); //TODO check if there's any questions
+                string[] files = Directory.GetFiles(DATABASE_PATH, "*.jpg");
+                
+                foreach (string path in files)
+                {
+                    question tmp = new question(path);
+                    if (tmp.name != "corrupted")
+                    {
+                        questions.Add(tmp);
+                    }
+                }
             }
 
-
             graphics.Clear(Color.White);//TODO why nothing appears?
-            this.userName = userName;
         }
 
         private void setNewQuestion()
         {
-            //TODO get better solution to get random next question
-            //depends on current question (to not show the same)
-            question currentQuestion = (question)questions[rnd.Next(questions.Count)];
+            int nextQuestionNumber = lastQuestionNumber;
+
+            while (nextQuestionNumber == lastQuestionNumber)
+                nextQuestionNumber = rnd.Next(questions.Count);
+
+            question currentQuestion = (question)questions[nextQuestionNumber];
+            lastQuestionNumber = nextQuestionNumber;
             
             if (rnd.Next(100) > 50)
             {
@@ -111,32 +138,75 @@ namespace mysz
             questionBox.Image = currentQuestion.image;
             answerRButton.Enabled = true;
             answerLButton.Enabled = true;
-            
+        }
+
+        private bool databaseExists()
+        {
+            if (questions.ToArray().Length <= 2)
+            {
+                MessageBox.Show("Unfortunately application couldn't read enough questions from database. Please play other games.");
+                return false;
+            }
+            return true;
+        }
+
+        private void decreaseGameTime()
+        {
+            if (questionCounter % 10 == 0 && questionTime > 2)
+            {
+                --questionTime;
+            }
+        }
+
+        private void playNewQuestion()
+        {
+            answerRButton.Enabled = false;
+            answerLButton.Enabled = false;
+            startButton.Enabled = false;
+
+            answerRButton.Visible = true;
+            answerLButton.Visible = true;
+            timeLabel.Visible = true;
+
+            startButton.Text = "Next question";
+            gameState = GameStates.inRound;
+            ++questionCounter;
+            decreaseGameTime();
+
+            graphics.Clear(Color.White);
+            writeToPictureBox("Now quick, answer the question!", 310, 500);
+
+            Timer = new Thread(TimeCountdown);
+            CoordinateSaver = new Thread(saveCoordinates);
+
+            setNewQuestion();
+            CoordsList.Clear();
+
+            Timer.Start();
+            CoordinateSaver.Start();
         }
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            answerRButton.Enabled = false;
-            answerRButton.Visible = true;
-            answerLButton.Enabled = false;
-            answerLButton.Visible = true;
-            startButton.Enabled = false;
-            timeLabel.Visible = true;
-            startButton.Text = "Next question";
-            startButton.Enabled = false;
-
-            graphics.Clear(Color.White);
-            writeToPictureBox("Now quick, answer the question!", 310, 550);
-
-            if (! inGame)
+            switch (gameState)
             {
-                endGameTime = DateTime.Now.AddSeconds(roundTime);
-                CoordinateSaver = new Thread(SaveCoordinates);
-                CoordinateSaver.Start();
-                inGame = true;
+                case GameStates.firstRun:
+                    if (!databaseExists())//TODO think about this ugly way; automatize it
+                    {
+                        this.Close();
+                        return;
+                    }
+                    playNewQuestion();
+                    break;
+
+                case GameStates.beforeGame:
+                    playNewQuestion();
+                    break;
+
+                case GameStates.inRound:
+                    playNewQuestion();
+                    break;
             }
-            CoordsList.Clear();
-            setNewQuestion();
         }
 
         private void stopButton_Click(object sender, EventArgs e)
@@ -146,59 +216,59 @@ namespace mysz
             answerRButton.Visible = false;
             answerLButton.Enabled = false;
             answerLButton.Visible = false;
-            DateTime currentTime = DateTime.Now;
-
+            timeLabel.Visible = false;
 
             questionGraphics.Clear(Color.White);
             graphics.Clear(Color.White);
 
-            if (!CoordinateSaver.IsAlive)
+            CoordinateSaver.Abort();
+            Timer.Abort();
+
+            if (timeLabel.Text == "Time out!")
             {
-                if (leftButtonClicked == leftButtonCorrect)
-                {
-                    mood = getMood();
-                    WriteCoordinatesToFile();
-                    CoordsList.Clear();
-                    writeToPictureBox("Great job! Your move data was just save to file. The game has ended!", 190, 550);
-                }
-                else
-                {
-                    CoordsList.Clear();
-                    writeToPictureBox("Your last answer wasn't correct. Game over!", 230, 550);
-                }
+                //TODO game lost
+                writeGameDetails();
+                gameState = GameStates.beforeGame;
                 startButton.Text = "Start new game";
                 gameId = 0;
-                inGame = false;
+                score = 0;
+                questionCounter = 0;
+                scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
             }
             else
             {
                 if (leftButtonClicked == leftButtonCorrect)
                 {
-                    CoordinateSaver.Suspend();
-                    WriteCoordinatesToFile();
-                    CoordsList.Clear();
-                    CoordinateSaver.Resume();
-                    writeToPictureBox("Great job! Your move data was just save to file. Please take next question!", 180, 550);
+                    scoreLabel.Text = (++score).ToString() + " / " + questionCounter.ToString();
                 }
-                else
-                {
-                    CoordinateSaver.Abort();
-                    CoordsList.Clear();
-                    writeToPictureBox("Your last answer wasn't correct. The game is ended!", 230, 550);
-                    startButton.Text = "Start new game";
-                    gameId = 0;
-                    inGame = false;
-                }
-                
+
+                writeCoordinatesToFile();
+                CoordsList.Clear();
+                writeToPictureBox("Good job! Please take next question!", 280, 500);
             }
-            
-            //TODO decide about feelings
         }
+
+        private void writeGameDetails()
+        {
+            MoodWindow.Mood mood = getMood();
+            String fileName = @".\ThingsGame\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) +
+                              @"\" + gameId.ToString() + @"\gameDetails.txt";
+
+            using (StreamWriter sw = new StreamWriter(fileName))
+            {
+                sw.WriteLine("Mood: " + mood.ToString());
+                sw.WriteLine("Score: " + score.ToString()+ " / " + questionCounter.ToString());
+                sw.WriteLine("Initial game time: " + INITIAL_QUESTION_TIME.ToString());
+            }
+        }
+
         //void WriteCoordinatesToFile(string gameName, ref int gameId, MoodWindow.Mood mood, List<Point> CoordsList)
-        void WriteCoordinatesToFile()
+        //TODO make one writeCoordinates for all windows
+        private void writeCoordinatesToFile()
         {
             String name;
-            String dirPath = @".\ThingsGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
+            String dirPath = @".\ThingsGame\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
+
             if (gameId == 0)
             {
                 if (!Directory.Exists(dirPath))
@@ -208,76 +278,57 @@ namespace mysz
                 }
                 else
                 {
-                    DirectoryInfo partDirInfo = new DirectoryInfo(dirPath);
-                    gameId = (partDirInfo.GetDirectories().Length + 1);
+                    gameId = ((new DirectoryInfo(dirPath)).GetDirectories().Length + 1);
                 }
             }
-            dirPath += @"\" + gameId.ToString();
+
+            if (leftButtonClicked)
+                dirPath += @"\" + gameId.ToString() + @"\L";
+            else
+                dirPath += @"\" + gameId.ToString() + @"\P";
+
             if (!Directory.Exists(dirPath))
             {
-                Directory.CreateDirectory(dirPath); //TODO make this safe to existing dirs
-                if (leftButtonCorrect)  name = dirPath + @"\dataL0.csv";
-                else                name = dirPath + @"\dataR0.csv";
+                Directory.CreateDirectory(dirPath);
             }
-            else
-            {
-                DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
-                if(leftButtonCorrect)   name = dirPath + @"\dataL" + dirInfo.GetFiles().Length.ToString() + ".csv";
-                else                    name = dirPath + @"\dataR" + dirInfo.GetFiles().Length.ToString() + ".csv";
-                int fileAddCounter = 1;
-                while (File.Exists(name))
-                {   // very bad idea, but just to be sure TODO talk about this
-                    //TODO talk how to save L & R
-                    if(leftButtonCorrect)   name = dirPath + @"\dataL" + dirInfo.GetFiles().Length.ToString() + (fileAddCounter++) + ".csv";
-                    else                    name = dirPath + @"\dataR" + dirInfo.GetFiles().Length.ToString() + (fileAddCounter++) + ".csv";
-                }
-            }
+
+            name = dirPath + @"\" + String.Format("{0:HH-mm-ss}", DateTime.Now) + ".csv";
+
             using (StreamWriter sw = new StreamWriter(name))
             {
                 sw.WriteLine(DateTime.Now.ToString());
-                sw.WriteLine("Mood: " + mood);
-                foreach(Point p in CoordsList)
+                //sw.WriteLine(gameTimeString + " / " + maxGameTime);
+                if (leftButtonClicked == leftButtonCorrect) 
+                    sw.WriteLine("Correct button");
+                else 
+                    sw.WriteLine("Wrong button");
+                foreach (Point p in CoordsList)
                 {
-                    sw.WriteLine(p.X + " , " + p.Y); 
+                    sw.WriteLine(p.X + " , " + p.Y);
                 }
             }
-
         }
 
-        void SaveCoordinates()
-        // writing coordinates to list of coords
+        private void TimeCountdown()
         {
-            int LastX = 0, LastY = 0;
-            while (DateTime.Now < endGameTime)
-            {
-                if (this.timeLabel.InvokeRequired)
-                {
-                    this.timeLabel.BeginInvoke((MethodInvoker)delegate() { this.timeLabel.Text = (endGameTime - DateTime.Now).TotalSeconds.ToString("0.00"); ;});
-                }
-                else
-                {
-                    timeLabel.Text = (endGameTime - DateTime.Now).TotalSeconds.ToString("0.00"); ;
-                }
+            DateTime endTime = DateTime.Now.AddSeconds((double) questionTime);
 
-                if (!( LastX + GRANULATION > GetX() 
-                    && LastX - GRANULATION < GetX() 
-                    && LastY + GRANULATION > GetY() 
-                    && LastY - GRANULATION < GetY() ))
+            while (endTime >= DateTime.Now)
+            {
+                this.timeLabel.BeginInvoke((MethodInvoker)delegate()
                 {
-                    CoordsList.Add(new Point(GetX(), GetY()));
-                    LastX = GetX();
-                    LastY = GetY();
-                }
+                    this.timeLabel.Text = String.Format("{0:N2} s",
+                        (endTime - DateTime.Now).TotalSeconds);
+                });
+
                 Thread.Sleep(10);
             }
-            if (this.timeLabel.InvokeRequired)
+
+            this.timeLabel.BeginInvoke((MethodInvoker)delegate()
             {
-                this.timeLabel.BeginInvoke((MethodInvoker)delegate() { this.timeLabel.Text = "0"; ;});
-            }
-            else
-            {
-                timeLabel.Text = "0";
-            }
+                this.timeLabel.Text = "Time out!";
+            });
+
         }
 
         public void writeToPictureBox(String text, int X, int Y)
@@ -288,7 +339,10 @@ namespace mysz
             }
         }
 
-
+        private void saveCoordinates()
+        {
+            base.SaveCoordinates(GRANULATION, CoordsList);
+        }
 
         public new void highlightLabel(object sender, EventArgs e)
         {

@@ -9,13 +9,6 @@ namespace mysz
 {
     public partial class ReflexGameWindow : MouseForm
     {
-        enum GameStates
-        {
-            OutOfGame = 0,
-            BeforeGame = 1,
-            Waiting = 2
-        };
-
         const int GRANULATION = 5;
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
@@ -37,6 +30,13 @@ namespace mysz
         int gameId = 0;        
         int maxGameTime = 5;        
         int score = 0;
+
+        enum GameStates
+        {
+            OutOfGame = 0,
+            BeforeGame = 1,
+            Waiting = 2
+        };
 
         public ReflexGameWindow(string userName, int initialGameTime)
         {

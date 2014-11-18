@@ -36,6 +36,8 @@
             this.timeLabel = new System.Windows.Forms.Label();
             this.answerLButton = new System.Windows.Forms.Button();
             this.questionBox = new System.Windows.Forms.PictureBox();
+            this.scoreTextLabel = new System.Windows.Forms.Label();
+            this.scoreLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.questionBox)).BeginInit();
             this.SuspendLayout();
@@ -95,12 +97,12 @@
             // timeLabel
             // 
             this.timeLabel.AutoSize = true;
-            this.timeLabel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.timeLabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.timeLabel.Location = new System.Drawing.Point(16, 71);
             this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(41, 21);
+            this.timeLabel.Size = new System.Drawing.Size(12, 18);
             this.timeLabel.TabIndex = 24;
-            this.timeLabel.Text = "time";
+            this.timeLabel.Text = " ";
             this.timeLabel.Visible = false;
             // 
             // answerLButton
@@ -122,11 +124,33 @@
             this.questionBox.TabIndex = 27;
             this.questionBox.TabStop = false;
             // 
+            // scoreTextLabel
+            // 
+            this.scoreTextLabel.AutoSize = true;
+            this.scoreTextLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scoreTextLabel.Location = new System.Drawing.Point(12, 89);
+            this.scoreTextLabel.Name = "scoreTextLabel";
+            this.scoreTextLabel.Size = new System.Drawing.Size(57, 40);
+            this.scoreTextLabel.TabIndex = 28;
+            this.scoreTextLabel.Text = "Score:";
+            // 
+            // scoreLabel
+            // 
+            this.scoreLabel.AutoSize = true;
+            this.scoreLabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.scoreLabel.Location = new System.Drawing.Point(16, 129);
+            this.scoreLabel.Name = "scoreLabel";
+            this.scoreLabel.Size = new System.Drawing.Size(12, 18);
+            this.scoreLabel.TabIndex = 29;
+            this.scoreLabel.Text = " ";
+            // 
             // ThingsGameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 662);
+            this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.scoreLabel);
+            this.Controls.Add(this.scoreTextLabel);
             this.Controls.Add(this.questionBox);
             this.Controls.Add(this.answerLButton);
             this.Controls.Add(this.timeTextLabel);
@@ -141,7 +165,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "ThingsGameWindow";
-            this.Text = "ReflexGameWindow";
+            this.Text = "ThingsGameWindow";
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.questionBox)).EndInit();
             this.ResumeLayout(false);
@@ -159,5 +183,7 @@
         private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.Button answerLButton;
         private System.Windows.Forms.PictureBox questionBox;
+        private System.Windows.Forms.Label scoreTextLabel;
+        private System.Windows.Forms.Label scoreLabel;
     }
 }

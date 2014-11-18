@@ -21,7 +21,9 @@ namespace mysz
 
         public void playButtonClick(object sender, EventArgs e)
         {
-            ThingsWindow = new ThingsGameWindow(userName);
+            /*** WORKAROUND BELOW ***/
+            ThingsWindow = new ThingsGameWindow(userName, 5); //TODO change to seconds readed from settings, instead of hardcoded
+            /*** WORKAROUND ABOVE ***/
             ThingsWindow.FormClosed += new FormClosedEventHandler(ThingsWindow_FormClosed);
             ThingsWindow.Show();
             this.Hide();
