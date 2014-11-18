@@ -12,21 +12,34 @@ namespace mysz
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
+
+        readonly int INITIAL_GAME_TIME;
+        DateTime startTime;
+
         Graphics graphics;
         MoodWindow.Mood mood;
+
         List<Color> circleColorsBase = new List<Color>();
         List<string> textColorsBase = new List<string>();
-        int gameScore = 0;
         Color circleBrushColor;
         String textColor;
-        int minutes = 0, seconds = 0;
-        Thread CoordinateSaver;
-        List<Point> CoordsList;
+        
+        int gameScore = 0;
         bool firstRun = true;
-        string userName;
         int quantityOfAnswers = 0;
+        string userName;
+        bool useLeftButtonYES = false;
+        bool useRightButtonNO = false;
+        int minutes = 0, seconds = 0;
+        int gameId = 0;
+        int maxGameTime = 5;        
 
-        public ColorsGameWindow(string userName, int seconds, int minutes)
+
+        Thread CoordinateSaver;
+        Thread Timer;
+        List<Point> CoordsList;
+
+        public ColorsGameWindow(string userName, int initialGameTime)
         {
             InitializeComponent();
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
@@ -46,6 +59,8 @@ namespace mysz
             CoordsList = new List<Point>();
             CoordinateSaver = new Thread(SaveCoordinates);
             this.userName = userName;
+            maxGameTime = INITIAL_GAME_TIME = initialGameTime;
+
             if (minutes * 60 + seconds != 0)
             {
                 this.seconds = seconds;
@@ -82,14 +97,15 @@ namespace mysz
             // this must be convertible from settings (default 1minute)
             setTime();
 
-            minutesLabel.Text = minutes.ToString();
-            minutesLabel.Visible = true;
-            label1.Visible = true;
-            if (seconds < 10)
-                secondsLabel.Text = "0" + seconds.ToString();
-            secondsLabel.Visible = true;
+            timeLabel.Text = minutes.ToString();
+            timeLabel.Visible = true;
+            timeLabel.Visible = true;
+            
+            startTime = DateTime.Now;
 
-            timer1.Start();
+            Timer = new Thread(TimeCountdown);
+            Timer.Start();
+
             drawEclipse();
             CoordsList.Clear();
             if (firstRun)
@@ -164,6 +180,8 @@ namespace mysz
 
         private void yesButton_Click(object sender, EventArgs e)
         {
+            startTime = DateTime.Now;
+
             if ((textColor == circleBrushColor.Name.ToString()))
             {
                 gameScore++;
@@ -176,64 +194,63 @@ namespace mysz
                 drawEclipse();
             }
             quantityOfAnswers++;
+            useLeftButtonYES = true;
+            if (Timer.IsAlive)
+                Timer.Abort();
+            if (CoordinateSaver.IsAlive) CoordinateSaver.Suspend();
+            WriteCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now - startTime).TotalSeconds));
+
         }
 
         private void noButton_Click(object sender, EventArgs e)
         {
+            startTime = DateTime.Now;
+
             if (textColor != circleBrushColor.Name.ToString())
             {
                 gameScore++;
                 scoreNumber.Text = gameScore.ToString();
                 scoreNumber.Refresh();
             }
-            if (seconds >= 0)
-            {
-                moveCursor();
-                drawEclipse();
-            }
-            quantityOfAnswers++;
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            seconds -= 1;
-            if (seconds == -1)
-            {
-                minutes -= 1;
-                seconds = 59;
-            }
-            if (minutes == 0 && seconds == 0)
-                timer1.Stop();
-
-            string minutesS = minutes.ToString();
-            string secondsS = seconds.ToString();
-
-            minutesLabel.Text = minutesS;
-            if (seconds < 10)
-                secondsLabel.Text = "0" + secondsS;
-            else
-                secondsLabel.Text = secondsS;
-
-            if (seconds == 0)
+            if (timeLabel.Text.Equals("Time out!"))
             {
                 gameWindow.Refresh();
                 playButton.Location = new Point(450, 148);
                 playButton.Text = "PLAY AGAIN";
-
-                playButton.Visible = true;
-                writeToPictureBox(graphics, "Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
-
+                
                 yesButton.Visible = false;
                 noButton.Visible = false;
                 if (CoordinateSaver.IsAlive) CoordinateSaver.Suspend();
 
-                mood = getMood();
+                playButton.Visible = true;
+                writeToPictureBox(graphics, "Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
+                writeGameDetails();
 
-                WriteCoordinatesToFile();
+                gameScore = 0;
+                gameId = 0;
+                maxGameTime = INITIAL_GAME_TIME;
+                scoreLabel.Text = gameScore.ToString();
+
             }
-        }
+            else
+            {
+                decreaseGameTime();
 
-        
+                moveCursor();
+                drawEclipse();
+
+            }
+            if (seconds >= 0)
+            {
+                
+            }
+            quantityOfAnswers++;
+            useRightButtonNO = true;
+            if (Timer.IsAlive)
+                Timer.Abort();
+            if (CoordinateSaver.IsAlive) CoordinateSaver.Suspend();
+            WriteCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now - startTime).TotalSeconds));
+        }
 
         private void moveCursor()
         {
@@ -247,66 +264,84 @@ namespace mysz
             base.SaveCoordinates(GRANULATION, CoordsList);
         }
 
-        void WriteCoordinatesToFile()
+        void WriteCoordinatesToFile(String gameTimeString)
         {
             //TODO change it -> line 277
-            String name1;
-            String name2;
-            DateTime dateDT = DateTime.Now;
-            string date = String.Format("{0:yyyy-MM-dd}", dateDT);
-            string time = String.Format("{0:hh-mm-ss}", dateDT); //TODO small hh is time in 12h format; use HH to get 24h format!
-            time = time.Replace(":", " ");
-            if (!Directory.Exists(@".\ColorsGame\" + userName + "\\" + date))
-            {
-                Directory.CreateDirectory(@".\ColorsGame\" + userName + "\\" + date);
-            }
+            String name;
+            String dirPath = @".\ColorsGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
 
-            DirectoryInfo info = new DirectoryInfo(@".\ColorsGame\" + userName + "\\" + date);
-            
-            FileInfo[] fileNames = info.GetFiles();
-            int maxId =0; //gameId
-            foreach (var f in fileNames)
-            { //not pretty but well no other idea
-                if (maxId < Convert.ToInt32(f.Name))
+            if (gameId == 0)
+            {
+                if (!Directory.Exists(dirPath))
                 {
-                    maxId = Convert.ToInt32(f.Name);
+                    Directory.CreateDirectory(dirPath);
+                    gameId = 1;
+                }
+                else
+                {
+                    gameId = ((new DirectoryInfo(dirPath)).GetDirectories().Length + 1);
                 }
             }
-            maxId++;
-            
-            String dirPath = @".\ColorsGame\" + userName + "\\" + date + "\\" +  maxId; //TODO convert like in Reflex and ThingsGames
-            String dirPathL = dirPath + "\\L";
-            String dirPathR = dirPath + "\\P";
-
-            name1 = dirPathL + "\\" + time + ".csv";
-            name2 = dirPathR + "\\" + time + ".csv";
-
+            if (useLeftButtonYES)
+                dirPath += @"\" + gameId.ToString() + @"\L";
+            else
+                dirPath += @"\" + gameId.ToString() + @"\P";
 
             if (!Directory.Exists(dirPath))
             {
-                Directory.CreateDirectory(dirPathL);
-                Directory.CreateDirectory(dirPathR);
+                Directory.CreateDirectory(dirPath);
             }
 
-            
-            using (StreamWriter sw = new StreamWriter(name1))
+            name = dirPath + @"\" + String.Format("{0:HH-mm-ss}", DateTime.Now) + ".csv";
+
+            using (StreamWriter sw = new StreamWriter(name))
             {
-                sw.WriteLine("Correct answers: " + scoreNumber.Text + "/" + quantityOfAnswers.ToString());
-                sw.WriteLine("Mood: "+ mood);
+                sw.WriteLine(gameTimeString + " / " + maxGameTime);
+
                 foreach (Point p in CoordsList)
                 {
                     sw.WriteLine(p.X + " , " + p.Y);
                 }
             }
+        }
+        private void TimeCountdown()
+        {
+            DateTime endTime = DateTime.Now.AddSeconds((double)maxGameTime);
 
-            using (StreamWriter sw = new StreamWriter(name2))
+            while (endTime >= DateTime.Now)
             {
-                sw.WriteLine("Correct answers: " + scoreNumber.Text + "/" + quantityOfAnswers.ToString());
-                sw.WriteLine("Mood: " + mood);
-                foreach (Point p in CoordsList)
+                this.timeLabel.BeginInvoke((MethodInvoker)delegate()
                 {
-                    sw.WriteLine(p.X + " , " + p.Y);
-                }
+                    this.timeLabel.Text = String.Format("{0:N2} s", (endTime - DateTime.Now).TotalSeconds);
+                });
+
+                Thread.Sleep(10);
+            }
+
+            this.timeLabel.BeginInvoke((MethodInvoker)delegate()
+            {
+                this.timeLabel.Text = "Time out!";
+            });
+
+        }
+        private void decreaseGameTime()
+        {
+            if ((quantityOfAnswers % 10 == 0) && (maxGameTime > 2))
+            {
+                --maxGameTime;
+            }
+        }
+        private void writeGameDetails()
+        {
+            MoodWindow.Mood mood = getMood();
+            String fileName = @".\ColorsGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) +
+                              @"\" + gameId.ToString() + @"\gameDetails.txt";
+
+            using (StreamWriter sw = new StreamWriter(fileName))
+            {
+                sw.WriteLine("Mood: " + mood.ToString());
+                sw.WriteLine("Score: " + gameScore.ToString());
+                sw.WriteLine("Initial game time: " + INITIAL_GAME_TIME.ToString());
             }
         }
     }

@@ -295,7 +295,6 @@ namespace mysz
 
             using (StreamWriter sw = new StreamWriter(name))
             {
-                sw.WriteLine(DateTime.Now.ToString());
                 sw.WriteLine(gameTimeString + " / " + maxGameTime);
                 
                 foreach (Point p in CoordsList)

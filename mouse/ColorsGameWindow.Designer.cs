@@ -28,20 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColorsGameWindow));
             this.gameWindow = new System.Windows.Forms.PictureBox();
             this.timeTextLabel = new System.Windows.Forms.Label();
             this.endGameLabel = new System.Windows.Forms.Label();
-            this.minutesLabel = new System.Windows.Forms.Label();
+            this.timeLabel = new System.Windows.Forms.Label();
             this.playButton = new System.Windows.Forms.Button();
             this.yesButton = new System.Windows.Forms.Button();
             this.noButton = new System.Windows.Forms.Button();
             this.scoreLabel = new System.Windows.Forms.Label();
             this.scoreNumber = new System.Windows.Forms.Label();
-            this.secondsLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,16 +73,16 @@
             this.endGameLabel.MouseEnter += new System.EventHandler(this.highlightLabel);
             this.endGameLabel.MouseLeave += new System.EventHandler(this.removeHighlightLabel);
             // 
-            // minutesLabel
+            // timeLabel
             // 
-            this.minutesLabel.AutoSize = true;
-            this.minutesLabel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minutesLabel.Location = new System.Drawing.Point(32, 71);
-            this.minutesLabel.Name = "minutesLabel";
-            this.minutesLabel.Size = new System.Drawing.Size(29, 15);
-            this.minutesLabel.TabIndex = 30;
-            this.minutesLabel.Text = "time";
-            this.minutesLabel.Visible = false;
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeLabel.Location = new System.Drawing.Point(32, 71);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(29, 15);
+            this.timeLabel.TabIndex = 30;
+            this.timeLabel.Text = "time";
+            this.timeLabel.Visible = false;
             // 
             // playButton
             // 
@@ -147,46 +143,17 @@
             this.scoreNumber.Text = "0";
             this.scoreNumber.Visible = false;
             // 
-            // secondsLabel
-            // 
-            this.secondsLabel.AutoSize = true;
-            this.secondsLabel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.secondsLabel.Location = new System.Drawing.Point(51, 71);
-            this.secondsLabel.Name = "secondsLabel";
-            this.secondsLabel.Size = new System.Drawing.Size(29, 15);
-            this.secondsLabel.TabIndex = 38;
-            this.secondsLabel.Text = "time";
-            this.secondsLabel.Visible = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(44, 71);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(10, 15);
-            this.label1.TabIndex = 39;
-            this.label1.Text = ":";
-            this.label1.Visible = false;
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // ColorsGameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 662);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.secondsLabel);
+            this.ClientSize = new System.Drawing.Size(984, 661);
             this.Controls.Add(this.scoreNumber);
             this.Controls.Add(this.scoreLabel);
             this.Controls.Add(this.noButton);
             this.Controls.Add(this.yesButton);
             this.Controls.Add(this.playButton);
-            this.Controls.Add(this.minutesLabel);
+            this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.timeTextLabel);
             this.Controls.Add(this.endGameLabel);
             this.Controls.Add(this.gameWindow);
@@ -207,15 +174,12 @@
         private System.Windows.Forms.PictureBox gameWindow;
         private System.Windows.Forms.Label timeTextLabel;
         private System.Windows.Forms.Label endGameLabel;
-        private System.Windows.Forms.Label minutesLabel;
+        private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.Button playButton;
         private System.Windows.Forms.Button yesButton;
         private System.Windows.Forms.Button noButton;
         private System.Windows.Forms.Label scoreLabel;
         private System.Windows.Forms.Label scoreNumber;
-        private System.Windows.Forms.Label secondsLabel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Timer timer1;
 
     }
 }

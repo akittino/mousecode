@@ -21,7 +21,7 @@ namespace mysz
 
         public void playButtonClick(object sender, EventArgs e)
         {
-            ColorsWindow = new ColorsGameWindow(userName, seconds, minutes);
+            ColorsWindow = new ColorsGameWindow(userName, seconds);
             ColorsWindow.FormClosed += new FormClosedEventHandler(ColorsWindow_FormClosed);
             ColorsWindow.Show();
             this.Hide();
