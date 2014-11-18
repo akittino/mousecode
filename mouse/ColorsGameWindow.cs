@@ -249,21 +249,47 @@ namespace mysz
 
         void WriteCoordinatesToFile()
         {
-            String name;
+            //TODO change it -> line 277
+            String name1;
+            String name2;
             DateTime dateDT = DateTime.Now;
-            string date = dateDT.ToString().Substring(0, 10);
-            string time = dateDT.ToString().Substring(10, 9);
+            string date = String.Format("{0:yyyy-MM-dd}", dateDT);
+            string time = String.Format("{0:hh-mm-ss}", dateDT);
             time = time.Replace(":", " ");
-            String dirPath = @".\ColorsGame\" + userName + "\\" + date;
+            if (!Directory.Exists(@".\ColorsGame\" + userName + "\\" + date))
+            {
+                Directory.CreateDirectory(@".\ColorsGame\" + userName + "\\" + date);
+            }
 
-            name = dirPath + "\\" + time + ".csv";
+            DirectoryInfo info = new DirectoryInfo(@".\ColorsGame\" + userName + "\\" + date);
+            
+            FileInfo[] fileNames = info.GetFiles();
+            int maxId =0; //gameId
+            foreach (var f in fileNames)
+            { //not pretty but well no other idea
+                if (maxId < Convert.ToInt32(f.Name))
+                {
+                    maxId = Convert.ToInt32(f.Name);
+                }
+            }
+            maxId++;
+            
+            String dirPath = @".\ColorsGame\" + userName + "\\" + date + "\\" +  maxId; //TODO convert like in Reflex and ThingsGames
+            String dirPathL = dirPath + "\\L";
+            String dirPathR = dirPath + "\\P";
+
+            name1 = dirPathL + "\\" + time + ".csv";
+            name2 = dirPathR + "\\" + time + ".csv";
+
 
             if (!Directory.Exists(dirPath))
             {
-                Directory.CreateDirectory(dirPath);
+                Directory.CreateDirectory(dirPathL);
+                Directory.CreateDirectory(dirPathR);
             }
 
-            using (StreamWriter sw = new StreamWriter(name))
+            
+            using (StreamWriter sw = new StreamWriter(name1))
             {
                 sw.WriteLine("Correct answers: " + scoreNumber.Text + "/" + quantityOfAnswers.ToString());
                 sw.WriteLine("Mood: "+ mood);
@@ -273,6 +299,15 @@ namespace mysz
                 }
             }
 
+            using (StreamWriter sw = new StreamWriter(name2))
+            {
+                sw.WriteLine("Correct answers: " + scoreNumber.Text + "/" + quantityOfAnswers.ToString());
+                sw.WriteLine("Mood: " + mood);
+                foreach (Point p in CoordsList)
+                {
+                    sw.WriteLine(p.X + " , " + p.Y);
+                }
+            }
         }
     }
 }

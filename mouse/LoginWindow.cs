@@ -7,7 +7,7 @@ namespace mysz
     {
         const String AdminPassword = "admin";
         
-        AdminPanel AdminWindow;
+        AdminPanelAnalyzator AdminWindow;
         ThingsGameMenuWindow ThingsWindow;
         ReflexGameMenuWindow ReflexWindow;
         ColorsGameMenuWindow ColorsWindow;
@@ -29,7 +29,7 @@ namespace mysz
 
                 case AdminPassword:
                     logThis("Password correct. Access granted.");
-                    AdminWindow = new AdminPanel();
+                    AdminWindow = new AdminPanelAnalyzator();
                     AdminWindow.FormClosed += new FormClosedEventHandler(AdminWindow_FormClosed);
                     AdminWindow.Show();
                     this.Hide();
