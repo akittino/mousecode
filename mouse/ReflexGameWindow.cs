@@ -107,14 +107,19 @@ namespace mysz
             }
         }
 
-        private bool waitingOnButton(DateTime endTime) //if return true that means waiting failed
+        private bool waitingOnButton(DateTime endTime) 
+            //if return true that means waiting failed
         {
+            int Xmin = startButton.Location.X - gameWindow.Location.X;
+            int Ymin = startButton.Location.Y - gameWindow.Location.Y;
+            int Xmax = Xmin + startButton.Width;
+            int Ymax = Ymin + startButton.Height - 1; 
+            // -1 above due to GetY can't be larger then 600 but must detect move out  
+
             while (DateTime.Now <= endTime)
             {
-                int a = GetX();
-                int b = GetY();
-                if ((GetX() > 429 || GetX() < 370) ||
-                    (GetY() > 599 || GetY() < 577)) // TODO it's very ugly way to do this
+                if (GetX() > Xmax || GetY() > Ymax ||
+                    GetX() < Xmin || GetY() < Ymin)
                 {
                     return true;
                 }
