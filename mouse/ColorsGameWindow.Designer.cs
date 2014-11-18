@@ -163,6 +163,7 @@
             this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "ColorsGameWindow";
             this.Text = "ColorsGameWindow";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ColorsGameWindow_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

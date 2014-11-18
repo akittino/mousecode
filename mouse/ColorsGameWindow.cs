@@ -342,5 +342,15 @@ namespace mysz
                 sw.WriteLine("Initial game time: " + INITIAL_GAME_TIME.ToString());
             }
         }
+
+        private void ColorsGameWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Timer != null && Timer.IsAlive)
+                Timer.Abort();
+            if (CoordinateSaver != null && CoordinateSaver.IsAlive)
+                CoordinateSaver.Abort();
+            if (gameScore != 0)
+                writeGameDetails();
+        }
     }
 }
