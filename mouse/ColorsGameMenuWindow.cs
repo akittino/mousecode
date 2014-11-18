@@ -8,7 +8,7 @@ namespace mysz
     {
         ColorsGameWindow ColorsWindow;
         string userName;
-        int seconds = 0, minutes = 0;
+        int seconds = 5, minutes = 0;
 
         public ColorsGameMenuWindow(string userName)
         {
