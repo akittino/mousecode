@@ -84,7 +84,8 @@ namespace mysz
             scoreNumber.Text = "0";
             scoreNumber.Refresh();
             playButton.Visible = false;
-            animation();
+
+            animation(); // TODO add thread for this
 
             yesButton.Visible = true;
             noButton.Visible = true;
@@ -274,7 +275,7 @@ namespace mysz
 
             using (StreamWriter sw = new StreamWriter(name))
             {
-                sw.WriteLine("Correct Answer: " + (correctAnswer==true ? "YES" : "NO"));
+                sw.WriteLine("Correct Answer: " + (correctAnswer == true ? "YES" : "NO"));
                 sw.WriteLine(gameTimeString + " / " + maxGameTime);
 
                 foreach (Point p in CoordsList)
