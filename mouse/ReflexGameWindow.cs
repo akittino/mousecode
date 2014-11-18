@@ -35,7 +35,7 @@ namespace mysz
         
         bool useLeftButton = true;        
         int gameId = 0;        
-        int gameTime;        
+        int maxGameTime = 5;        
         int score = 0;
 
         public ReflexGameWindow(string userName, int initialGameTime)
@@ -50,7 +50,7 @@ namespace mysz
             blueBrush = new SolidBrush(Color.Blue);
             redBrush = new SolidBrush(Color.Red);
 
-            gameTime = INITIAL_GAME_TIME = initialGameTime;
+            maxGameTime = INITIAL_GAME_TIME = initialGameTime;
             graphics = gameWindow.CreateGraphics();
             gameState = GameStates.OutOfGame;
             USER_NAME = userName;
@@ -67,7 +67,7 @@ namespace mysz
 
         private void TimeCountdown()
         {
-            DateTime endTime = DateTime.Now.AddSeconds((double)gameTime);
+            DateTime endTime = DateTime.Now.AddSeconds((double)maxGameTime);
 
             while (endTime >= DateTime.Now)
             {
@@ -226,7 +226,7 @@ namespace mysz
                 
                 score = 0;
                 gameId = 0;
-                gameTime = INITIAL_GAME_TIME;
+                maxGameTime = INITIAL_GAME_TIME;
                 gameState = GameStates.OutOfGame;
                 scoreLabel.Text = score.ToString();
                 
@@ -243,9 +243,9 @@ namespace mysz
 
         private void decreaseGameTime()
         {
-            if ((score % 10 == 0) && (gameTime > 2))
+            if ((score % 10 == 0) && (maxGameTime > 2))
             {
-                --gameTime;
+                --maxGameTime;
             }
         }
 
@@ -291,12 +291,12 @@ namespace mysz
                 Directory.CreateDirectory(dirPath);
             }
 
-            name = dirPath + @"\" + String.Format("{0:hh-mm-ss tt}", DateTime.Now) + ".csv";
+            name = dirPath + @"\" + String.Format("{0:HH-mm-ss}", DateTime.Now) + ".csv";
 
             using (StreamWriter sw = new StreamWriter(name)) //TODO pathTooLongException
             {
                 sw.WriteLine(DateTime.Now.ToString());
-                sw.WriteLine(gameTimeString);
+                sw.WriteLine(gameTimeString + " / " + maxGameTime);
                 
                 foreach (Point p in CoordsList)
                 {
