@@ -6,7 +6,7 @@ namespace mysz
     public partial class login_main_window : Form
     {
         const String AdminPassword = "admin";
-        
+        //TODO check if path to readings isn't too long! can cause exception!
         AdminPanelAnalyzator AdminWindow;
         ThingsGameMenuWindow ThingsWindow;
         ReflexGameMenuWindow ReflexWindow;
@@ -130,7 +130,12 @@ namespace mysz
 
         private void userNameTextbox_TextChanged(object sender, EventArgs e)
         {
-            if (userNameTextbox.Text == "")
+            if (!System.Text.RegularExpressions.Regex.IsMatch(userNameTextbox.Text, "^[0-9a-zA-Z]+$"))
+            {
+                logThis("Username accepts only alphanumeric characters!");
+                userNameTextbox.ResetText();
+            }
+            else if (userNameTextbox.Text == "")
             {
                 logThis("Please enter name before play.");
                 GamesButtonsOff();
@@ -144,7 +149,6 @@ namespace mysz
                 logThis("Access to games granted. Hello " + userNameTextbox.Text + "!");
                 GamesButtonsOn();
             }
-            //TODO name verification -> failes when & in name
         }
     }
 }
