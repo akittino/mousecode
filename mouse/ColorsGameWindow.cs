@@ -254,7 +254,7 @@ namespace mysz
             String name2;
             DateTime dateDT = DateTime.Now;
             string date = String.Format("{0:yyyy-MM-dd}", dateDT);
-            string time = String.Format("{0:hh-mm-ss}", dateDT);
+            string time = String.Format("{0:hh-mm-ss}", dateDT); //TODO small hh is time in 12h format; use HH to get 24h format!
             time = time.Replace(":", " ");
             if (!Directory.Exists(@".\ColorsGame\" + userName + "\\" + date))
             {
