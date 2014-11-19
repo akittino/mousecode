@@ -70,6 +70,7 @@
             this.showButton.TabIndex = 4;
             this.showButton.Text = "Show";
             this.showButton.UseVisualStyleBackColor = true;
+            this.showButton.Click += new System.EventHandler(this.showButton_Click);
             // 
             // showRightCheckBox
             // 
@@ -87,6 +88,7 @@
             this.fileViewer.Name = "fileViewer";
             this.fileViewer.Size = new System.Drawing.Size(237, 523);
             this.fileViewer.TabIndex = 1;
+            this.fileViewer.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.fileViewer_AfterCheck);
             // 
             // showLeftCheckBox
             // 

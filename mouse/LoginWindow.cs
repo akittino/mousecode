@@ -140,9 +140,9 @@ namespace mysz
                 logThis("Please enter name before play.");
                 GamesButtonsOff();
             }
-            else if (userNameTextbox.Text.Length >= 15)
+            else if (userNameTextbox.Text.Length >= 12)
             {
-                MessageBox.Show("User name allows only 15 characters.");
+                MessageBox.Show("User name allows only 12 characters.");
                 logThis("User name is too long. Please use valid name.");
                 userNameTextbox.Text = "";
             }

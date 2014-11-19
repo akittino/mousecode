@@ -18,7 +18,7 @@ namespace mysz
         readonly int INITIAL_QUESTION_TIME;
 
         public bool databaseCorrupted;
-
+        //TODO change when time out, no possible answer; in reflex too.
         Graphics graphics, questionGraphics;
         List<Point> CoordsList;
         Thread CoordinateSaver;

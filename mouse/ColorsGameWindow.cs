@@ -111,7 +111,7 @@ namespace mysz
             }
             else
             {
-                CoordinateSaver.Abort();
+                CoordinateSaver.Abort();//TODO once readed coordinates are saving all the time; there aren't read any new.
 
             }
         }
