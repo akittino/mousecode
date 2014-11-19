@@ -13,12 +13,13 @@ namespace mysz
     public partial class AdminPanelAnalyzator : MouseForm
     {
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.StartupPath);
-        Pen bluePen;
+        Pen bluePen, greenPen;
         Graphics graphics;
         public AdminPanelAnalyzator()
         {
             InitializeComponent();
             bluePen = new Pen(Color.Blue, 2f);
+            greenPen = new Pen(Color.Green, 2f);
             graphics = coordinatesViewer.CreateGraphics();
             SetMouseForm(coordinatesViewer, coordinatesViewer.Width, coordinatesViewer.Height, null);
         }
@@ -98,12 +99,11 @@ namespace mysz
 
         private void showButton_Click(object sender, EventArgs e)
         {
+            graphics.Clear(Color.White);
             printAllChecked();
-            //string path = Path.GetFullPath(".") + @"\" + fileViewer.SelectedNode.FullPath ;
-            //readFileAndDraw(path);
         }
 
-        private void readFileAndDraw(string path)
+        private void readFileAndDraw(string path, Pen pen)
         {
             if (path.Split('.')[path.Split('.').Length - 1] != "csv")
             {
@@ -128,7 +128,7 @@ namespace mysz
                     s = sr.ReadLine();
                 }
 
-                drawMouseTrace(coordsList);
+                drawMouseTrace(coordsList, pen);
             }
         }
         private void printAllChecked()
@@ -146,7 +146,7 @@ namespace mysz
                                 foreach (TreeNode g in f.Nodes)
                                 {
                                     if (g.Checked) 
-                                        readFileAndDraw(Path.GetFullPath(".") + @"\" + g.FullPath);
+                                        readFileAndDraw(Path.GetFullPath(".") + @"\" + g.FullPath, bluePen);
                                 }
                                 if (f.Checked)
                                     f.Expand();
@@ -163,6 +163,9 @@ namespace mysz
                 if (a.Checked)
                     a.Expand();
             }
+
+            readFileAndDraw(Path.GetFullPath(".") + @"\" + fileViewer.SelectedNode.FullPath, greenPen);
+            //TODO thread in background that check selection and rewrite lines 
         }
 
         private void fileViewer_AfterCheck(object sender, TreeViewEventArgs e)
@@ -174,17 +177,17 @@ namespace mysz
             }
         }
 
-        private void drawMouseTrace(List<Point> coordsList)
+        private void drawMouseTrace(List<Point> coordsList, Pen pen)
         {
             if (coordsList.Count < 2)
                 return;
 
-            graphics.DrawEllipse(bluePen, coordsList[0].X - 1, coordsList[0].Y - 1, 2, 2);
+            graphics.DrawEllipse(pen, coordsList[0].X - 1, coordsList[0].Y - 1, 2, 2);
             
             for (int i = 1; i < coordsList.Count; i++)
             {
-                graphics.DrawLine(bluePen, coordsList[i - 1], coordsList[i]);
-                graphics.DrawEllipse(bluePen, coordsList[i].X - 1, coordsList[i].Y - 1, 2, 2);
+                graphics.DrawLine(pen, coordsList[i - 1], coordsList[i]);
+                graphics.DrawEllipse(pen, coordsList[i].X - 1, coordsList[i].Y - 1, 2, 2);
             }
         }
     }
