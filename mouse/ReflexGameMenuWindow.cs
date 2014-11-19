@@ -46,9 +46,7 @@ namespace mysz
             backLabel.Visible = true;
             instructionTextBox.Visible = false;
             gameTimeLabel.Visible = true;
-            minutesLabel.Visible = true;
             secondsLabel.Visible = true;
-            minutesTextbox.Visible = true;
             secondsTextbox.Visible = true;
             setTimeButton.Visible = true;
             playButton.Enabled = false;
@@ -112,44 +110,44 @@ namespace mysz
 
         private void textbox_TextChanged(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(minutesTextbox.Text, "^[a-zA-Z]+$"))
-            {
-                MessageBox.Show("Please enter only numbers.");
-                minutesTextbox.Text = "";
-            }
             if (System.Text.RegularExpressions.Regex.IsMatch(secondsTextbox.Text, "^[a-zA-Z]+$"))
             {
                 MessageBox.Show("Please enter only numbers.");
                 secondsTextbox.Text = "";
             }
-            base.textbox_TextChanged(sender, e, minutesTextbox, secondsTextbox, setTimeButton);
+            if (secondsTextbox.Text.Length > 2)
+            {
+                MessageBox.Show("Please enter only two numbers.");
+                secondsTextbox.Text = "";
+            }
+
+            base.textbox_TextChanged(sender, e, secondsTextbox, setTimeButton); 
         }
 
         private void setTimeButton_Click(object sender, EventArgs e)
         {
-            int time = base.setTimeButton_Click(sender, e, secondsTextbox.Text, minutesTextbox.Text, setTimeButton);
-            seconds = time % 60;
-            minutes = time / 60;
-
-            /*** WORKAROUND BELOW ***/
-            //TODO@DAX change this window to ask only about seconds per question with one textbox with seconds, and validate if it's 2 <= x <= 10
-                //Seconds per question
-                seconds = Convert.ToInt32(secondsTextbox.Text);
-                if (seconds > 10 || seconds < 2)
-                {
-                    MessageBox.Show("Time per question should be at least 2 seconds and max 10 seconds!");
-                    seconds = 5;
-                }
-
-            /*** WORKAROUND ABOVE ***/
+            int secondsValidator = 0;
+            if (secondsTextbox.Text != "")
+            {
+                string secondsS = secondsTextbox.Text;
+                secondsValidator = Convert.ToInt32(secondsS);
+            }
+            if (!String.IsNullOrEmpty(secondsTextbox.Text) && (secondsValidator < 2 || secondsValidator > 10))
+            {
+                MessageBox.Show("Please enter seconds in range from 2 to 10.");
+                secondsTextbox.Text = "";
+            }
+            else
+            {
+                int time = base.setTimeButton_Click(sender, e, secondsTextbox.Text, setTimeButton);
+                seconds = time;
+            }
         }
 
         public void settingsComponents()
         {
             gameTimeLabel.Visible = false;
-            minutesLabel.Visible = false;
             secondsLabel.Visible = false;
-            minutesTextbox.Visible = false;
             secondsTextbox.Visible = false;
             setTimeButton.Visible = false;
         }

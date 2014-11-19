@@ -27,8 +27,7 @@ namespace mysz
                 DirectoryInfo[] userDirectories = null;
                 DirectoryInfo[] dateDirectories = null;
                 DirectoryInfo[] gameIdDirectories = null;
-                DirectoryInfo[] lCoordinatesDirectories = null;
-                DirectoryInfo[] rCoordinatesDirectories = null;
+                DirectoryInfo[] coordinatesDirectories = null;
                 FileInfo[] files = null;
 
 
@@ -56,13 +55,13 @@ namespace mysz
                                             for (int k = 0; k < gameIdDirectories.Length; k++)
                                             {
                                                 TreeNode nodeDateChild = treeView1.Nodes[tmp].Nodes[i].Nodes[j].Nodes.Add(gameIdDirectories[k].Name);
-                                                lCoordinatesDirectories = gameIdDirectories[k].GetDirectories();
-                                                if (lCoordinatesDirectories.Length > 0)
+                                                coordinatesDirectories = gameIdDirectories[k].GetDirectories();
+                                                if (coordinatesDirectories.Length > 0)
                                                 {
-                                                    for (int n = 0; n < lCoordinatesDirectories.Length; n++)
+                                                    for (int n = 0; n < coordinatesDirectories.Length; n++)
                                                     {
-                                                        TreeNode nodeGameIdChild = treeView1.Nodes[tmp].Nodes[i].Nodes[j].Nodes[k].Nodes.Add(lCoordinatesDirectories[n].Name);
-                                                        files = lCoordinatesDirectories[n].GetFiles();
+                                                        TreeNode nodeGameIdChild = treeView1.Nodes[tmp].Nodes[i].Nodes[j].Nodes[k].Nodes.Add(coordinatesDirectories[n].Name);
+                                                        files = coordinatesDirectories[n].GetFiles();
                                                         if (files.Length > 0)
                                                         {
                                                             for (int m = 0; m < files.Length; m++)

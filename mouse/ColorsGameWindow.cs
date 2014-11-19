@@ -314,7 +314,8 @@ namespace mysz
 
                 playButton.Visible = true;
                 writeToPictureBox(graphics, "Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
-                writeGameDetails();
+                if(gameScore !=0)
+                    writeGameDetails();
 
                 gameScore = 0;
                 gameId = 0;

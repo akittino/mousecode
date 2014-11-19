@@ -39,9 +39,7 @@
             this.setTimeButton = new System.Windows.Forms.Button();
             this.secondsTextbox = new System.Windows.Forms.TextBox();
             this.secondsLabel = new System.Windows.Forms.Label();
-            this.minutesLabel = new System.Windows.Forms.Label();
             this.gameTimeLabel = new System.Windows.Forms.Label();
-            this.minutesTextbox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // playButton
@@ -171,48 +169,26 @@
             this.secondsLabel.Text = "Seconds";
             this.secondsLabel.Visible = false;
             // 
-            // minutesLabel
-            // 
-            this.minutesLabel.AutoSize = true;
-            this.minutesLabel.Font = new System.Drawing.Font("Gabriola", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minutesLabel.Location = new System.Drawing.Point(413, 101);
-            this.minutesLabel.Name = "minutesLabel";
-            this.minutesLabel.Size = new System.Drawing.Size(54, 29);
-            this.minutesLabel.TabIndex = 22;
-            this.minutesLabel.Text = "Minutes";
-            this.minutesLabel.Visible = false;
-            // 
             // gameTimeLabel
             // 
             this.gameTimeLabel.AutoSize = true;
             this.gameTimeLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameTimeLabel.Location = new System.Drawing.Point(311, 122);
             this.gameTimeLabel.Name = "gameTimeLabel";
-            this.gameTimeLabel.Size = new System.Drawing.Size(95, 40);
+            this.gameTimeLabel.Size = new System.Drawing.Size(138, 40);
             this.gameTimeLabel.TabIndex = 21;
-            this.gameTimeLabel.Text = "Game Time";
+            this.gameTimeLabel.Text = "Time per question";
             this.gameTimeLabel.Visible = false;
-            // 
-            // minutesTextbox
-            // 
-            this.minutesTextbox.Location = new System.Drawing.Point(427, 133);
-            this.minutesTextbox.Name = "minutesTextbox";
-            this.minutesTextbox.Size = new System.Drawing.Size(28, 20);
-            this.minutesTextbox.TabIndex = 20;
-            this.minutesTextbox.Visible = false;
-            this.minutesTextbox.TextChanged += new System.EventHandler(this.textbox_TextChanged);
             // 
             // ThingsGameMenuWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 342);
+            this.ClientSize = new System.Drawing.Size(660, 341);
             this.Controls.Add(this.setTimeButton);
             this.Controls.Add(this.secondsTextbox);
             this.Controls.Add(this.secondsLabel);
-            this.Controls.Add(this.minutesLabel);
             this.Controls.Add(this.gameTimeLabel);
-            this.Controls.Add(this.minutesTextbox);
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.exitLabel);
             this.Controls.Add(this.helpLabel);
@@ -243,8 +219,6 @@
         private System.Windows.Forms.Button setTimeButton;
         private System.Windows.Forms.TextBox secondsTextbox;
         private System.Windows.Forms.Label secondsLabel;
-        private System.Windows.Forms.Label minutesLabel;
         private System.Windows.Forms.Label gameTimeLabel;
-        private System.Windows.Forms.TextBox minutesTextbox;
     }
 }
