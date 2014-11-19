@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -14,32 +13,9 @@ namespace mysz
     public partial class AdminPanelAnalyzator : Form
     {
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.StartupPath);
-        public const int TVIF_STATE = 0x8;
-        public const int TVIS_STATEIMAGEMASK = 0xF000;
-        public const int TV_FIRST = 0x1100;
-        public const int TVM_SETITEM = TV_FIRST + 63;
-
-        [DllImport("user32.dll")]
-        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam); 
         public AdminPanelAnalyzator()
         {
             InitializeComponent();
-
-        }
-        public struct TVITEM
-        {
-            public int mask;
-            public IntPtr hItem;
-            public int state;
-            public int stateMask;
-            [MarshalAs(UnmanagedType.LPTStr)]
-            public String lpszText;
-            public int cchTextMax;
-            public int iImage;
-            public int iSelectedImage;
-            public int cChildren;
-            public IntPtr lParam;
-
         }
 
         private void AdminPanelAnalyzator_Load(object sender, EventArgs e)
@@ -53,8 +29,8 @@ namespace mysz
                 DirectoryInfo[] gameIdDirectories = null;
                 DirectoryInfo[] coordinatesDirectories = null;
                 FileInfo[] files = null;
-                treeView1.CheckBoxes = true;
-                treeView1.DrawMode = TreeViewDrawMode.OwnerDrawAll;
+
+
                 
                 if(gameDirectories.Length >0)
                 {
@@ -91,7 +67,6 @@ namespace mysz
                                                             for (int m = 0; m < files.Length; m++)
                                                             {
                                                                 TreeNode nodeCoordinatesChild = treeView1.Nodes[tmp].Nodes[i].Nodes[j].Nodes[k].Nodes[n].Nodes.Add(files[m].Name);
-
                                                             }
                                                         }
                                                     }
@@ -112,24 +87,5 @@ namespace mysz
         private void button2_Click(object sender, EventArgs e)
         {
             picture_box.InitialImage = null;
-        }
-
-        private void treeView1_DrawNode(object sender, DrawTreeNodeEventArgs e)
-        {
-            if (e.Node.Level == 0 || e.Node.Level == 1 || e.Node.Level == 2)
-                HideCheckBox(e.Node);
-            e.DrawDefault = true;
-        }
-        
-        private void HideCheckBox(TreeNode node)
-        {
-            TVITEM tvi = new TVITEM();
-            tvi.hItem = node.Handle;
-            tvi.mask = TVIF_STATE;
-            tvi.stateMask = TVIS_STATEIMAGEMASK;
-            tvi.state = 0;
-            IntPtr lparam = Marshal.AllocHGlobal(Marshal.SizeOf(tvi));
-            Marshal.StructureToPtr(tvi, lparam, false);
-            SendMessage(this.treeView1.Handle, TVM_SETITEM, IntPtr.Zero, lparam);
         }
 }}
