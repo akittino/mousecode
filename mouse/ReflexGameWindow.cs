@@ -43,6 +43,8 @@ namespace mysz
             //TODO save status of picturebox, and check minimalizing window
             InitializeComponent();
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT, timeLabel);
+            setTimeOutMethod(timedOut);
+            setQuestionTime((double)initialGameTime);
 
             CoordsList = new List<Point>();
 
@@ -192,15 +194,15 @@ namespace mysz
             if (CoordinateSaver.IsAlive)
                 CoordinateSaver.Abort();
 
-            gameId = writeCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now - startTime).TotalSeconds));
-
             graphics.Clear(BACKGROUND_COLOR);
             drawEllipse(blueBrush);
 
             if (timeLabel.Text.Equals("Time out!"))
             {
                 writeToPictureBox(graphics, "Game has just ended due to time out!", 300, 280, 15);
-                writeGameDetails();
+
+                if (gameId != 0)
+                    writeGameDetails();
                 
                 score = 0;
                 gameId = 0;
@@ -212,6 +214,9 @@ namespace mysz
             }
             else
             {
+
+                gameId = writeCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now - startTime).TotalSeconds));
+
                 ++score;
                 scoreLabel.Text = score.ToString();
 
@@ -226,6 +231,15 @@ namespace mysz
             {
                 setQuestionTime((double)--maxGameTime);
             }
+        }
+
+        private bool timedOut()
+        {
+            this.BeginInvoke((MethodInvoker)delegate()
+            {
+                stopButton_Click(null, null);
+            });
+            return false;
         }
 
         private int writeCoordinatesToFile(string gameTimeString)

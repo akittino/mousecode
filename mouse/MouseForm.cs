@@ -11,6 +11,7 @@ namespace mysz
         MoodWindow MoodWindow;
         MoodWindow.Mood mood;
         Label timeLabel;
+        Func<bool> timeOutMethod;
         int CHART_WIDTH = 0;
         int CHART_HEIGHT = 0;
         double questionTime = 0;
@@ -23,6 +24,11 @@ namespace mysz
             CHART_HEIGHT = _chart_height;
             picture_box = _picture_box;
             timeLabel = _timeLabel;
+        }
+
+        protected void setTimeOutMethod(Func<bool> fun)
+        {
+            timeOutMethod = fun;
         }
 
         protected void setQuestionTime(double _qT)
@@ -110,6 +116,9 @@ namespace mysz
             {
                 this.timeLabel.Text = "Time out!";
             });
+
+            if(timeOutMethod != null)
+                timeOutMethod();
 
         }
 

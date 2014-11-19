@@ -18,7 +18,6 @@ namespace mysz
         readonly int INITIAL_QUESTION_TIME;
 
         public bool databaseCorrupted;
-        //TODO change when time out, no possible answer; in reflex too.
         Graphics graphics, questionGraphics;
         List<Point> CoordsList;
         Thread CoordinateSaver;
@@ -74,6 +73,7 @@ namespace mysz
             InitializeComponent();
 
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT, timeLabel);
+            setTimeOutMethod(timedOut);
 
             rnd = new Random();
             questions = new ArrayList();
@@ -214,14 +214,17 @@ namespace mysz
 
             if (timeLabel.Text == "Time out!")
             {
-                writeGameDetails();
+                startButton.Text = "Start new game";
+                writeToPictureBox("Please start a game!", 340, 550);
+
+                if(gameId != 0)
+                    writeGameDetails();
 
                 score = 0; 
                 gameId = 0;
+                CoordsList.Clear();
                 questionCounter = 0;
-                startButton.Text = "Start new game";
                 scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
-                writeToPictureBox("Please start a game!", 340, 550);
             }
             else
             {
@@ -249,6 +252,15 @@ namespace mysz
             {
                 graphics.DrawString(text, myFont, Brushes.Black, new Point(X, Y));
             }
+        }
+
+        private bool timedOut()
+        {
+            this.BeginInvoke((MethodInvoker)delegate()
+            {
+                stopButton_Click(null, null);
+            });
+            return false;
         }
 
         private int writeCoordinatesToFile(double gameTime)
