@@ -98,7 +98,7 @@ namespace mysz
 
         private void showButton_Click(object sender, EventArgs e)
         {
-            printAll();
+            printAllChecked();
             //string path = Path.GetFullPath(".") + @"\" + fileViewer.SelectedNode.FullPath ;
             //readFileAndDraw(path);
         }
@@ -131,7 +131,7 @@ namespace mysz
                 drawMouseTrace(coordsList);
             }
         }
-        private void printAll()
+        private void printAllChecked()
         {
             foreach (TreeNode a in fileViewer.Nodes)
             {
@@ -145,7 +145,8 @@ namespace mysz
                             {
                                 foreach (TreeNode g in f.Nodes)
                                 {
-                                    readFileAndDraw(Path.GetFullPath(".") + @"\" + g.FullPath);
+                                    if (g.Checked) 
+                                        readFileAndDraw(Path.GetFullPath(".") + @"\" + g.FullPath);
                                 }
                                 f.Expand();
                             }
