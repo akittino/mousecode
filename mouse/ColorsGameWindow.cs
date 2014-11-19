@@ -85,9 +85,6 @@ namespace mysz
             scoreNumber.Refresh();
             playButton.Visible = false;
 
-            // this must be convertible from settings (default 1minute)
-            setTime();
-
             BackgroundProcessing = new Thread(pushedPlayButton);
             BackgroundProcessing.Start();
         }
@@ -117,22 +114,8 @@ namespace mysz
             Timer = new Thread(TimeCountdown);
             Timer.Start();
 
-            if (firstRun)
-            {
-                CoordinateSaver.Start();
-                firstRun = false;
-            }
-            else
-            {
-                CoordinateSaver.Abort();//TODO once readed coordinates are saving all the time; there aren't read any new.
-            }
-        }
-
-        public void setTime() //TODO bug -time from settings works only in firstGame 
-        {
-            int gameTime = base.setTime(seconds, minutes);
-            minutes = gameTime / 60;
-            seconds = gameTime % 60;
+            CoordinateSaver = new Thread(SaveCoordinates);
+            CoordinateSaver.Start();
         }
 
         private void animationFun(string sign)
@@ -216,9 +199,12 @@ namespace mysz
             moveCursor();
             drawEclipse();
 
-
+            CoordsList.Clear();
+            CoordinateSaver = new Thread(SaveCoordinates);
+            CoordinateSaver.Start();
             Timer = new Thread(TimeCountdown);
             Timer.Start();
+
         }
 
         private void noButton_Click(object sender, EventArgs e)
@@ -243,8 +229,12 @@ namespace mysz
             moveCursor();
             drawEclipse();
 
+            CoordsList.Clear();
+            CoordinateSaver = new Thread(SaveCoordinates);
+            CoordinateSaver.Start();
             Timer = new Thread(TimeCountdown);
             Timer.Start();
+
         }
 
         private void moveCursor()
@@ -326,7 +316,7 @@ namespace mysz
                 yesButton.Visible = false;
                 noButton.Visible = false;
                 if (CoordinateSaver.IsAlive) CoordinateSaver.Abort();
-
+                if (Timer.IsAlive) Timer.Abort();
                 playButton.Visible = true;
                 writeToPictureBox(graphics, "Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
                 if(gameScore !=0)
@@ -336,6 +326,7 @@ namespace mysz
                 gameId = 0;
                 maxGameTime = INITIAL_GAME_TIME;
                 scoreNumber.Text = gameScore.ToString();
+                
             });
 
         }

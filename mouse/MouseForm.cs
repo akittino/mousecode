@@ -207,17 +207,6 @@ namespace mysz
                 Thread.Sleep(10);
             }
         }
-
-        protected int setTime(int seconds, int minutes)
-        {
-            if (minutes * 60 + seconds == 0)
-            {
-                minutes = 1;
-                seconds = 0;
-            }
-            return minutes * 60 + seconds;
-        }
-
         protected MoodWindow.Mood getMood()
         {
             MoodWindow = new MoodWindow();

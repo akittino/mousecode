@@ -167,7 +167,7 @@ namespace mysz
 
                 seconds = time;
             }
-        }//TODO@DAX the solution wasn't building due to this bracket missing :(
+        }
 
         public void settingsComponents()
         {
