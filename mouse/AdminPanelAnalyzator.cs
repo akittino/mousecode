@@ -36,37 +36,37 @@ namespace mysz
                 {
                     foreach (var d in gameDirectories)
                     {
-                        TreeNode node = treeView1.Nodes.Add(d.Name);
+                        TreeNode node = fileViewer.Nodes.Add(d.Name);
                         userDirectories = d.GetDirectories();
                         if(userDirectories.Length>0)
                         {
                             for(int i=0;i<userDirectories.Length;i++)
                             {
-                                TreeNode nodeGameChild = treeView1.Nodes[tmp].Nodes.Add(userDirectories[i].Name);
+                                TreeNode nodeGameChild = fileViewer.Nodes[tmp].Nodes.Add(userDirectories[i].Name);
                                 dateDirectories = userDirectories[i].GetDirectories();
                                 if (dateDirectories.Length > 0)
                                 {
                                     for (int j = 0; j < dateDirectories.Length; j++)
                                     {
-                                        TreeNode nodeUserChild = treeView1.Nodes[tmp].Nodes[i].Nodes.Add(dateDirectories[j].Name);
+                                        TreeNode nodeUserChild = fileViewer.Nodes[tmp].Nodes[i].Nodes.Add(dateDirectories[j].Name);
                                         gameIdDirectories = dateDirectories[j].GetDirectories();
                                         if (gameIdDirectories.Length > 0)
                                         {
                                             for (int k = 0; k < gameIdDirectories.Length; k++)
                                             {
-                                                TreeNode nodeDateChild = treeView1.Nodes[tmp].Nodes[i].Nodes[j].Nodes.Add(gameIdDirectories[k].Name);
+                                                TreeNode nodeDateChild = fileViewer.Nodes[tmp].Nodes[i].Nodes[j].Nodes.Add(gameIdDirectories[k].Name);
                                                 coordinatesDirectories = gameIdDirectories[k].GetDirectories();
                                                 if (coordinatesDirectories.Length > 0)
                                                 {
                                                     for (int n = 0; n < coordinatesDirectories.Length; n++)
                                                     {
-                                                        TreeNode nodeGameIdChild = treeView1.Nodes[tmp].Nodes[i].Nodes[j].Nodes[k].Nodes.Add(coordinatesDirectories[n].Name);
+                                                        TreeNode nodeGameIdChild = fileViewer.Nodes[tmp].Nodes[i].Nodes[j].Nodes[k].Nodes.Add(coordinatesDirectories[n].Name);
                                                         files = coordinatesDirectories[n].GetFiles();
                                                         if (files.Length > 0)
                                                         {
                                                             for (int m = 0; m < files.Length; m++)
                                                             {
-                                                                TreeNode nodeCoordinatesChild = treeView1.Nodes[tmp].Nodes[i].Nodes[j].Nodes[k].Nodes[n].Nodes.Add(files[m].Name);
+                                                                TreeNode nodeCoordinatesChild = fileViewer.Nodes[tmp].Nodes[i].Nodes[j].Nodes[k].Nodes[n].Nodes.Add(files[m].Name);
                                                             }
                                                         }
                                                     }
@@ -84,8 +84,9 @@ namespace mysz
             }
     }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void clearButton_Click(object sender, EventArgs e)
         {
-            picture_box.InitialImage = null;
+            Bitmap clearBitmap = new Bitmap(coordinatesViewer.Width, coordinatesViewer.Height);
+            coordinatesViewer.Image = clearBitmap;
         }
 }}
