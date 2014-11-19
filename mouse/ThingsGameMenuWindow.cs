@@ -118,6 +118,7 @@ namespace mysz
 
         private void textbox_TextChanged(object sender, EventArgs e)
         {
+            
             if (System.Text.RegularExpressions.Regex.IsMatch(secondsTextbox.Text, "^[a-zA-Z]+$"))
             {
                 MessageBox.Show("Please enter only numbers.");
@@ -134,23 +135,38 @@ namespace mysz
 
         private void setTimeButton_Click(object sender, EventArgs e)
         {
+            string secondsS = "";
             int secondsValidator = 0;
             if (secondsTextbox.Text != "")
             {
-                string secondsS = secondsTextbox.Text;
-                secondsValidator = Convert.ToInt32(secondsS);
+                try
+                {
+                    secondsS = secondsTextbox.Text;
+                    secondsValidator = Convert.ToInt32(secondsS);
+                    secondsS = "0";
+                }
+                catch
+                {
+                    MessageBox.Show("Please enter seconds in valid format.");
+                    secondsTextbox.Text = "";
+                    secondsS = "1000";
+                    //workaround
+                }
             }
             if (!String.IsNullOrEmpty(secondsTextbox.Text) && (secondsValidator < 2 || secondsValidator > 10))
             {
                 MessageBox.Show("Please enter seconds in range from 2 to 10.");
                 secondsTextbox.Text = "";
             }
+
             else
             {
-                int time = base.setTimeButton_Click(sender, e, secondsTextbox.Text, setTimeButton);
+                int time = 0;
+                if(secondsS !="1000")
+                    time = base.setTimeButton_Click(sender, e, secondsTextbox.Text, setTimeButton);
+
                 seconds = time;
             }
-        }
 
         public void settingsComponents()
         {
