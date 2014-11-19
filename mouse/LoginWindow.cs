@@ -129,19 +129,22 @@ namespace mysz
 
         private void userNameTextbox_TextChanged(object sender, EventArgs e)
         {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(userNameTextbox.Text, "^[0-9a-zA-Z]+$"))
+            if (!System.Text.RegularExpressions.Regex.IsMatch(userNameTextbox.Text, "^[0-9a-zA-Z]+$") && !String.IsNullOrEmpty(userNameTextbox.Text))
             {
                 logThis("Username accepts only alphanumeric characters!");
                 userNameTextbox.ResetText();
+
             }
             else if (userNameTextbox.Text == "")
             {
                 logThis("Please enter name before play.");
                 GamesButtonsOff();
             }
-            else if (userNameTextbox.Text.Length > 13)
+            else if (userNameTextbox.Text.Length >= 15)
             {
+                MessageBox.Show("User name allows only 15 characters.");
                 logThis("User name is too long. Please use valid name.");
+                userNameTextbox.Text = "";
             }
             else
             {
