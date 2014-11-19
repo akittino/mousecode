@@ -40,7 +40,6 @@ namespace mysz
 
         public ReflexGameWindow(string userName, int initialGameTime)
         {
-            //TODO save status of picturebox, and check minimalizing window
             InitializeComponent();
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT, timeLabel);
             setTimeOutMethod(timedOut);
@@ -63,8 +62,9 @@ namespace mysz
             stopRButton.Enabled = false;
             stopLButton.Enabled = false;
 
+            /*** below, nothing appears anyways ***/
             graphics.Clear(BACKGROUND_COLOR);
-            drawEllipse(blueBrush);//TODO why nothing appears?
+            drawEllipse(blueBrush);
         }
 
         private void startButton_Click(object sender, EventArgs e)

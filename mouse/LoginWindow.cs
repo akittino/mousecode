@@ -11,13 +11,11 @@ namespace mysz
         ReflexGameMenuWindow ReflexWindow;
         ColorsGameMenuWindow ColorsWindow;
 
-        //TODO close all threads in other windows
         public login_main_window()
         {
             InitializeComponent();            
         }
 
-        //TODO if can resize window. mustn't. ALL WINDOWS!!!
         private void admin_panel_button_Click(object sender, EventArgs e)
         {
             switch(adminPasswordTextbox.Text)

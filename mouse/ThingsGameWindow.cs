@@ -69,7 +69,6 @@ namespace mysz
 
         public ThingsGameWindow(string userName, int timePerQuestion)
         {
-            //TODO save status of picturebox, and check minimalizing window
             InitializeComponent();
 
             SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT, timeLabel);
@@ -115,8 +114,9 @@ namespace mysz
                 databaseCorrupted = false;
             }
 
-            graphics.Clear(Color.Black);
-            writeToPictureBox("Please start a game!", 340, 550);//TODO why nothing appears!?
+            /*** below, nothing appears anyways ***/
+            graphics.Clear(Color.White);
+            writeToPictureBox("Please start a game!", 340, 550);
         }
 
         private void setNewQuestion()
