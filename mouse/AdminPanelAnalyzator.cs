@@ -20,9 +20,9 @@ namespace mysz
 
         private void AdminPanelAnalyzator_Load(object sender, EventArgs e)
         {
-            if(Directory.Exists(directoryInfo.ToString()))
-            { 
-                int tmp=0;
+            if (Directory.Exists(directoryInfo.ToString()))
+            {
+                int tmp = 0;
                 DirectoryInfo[] gameDirectories = directoryInfo.GetDirectories();
                 DirectoryInfo[] userDirectories = null;
                 DirectoryInfo[] dateDirectories = null;
@@ -30,17 +30,18 @@ namespace mysz
                 DirectoryInfo[] coordinatesDirectories = null;
                 FileInfo[] files = null;
 
+                fileViewer.CheckBoxes = true;
 
-                
-                if(gameDirectories.Length >0)
+
+                if (gameDirectories.Length > 0)
                 {
                     foreach (var d in gameDirectories)
                     {
                         TreeNode node = fileViewer.Nodes.Add(d.Name);
                         userDirectories = d.GetDirectories();
-                        if(userDirectories.Length>0)
+                        if (userDirectories.Length > 0)
                         {
-                            for(int i=0;i<userDirectories.Length;i++)
+                            for (int i = 0; i < userDirectories.Length; i++)
                             {
                                 TreeNode nodeGameChild = fileViewer.Nodes[tmp].Nodes.Add(userDirectories[i].Name);
                                 dateDirectories = userDirectories[i].GetDirectories();
@@ -79,14 +80,15 @@ namespace mysz
                         }
                         tmp++;
                     }
-                    
+
                 }
             }
-    }
+        }
 
         private void clearButton_Click(object sender, EventArgs e)
         {
             Bitmap clearBitmap = new Bitmap(coordinatesViewer.Width, coordinatesViewer.Height);
             coordinatesViewer.Image = clearBitmap;
         }
-}}
+    }
+}
