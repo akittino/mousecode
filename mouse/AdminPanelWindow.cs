@@ -20,7 +20,7 @@ namespace mysz
         // main form - main function in app
         {
             InitializeComponent();
-            SetMouseForm(picture_box, CHART_WIDTH, CHART_HEIGHT);
+            SetMouseForm(picture_box, CHART_WIDTH, CHART_HEIGHT, null);
             CoordinateUpdater = new Thread(UpdateCoordinates);
             CoordinateSaver = new Thread(SaveCoordinates);
             CoordsList = new List<String>();

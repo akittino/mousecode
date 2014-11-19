@@ -8,7 +8,7 @@ namespace mysz
     {
         ThingsGameWindow ThingsWindow;
         public string userName;
-        int seconds = 0, minutes = 0;
+        int seconds = 5;
 
         public ThingsGameMenuWindow(string userName)
         {
@@ -21,9 +21,7 @@ namespace mysz
 
         public void playButtonClick(object sender, EventArgs e)
         {
-            /*** WORKAROUND BELOW ***/
-            ThingsWindow = new ThingsGameWindow(userName, 5); //TODO change to seconds readed from settings, instead of hardcoded
-            /*** WORKAROUND ABOVE ***/
+            ThingsWindow = new ThingsGameWindow(userName, seconds);
             ThingsWindow.FormClosed += new FormClosedEventHandler(ThingsWindow_FormClosed);
             if (!ThingsWindow.databaseCorrupted)
             {

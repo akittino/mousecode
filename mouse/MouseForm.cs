@@ -10,19 +10,110 @@ namespace mysz
     {
         MoodWindow MoodWindow;
         MoodWindow.Mood mood;
+        Label timeLabel;
         int CHART_WIDTH = 0;
         int CHART_HEIGHT = 0;
+        double questionTime = 0;
         PictureBox picture_box;
 
         // this method must be called before using any of other methods from this class
-        public void SetMouseForm(PictureBox _picture_box, int _chart_width, int _chart_height)
+        public void SetMouseForm(PictureBox _picture_box, int _chart_width, int _chart_height, Label _timeLabel)
         {
             CHART_WIDTH = _chart_width;
             CHART_HEIGHT = _chart_height;
             picture_box = _picture_box;
+            timeLabel = _timeLabel;
         }
 
-        public int GetX()
+        protected void setQuestionTime(double _qT)
+        {
+            questionTime = _qT;
+        }
+
+        protected void writeGameDetails(string gameName, string USER_NAME, int gameId, params string[] strings)
+        {
+            MoodWindow.Mood mood = getMood();
+            String fileName = @".\" + gameName + @"\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) +
+                              @"\" + gameId.ToString() + @"\gameDetails.txt";
+
+            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(fileName))
+            {
+                sw.WriteLine("Mood: " + mood.ToString());
+                for (int i = 0; i < strings.Length; ++i)
+                {
+                    sw.WriteLine(strings[i]);
+                }
+            }
+        }
+
+        protected int writeCoordinatesToFile(int gameId, string gameName, bool leftButtonClicked, string USER_NAME, List<Point> CoordsList, params string[] strings)
+        {
+            String name;
+            String dirPath = @".\" + gameName + @"\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
+
+            if (gameId == 0)
+            {
+                if (!System.IO.Directory.Exists(dirPath))
+                {
+                    System.IO.Directory.CreateDirectory(dirPath);
+                    gameId = 1;
+                }
+                else
+                {
+                    gameId = ((new System.IO.DirectoryInfo(dirPath)).GetDirectories().Length + 1);
+                }
+            }
+
+            if (leftButtonClicked)
+                dirPath += @"\" + gameId.ToString() + @"\L";
+            else
+                dirPath += @"\" + gameId.ToString() + @"\P";
+
+            if (!System.IO.Directory.Exists(dirPath))
+            {
+                System.IO.Directory.CreateDirectory(dirPath);
+            }
+
+            name = dirPath + @"\" + String.Format("{0:HH-mm-ss}", DateTime.Now) + ".csv";
+
+            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(name))
+            {
+                for (int i = 0; i < strings.Length; ++i)
+                {
+                    sw.WriteLine(strings[i]);
+                }
+
+                foreach (Point p in CoordsList)
+                {
+                    sw.WriteLine(p.X + " , " + p.Y);
+                }
+            }
+            return gameId;
+        }
+
+        protected void TimeCountdown()
+        {
+            DateTime endTime = DateTime.Now.AddSeconds(questionTime);
+
+            while (endTime >= DateTime.Now)
+            {
+                this.timeLabel.BeginInvoke((MethodInvoker)delegate()
+                {
+                    this.timeLabel.Text = String.Format("{0:N2} s",
+                        (endTime - DateTime.Now).TotalSeconds);
+                });
+
+                Thread.Sleep(10);
+            }
+
+            this.timeLabel.BeginInvoke((MethodInvoker)delegate()
+            {
+                this.timeLabel.Text = "Time out!";
+            });
+
+        }
+
+        protected int GetX()
         // return X mouse position
         {
             int X = MousePosition.X - this.Left - picture_box.Location.X - 8;
@@ -34,7 +125,7 @@ namespace mysz
             return X;
         }
 
-        public int GetY()
+        protected int GetY()
         // return Y mouse position
         {
             int Y = MousePosition.Y - this.Top - picture_box.Location.Y - 30;
@@ -46,7 +137,7 @@ namespace mysz
             return Y;
         }
 
-        public string GetXString()
+        protected string GetXString()
         // return X mouse position as String
         {
             int x = GetX();
@@ -58,7 +149,7 @@ namespace mysz
                 return x.ToString();
         }
 
-        public string GetYString()
+        protected string GetYString()
         // return Y mouse position as String
         {
             int y = GetY();
@@ -69,26 +160,27 @@ namespace mysz
             else
                 return y.ToString();
         }
-        public void highlightLabel(object sender, EventArgs e)
+
+        protected void highlightLabel(object sender, EventArgs e)
         {
             Label lbl = (Label)sender;
             lbl.ForeColor = Color.BlueViolet;
         }
 
-        public void removeHighlightLabel(object sender, EventArgs e)
+        protected void removeHighlightLabel(object sender, EventArgs e)
         {
             Label lbl = (Label)sender;
             lbl.ForeColor = Color.Black;
         }
 
-        public void writeToPictureBox(Graphics graphics, String text, int X, int Y, int fontSize)
+        protected void writeToPictureBox(Graphics graphics, String text, int X, int Y, int fontSize)
         {
             using (Font myFont = new Font("Gabriola", fontSize))
             {
                 graphics.DrawString(text, myFont, Brushes.Black, new Point(X, Y));
             }
         }
-        public void SaveCoordinates(int GRANULATION, List<Point> CoordsList)
+        protected void SaveCoordinates(int GRANULATION, List<Point> CoordsList)
         // writing coordinates to list of coords
         {
             int LastX = 0, LastY = 0;
@@ -107,7 +199,7 @@ namespace mysz
             }
         }
 
-        public int setTime(int seconds, int minutes)
+        protected int setTime(int seconds, int minutes)
         {
             if (minutes * 60 + seconds == 0)
             {
@@ -116,7 +208,8 @@ namespace mysz
             }
             return minutes * 60 + seconds;
         }
-        public MoodWindow.Mood getMood()
+
+        protected MoodWindow.Mood getMood()
         {
             MoodWindow = new MoodWindow();
             MoodWindow.ShowDialog();

@@ -8,7 +8,7 @@ namespace mysz
     {
         ReflexGameWindow ReflexWindow;
         string userName;
-        int seconds = 5, minutes = 0;
+        int seconds = 5;
 
         public ReflexGameMenuWindow(string userName)
         {

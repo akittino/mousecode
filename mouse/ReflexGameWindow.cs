@@ -42,7 +42,7 @@ namespace mysz
         {
             //TODO save status of picturebox, and check minimalizing window
             InitializeComponent();
-            SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
+            SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT, timeLabel);
 
             CoordsList = new List<Point>();
 
@@ -63,28 +63,6 @@ namespace mysz
 
             graphics.Clear(BACKGROUND_COLOR);
             drawEllipse(blueBrush);//TODO why nothing appears?
-        }
-
-        private void TimeCountdown()
-        {
-            DateTime endTime = DateTime.Now.AddSeconds((double)maxGameTime);
-
-            while (endTime >= DateTime.Now)
-            {
-                this.timeLabel.BeginInvoke((MethodInvoker)delegate()
-                {
-                    this.timeLabel.Text = String.Format("{0:N2} s",
-                        (endTime - DateTime.Now).TotalSeconds);
-                });
-
-                Thread.Sleep(10);
-            }
-
-            this.timeLabel.BeginInvoke((MethodInvoker)delegate()
-            {
-                this.timeLabel.Text = "Time out!";
-            });
-
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -214,7 +192,7 @@ namespace mysz
             if (CoordinateSaver.IsAlive)
                 CoordinateSaver.Abort();
 
-            writeCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now - startTime).TotalSeconds));
+            gameId = writeCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now - startTime).TotalSeconds));
 
             graphics.Clear(BACKGROUND_COLOR);
             drawEllipse(blueBrush);
@@ -227,6 +205,7 @@ namespace mysz
                 score = 0;
                 gameId = 0;
                 maxGameTime = INITIAL_GAME_TIME;
+                setQuestionTime((double)maxGameTime);
                 gameState = GameStates.OutOfGame;
                 scoreLabel.Text = score.ToString();
                 
@@ -245,63 +224,20 @@ namespace mysz
         {
             if ((score % 10 == 0) && (maxGameTime > 2))
             {
-                --maxGameTime;
+                setQuestionTime((double)--maxGameTime);
             }
+        }
+
+        private int writeCoordinatesToFile(string gameTimeString)
+        {
+            return base.writeCoordinatesToFile(gameId, "ReflexGame", useLeftButton, USER_NAME, CoordsList,
+                gameTimeString + " / " + maxGameTime);
         }
 
         private void writeGameDetails()
         {
-            MoodWindow.Mood mood = getMood();
-            String fileName = @".\ReflexGame\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) + 
-                              @"\" + gameId.ToString() + @"\gameDetails.txt";
-
-            using (StreamWriter sw = new StreamWriter(fileName))
-            {
-                sw.WriteLine("Mood: " + mood.ToString());
-                sw.WriteLine("Score: " + score.ToString());
-                sw.WriteLine("Initial game time: " + INITIAL_GAME_TIME.ToString());
-            }
-        }
-
-        private void writeCoordinatesToFile(String gameTimeString)
-        {
-            String name;
-            String dirPath = @".\ReflexGame\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
-
-            if (gameId == 0)
-            {
-                if (!Directory.Exists(dirPath))
-                {
-                    Directory.CreateDirectory(dirPath);
-                    gameId = 1;
-                }
-                else
-                {
-                    gameId = ((new DirectoryInfo(dirPath)).GetDirectories().Length + 1);
-                }
-            }
-
-            if (useLeftButton) 
-                dirPath += @"\" + gameId.ToString() + @"\L";
-            else 
-                dirPath += @"\" + gameId.ToString() + @"\P";
-
-            if (!Directory.Exists(dirPath))
-            {
-                Directory.CreateDirectory(dirPath);
-            }
-
-            name = dirPath + @"\" + String.Format("{0:HH-mm-ss}", DateTime.Now) + ".csv";
-
-            using (StreamWriter sw = new StreamWriter(name))
-            {
-                sw.WriteLine(gameTimeString + " / " + maxGameTime);
-                
-                foreach (Point p in CoordsList)
-                {
-                    sw.WriteLine(p.X + " , " + p.Y);
-                }
-            }
+            base.writeGameDetails("ReflexGame", USER_NAME, gameId,
+                "Score: " + score.ToString(), "Initial game time: " + INITIAL_GAME_TIME.ToString());
         }
 
         private void saveCoordinates()

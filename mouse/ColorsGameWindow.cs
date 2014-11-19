@@ -43,7 +43,7 @@ namespace mysz
         public ColorsGameWindow(string userName, int initialGameTime)
         {
             InitializeComponent();
-            SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
+            SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT, null);
             graphics = gameWindow.CreateGraphics();
             circleColorsBase.Add(Color.Red);
             circleColorsBase.Add(Color.Green);

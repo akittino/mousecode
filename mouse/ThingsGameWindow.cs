@@ -73,7 +73,7 @@ namespace mysz
             //TODO save status of picturebox, and check minimalizing window
             InitializeComponent();
 
-            SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT);
+            SetMouseForm(gameWindow, CHART_WIDTH, CHART_HEIGHT, timeLabel);
 
             rnd = new Random();
             questions = new ArrayList();
@@ -84,6 +84,8 @@ namespace mysz
             USER_NAME = userName;
             questionTime = INITIAL_QUESTION_TIME = timePerQuestion;
             scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
+
+            setQuestionTime((double)questionTime);
 
             answerRButton.Enabled = false;
             answerLButton.Enabled = false;
@@ -159,7 +161,7 @@ namespace mysz
         {
             if (questionCounter % 10 == 0 && questionTime > 2)
             {
-                --questionTime;
+                setQuestionTime((double)--questionTime);
             }
         }
 
@@ -235,93 +237,10 @@ namespace mysz
 
                 scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
 
-                writeCoordinatesToFile(questionTime - double.Parse(timeLabel.Text.Remove(timeLabel.Text.Length - 1)));
+                gameId = writeCoordinatesToFile(questionTime - double.Parse(timeLabel.Text.Remove(timeLabel.Text.Length - 1)));
 
                 CoordsList.Clear();
             }
-        }
-
-        private void writeGameDetails()
-        {
-            MoodWindow.Mood mood = getMood();
-            String fileName = @".\ThingsGame\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) +
-                              @"\" + gameId.ToString() + @"\gameDetails.txt";
-
-            using (StreamWriter sw = new StreamWriter(fileName))
-            {
-                sw.WriteLine("Mood: " + mood.ToString());
-                sw.WriteLine("Score: " + scoreLabel.Text);
-                sw.WriteLine("Initial game time: " + INITIAL_QUESTION_TIME.ToString());
-            }
-        }
-
-        //TODO make one writeCoordinates for all windows
-        private void writeCoordinatesToFile(double gameTime)
-        {
-            String name;
-            String dirPath = @".\ThingsGame\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
-
-            if (gameId == 0)
-            {
-                if (!Directory.Exists(dirPath))
-                {
-                    Directory.CreateDirectory(dirPath);
-                    gameId = 1;
-                }
-                else
-                {
-                    gameId = ((new DirectoryInfo(dirPath)).GetDirectories().Length + 1);
-                }
-            }
-
-            if (leftButtonClicked)
-                dirPath += @"\" + gameId.ToString() + @"\L";
-            else
-                dirPath += @"\" + gameId.ToString() + @"\P";
-
-            if (!Directory.Exists(dirPath))
-            {
-                Directory.CreateDirectory(dirPath);
-            }
-
-            name = dirPath + @"\" + String.Format("{0:HH-mm-ss}", DateTime.Now) + ".csv";
-
-            using (StreamWriter sw = new StreamWriter(name))
-            {
-                if (leftButtonClicked == leftButtonCorrect) 
-                    sw.WriteLine("Correct button");
-                else 
-                    sw.WriteLine("Wrong button");
-
-                sw.WriteLine("Game time: " + gameTime.ToString());
-
-                foreach (Point p in CoordsList)
-                {
-                    sw.WriteLine(p.X + " , " + p.Y);
-                }
-            }
-        }
-
-        private void TimeCountdown()
-        {
-            DateTime endTime = DateTime.Now.AddSeconds((double) questionTime);
-
-            while (endTime >= DateTime.Now)
-            {
-                this.timeLabel.BeginInvoke((MethodInvoker)delegate()
-                {
-                    this.timeLabel.Text = String.Format("{0:N2} s",
-                        (endTime - DateTime.Now).TotalSeconds);
-                });
-
-                Thread.Sleep(10);
-            }
-
-            this.timeLabel.BeginInvoke((MethodInvoker)delegate()
-            {
-                this.timeLabel.Text = "Time out!";
-            });
-
         }
 
         public void writeToPictureBox(String text, int X, int Y)
@@ -330,6 +249,17 @@ namespace mysz
             {
                 graphics.DrawString(text, myFont, Brushes.Black, new Point(X, Y));
             }
+        }
+
+        private int writeCoordinatesToFile(double gameTime)
+        {
+            return base.writeCoordinatesToFile(gameId, "ThingsGame", leftButtonClicked, USER_NAME, CoordsList,
+                (leftButtonClicked == leftButtonCorrect) ? "Correct button" : "Wrong button", "Game time: " + gameTime.ToString());
+        }
+
+        private void writeGameDetails()
+        {
+            base.writeGameDetails("ThingsGame", USER_NAME, gameId, "Score: " + scoreLabel.Text, "Initial game time: " + INITIAL_QUESTION_TIME.ToString());
         }
 
         private void saveCoordinates()
@@ -370,7 +300,7 @@ namespace mysz
                 Timer.Abort();
             if (CoordinateSaver != null && CoordinateSaver.IsAlive)
                 Timer.Abort();
-            if (questionCounter != 0)
+            if (gameId != 0) // this means that some data was already saved
                 writeGameDetails();
         }
     }
