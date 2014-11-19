@@ -29,97 +29,97 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.picture_box = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.showButton = new System.Windows.Forms.Button();
+            this.showRightCheckBox = new System.Windows.Forms.CheckBox();
+            this.fileViewer = new System.Windows.Forms.TreeView();
+            this.showLeftCheckBox = new System.Windows.Forms.CheckBox();
+            this.coordinatesViewer = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picture_box)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coordinatesViewer)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.checkBox2);
-            this.panel1.Controls.Add(this.treeView1);
-            this.panel1.Controls.Add(this.checkBox1);
+            this.panel1.Controls.Add(this.clearButton);
+            this.panel1.Controls.Add(this.showButton);
+            this.panel1.Controls.Add(this.showRightCheckBox);
+            this.panel1.Controls.Add(this.fileViewer);
+            this.panel1.Controls.Add(this.showLeftCheckBox);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(247, 604);
             this.panel1.TabIndex = 0;
             // 
-            // checkBox2
+            // clearButton
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(112, 3);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(81, 17);
-            this.checkBox2.TabIndex = 3;
-            this.checkBox2.Text = "Show Right";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.clearButton.Location = new System.Drawing.Point(58, 35);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(49, 23);
+            this.clearButton.TabIndex = 12;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
-            // treeView1
+            // showButton
             // 
-            this.treeView1.Location = new System.Drawing.Point(3, 74);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(237, 523);
-            this.treeView1.TabIndex = 1;
+            this.showButton.Location = new System.Drawing.Point(3, 35);
+            this.showButton.Name = "showButton";
+            this.showButton.Size = new System.Drawing.Size(49, 23);
+            this.showButton.TabIndex = 4;
+            this.showButton.Text = "Show";
+            this.showButton.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // showRightCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(3, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(74, 17);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Show Left";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.showRightCheckBox.AutoSize = true;
+            this.showRightCheckBox.Location = new System.Drawing.Point(112, 3);
+            this.showRightCheckBox.Name = "showRightCheckBox";
+            this.showRightCheckBox.Size = new System.Drawing.Size(81, 17);
+            this.showRightCheckBox.TabIndex = 3;
+            this.showRightCheckBox.Text = "Show Right";
+            this.showRightCheckBox.UseVisualStyleBackColor = true;
             // 
-            // picture_box
+            // fileViewer
             // 
-            this.picture_box.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.picture_box.Location = new System.Drawing.Point(265, 11);
-            this.picture_box.Name = "picture_box";
-            this.picture_box.Size = new System.Drawing.Size(800, 600);
-            this.picture_box.TabIndex = 11;
-            this.picture_box.TabStop = false;
+            this.fileViewer.Location = new System.Drawing.Point(3, 74);
+            this.fileViewer.Name = "fileViewer";
+            this.fileViewer.Size = new System.Drawing.Size(237, 523);
+            this.fileViewer.TabIndex = 1;
             // 
-            // button1
+            // showLeftCheckBox
             // 
-            this.button1.Location = new System.Drawing.Point(3, 35);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(49, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Show";
-            this.button1.UseVisualStyleBackColor = true;
+            this.showLeftCheckBox.AutoSize = true;
+            this.showLeftCheckBox.Location = new System.Drawing.Point(3, 3);
+            this.showLeftCheckBox.Name = "showLeftCheckBox";
+            this.showLeftCheckBox.Size = new System.Drawing.Size(74, 17);
+            this.showLeftCheckBox.TabIndex = 2;
+            this.showLeftCheckBox.Text = "Show Left";
+            this.showLeftCheckBox.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // coordinatesViewer
             // 
-            this.button2.Location = new System.Drawing.Point(58, 35);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(49, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Clear";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.coordinatesViewer.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.coordinatesViewer.Location = new System.Drawing.Point(265, 11);
+            this.coordinatesViewer.Name = "coordinatesViewer";
+            this.coordinatesViewer.Size = new System.Drawing.Size(800, 600);
+            this.coordinatesViewer.TabIndex = 11;
+            this.coordinatesViewer.TabStop = false;
             // 
             // AdminPanelAnalyzator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1077, 628);
-            this.Controls.Add(this.picture_box);
+            this.Controls.Add(this.coordinatesViewer);
             this.Controls.Add(this.panel1);
             this.Name = "AdminPanelAnalyzator";
             this.Text = "AdminPanelAnalyzator";
             this.Load += new System.EventHandler(this.AdminPanelAnalyzator_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picture_box)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coordinatesViewer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -127,11 +127,11 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.PictureBox picture_box;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TreeView fileViewer;
+        private System.Windows.Forms.CheckBox showRightCheckBox;
+        private System.Windows.Forms.CheckBox showLeftCheckBox;
+        private System.Windows.Forms.PictureBox coordinatesViewer;
+        private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Button showButton;
     }
 }
