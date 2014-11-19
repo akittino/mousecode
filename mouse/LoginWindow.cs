@@ -10,6 +10,7 @@ namespace mysz
         ThingsGameMenuWindow ThingsWindow;
         ReflexGameMenuWindow ReflexWindow;
         ColorsGameMenuWindow ColorsWindow;
+        bool resetedName = false;
 
         public login_main_window()
         {
@@ -127,11 +128,17 @@ namespace mysz
 
         private void userNameTextbox_TextChanged(object sender, EventArgs e)
         {
+            if (resetedName)
+            {
+                resetedName = false;
+                return;
+            }
+
             if (!System.Text.RegularExpressions.Regex.IsMatch(userNameTextbox.Text, "^[0-9a-zA-Z]+$") && !String.IsNullOrEmpty(userNameTextbox.Text))
             {
                 logThis("Username accepts only alphanumeric characters!");
+                resetedName = true;
                 userNameTextbox.ResetText();
-
             }
             else if (userNameTextbox.Text == "")
             {
