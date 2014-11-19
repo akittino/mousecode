@@ -148,15 +148,20 @@ namespace mysz
                                     if (g.Checked) 
                                         readFileAndDraw(Path.GetFullPath(".") + @"\" + g.FullPath);
                                 }
-                                f.Expand();
+                                if (f.Checked)
+                                    f.Expand();
                             }
-                            d.Expand();
+                            if (d.Checked)
+                                d.Expand();
                         }
-                        c.Expand();
+                        if (c.Checked)
+                            c.Expand();
                     }
-                    b.Expand();
+                    if (b.Checked)
+                        b.Expand();
                 }
-                a.Expand();
+                if (a.Checked)
+                    a.Expand();
             }
         }
 

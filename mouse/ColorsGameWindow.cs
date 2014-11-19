@@ -291,7 +291,7 @@ namespace mysz
             using (StreamWriter sw = new StreamWriter(name))
             {
                 sw.WriteLine("Correct Answer: " + (correctAnswer == true ? "YES" : "NO"));
-                sw.WriteLine(gameTimeString + " / " + maxGameTime);
+                sw.WriteLine(gameTimeString + " / " + maxGameTime + " s");
 
                 foreach (Point p in CoordsList)
                 {
@@ -355,7 +355,7 @@ namespace mysz
             using (StreamWriter sw = new StreamWriter(fileName))
             {
                 sw.WriteLine("Mood: " + mood.ToString());
-                sw.WriteLine("Correct answers: " + scoreNumber.Text + "/" + quantityOfAnswers.ToString());
+                sw.WriteLine("Score: " + scoreNumber.Text + "/" + quantityOfAnswers.ToString());
                 sw.WriteLine("Initial game time: " + INITIAL_GAME_TIME.ToString());
             }
         }
