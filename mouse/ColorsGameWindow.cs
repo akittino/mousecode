@@ -35,7 +35,7 @@ namespace mysz
         int gameId = 0;
         int maxGameTime = 5;
 
-
+        Thread BackgroundProcessing;
         Thread CoordinateSaver;
         Thread Timer;
         List<Point> CoordsList;
@@ -85,25 +85,38 @@ namespace mysz
             scoreNumber.Refresh();
             playButton.Visible = false;
 
-            animation(); // TODO add thread for this
-
-            yesButton.Visible = true;
-            noButton.Visible = true;
-
             // this must be convertible from settings (default 1minute)
             setTime();
 
-            timeLabel.Text = minutes.ToString();
-            timeLabel.Visible = true;
-            timeLabel.Visible = true;
+            BackgroundProcessing = new Thread(pushedPlayButton);
+            BackgroundProcessing.Start();
+        }
 
-            startTime = DateTime.Now;
+        private void pushedPlayButton()
+        {
+            animation();
+
+            this.BeginInvoke((MethodInvoker)delegate()
+            {
+                graphics.Clear(Color.White);
+                moveCursor();
+
+                yesButton.Visible = true;
+                noButton.Visible = true;
+
+                timeLabel.Text = minutes.ToString();
+                timeLabel.Visible = true;
+                timeLabel.Visible = true;
+
+                startTime = DateTime.Now;
+
+                drawEclipse();
+                CoordsList.Clear();
+            });
 
             Timer = new Thread(TimeCountdown);
             Timer.Start();
 
-            drawEclipse();
-            CoordsList.Clear();
             if (firstRun)
             {
                 CoordinateSaver.Start();
@@ -112,9 +125,9 @@ namespace mysz
             else
             {
                 CoordinateSaver.Abort();//TODO once readed coordinates are saving all the time; there aren't read any new.
-
             }
         }
+
         public void setTime() //TODO bug -time from settings works only in firstGame 
         {
             int gameTime = base.setTime(seconds, minutes);
@@ -122,22 +135,24 @@ namespace mysz
             seconds = gameTime % 60;
         }
 
-        private void animation()
+        private void animationFun(string sign)
         {
             graphics.Clear(Color.White);
-            writeToPictureBox(graphics, "3", 320, 180, 100);
-            Thread.Sleep(1000);
-            graphics.Clear(Color.White);
-            writeToPictureBox(graphics, "2", 320, 180, 100);
-            Thread.Sleep(1000);
-            graphics.Clear(Color.White);
-            writeToPictureBox(graphics, "1", 320, 180, 100);
-            Thread.Sleep(1000);
-            graphics.Clear(Color.White);
-            writeToPictureBox(graphics, "GO!", 280, 180, 100);
-            Thread.Sleep(1000);
-            graphics.Clear(Color.White);
-            moveCursor();
+            writeToPictureBox(graphics, sign, 320, 180, 100);
+        }
+
+        private void animation()
+        {
+            string[] signs = { "3", "2", "1", "GO!" };
+
+            for (int i = 0; i < signs.Length; ++i)
+            {
+                this.gameWindow.BeginInvoke((MethodInvoker)delegate()
+                {
+                    animationFun(signs[i]);
+                });
+                Thread.Sleep(1000);
+            }
         }
 
         private void drawEclipse()
@@ -351,6 +366,8 @@ namespace mysz
                 Timer.Abort();
             if (CoordinateSaver != null && CoordinateSaver.IsAlive)
                 CoordinateSaver.Abort();
+            if (BackgroundProcessing != null && BackgroundProcessing.IsAlive)
+                BackgroundProcessing.Abort();
             if (gameScore != 0)
                 writeGameDetails();
         }
