@@ -162,11 +162,12 @@ namespace mysz
             else
             {
                 int time = 0;
-                if(secondsS !="1000")
+                if (secondsS != "1000")
                     time = base.setTimeButton_Click(sender, e, secondsTextbox.Text, setTimeButton);
 
                 seconds = time;
             }
+        }//TODO@DAX the solution wasn't building due to this bracket missing :(
 
         public void settingsComponents()
         {

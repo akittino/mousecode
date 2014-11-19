@@ -88,31 +88,6 @@ namespace mysz
 
                 }
             }
-
-            foreach (TreeNode a in fileViewer.Nodes)
-            {
-                foreach (TreeNode b in a.Nodes)
-                {
-                    foreach (TreeNode c in b.Nodes)
-                    {
-                        foreach (TreeNode d in c.Nodes)
-                        {
-                            foreach (TreeNode f in d.Nodes)
-                            {
-                                f.Expand();
-                                readFileAndDraw(Path.GetFullPath(".") + @"\" + f.FullPath);
-                            }
-                            d.Expand();
-                        }
-                        c.Expand();
-                    }
-                    b.Expand();
-                }
-                a.Expand();
-            }
-
-
-            //things 2 reflex 1 colors 2
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -123,8 +98,9 @@ namespace mysz
 
         private void showButton_Click(object sender, EventArgs e)
         {
-            string path = Path.GetFullPath(".") + @"\" + fileViewer.SelectedNode.FullPath ;
-            readFileAndDraw(path);
+            printAll();
+            //string path = Path.GetFullPath(".") + @"\" + fileViewer.SelectedNode.FullPath ;
+            //readFileAndDraw(path);
         }
 
         private void readFileAndDraw(string path)
@@ -153,6 +129,33 @@ namespace mysz
                 }
 
                 drawMouseTrace(coordsList);
+            }
+        }
+        private void printAll()
+        {
+            foreach (TreeNode a in fileViewer.Nodes)
+            {
+                foreach (TreeNode b in a.Nodes)
+                {
+                    foreach (TreeNode c in b.Nodes)
+                    {
+                        foreach (TreeNode d in c.Nodes)
+                        {
+                            foreach (TreeNode f in d.Nodes)
+                            {
+                                foreach (TreeNode g in f.Nodes)
+                                {
+                                    readFileAndDraw(Path.GetFullPath(".") + @"\" + g.FullPath);
+                                }
+                                f.Expand();
+                            }
+                            d.Expand();
+                        }
+                        c.Expand();
+                    }
+                    b.Expand();
+                }
+                a.Expand();
             }
         }
 
