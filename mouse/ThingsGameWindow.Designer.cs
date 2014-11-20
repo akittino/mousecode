@@ -49,7 +49,7 @@
             this.answerRButton.Name = "answerRButton";
             this.answerRButton.Size = new System.Drawing.Size(118, 82);
             this.answerRButton.TabIndex = 36;
-            this.answerRButton.Text = "NO";
+            this.answerRButton.Text = "STOP";
             this.answerRButton.UseVisualStyleBackColor = true;
             this.answerRButton.Visible = false;
             this.answerRButton.Click += new System.EventHandler(this.stopRButton_Click);
@@ -61,7 +61,7 @@
             this.answerLButton.Name = "answerLButton";
             this.answerLButton.Size = new System.Drawing.Size(118, 82);
             this.answerLButton.TabIndex = 35;
-            this.answerLButton.Text = "NO";
+            this.answerLButton.Text = "STOP";
             this.answerLButton.UseVisualStyleBackColor = true;
             this.answerLButton.Visible = false;
             this.answerLButton.Click += new System.EventHandler(this.stopLButton_Click);
