@@ -79,7 +79,7 @@ namespace mysz
             CoordsList = new List<Point>();           
             graphics = gameWindow.CreateGraphics();
             questionGraphics = questionBox.CreateGraphics();
-
+            
             USER_NAME = userName;
             questionTime = INITIAL_QUESTION_TIME = timePerQuestion;
             scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
@@ -116,7 +116,7 @@ namespace mysz
 
             /*** below, nothing appears anyways ***/
             graphics.Clear(Color.White);
-            writeToPictureBox("Please start a game!", 340, 550);
+            writeToPictureBox("Please start a game!", 340, 520);
         }
 
         private void setNewQuestion()
@@ -143,6 +143,8 @@ namespace mysz
             }
 
             questionBox.Image = currentQuestion.image;
+            if (questionBox.Image != null)
+                questionBox.Location = new Point(this.Width / 2 - questionBox.Image.Width/3, this.Height / 2 - gameWindow.Height / 2);
             answerRButton.Enabled = true;
             answerLButton.Enabled = true;
         }
@@ -180,7 +182,7 @@ namespace mysz
             decreaseGameTime();
 
             graphics.Clear(Color.White);
-            writeToPictureBox("Now quick, answer the question!", 310, 550);
+            writeToPictureBox("Now quick, answer the question!", 300, 520);
 
             Timer = new Thread(TimeCountdown);
             CoordinateSaver = new Thread(saveCoordinates);
@@ -215,7 +217,7 @@ namespace mysz
             if (timeLabel.Text == "Time out!")
             {
                 startButton.Text = "Start new game";
-                writeToPictureBox("Please start a game!", 340, 550);
+                writeToPictureBox("Please start a game!", 340, 520);
 
                 if(gameId != 0)
                     writeGameDetails();
@@ -231,11 +233,11 @@ namespace mysz
                 if (leftButtonClicked == leftButtonCorrect)
                 {
                     ++score;
-                    writeToPictureBox("Good job! Please take next question!", 280, 550);
+                    writeToPictureBox("Good job! Please take next question!", 280, 520);
                 }
                 else
                 {
-                    writeToPictureBox("You were wrong! Please take next question!", 260, 550);
+                    writeToPictureBox("You were wrong! Please take next question!", 260, 520);
                 }
 
                 scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
