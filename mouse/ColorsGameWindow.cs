@@ -241,7 +241,7 @@ namespace mysz
         {
             this.Cursor = new Cursor(Cursor.Current.Handle);
             Cursor.Position = new Point((gameWindow.Size.Width / 2) + gameWindow.Location.X + this.Location.X,
-                (gameWindow.Size.Height / 2) + gameWindow.Location.Y + this.Location.Y);
+                30 + gameWindow.Location.Y + this.Location.Y);
         }
         void SaveCoordinates()
         // writing coordinates to list of coords
