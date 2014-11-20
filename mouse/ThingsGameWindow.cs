@@ -21,9 +21,10 @@ namespace mysz
         Graphics graphics, questionGraphics;
         List<Point> CoordsList;
         Thread CoordinateSaver;
-        ArrayList questions;        
+        ArrayList questions;
         Thread Timer;
         Random rnd;
+        List<int> questionsRnd = new List<int>();
 
         bool leftButtonCorrect = true;
         bool leftButtonClicked = true;
@@ -32,6 +33,7 @@ namespace mysz
         int questionTime = 5;
         int gameId = 0;
         int score = 0;
+        int nextQuestionNumber = 0;
 
         class question
         {
@@ -61,7 +63,7 @@ namespace mysz
                 {
                     name = commaList[0];
                     correctAnswer = commaList[1];
-                    wrongAnswer = commaList[2].Remove(commaList[2].Length - 4); 
+                    wrongAnswer = commaList[2].Remove(commaList[2].Length - 4);
                     //above remove 4 because of deleting ".jpg"
                 }
             }
@@ -76,10 +78,10 @@ namespace mysz
 
             rnd = new Random();
             questions = new ArrayList();
-            CoordsList = new List<Point>();           
+            CoordsList = new List<Point>();
             graphics = gameWindow.CreateGraphics();
             questionGraphics = questionBox.CreateGraphics();
-            
+
             USER_NAME = userName;
             questionTime = INITIAL_QUESTION_TIME = timePerQuestion;
             scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
@@ -121,14 +123,21 @@ namespace mysz
 
         private void setNewQuestion()
         {
-            int nextQuestionNumber = lastQuestionNumber;
 
-            while (nextQuestionNumber == lastQuestionNumber)
-                nextQuestionNumber = rnd.Next(questions.Count);
-
-            question currentQuestion = (question)questions[nextQuestionNumber];
-            lastQuestionNumber = nextQuestionNumber;
+            if (questionsRnd.Count == 0)
+            {
+                for (int j = 0; j < questions.Count; j++)
+                {
+                    questionsRnd.Add(j);
+                }
+            }
             
+            int rndNumber = rnd.Next(questionsRnd.Count);
+            nextQuestionNumber = questionsRnd[rndNumber];
+            question currentQuestion = (question)questions[nextQuestionNumber];
+            questionsRnd.RemoveAll(x => x == nextQuestionNumber);
+
+
             if (rnd.Next(100) > 50)
             {
                 leftButtonCorrect = true;
@@ -144,9 +153,10 @@ namespace mysz
 
             questionBox.Image = currentQuestion.image;
             if (questionBox.Image != null)
-                questionBox.Location = new Point(this.Width / 2 - questionBox.Image.Width/3, this.Height / 2 - gameWindow.Height / 2);
+                questionBox.Location = new Point(this.Width / 2 - questionBox.Image.Width / 3, this.Height / 2 - gameWindow.Height / 2);
             answerRButton.Enabled = true;
             answerLButton.Enabled = true;
+
         }
 
         private bool enoughQuestionsInDatabase()
@@ -218,11 +228,11 @@ namespace mysz
             {
                 startButton.Text = "Start new game";
                 writeToPictureBox("Please start a game!", 340, 520);
-
-                if(gameId != 0)
+                questionsRnd.Clear();
+                if (gameId != 0)
                     writeGameDetails();
 
-                score = 0; 
+                score = 0;
                 gameId = 0;
                 CoordsList.Clear();
                 questionCounter = 0;
