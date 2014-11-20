@@ -11,7 +11,7 @@ namespace mysz
 {
     public partial class MoodWindow : Form
     {
-        Mood mood = 0;
+        Mood mood = Mood.Normal;
         public MoodWindow()
         {
             InitializeComponent();
@@ -20,7 +20,6 @@ namespace mysz
 
         public enum Mood
         {
-            Not_Decided = 0,
             Very_Happy = 1,
             Happy = 2,
             Normal = 3,
