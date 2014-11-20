@@ -311,7 +311,7 @@ namespace mysz
             if (Timer != null && Timer.IsAlive)
                 Timer.Abort();
             if (CoordinateSaver != null && CoordinateSaver.IsAlive)
-                Timer.Abort();
+                CoordinateSaver.Abort();
             if (gameId != 0) // this means that some data was already saved
                 writeGameDetails();
         }
