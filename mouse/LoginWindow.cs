@@ -5,6 +5,8 @@ namespace mysz
 {
     public partial class login_main_window : Form
     {
+        //TODO set the same font to all windows
+        //TODO change windows names
         const String AdminPassword = "admin";
         AdminPanelAnalyzator AdminWindow;
         ThingsGameMenuWindow ThingsWindow;
