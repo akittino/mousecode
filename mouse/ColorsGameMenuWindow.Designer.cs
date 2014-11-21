@@ -29,18 +29,93 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColorsGameMenuWindow));
-            this.exitLabel = new System.Windows.Forms.Label();
-            this.helpLabel = new System.Windows.Forms.Label();
-            this.settingsLabel = new System.Windows.Forms.Label();
-            this.titleLabel1 = new System.Windows.Forms.Label();
+            this.setTimeButton = new System.Windows.Forms.Button();
+            this.secondsTextbox = new System.Windows.Forms.TextBox();
+            this.secondsLabel = new System.Windows.Forms.Label();
+            this.gameTimeLabel = new System.Windows.Forms.Label();
             this.playButton = new System.Windows.Forms.Button();
             this.instructionTextBox = new System.Windows.Forms.TextBox();
+            this.exitLabel = new System.Windows.Forms.Label();
+            this.settingsLabel = new System.Windows.Forms.Label();
+            this.titleLabel1 = new System.Windows.Forms.Label();
+            this.helpLabel = new System.Windows.Forms.Label();
             this.backLabel = new System.Windows.Forms.Label();
-            this.gameTimeLabel = new System.Windows.Forms.Label();
-            this.secondsLabel = new System.Windows.Forms.Label();
-            this.secondsTextbox = new System.Windows.Forms.TextBox();
-            this.setTimeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // setTimeButton
+            // 
+            this.setTimeButton.Enabled = false;
+            this.setTimeButton.Font = new System.Drawing.Font("Gabriola", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.setTimeButton.Location = new System.Drawing.Point(530, 129);
+            this.setTimeButton.Name = "setTimeButton";
+            this.setTimeButton.Size = new System.Drawing.Size(75, 33);
+            this.setTimeButton.TabIndex = 19;
+            this.setTimeButton.Text = "Set Time";
+            this.setTimeButton.UseVisualStyleBackColor = true;
+            this.setTimeButton.Visible = false;
+            this.setTimeButton.Click += new System.EventHandler(this.setTimeButton_Click);
+            // 
+            // secondsTextbox
+            // 
+            this.secondsTextbox.Location = new System.Drawing.Point(477, 133);
+            this.secondsTextbox.Name = "secondsTextbox";
+            this.secondsTextbox.Size = new System.Drawing.Size(28, 20);
+            this.secondsTextbox.TabIndex = 18;
+            this.secondsTextbox.Visible = false;
+            this.secondsTextbox.TextChanged += new System.EventHandler(this.textbox_TextChanged);
+            // 
+            // secondsLabel
+            // 
+            this.secondsLabel.AutoSize = true;
+            this.secondsLabel.Font = new System.Drawing.Font("Gabriola", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.secondsLabel.Location = new System.Drawing.Point(468, 101);
+            this.secondsLabel.Name = "secondsLabel";
+            this.secondsLabel.Size = new System.Drawing.Size(54, 29);
+            this.secondsLabel.TabIndex = 17;
+            this.secondsLabel.Text = "Seconds";
+            this.secondsLabel.Visible = false;
+            // 
+            // gameTimeLabel
+            // 
+            this.gameTimeLabel.AutoSize = true;
+            this.gameTimeLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameTimeLabel.Location = new System.Drawing.Point(312, 122);
+            this.gameTimeLabel.Name = "gameTimeLabel";
+            this.gameTimeLabel.Size = new System.Drawing.Size(138, 40);
+            this.gameTimeLabel.TabIndex = 15;
+            this.gameTimeLabel.Text = "Time per question";
+            this.gameTimeLabel.Visible = false;
+            // 
+            // playButton
+            // 
+            this.playButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("playButton.BackgroundImage")));
+            this.playButton.Font = new System.Drawing.Font("Iskoola Pota", 35.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playButton.ForeColor = System.Drawing.Color.Indigo;
+            this.playButton.Location = new System.Drawing.Point(268, 21);
+            this.playButton.Name = "playButton";
+            this.playButton.Size = new System.Drawing.Size(380, 299);
+            this.playButton.TabIndex = 10;
+            this.playButton.Text = "PLAY ME";
+            this.playButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.playButton.UseVisualStyleBackColor = true;
+            this.playButton.Click += new System.EventHandler(this.playButtonClick);
+            this.playButton.MouseEnter += new System.EventHandler(this.buttonHighlight);
+            this.playButton.MouseLeave += new System.EventHandler(this.removeHighlightButton);
+            // 
+            // instructionTextBox
+            // 
+            this.instructionTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.instructionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.instructionTextBox.Enabled = false;
+            this.instructionTextBox.Font = new System.Drawing.Font("Gabriola", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.instructionTextBox.Location = new System.Drawing.Point(266, 31);
+            this.instructionTextBox.Multiline = true;
+            this.instructionTextBox.Name = "instructionTextBox";
+            this.instructionTextBox.ReadOnly = true;
+            this.instructionTextBox.Size = new System.Drawing.Size(380, 299);
+            this.instructionTextBox.TabIndex = 11;
+            this.instructionTextBox.Text = resources.GetString("instructionTextBox.Text");
+            this.instructionTextBox.Visible = false;
             // 
             // exitLabel
             // 
@@ -54,19 +129,6 @@
             this.exitLabel.Click += new System.EventHandler(this.exitClick);
             this.exitLabel.MouseEnter += new System.EventHandler(this.highlightLabel);
             this.exitLabel.MouseLeave += new System.EventHandler(this.removeHighlightLabel);
-            // 
-            // helpLabel
-            // 
-            this.helpLabel.AutoSize = true;
-            this.helpLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helpLabel.Location = new System.Drawing.Point(96, 174);
-            this.helpLabel.Name = "helpLabel";
-            this.helpLabel.Size = new System.Drawing.Size(49, 40);
-            this.helpLabel.TabIndex = 8;
-            this.helpLabel.Text = "Help";
-            this.helpLabel.Click += new System.EventHandler(this.helpClick);
-            this.helpLabel.MouseEnter += new System.EventHandler(this.highlightLabel);
-            this.helpLabel.MouseLeave += new System.EventHandler(this.removeHighlightLabel);
             // 
             // settingsLabel
             // 
@@ -91,35 +153,18 @@
             this.titleLabel1.TabIndex = 6;
             this.titleLabel1.Text = "Welcome";
             // 
-            // playButton
+            // helpLabel
             // 
-            this.playButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("playButton.BackgroundImage")));
-            this.playButton.Font = new System.Drawing.Font("Iskoola Pota", 35.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playButton.ForeColor = System.Drawing.Color.Indigo;
-            this.playButton.Location = new System.Drawing.Point(266, 31);
-            this.playButton.Name = "playButton";
-            this.playButton.Size = new System.Drawing.Size(380, 299);
-            this.playButton.TabIndex = 10;
-            this.playButton.Text = "PLAY ME";
-            this.playButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.playButton.UseVisualStyleBackColor = true;
-            this.playButton.Click += new System.EventHandler(this.playButtonClick);
-            this.playButton.MouseEnter += new System.EventHandler(this.buttonHighlight);
-            this.playButton.MouseLeave += new System.EventHandler(this.removeHighlightButton);
-            // 
-            // instructionTextBox
-            // 
-            this.instructionTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.instructionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.instructionTextBox.Enabled = false;
-            this.instructionTextBox.Location = new System.Drawing.Point(266, 31);
-            this.instructionTextBox.Multiline = true;
-            this.instructionTextBox.Name = "instructionTextBox";
-            this.instructionTextBox.ReadOnly = true;
-            this.instructionTextBox.Size = new System.Drawing.Size(380, 299);
-            this.instructionTextBox.TabIndex = 11;
-            this.instructionTextBox.Text = resources.GetString("instructionTextBox.Text");
-            this.instructionTextBox.Visible = false;
+            this.helpLabel.AutoSize = true;
+            this.helpLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpLabel.Location = new System.Drawing.Point(96, 174);
+            this.helpLabel.Name = "helpLabel";
+            this.helpLabel.Size = new System.Drawing.Size(49, 40);
+            this.helpLabel.TabIndex = 8;
+            this.helpLabel.Text = "Help";
+            this.helpLabel.Click += new System.EventHandler(this.helpClick);
+            this.helpLabel.MouseEnter += new System.EventHandler(this.highlightLabel);
+            this.helpLabel.MouseLeave += new System.EventHandler(this.removeHighlightLabel);
             // 
             // backLabel
             // 
@@ -134,50 +179,6 @@
             this.backLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.backGameWindow);
             this.backLabel.MouseEnter += new System.EventHandler(this.highlightLabel);
             this.backLabel.MouseLeave += new System.EventHandler(this.removeHighlightLabel);
-            // 
-            // gameTimeLabel
-            // 
-            this.gameTimeLabel.AutoSize = true;
-            this.gameTimeLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameTimeLabel.Location = new System.Drawing.Point(312, 122);
-            this.gameTimeLabel.Name = "gameTimeLabel";
-            this.gameTimeLabel.Size = new System.Drawing.Size(138, 40);
-            this.gameTimeLabel.TabIndex = 15;
-            this.gameTimeLabel.Text = "Time per question";
-            this.gameTimeLabel.Visible = false;
-            // 
-            // secondsLabel
-            // 
-            this.secondsLabel.AutoSize = true;
-            this.secondsLabel.Font = new System.Drawing.Font("Gabriola", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.secondsLabel.Location = new System.Drawing.Point(468, 101);
-            this.secondsLabel.Name = "secondsLabel";
-            this.secondsLabel.Size = new System.Drawing.Size(54, 29);
-            this.secondsLabel.TabIndex = 17;
-            this.secondsLabel.Text = "Seconds";
-            this.secondsLabel.Visible = false;
-            // 
-            // secondsTextbox
-            // 
-            this.secondsTextbox.Location = new System.Drawing.Point(477, 133);
-            this.secondsTextbox.Name = "secondsTextbox";
-            this.secondsTextbox.Size = new System.Drawing.Size(28, 20);
-            this.secondsTextbox.TabIndex = 18;
-            this.secondsTextbox.Visible = false;
-            this.secondsTextbox.TextChanged += new System.EventHandler(this.textbox_TextChanged);
-            // 
-            // setTimeButton
-            // 
-            this.setTimeButton.Enabled = false;
-            this.setTimeButton.Font = new System.Drawing.Font("Gabriola", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.setTimeButton.Location = new System.Drawing.Point(530, 129);
-            this.setTimeButton.Name = "setTimeButton";
-            this.setTimeButton.Size = new System.Drawing.Size(75, 33);
-            this.setTimeButton.TabIndex = 19;
-            this.setTimeButton.Text = "Set Time";
-            this.setTimeButton.UseVisualStyleBackColor = true;
-            this.setTimeButton.Visible = false;
-            this.setTimeButton.Click += new System.EventHandler(this.setTimeButton_Click);
             // 
             // ColorsGameMenuWindow
             // 

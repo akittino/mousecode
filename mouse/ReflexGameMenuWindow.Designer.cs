@@ -122,6 +122,7 @@
             this.instructionTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.instructionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.instructionTextBox.Enabled = false;
+            this.instructionTextBox.Font = new System.Drawing.Font("Gabriola", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.instructionTextBox.Location = new System.Drawing.Point(266, 31);
             this.instructionTextBox.Multiline = true;
             this.instructionTextBox.Name = "instructionTextBox";
