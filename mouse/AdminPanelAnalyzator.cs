@@ -79,18 +79,6 @@ namespace mysz
             }
         }
 
-        private void clearButton_Click(object sender, EventArgs e)
-        {
-            Bitmap clearBitmap = new Bitmap(coordinatesViewer.Width, coordinatesViewer.Height);
-            coordinatesViewer.Image = clearBitmap;
-        }
-
-        private void showButton_Click(object sender, EventArgs e)
-        {
-            graphics.Clear(BACKGROUND_COLOR);
-            printChecked();
-        }
-
         private void readFileAndDraw(string path, Pen pen)
         {
             if (path.Split('.')[path.Split('.').Length - 1] != "csv")
@@ -224,6 +212,11 @@ namespace mysz
 
         private void fileViewer_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            if (e.Node.Text.Length < 5 || e.Node.Text.Substring(e.Node.Text.Length - 4) != ".csv")
+            {
+                e = null;
+            }
+
             if(lastSelected != null )
             {
                 if (lastSelected.Checked == true)
@@ -239,9 +232,15 @@ namespace mysz
             if (e != null)
             {
                 readFileAndDraw(Path.GetFullPath(".") + @"\" + e.Node.FullPath, yellowPen);
+                lastSelected = e.Node;
             }
-            lastSelected = e.Node;
+            else
+            {
+                lastSelected = null;
+            }
+            
         }
     }
 }
 //TODO files validate
+//TODO add bitmap click to get play reading
