@@ -80,10 +80,10 @@ namespace mysz
 
         private void playButton_Click(object sender, EventArgs e)
         {
-            gameScore = 0;
-            scoreNumber.Text = "0";
+            scoreNumber.Text = gameScore.ToString();
             scoreNumber.Refresh();
             playButton.Visible = false;
+            continueButton.Visible = false;
 
             BackgroundProcessing = new Thread(pushedPlayButton);
             BackgroundProcessing.Start();
@@ -91,8 +91,10 @@ namespace mysz
 
         private void pushedPlayButton()
         {
-            animation();
-
+            if (firstRun == true)
+            {
+                animation();
+            }
             this.BeginInvoke((MethodInvoker)delegate()
             {
                 graphics.Clear(Color.White);
@@ -102,7 +104,6 @@ namespace mysz
                 noButton.Visible = true;
 
                 timeLabel.Text = minutes.ToString();
-                timeLabel.Visible = true;
                 timeLabel.Visible = true;
 
                 startTime = DateTime.Now;
@@ -170,7 +171,6 @@ namespace mysz
                 textColor = textColorsBase[r2];
                 graphics.DrawString(textColor, new Font("Gabriola", 80), Brushes.White, new Point(280, 180));
             }
-
         }
 
         private void yesButton_Click(object sender, EventArgs e)
@@ -196,15 +196,10 @@ namespace mysz
 
             decreaseGameTime();
 
-            moveCursor();
-            drawEclipse();
-
             CoordsList.Clear();
-            CoordinateSaver = new Thread(SaveCoordinates);
-            CoordinateSaver.Start();
-            Timer = new Thread(TimeCountdown);
-            Timer.Start();
-
+            continueButton.Visible = true;
+            gameWindow.Refresh();
+            timeLabel.Visible = false;
         }
 
         private void noButton_Click(object sender, EventArgs e)
@@ -226,15 +221,10 @@ namespace mysz
 
             decreaseGameTime();
 
-            moveCursor();
-            drawEclipse();
-
             CoordsList.Clear();
-            CoordinateSaver = new Thread(SaveCoordinates);
-            CoordinateSaver.Start();
-            Timer = new Thread(TimeCountdown);
-            Timer.Start();
-
+            continueButton.Visible = true;
+            gameWindow.Refresh();
+            timeLabel.Visible = false;
         }
 
         private void moveCursor()
@@ -251,6 +241,7 @@ namespace mysz
 
         void WriteCoordinatesToFile(String gameTimeString)
         {
+            firstRun = false;
             String name;
             String dirPath = @".\ColorsGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
 
@@ -309,6 +300,7 @@ namespace mysz
             {
                 this.timeLabel.Text = "Time out!";
                 gameWindow.Refresh();
+                firstRun = true;
 
                 playButton.Location = new Point(450, 148);
                 playButton.Text = "PLAY AGAIN";
@@ -319,14 +311,14 @@ namespace mysz
                 if (Timer.IsAlive) Timer.Abort();
                 playButton.Visible = true;
                 writeToPictureBox(graphics, "Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
-                if(gameScore !=0)
+                if (gameScore != 0)
                     writeGameDetails();
 
                 gameScore = 0;
                 gameId = 0;
                 maxGameTime = INITIAL_GAME_TIME;
                 scoreNumber.Text = gameScore.ToString();
-                
+
             });
 
         }

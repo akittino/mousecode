@@ -38,6 +38,7 @@
             this.noButton = new System.Windows.Forms.Button();
             this.scoreLabel = new System.Windows.Forms.Label();
             this.scoreNumber = new System.Windows.Forms.Label();
+            this.continueButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,7 +91,7 @@
             this.playButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("playButton.BackgroundImage")));
             this.playButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.playButton.Font = new System.Drawing.Font("Iskoola Pota", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playButton.Location = new System.Drawing.Point(490, 268);
+            this.playButton.Location = new System.Drawing.Point(490, 31);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(198, 136);
             this.playButton.TabIndex = 31;
@@ -143,11 +144,27 @@
             this.scoreNumber.Text = "0";
             this.scoreNumber.Visible = false;
             // 
+            // continueButton
+            // 
+            this.continueButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.continueButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("continueButton.BackgroundImage")));
+            this.continueButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.continueButton.Font = new System.Drawing.Font("Iskoola Pota", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.continueButton.Location = new System.Drawing.Point(490, 31);
+            this.continueButton.Name = "continueButton";
+            this.continueButton.Size = new System.Drawing.Size(198, 136);
+            this.continueButton.TabIndex = 38;
+            this.continueButton.Text = "Continue Game";
+            this.continueButton.UseVisualStyleBackColor = false;
+            this.continueButton.Visible = false;
+            this.continueButton.Click += new System.EventHandler(this.playButton_Click);
+            // 
             // ColorsGameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.continueButton);
             this.Controls.Add(this.scoreNumber);
             this.Controls.Add(this.scoreLabel);
             this.Controls.Add(this.noButton);
@@ -181,6 +198,7 @@
         private System.Windows.Forms.Button noButton;
         private System.Windows.Forms.Label scoreLabel;
         private System.Windows.Forms.Label scoreNumber;
+        private System.Windows.Forms.Button continueButton;
 
     }
 }
