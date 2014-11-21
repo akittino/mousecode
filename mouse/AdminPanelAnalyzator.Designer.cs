@@ -89,6 +89,7 @@
             this.fileViewer.Size = new System.Drawing.Size(237, 523);
             this.fileViewer.TabIndex = 1;
             this.fileViewer.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.fileViewer_AfterCheck);
+            this.fileViewer.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.fileViewer_AfterSelect);
             // 
             // showLeftCheckBox
             // 
@@ -102,7 +103,7 @@
             // 
             // coordinatesViewer
             // 
-            this.coordinatesViewer.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.coordinatesViewer.BackColor = System.Drawing.Color.Black;
             this.coordinatesViewer.Location = new System.Drawing.Point(265, 11);
             this.coordinatesViewer.Name = "coordinatesViewer";
             this.coordinatesViewer.Size = new System.Drawing.Size(800, 600);

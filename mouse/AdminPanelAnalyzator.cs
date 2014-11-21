@@ -6,87 +6,75 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace mysz
 {
     public partial class AdminPanelAnalyzator : MouseForm
     {
-        DirectoryInfo directoryInfo = new DirectoryInfo(Application.StartupPath);
-        Pen bluePen, greenPen;
+        readonly Color BACKGROUND_COLOR = Color.Black;
+
+        Pen bluePen, yellowPen;
         Graphics graphics;
+
+        TreeNode lastSelected;
+        DateTime checkedTime;
+        bool checkingDown;
+        int checkedLevel;
+
         public AdminPanelAnalyzator()
         {
             InitializeComponent();
             bluePen = new Pen(Color.Blue, 2f);
-            greenPen = new Pen(Color.Green, 2f);
+            yellowPen = new Pen(Color.Yellow, 2f);
             graphics = coordinatesViewer.CreateGraphics();
             SetMouseForm(coordinatesViewer, coordinatesViewer.Width, coordinatesViewer.Height, null);
+            checkedTime = DateTime.Now;
+            checkingDown = false;
+            checkedLevel = 0;
         }
 
         private void AdminPanelAnalyzator_Load(object sender, EventArgs e)
         {
-            if (Directory.Exists(directoryInfo.ToString()))
+            string [] games = {"ColorsGame", "ReflexGame", "ThingsGame"};
+
+            fileViewer.CheckBoxes = true;
+
+            foreach (DirectoryInfo d in (new DirectoryInfo(Application.StartupPath)).GetDirectories())
             {
-                int tmp = 0;
-                DirectoryInfo[] gameDirectories = directoryInfo.GetDirectories();
-                DirectoryInfo[] userDirectories = null;
-                DirectoryInfo[] dateDirectories = null;
-                DirectoryInfo[] gameIdDirectories = null;
-                DirectoryInfo[] coordinatesDirectories = null;
-                FileInfo[] files = null;
-
-                fileViewer.CheckBoxes = true;
-
-
-                if (gameDirectories.Length > 0)
+                foreach(string g in games)
                 {
-                    foreach (var d in gameDirectories)
+                    if(d.Name.Equals(g))
                     {
-                        TreeNode node = fileViewer.Nodes.Add(d.Name);
-                        userDirectories = d.GetDirectories();
-                        if (userDirectories.Length > 0)
-                        {
-                            for (int i = 0; i < userDirectories.Length; i++)
-                            {
-                                TreeNode nodeGameChild = fileViewer.Nodes[tmp].Nodes.Add(userDirectories[i].Name);
-                                dateDirectories = userDirectories[i].GetDirectories();
-                                if (dateDirectories.Length > 0)
-                                {
-                                    for (int j = 0; j < dateDirectories.Length; j++)
-                                    {
-                                        TreeNode nodeUserChild = fileViewer.Nodes[tmp].Nodes[i].Nodes.Add(dateDirectories[j].Name);
-                                        gameIdDirectories = dateDirectories[j].GetDirectories();
-                                        if (gameIdDirectories.Length > 0)
-                                        {
-                                            for (int k = 0; k < gameIdDirectories.Length; k++)
-                                            {
-                                                TreeNode nodeDateChild = fileViewer.Nodes[tmp].Nodes[i].Nodes[j].Nodes.Add(gameIdDirectories[k].Name);
-                                                coordinatesDirectories = gameIdDirectories[k].GetDirectories();
-                                                if (coordinatesDirectories.Length > 0)
-                                                {
-                                                    for (int n = 0; n < coordinatesDirectories.Length; n++)
-                                                    {
-                                                        TreeNode nodeGameIdChild = fileViewer.Nodes[tmp].Nodes[i].Nodes[j].Nodes[k].Nodes.Add(coordinatesDirectories[n].Name);
-                                                        files = coordinatesDirectories[n].GetFiles();
-                                                        if (files.Length > 0)
-                                                        {
-                                                            for (int m = 0; m < files.Length; m++)
-                                                            {
-                                                                TreeNode nodeCoordinatesChild = fileViewer.Nodes[tmp].Nodes[i].Nodes[j].Nodes[k].Nodes[n].Nodes.Add(files[m].Name);
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        tmp++;
+                        TreeNode t = fileViewer.Nodes.Add(d.Name);
+                        readChildNodes(t);
                     }
+                }
+            }
 
+            fileViewer.ExpandAll();
+        }
+
+        private void readChildNodes(TreeNode t)
+        {
+            DirectoryInfo[] dirsInfo = (new DirectoryInfo(Application.StartupPath + @"\" + t.FullPath)).GetDirectories();
+
+            if (dirsInfo.Length != 0)
+            {
+                foreach (DirectoryInfo d in dirsInfo)
+                {
+                    TreeNode tn = t.Nodes.Add(d.Name);
+                    readChildNodes(tn);
+                }
+            }
+            else
+            {
+                FileInfo[] files = (new DirectoryInfo(Application.StartupPath + @"\" + t.FullPath)).GetFiles();
+
+                foreach(FileInfo f in files)
+                {
+                    t.Nodes.Add(f.Name);
                 }
             }
         }
@@ -99,8 +87,8 @@ namespace mysz
 
         private void showButton_Click(object sender, EventArgs e)
         {
-            graphics.Clear(Color.White);
-            printAllChecked();
+            graphics.Clear(BACKGROUND_COLOR);
+            printChecked();
         }
 
         private void readFileAndDraw(string path, Pen pen)
@@ -131,49 +119,92 @@ namespace mysz
                 drawMouseTrace(coordsList, pen);
             }
         }
-        private void printAllChecked()
+
+        private void printChecked()
         {
-            foreach (TreeNode a in fileViewer.Nodes)
+            foreach(TreeNode t in fileViewer.Nodes)
             {
-                foreach (TreeNode b in a.Nodes)
+                drawCheckedChildNodes(t);
+            }
+        }
+
+        private void drawCheckedChildNodes (TreeNode t)
+        {
+            if (t.FullPath.Split('.')[t.FullPath.Split('.').Length - 1] != "csv")
+            {
+                foreach(TreeNode child in t.Nodes)
                 {
-                    foreach (TreeNode c in b.Nodes)
-                    {
-                        foreach (TreeNode d in c.Nodes)
-                        {
-                            foreach (TreeNode f in d.Nodes)
-                            {
-                                foreach (TreeNode g in f.Nodes)
-                                {
-                                    if (g.Checked) 
-                                        readFileAndDraw(Path.GetFullPath(".") + @"\" + g.FullPath, bluePen);
-                                }
-                                if (f.Checked)
-                                    f.Expand();
-                            }
-                            if (d.Checked)
-                                d.Expand();
-                        }
-                        if (c.Checked)
-                            c.Expand();
-                    }
-                    if (b.Checked)
-                        b.Expand();
+                    drawCheckedChildNodes(child);
                 }
-                if (a.Checked)
-                    a.Expand();
+            }
+            else
+            {
+                if (t.Checked)
+                {
+                    fileViewer.BeginInvoke((MethodInvoker)delegate 
+                    { 
+                        readFileAndDraw(Path.GetFullPath(".") + @"\" + t.FullPath, bluePen);
+                    });
+                }
             }
 
-            readFileAndDraw(Path.GetFullPath(".") + @"\" + fileViewer.SelectedNode.FullPath, greenPen);
-            //TODO thread in background that check selection and rewrite lines 
+        }
+
+        private void waitBeforeRefresh()
+        {
+            Thread.Sleep(200);
+            graphics.Clear(BACKGROUND_COLOR);
+            printChecked();
+            fileViewer.BeginInvoke((MethodInvoker)delegate
+            {
+                fileViewer.SelectedNode = null;
+            });
         }
 
         private void fileViewer_AfterCheck(object sender, TreeViewEventArgs e)
         {
             bool c = e.Node.Checked;
-            foreach (TreeNode n in e.Node.Nodes)
+
+            if (checkedTime.AddMilliseconds(200) < DateTime.Now)
             {
-                n.Checked = c;
+                (new Thread(waitBeforeRefresh)).Start();
+                checkingDown = c;
+                checkedLevel = e.Node.Level;
+                checkedTime = DateTime.Now;
+                if(!checkingDown)
+                {
+                    if (e.Node.Parent != null)
+                    {
+                        e.Node.Parent.Checked = c;
+                    }
+
+                    foreach (TreeNode n in e.Node.Nodes)
+                    {
+                        n.Checked = c;
+                    }
+                }
+            }
+
+            if (checkingDown)
+            {
+                foreach (TreeNode n in e.Node.Nodes)
+                {
+                    n.Checked = c;
+                }
+            }
+            else if (checkedLevel > e.Node.Level)
+            {
+                if (e.Node.Parent != null)
+                {
+                    e.Node.Parent.Checked = c;
+                }
+            }
+            else if (checkedLevel < e.Node.Level)
+            {
+                foreach (TreeNode n in e.Node.Nodes)
+                {
+                    n.Checked = c;
+                }
             }
         }
 
@@ -190,5 +221,27 @@ namespace mysz
                 graphics.DrawEllipse(pen, coordsList[i].X - 1, coordsList[i].Y - 1, 2, 2);
             }
         }
+
+        private void fileViewer_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if(lastSelected != null )
+            {
+                if (lastSelected.Checked == true)
+                {
+                    readFileAndDraw(Path.GetFullPath(".") + @"\" + lastSelected.FullPath, bluePen);
+                }
+                else
+                {
+                    graphics.Clear(BACKGROUND_COLOR);
+                    printChecked();
+                }
+            }
+            if (e != null)
+            {
+                readFileAndDraw(Path.GetFullPath(".") + @"\" + e.Node.FullPath, yellowPen);
+            }
+            lastSelected = e.Node;
+        }
     }
 }
+//TODO files validate
