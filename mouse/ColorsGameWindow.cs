@@ -17,7 +17,7 @@ namespace mysz
         DateTime startTime;
 
         Graphics graphics;
-        MoodWindow.Mood mood;
+        MoodWindow.MoodFromHappyToAngryScale mood;
 
         List<Color> circleColorsBase = new List<Color>();
         List<string> textColorsBase = new List<string>();
@@ -331,7 +331,7 @@ namespace mysz
         }
         private void writeGameDetails()
         {
-            MoodWindow.Mood mood = getMood();
+            MoodWindow.MoodFromHappyToAngryScale mood = getMood();
             String fileName = @".\ColorsGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) +
                               @"\" + gameId.ToString() + @"\gameDetails.txt";
 

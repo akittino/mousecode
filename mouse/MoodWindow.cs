@@ -11,58 +11,132 @@ namespace mysz
 {
     public partial class MoodWindow : Form
     {
-        Mood mood = Mood.Normal;
+        MoodFromHappyToAngryScale moodHAScale = MoodFromHappyToAngryScale.Normal;
+        MoodBoredOrExcited moodBEScale = MoodBoredOrExcited.Bored;
+        bool buttonMoodHSClicked = false;
+        bool buttonMoodBEClicked = false;
+        Bitmap whiteBitmap = new Bitmap(60, 60);
+
+
         public MoodWindow()
         {
             InitializeComponent();
-            
         }
 
-        public enum Mood
+        public enum MoodFromHappyToAngryScale
         {
             Very_Happy = 1,
             Happy = 2,
             Normal = 3,
-            Sad = 4,
-            Very_Sad = 5
+            Angry = 4,
+            Very_Angry = 5
         };
 
+        public enum MoodBoredOrExcited
+        {
+            Excited =1,
+            Bored = 2
+        };
 
         private void veryHappyButton_Click(object sender, EventArgs e)
         {
-            mood = Mood.Very_Happy;
-            this.Close();
+            moodHAScale = MoodFromHappyToAngryScale.Very_Happy;
+            buttonMoodHSClicked = true;
+            resetLabelsHS();
+            buttonChoosen(veryHappyLabel);
+            
         }
 
         private void happyButton_Click(object sender, EventArgs e)
         {
-            mood = Mood.Happy;
-            this.Close();
+            moodHAScale = MoodFromHappyToAngryScale.Happy;
+            buttonMoodHSClicked = true;
+            resetLabelsHS();
+            buttonChoosen(happyLabel);
+            
         }
 
         private void normalButton_Click(object sender, EventArgs e)
         {
-            mood = Mood.Normal;
-            this.Close();
+            moodHAScale = MoodFromHappyToAngryScale.Normal;
+            buttonMoodHSClicked = true;
+            resetLabelsHS();
+            buttonChoosen(normalLabel);
+            
         }
 
-        private void sadButton_Click(object sender, EventArgs e)
+        private void veryAngryButton_Click(object sender, EventArgs e)
         {
-            mood = Mood.Sad;
-            this.Close();
+            moodHAScale = MoodFromHappyToAngryScale.Very_Angry;
+            buttonMoodHSClicked = true;
+            resetLabelsHS();
+            buttonChoosen(veryAngryLabel);
         }
 
-        private void verySadButton_Click(object sender, EventArgs e)
-        {
-            mood = Mood.Very_Sad;
-            this.Close();
-        }
-
-        public Mood GetMood()
+        public MoodFromHappyToAngryScale GetMood()
         { 
-            Mood get = mood;
+            MoodFromHappyToAngryScale get = moodHAScale;
             return get;
         }
 
+        private void angryButton_Click(object sender, EventArgs e)
+        {
+            moodHAScale = MoodFromHappyToAngryScale.Angry;
+            buttonMoodHSClicked = true;
+            resetLabelsHS();
+            buttonChoosen(angryLabel);
+        }
+
+        private void excitedButton_Click(object sender, EventArgs e)
+        {
+            moodBEScale = MoodBoredOrExcited.Excited;
+            buttonMoodBEClicked = true;
+            resetLabelsBE();
+            buttonChoosen(excitedLabel);
+        }
+
+        private void answerRButton_Click(object sender, EventArgs e)
+        {
+            if (buttonMoodBEClicked == true && buttonMoodHSClicked == true)
+            {
+                this.Close();
+            }
+        }
+
+        private void boredButton_Click(object sender, EventArgs e)
+        {
+            moodBEScale = MoodBoredOrExcited.Bored;
+            buttonMoodBEClicked = true;
+            resetLabelsBE();
+            buttonChoosen(boredLabel);
+        }
+
+        private void buttonChoosen(Label label)
+        {
+            label.Text = "Choosen";
+            label.ForeColor = Color.Green;
+        }
+
+        private void resetLabelsHS()
+        {
+            angryLabel.Text = "Angry";
+            angryLabel.ForeColor = Color.Black;
+            veryHappyLabel.Text = "Very happy";
+            veryHappyLabel.ForeColor = Color.Black;
+            veryAngryLabel.Text = "Very angry";
+            veryAngryLabel.ForeColor = Color.Black;
+            normalLabel.Text = "Normal";
+            normalLabel.ForeColor = Color.Black;
+            happyLabel.Text = "Happy";
+            happyLabel.ForeColor = Color.Black;
+        }
+
+        private void resetLabelsBE()
+        {
+            excitedLabel.Text = "Excited";
+            excitedLabel.ForeColor = Color.Black;
+            boredLabel.Text = "Bored";
+            boredLabel.ForeColor = Color.Black;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace mysz
     public class MouseForm : Form
     {
         MoodWindow MoodWindow;
-        MoodWindow.Mood mood;
+        MoodWindow.MoodFromHappyToAngryScale mood;
         Label timeLabel;
         Func<bool> timeOutMethod;
         int CHART_WIDTH = 0;
@@ -38,7 +38,7 @@ namespace mysz
 
         protected void writeGameDetails(string gameName, string USER_NAME, int gameId, params string[] strings)
         {
-            MoodWindow.Mood mood = getMood();
+            MoodWindow.MoodFromHappyToAngryScale mood = getMood();
             String fileName = @".\" + gameName + @"\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) +
                               @"\" + gameId.ToString() + @"\gameDetails.txt";
 
@@ -207,7 +207,7 @@ namespace mysz
                 Thread.Sleep(10);
             }
         }
-        protected MoodWindow.Mood getMood()
+        protected MoodWindow.MoodFromHappyToAngryScale getMood()
         {
             MoodWindow = new MoodWindow();
             MoodWindow.ShowDialog();
