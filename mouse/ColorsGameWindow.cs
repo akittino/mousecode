@@ -17,7 +17,6 @@ namespace mysz
         DateTime startTime;
 
         Graphics graphics;
-        MoodWindow.MoodFromHappyToAngryScale mood;
 
         List<Color> circleColorsBase = new List<Color>();
         List<string> textColorsBase = new List<string>();
@@ -31,7 +30,7 @@ namespace mysz
         string userName;
         bool useLeftButtonYES = false;
         bool useRightButtonNO = false;
-        int minutes = 0, seconds = 0;
+        int seconds = 0;
         int gameId = 0;
         int maxGameTime = 5;
 
@@ -104,7 +103,6 @@ namespace mysz
                 yesButton.Visible = true;
                 noButton.Visible = true;
 
-                timeLabel.Text = minutes.ToString();
                 timeLabel.Visible = true;
 
                 startTime = DateTime.Now;

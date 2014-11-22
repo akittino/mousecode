@@ -9,8 +9,6 @@ namespace mysz
     public class MouseForm : Form
     {
         MoodWindow MoodWindow;
-        MoodWindow.MoodFromHappyToAngryScale moodHS;
-        MoodWindow.MoodFromExcitedToBoredScale moodBE;
         Label timeLabel;
         Func<bool> timeOutMethod;
         int CHART_WIDTH = 0;
