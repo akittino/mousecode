@@ -18,7 +18,7 @@ namespace mysz
         readonly Color BACKGROUND_COLOR = Color.White;
 
         SolidBrush redBrush, greenBrush, blueBrush;
-        List<Point> CoordsList;
+        List<TimePoint> CoordsList;
         Thread CoordinateSaver;
         Thread Timer;
         Random rnd;
@@ -45,7 +45,7 @@ namespace mysz
             setTimeOutMethod(timedOut);
             setQuestionTime((double)initialGameTime);
 
-            CoordsList = new List<Point>();
+            CoordsList = new List<TimePoint>();
 
             greenBrush = new SolidBrush(Color.Green);
             blueBrush = new SolidBrush(Color.Blue);

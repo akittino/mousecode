@@ -38,7 +38,7 @@ namespace mysz
         Thread BackgroundProcessing;
         Thread CoordinateSaver;
         Thread Timer;
-        List<Point> CoordsList;
+        List<TimePoint> CoordsList;
 
         public ColorsGameWindow(string userName, int initialGameTime)
         {
@@ -57,7 +57,7 @@ namespace mysz
             textColorsBase.Add("Purple");
             textColorsBase.Add("Yellow");
             textColorsBase.Add("Pink");
-            CoordsList = new List<Point>();
+            CoordsList = new List<TimePoint>();
             CoordinateSaver = new Thread(SaveCoordinates);
             this.userName = userName;
             maxGameTime = INITIAL_GAME_TIME = initialGameTime;
@@ -240,7 +240,7 @@ namespace mysz
         }
 
         void WriteCoordinatesToFile(String gameTimeString)
-        {
+        {//TODO please use methods from MouseForm instead of this
             firstRun = false;
             String name;
             String dirPath = @".\ColorsGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
@@ -274,9 +274,9 @@ namespace mysz
                 sw.WriteLine("Correct Answer: " + (correctAnswer == true ? "YES" : "NO"));
                 sw.WriteLine(gameTimeString + " / " + maxGameTime + " s");
 
-                foreach (Point p in CoordsList)
+                foreach (TimePoint p in CoordsList)
                 {
-                    sw.WriteLine(p.X + " , " + p.Y);
+                    sw.WriteLine(p.X + " , " + p.Y + " , " + p.timeFromGameStart);
                 }
             }
             useRightButtonNO = false;

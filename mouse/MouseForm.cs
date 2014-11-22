@@ -17,6 +17,18 @@ namespace mysz
         double questionTime = 0;
         PictureBox picture_box;
 
+        protected class TimePoint
+        {
+            public int X, Y;
+            public double timeFromGameStart;
+            public TimePoint(int _X, int _Y, double _timeFromGameStart)
+            {
+                X = _X;
+                Y = _Y;
+                timeFromGameStart = _timeFromGameStart;
+            }
+        }
+
         // this method must be called before using any of other methods from this class
         public void SetMouseForm(PictureBox _picture_box, int _chart_width, int _chart_height, Label _timeLabel)
         {
@@ -52,7 +64,7 @@ namespace mysz
             }
         }
 
-        protected int writeCoordinatesToFile(int gameId, string gameName, bool leftButtonClicked, string USER_NAME, List<Point> CoordsList, params string[] strings)
+        protected int writeCoordinatesToFile(int gameId, string gameName, bool leftButtonClicked, string USER_NAME, List<TimePoint> CoordsList, params string[] strings)
         {
             String name;
             String dirPath = @".\" + gameName + @"\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
@@ -89,9 +101,9 @@ namespace mysz
                     sw.WriteLine(strings[i]);
                 }
 
-                foreach (Point p in CoordsList)
+                foreach (TimePoint p in CoordsList)
                 {
-                    sw.WriteLine(p.X + " , " + p.Y);
+                    sw.WriteLine(p.X + " , " + p.Y + " , " + p.timeFromGameStart);
                 }
             }
             return gameId;
@@ -189,10 +201,11 @@ namespace mysz
                 graphics.DrawString(text, myFont, Brushes.Black, new Point(X, Y));
             }
         }
-        protected void SaveCoordinates(int GRANULATION, List<Point> CoordsList)
+        protected void SaveCoordinates(int GRANULATION, List<TimePoint> CoordsList)
         // writing coordinates to list of coords
         {
             int LastX = 0, LastY = 0;
+            DateTime startTime = DateTime.Now;
             while (true)
             {
                 if (!(LastX + GRANULATION > GetX()
@@ -200,7 +213,7 @@ namespace mysz
                     && LastY + GRANULATION > GetY()
                     && LastY - GRANULATION < GetY()))
                 {
-                    CoordsList.Add(new Point(GetX(), GetY()));
+                    CoordsList.Add(new TimePoint(GetX(), GetY(), (DateTime.Now - startTime).TotalMilliseconds));
                     LastX = GetX();
                     LastY = GetY();
                 }

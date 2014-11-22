@@ -19,7 +19,7 @@ namespace mysz
 
         public bool databaseCorrupted;
         Graphics graphics, questionGraphics;
-        List<Point> CoordsList;
+        List<TimePoint> coordsList;
         Thread CoordinateSaver;
         ArrayList questions;
         Thread Timer;
@@ -28,7 +28,6 @@ namespace mysz
 
         bool leftButtonCorrect = true;
         bool leftButtonClicked = true;
-        int lastQuestionNumber = 0;
         int questionCounter = 0;
         int questionTime = 5;
         int gameId = 0;
@@ -78,7 +77,7 @@ namespace mysz
 
             rnd = new Random();
             questions = new ArrayList();
-            CoordsList = new List<Point>();
+            coordsList = new List<TimePoint>();
             graphics = gameWindow.CreateGraphics();
             questionGraphics = questionBox.CreateGraphics();
 
@@ -198,7 +197,7 @@ namespace mysz
             CoordinateSaver = new Thread(saveCoordinates);
 
             setNewQuestion();
-            CoordsList.Clear();
+            coordsList.Clear();
 
             Timer.Start();
             CoordinateSaver.Start();
@@ -234,7 +233,7 @@ namespace mysz
 
                 score = 0;
                 gameId = 0;
-                CoordsList.Clear();
+                coordsList.Clear();
                 questionCounter = 0;
                 scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
             }
@@ -254,7 +253,7 @@ namespace mysz
 
                 gameId = writeCoordinatesToFile(questionTime - double.Parse(timeLabel.Text.Remove(timeLabel.Text.Length - 1)));
 
-                CoordsList.Clear();
+                coordsList.Clear();
             }
         }
 
@@ -277,7 +276,7 @@ namespace mysz
 
         private int writeCoordinatesToFile(double gameTime)
         {
-            return base.writeCoordinatesToFile(gameId, "ThingsGame", leftButtonClicked, USER_NAME, CoordsList,
+            return base.writeCoordinatesToFile(gameId, "ThingsGame", leftButtonClicked, USER_NAME, coordsList,
                 "Correct Answer: " + ((leftButtonClicked == leftButtonCorrect) ? "YES" : "NO"), gameTime.ToString() + " s / " + questionTime + " s");
         }
 
@@ -288,7 +287,7 @@ namespace mysz
 
         private void saveCoordinates()
         {
-            base.SaveCoordinates(GRANULATION, CoordsList);
+            base.SaveCoordinates(GRANULATION, coordsList);
         }
 
         public new void highlightLabel(object sender, EventArgs e)

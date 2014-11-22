@@ -22,6 +22,7 @@ namespace mysz
         DateTime checkedTime;
         bool checkingDown;
         int checkedLevel;
+        Thread refreshThread;
 
         public AdminPanelAnalyzator()
         {
@@ -86,25 +87,33 @@ namespace mysz
                 //MessageBox.Show("You should select csv file");
                 return;
             }
-            using (StreamReader sr = new StreamReader(path))
+
+            try
             {
-                int linesToSkip = 2;
-                if (path.Split('\\')[path.Split('\\').Length - 6] == "ReflexGame")
-                    linesToSkip = 1;
-
-                while (linesToSkip-- != 0)
-                    sr.ReadLine();
-
-                List<Point> coordsList = new List<Point>();
-
-                string s = sr.ReadLine();
-                while (!string.IsNullOrEmpty(s))
+                using (StreamReader sr = new StreamReader(path))
                 {
-                    coordsList.Add(new Point(int.Parse(s.Split(',')[0]), int.Parse(s.Split(',')[1])));
-                    s = sr.ReadLine();
-                }
+                    int linesToSkip = 2;
+                    if (path.Split('\\')[path.Split('\\').Length - 6] == "ReflexGame")
+                        linesToSkip = 1;
 
-                drawMouseTrace(coordsList, pen);
+                    while (linesToSkip-- != 0)
+                        sr.ReadLine();
+
+                    List<Point> coordsList = new List<Point>();
+
+                    string s = sr.ReadLine();
+                    while (!string.IsNullOrEmpty(s))
+                    {
+                        coordsList.Add(new Point(int.Parse(s.Split(',')[0]), int.Parse(s.Split(',')[1])));
+                        s = sr.ReadLine();
+                    }
+
+                    drawMouseTrace(coordsList, pen);
+                }
+            }
+            catch(IOException e)
+            {
+                MessageBox.Show("Please close all games files when using this analyzer!");
             }
         }
 
@@ -155,7 +164,8 @@ namespace mysz
 
             if (checkedTime.AddMilliseconds(200) < DateTime.Now)
             {
-                (new Thread(waitBeforeRefresh)).Start();
+                refreshThread = new Thread(waitBeforeRefresh);
+                refreshThread.Start();
                 checkingDown = c;
                 checkedLevel = e.Node.Level;
                 checkedTime = DateTime.Now;
@@ -239,6 +249,14 @@ namespace mysz
                 lastSelected = null;
             }
             
+        }
+
+        private void AdminPanelAnalyzator_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(refreshThread != null && refreshThread.IsAlive)
+            {
+                refreshThread.Abort();
+            }
         }
     }
 }
