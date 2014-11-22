@@ -9,7 +9,8 @@ namespace mysz
     public class MouseForm : Form
     {
         MoodWindow MoodWindow;
-        MoodWindow.MoodFromHappyToAngryScale mood;
+        MoodWindow.MoodFromHappyToAngryScale moodHS;
+        MoodWindow.MoodFromExcitedToBoredScale moodBE;
         Label timeLabel;
         Func<bool> timeOutMethod;
         int CHART_WIDTH = 0;
@@ -50,13 +51,15 @@ namespace mysz
 
         protected void writeGameDetails(string gameName, string USER_NAME, int gameId, params string[] strings)
         {
-            MoodWindow.MoodFromHappyToAngryScale mood = getMood();
+            Tuple<MoodWindow.MoodFromHappyToAngryScale, MoodWindow.MoodFromExcitedToBoredScale> moods = getMood();
             String fileName = @".\" + gameName + @"\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) +
                               @"\" + gameId.ToString() + @"\gameDetails.txt";
 
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(fileName))
             {
-                sw.WriteLine("Mood: " + mood.ToString());
+                sw.WriteLine("Mood from scale happy to sad: " + moods.Item1.ToString());
+                sw.WriteLine("Mood from scale excited to bored: " + moods.Item2.ToString());
+
                 for (int i = 0; i < strings.Length; ++i)
                 {
                     sw.WriteLine(strings[i]);
@@ -220,11 +223,11 @@ namespace mysz
                 Thread.Sleep(10);
             }
         }
-        protected MoodWindow.MoodFromHappyToAngryScale getMood()
+        protected Tuple<MoodWindow.MoodFromHappyToAngryScale, MoodWindow.MoodFromExcitedToBoredScale> getMood()
         {
             MoodWindow = new MoodWindow();
             MoodWindow.ShowDialog();
-            return mood = MoodWindow.GetMood();
+            return MoodWindow.getMoods();
         }
     }
 }

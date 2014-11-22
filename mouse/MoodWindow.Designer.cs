@@ -41,11 +41,17 @@
             this.angryLabel = new System.Windows.Forms.Label();
             this.veryAngryLabel = new System.Windows.Forms.Label();
             this.boredLabel = new System.Windows.Forms.Label();
-            this.excitedLabel = new System.Windows.Forms.Label();
+            this.veryExcitedLabel = new System.Windows.Forms.Label();
             this.boredButton = new System.Windows.Forms.Button();
-            this.excitedButton = new System.Windows.Forms.Button();
+            this.veryExcitedButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.answerRButton = new System.Windows.Forms.Button();
+            this.normalBEButton = new System.Windows.Forms.Button();
+            this.normalBELabel = new System.Windows.Forms.Label();
+            this.excitedButton = new System.Windows.Forms.Button();
+            this.excitedLabel = new System.Windows.Forms.Label();
+            this.veryBoredButton = new System.Windows.Forms.Button();
+            this.veryBoredLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // titleLabel
@@ -174,29 +180,29 @@
             this.veryAngryLabel.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.veryAngryLabel.Location = new System.Drawing.Point(273, 127);
             this.veryAngryLabel.Name = "veryAngryLabel";
-            this.veryAngryLabel.Size = new System.Drawing.Size(57, 14);
+            this.veryAngryLabel.Size = new System.Drawing.Size(59, 14);
             this.veryAngryLabel.TabIndex = 44;
-            this.veryAngryLabel.Text = "Very angry";
+            this.veryAngryLabel.Text = "Very Angry";
             // 
             // boredLabel
             // 
             this.boredLabel.AutoSize = true;
             this.boredLabel.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.boredLabel.Location = new System.Drawing.Point(190, 259);
+            this.boredLabel.Location = new System.Drawing.Point(221, 259);
             this.boredLabel.Name = "boredLabel";
             this.boredLabel.Size = new System.Drawing.Size(34, 14);
             this.boredLabel.TabIndex = 48;
             this.boredLabel.Text = "Bored";
             // 
-            // excitedLabel
+            // veryExcitedLabel
             // 
-            this.excitedLabel.AutoSize = true;
-            this.excitedLabel.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.excitedLabel.Location = new System.Drawing.Point(122, 259);
-            this.excitedLabel.Name = "excitedLabel";
-            this.excitedLabel.Size = new System.Drawing.Size(42, 14);
-            this.excitedLabel.TabIndex = 47;
-            this.excitedLabel.Text = "Exicted";
+            this.veryExcitedLabel.AutoSize = true;
+            this.veryExcitedLabel.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.veryExcitedLabel.Location = new System.Drawing.Point(12, 259);
+            this.veryExcitedLabel.Name = "veryExcitedLabel";
+            this.veryExcitedLabel.Size = new System.Drawing.Size(66, 14);
+            this.veryExcitedLabel.TabIndex = 47;
+            this.veryExcitedLabel.Text = "Very Exicted";
             // 
             // boredButton
             // 
@@ -204,7 +210,7 @@
             this.boredButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.boredButton.Font = new System.Drawing.Font("Gabriola", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.boredButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.boredButton.Location = new System.Drawing.Point(179, 196);
+            this.boredButton.Location = new System.Drawing.Point(210, 196);
             this.boredButton.Name = "boredButton";
             this.boredButton.Size = new System.Drawing.Size(60, 60);
             this.boredButton.TabIndex = 46;
@@ -212,19 +218,19 @@
             this.boredButton.UseVisualStyleBackColor = true;
             this.boredButton.Click += new System.EventHandler(this.boredButton_Click);
             // 
-            // excitedButton
+            // veryExcitedButton
             // 
-            this.excitedButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("excitedButton.BackgroundImage")));
-            this.excitedButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.excitedButton.Font = new System.Drawing.Font("Gabriola", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.excitedButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.excitedButton.Location = new System.Drawing.Point(113, 196);
-            this.excitedButton.Name = "excitedButton";
-            this.excitedButton.Size = new System.Drawing.Size(60, 60);
-            this.excitedButton.TabIndex = 45;
-            this.excitedButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.excitedButton.UseVisualStyleBackColor = true;
-            this.excitedButton.Click += new System.EventHandler(this.excitedButton_Click);
+            this.veryExcitedButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("veryExcitedButton.BackgroundImage")));
+            this.veryExcitedButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.veryExcitedButton.Font = new System.Drawing.Font("Gabriola", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.veryExcitedButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.veryExcitedButton.Location = new System.Drawing.Point(13, 196);
+            this.veryExcitedButton.Name = "veryExcitedButton";
+            this.veryExcitedButton.Size = new System.Drawing.Size(60, 60);
+            this.veryExcitedButton.TabIndex = 45;
+            this.veryExcitedButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.veryExcitedButton.UseVisualStyleBackColor = true;
+            this.veryExcitedButton.Click += new System.EventHandler(this.veryExcitedButton_Click);
             // 
             // label7
             // 
@@ -247,17 +253,95 @@
             this.answerRButton.UseVisualStyleBackColor = true;
             this.answerRButton.Click += new System.EventHandler(this.answerRButton_Click);
             // 
+            // normalBEButton
+            // 
+            this.normalBEButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("normalBEButton.BackgroundImage")));
+            this.normalBEButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.normalBEButton.Font = new System.Drawing.Font("Gabriola", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.normalBEButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.normalBEButton.Location = new System.Drawing.Point(144, 196);
+            this.normalBEButton.Name = "normalBEButton";
+            this.normalBEButton.Size = new System.Drawing.Size(60, 60);
+            this.normalBEButton.TabIndex = 51;
+            this.normalBEButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.normalBEButton.UseVisualStyleBackColor = true;
+            this.normalBEButton.Click += new System.EventHandler(this.normalBEButton_Click);
+            // 
+            // normalBELabel
+            // 
+            this.normalBELabel.AutoSize = true;
+            this.normalBELabel.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.normalBELabel.Location = new System.Drawing.Point(153, 259);
+            this.normalBELabel.Name = "normalBELabel";
+            this.normalBELabel.Size = new System.Drawing.Size(42, 14);
+            this.normalBELabel.TabIndex = 52;
+            this.normalBELabel.Text = "Normal";
+            // 
+            // excitedButton
+            // 
+            this.excitedButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("excitedButton.BackgroundImage")));
+            this.excitedButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.excitedButton.Font = new System.Drawing.Font("Gabriola", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.excitedButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.excitedButton.Location = new System.Drawing.Point(79, 196);
+            this.excitedButton.Name = "excitedButton";
+            this.excitedButton.Size = new System.Drawing.Size(60, 60);
+            this.excitedButton.TabIndex = 53;
+            this.excitedButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.excitedButton.UseVisualStyleBackColor = true;
+            this.excitedButton.Click += new System.EventHandler(this.excitedButton_Click);
+            // 
+            // excitedLabel
+            // 
+            this.excitedLabel.AutoSize = true;
+            this.excitedLabel.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.excitedLabel.Location = new System.Drawing.Point(88, 259);
+            this.excitedLabel.Name = "excitedLabel";
+            this.excitedLabel.Size = new System.Drawing.Size(42, 14);
+            this.excitedLabel.TabIndex = 54;
+            this.excitedLabel.Text = "Exicted";
+            // 
+            // veryBoredButton
+            // 
+            this.veryBoredButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("veryBoredButton.BackgroundImage")));
+            this.veryBoredButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.veryBoredButton.Font = new System.Drawing.Font("Gabriola", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.veryBoredButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.veryBoredButton.Location = new System.Drawing.Point(276, 196);
+            this.veryBoredButton.Name = "veryBoredButton";
+            this.veryBoredButton.Size = new System.Drawing.Size(60, 60);
+            this.veryBoredButton.TabIndex = 55;
+            this.veryBoredButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.veryBoredButton.UseVisualStyleBackColor = true;
+            this.veryBoredButton.Click += new System.EventHandler(this.veryBoredButton_Click);
+            // 
+            // veryBoredLabel
+            // 
+            this.veryBoredLabel.AutoSize = true;
+            this.veryBoredLabel.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.veryBoredLabel.Location = new System.Drawing.Point(273, 259);
+            this.veryBoredLabel.Name = "veryBoredLabel";
+            this.veryBoredLabel.Size = new System.Drawing.Size(58, 14);
+            this.veryBoredLabel.TabIndex = 56;
+            this.veryBoredLabel.Text = "Very Bored";
+            // 
             // MoodWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(348, 331);
+            this.Controls.Add(this.veryBoredLabel);
+            this.Controls.Add(this.veryBoredButton);
+            this.Controls.Add(this.excitedLabel);
+            this.Controls.Add(this.excitedButton);
+            this.Controls.Add(this.normalBELabel);
+            this.Controls.Add(this.normalBEButton);
             this.Controls.Add(this.answerRButton);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.boredLabel);
-            this.Controls.Add(this.excitedLabel);
+            this.Controls.Add(this.veryExcitedLabel);
             this.Controls.Add(this.boredButton);
-            this.Controls.Add(this.excitedButton);
+            this.Controls.Add(this.veryExcitedButton);
             this.Controls.Add(this.veryAngryLabel);
             this.Controls.Add(this.angryLabel);
             this.Controls.Add(this.happyLabel);
@@ -294,10 +378,16 @@
         private System.Windows.Forms.Label angryLabel;
         private System.Windows.Forms.Label veryAngryLabel;
         private System.Windows.Forms.Label boredLabel;
-        private System.Windows.Forms.Label excitedLabel;
+        private System.Windows.Forms.Label veryExcitedLabel;
         private System.Windows.Forms.Button boredButton;
-        private System.Windows.Forms.Button excitedButton;
+        private System.Windows.Forms.Button veryExcitedButton;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button answerRButton;
+        private System.Windows.Forms.Button normalBEButton;
+        private System.Windows.Forms.Label normalBELabel;
+        private System.Windows.Forms.Button excitedButton;
+        private System.Windows.Forms.Label excitedLabel;
+        private System.Windows.Forms.Button veryBoredButton;
+        private System.Windows.Forms.Label veryBoredLabel;
     }
 }

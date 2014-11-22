@@ -91,12 +91,14 @@ namespace mysz
 
         private void pushedPlayButton()
         {
-            if (firstRun == true)
+            if (firstRun)
             {
                 animation();
             }
             this.BeginInvoke((MethodInvoker)delegate()
             {
+                if(firstRun)
+                    moveCursor();
                 graphics.Clear(Color.White);
 
                 yesButton.Visible = true;
@@ -224,6 +226,13 @@ namespace mysz
             continueButton.Visible = true;
             gameWindow.Refresh();
             timeLabel.Visible = false;
+        }
+
+        private void moveCursor()
+        {
+            this.Cursor = new Cursor(Cursor.Current.Handle);
+            Cursor.Position = new Point((gameWindow.Size.Width / 2) + gameWindow.Location.X + this.Location.X,
+                30 + gameWindow.Location.Y + this.Location.Y);
         }
 
         void SaveCoordinates()
