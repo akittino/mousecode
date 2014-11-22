@@ -277,7 +277,7 @@ namespace mysz
         private int writeCoordinatesToFile(double gameTime)
         {
             return base.writeCoordinatesToFile(gameId, "ThingsGame", leftButtonClicked, USER_NAME, coordsList,
-                "Correct Answer: " + ((leftButtonClicked == leftButtonCorrect) ? "YES" : "NO"), gameTime.ToString() + " s / " + questionTime + " s");
+                "Correct Answer: " + ((leftButtonClicked == leftButtonCorrect) ? "YES" : "NO"), gameTime.ToString() + " s , " + questionTime + " s");
         }
 
         private void writeGameDetails()

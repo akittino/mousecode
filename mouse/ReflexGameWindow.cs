@@ -245,7 +245,7 @@ namespace mysz
         private int writeCoordinatesToFile(string gameTimeString)
         {
             return base.writeCoordinatesToFile(gameId, "ReflexGame", useLeftButton, USER_NAME, CoordsList,
-                gameTimeString + " / " + maxGameTime + " s");
+                gameTimeString + " , " + maxGameTime + " s");
         }
 
         private void writeGameDetails()

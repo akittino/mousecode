@@ -103,7 +103,7 @@ namespace mysz
 
                 foreach (TimePoint p in CoordsList)
                 {
-                    sw.WriteLine(p.X + " , " + p.Y + " , " + p.timeFromGameStart);
+                    sw.WriteLine(p.X + " , " + p.Y + " , " + p.timeFromGameStart.ToString("F0"));
                 }
             }
             return gameId;
