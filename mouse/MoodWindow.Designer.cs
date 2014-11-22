@@ -243,7 +243,7 @@
             this.answerRButton.Name = "answerRButton";
             this.answerRButton.Size = new System.Drawing.Size(126, 40);
             this.answerRButton.TabIndex = 50;
-            this.answerRButton.Text = "Approve moves";
+            this.answerRButton.Text = "Approve moods";
             this.answerRButton.UseVisualStyleBackColor = true;
             this.answerRButton.Click += new System.EventHandler(this.answerRButton_Click);
             // 

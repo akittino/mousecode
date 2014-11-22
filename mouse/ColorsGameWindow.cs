@@ -98,7 +98,6 @@ namespace mysz
             this.BeginInvoke((MethodInvoker)delegate()
             {
                 graphics.Clear(Color.White);
-                moveCursor();
 
                 yesButton.Visible = true;
                 noButton.Visible = true;
@@ -227,12 +226,6 @@ namespace mysz
             timeLabel.Visible = false;
         }
 
-        private void moveCursor()
-        {
-            this.Cursor = new Cursor(Cursor.Current.Handle);
-            Cursor.Position = new Point((gameWindow.Size.Width / 2) + gameWindow.Location.X + this.Location.X,
-                30 + gameWindow.Location.Y + this.Location.Y);
-        }
         void SaveCoordinates()
         // writing coordinates to list of coords
         {
@@ -282,6 +275,7 @@ namespace mysz
             useRightButtonNO = false;
             useLeftButtonYES = false;
         }
+
         private void TimeCountdown()
         {
             DateTime endTime = DateTime.Now.AddSeconds((double)maxGameTime);
@@ -331,16 +325,7 @@ namespace mysz
         }
         private void writeGameDetails()
         {
-            MoodWindow.MoodFromHappyToAngryScale mood = getMood();
-            String fileName = @".\ColorsGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) +
-                              @"\" + gameId.ToString() + @"\gameDetails.txt";
-
-            using (StreamWriter sw = new StreamWriter(fileName))
-            {
-                sw.WriteLine("Mood: " + mood.ToString());
-                sw.WriteLine("Score: " + scoreNumber.Text + "/" + quantityOfAnswers.ToString());
-                sw.WriteLine("Initial game time: " + INITIAL_GAME_TIME.ToString());
-            }
+            base.writeGameDetails("ColorsGame", userName, gameId, "Score: " + scoreLabel.Text, "Initial game time: " + INITIAL_GAME_TIME.ToString());
         }
 
         private void ColorsGameWindow_FormClosing(object sender, FormClosingEventArgs e)

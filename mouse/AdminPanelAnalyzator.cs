@@ -111,7 +111,7 @@ namespace mysz
                     drawMouseTrace(coordsList, pen);
                 }
             }
-            catch(IOException e)
+            catch
             {
                 MessageBox.Show("Please close all games files when using this analyzer!");
             }
