@@ -251,7 +251,7 @@ namespace mysz
 
                 scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
 
-                gameId = writeCoordinatesToFile(questionTime - double.Parse(timeLabel.Text.Remove(timeLabel.Text.Length - 1)));
+                gameId = writeCoordinatesToFile(1000 * (questionTime - double.Parse(timeLabel.Text.Remove(timeLabel.Text.Length - 1))));//TODO this is very ugly
 
                 coordsList.Clear();
             }
@@ -277,7 +277,7 @@ namespace mysz
         private int writeCoordinatesToFile(double gameTime)
         {
             return base.writeCoordinatesToFile(gameId, "ThingsGame", leftButtonClicked, USER_NAME, coordsList,
-                "Correct Answer: " + ((leftButtonClicked == leftButtonCorrect) ? "YES" : "NO"), gameTime.ToString() + " s , " + questionTime + " s");
+                "Correct Answer: " + ((leftButtonClicked == leftButtonCorrect) ? "YES" : "NO"), gameTime.ToString("F0") + " , " + questionTime * 1000);
         }
 
         private void writeGameDetails()

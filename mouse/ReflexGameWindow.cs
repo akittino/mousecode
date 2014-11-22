@@ -215,7 +215,7 @@ namespace mysz
             else
             {
 
-                gameId = writeCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now - startTime).TotalSeconds));
+                gameId = writeCoordinatesToFile((DateTime.Now - startTime).TotalMilliseconds);
 
                 ++score;
                 scoreLabel.Text = score.ToString();
@@ -242,10 +242,10 @@ namespace mysz
             return false;
         }
 
-        private int writeCoordinatesToFile(string gameTimeString)
+        private int writeCoordinatesToFile(double gameTime)
         {
             return base.writeCoordinatesToFile(gameId, "ReflexGame", useLeftButton, USER_NAME, CoordsList,
-                gameTimeString + " , " + maxGameTime + " s");
+                gameTime.ToString("F0") + " , " + maxGameTime * 1000);
         }
 
         private void writeGameDetails()

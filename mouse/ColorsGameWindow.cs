@@ -272,7 +272,7 @@ namespace mysz
             using (StreamWriter sw = new StreamWriter(name))
             {
                 sw.WriteLine("Correct Answer: " + (correctAnswer == true ? "YES" : "NO"));
-                sw.WriteLine(gameTimeString + " / " + maxGameTime + " s");
+                sw.WriteLine(gameTimeString + " , " + maxGameTime + " s"); // TODO gameTimeString change to miliseconds
 
                 foreach (TimePoint p in CoordsList)
                 {
