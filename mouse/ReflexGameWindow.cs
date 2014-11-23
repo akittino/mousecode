@@ -167,6 +167,7 @@ namespace mysz
                 drawEllipse(blueBrush);
 
                 startButton.Enabled = true;
+                gameState = GameStates.BeforeGame;
                 
                 writeToPictureBox(graphics, "Game paused, please start again.", 270, 250, 15);
                 writeToPictureBox(graphics, "Moved out from Start button before circle changed to green.", 200, 280, 15);
