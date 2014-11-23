@@ -3868,7 +3868,7 @@
   </data>
   <data name="instructionTextBox.Text" xml:space="preserve">
     <value>HOW TO PLAY?
-Reflex Game tests as the name of it says Reflex. What you need to do is to push the button, which appears randomly on the left or rigth side of the game window, as fast as you can. The rules are quite easy, when the game starts, your button will be surrounded with a red ellipse, don't move your mouse until the color of the ellipse turns green, then afterwards the button will appear and your task is to push it as fast as you can. The game is over when you won't push the button in defined time.
+As it's name suggests, Reflex Game tests a person's reflex. The aim of the game is to push a button as fast as you can, which appears randomly on the left or right side of the game window. The rules are quite easy. When the game starts, your button will be surrounded by a red ellipse. Do not move your mouse until the color of the ellipse turns green. After the appearance of the green ellipse, the button will appear and your task is to push it as fast as you can. The game will be over if you do not push the button in the defined time.
 Have fun !</value>
   </data>
 </root>

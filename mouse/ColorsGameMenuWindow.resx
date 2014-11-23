@@ -790,7 +790,7 @@
   </data>
   <data name="instructionTextBox.Text" xml:space="preserve">
     <value>HOW TO PLAY?
-Colors Game is an easy and fun game and it is testing your logical thinking. What you need to do is to answer correctly question, in defined time, after the game starts. The rules are quite easy, when the game starts you get an ellipse with text inside of it, you have only few seconds to decide whether the text inside is the name of the color which the text is surrounded with. The game is over when you won't answer the question in defined time.
+Colors Game is an easy and fun game. The game tests your logical thinking. The aim of the game is to answer each question correctly in the defined time, after the game starts. The rules are quite easy. When the game starts, an ellipse will appear with text inside. You have only a few seconds to decide whether the text inside of the ellipse is the name of the color with which the text is surrounded with. The game will be over if you do not answer the question in the defined time.
 Have fun !</value>
   </data>
 </root>
