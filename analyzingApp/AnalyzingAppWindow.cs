@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using analyzingApp;
 
 namespace analyzingApp
 {
@@ -23,29 +22,17 @@ namespace analyzingApp
         List<Attributes> listOfAttributes = new List<Attributes>();
         BindingList<Attributes> dataOriginal = new BindingList<Attributes>();
         BindingList<Attributes> dataToAdd = new BindingList<Attributes>();
-
+        
 
         public analyzingAppWindow()
         {
             InitializeComponent();
-            int stops_granulation = 20; // TODO@DAX this should be parameter to pf readed from window
-            string filePath = @"C:\Users\dkotecka\Documents\mousecode\mousecode\mouse\bin\Debug\ColorsGame\Dagmara\2014-11-23\5\L\16-02-30.csv";
-            
-            playFile pf = new playFile(filePath, stops_granulation);
+            saveButton.Enabled = false; // TODO save changes
 
-            b1 = pf.getAttributeCorrectAnswer();
-
-            i1 = pf.getAttributeStops();
-            i2 = pf.getAttributeGameTime();
-
-            d1 = pf.getAttributePath();
-            d2 = pf.getAttributeDistance();
-            d3 = pf.getAttributeDistanceToPath();
-            d4 = pf.getAttributeMovingTime();
-            d5 = pf.getAttributeAverageSpeed();
-            d6 = pf.getAttributeTimeAfterStop();
-            d7 = pf.getAttributeTimeBeforeStart();
-            d8 = pf.getAttributeMaxSpeed();
+        }
+        public class Attributes
+        {
+            public string Name { get; set; }
         }
 
         private void analyzingAppWindow_Load(object sender, EventArgs e)
@@ -96,7 +83,6 @@ namespace analyzingApp
             settingListOfAttributes();
             this.listboxBase.DataSource = dataOriginal;
             this.listboxBase.DisplayMember = "Name";
-            this.listboxBase.ValueMember = "Value";
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -107,34 +93,30 @@ namespace analyzingApp
             {
                 if (listboxBase.GetSelected(i))
                 {
-                    dataToAdd.Add(new Attributes { Name = selectedItem.Name, Value = selectedItem.Value });
+                    dataToAdd.Add(new Attributes { Name = selectedItem.Name});
                     listboxToAdd.DataSource = dataToAdd;
                     listboxToAdd.DisplayMember = "Name";
-                    listboxToAdd.ValueMember = "Value";
 
                     int index = listboxBase.FindString(selectedItem.Name);
                     dataOriginal.RemoveAt(index);
                     this.listboxBase.DataSource = dataOriginal;
-                    
                 }
             }
         }
         private void settingListOfAttributes()
         {
+            dataOriginal.Add(new Attributes { Name = "Correct Answer" });
+            dataOriginal.Add(new Attributes { Name = "Stops" });
+            dataOriginal.Add(new Attributes { Name = "Game Time" });
+            dataOriginal.Add(new Attributes { Name = "Path" });
+            dataOriginal.Add(new Attributes { Name = "Distance" });
+            dataOriginal.Add(new Attributes { Name = "Distance to Path" });
+            dataOriginal.Add(new Attributes { Name = "Moving Time" });
+            dataOriginal.Add(new Attributes { Name = "Average Speed" });
+            dataOriginal.Add(new Attributes { Name = "Time After Stop" });
+            dataOriginal.Add(new Attributes { Name = "Time Before Start" });
+            dataOriginal.Add(new Attributes { Name = "Max Speed" });
 
-            dataOriginal.Add(new Attributes { Name = "Correct Answer", Value = b1.ToString()});
-            dataOriginal.Add(new Attributes { Name = "Stops", Value = i1.ToString() });
-            dataOriginal.Add(new Attributes { Name = "Game Time", Value = i2.ToString() });
-            dataOriginal.Add(new Attributes { Name = "Path", Value = d1.ToString() });
-            dataOriginal.Add(new Attributes { Name = "Distance", Value = d2.ToString() });
-            dataOriginal.Add(new Attributes { Name = "Distance to Path", Value = d3.ToString() });
-            dataOriginal.Add(new Attributes { Name = "Moving Time", Value = d4.ToString() });
-            dataOriginal.Add(new Attributes { Name = "Average Speed", Value = d5.ToString() });
-            dataOriginal.Add(new Attributes { Name = "Time After Stop", Value = d6.ToString() });
-            dataOriginal.Add(new Attributes { Name = "Time Before Start", Value = d7.ToString() });
-            dataOriginal.Add(new Attributes { Name = "Max Speed", Value = d8.ToString() });
-
-            
         }
 
         private void removeButton_Click(object sender, EventArgs e)
@@ -145,10 +127,9 @@ namespace analyzingApp
             {
                 if (listboxToAdd.GetSelected(i))
                 {
-                    dataOriginal.Add(new Attributes { Name = selectedItem.Name, Value = selectedItem.Value });
+                    dataOriginal.Add(new Attributes { Name = selectedItem.Name});
                     listboxBase.DataSource = dataOriginal;
                     listboxBase.DisplayMember = "Name";
-                    listboxBase.ValueMember = "Value";
 
                     int index = listboxToAdd.FindString(selectedItem.Name);
                     dataToAdd.RemoveAt(index);
@@ -157,5 +138,77 @@ namespace analyzingApp
             }
         }
 
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "CSV Files|*.csv";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                int stops_granulation = Convert.ToInt32(granulationTextbox.Text); // TODO@DAX this should be parameter to pf readed from window
+                string filePath = @"C:\Users\dkotecka\Documents\mousecode\mousecode\mouse\bin\Debug\ColorsGame\Dagmara\2014-11-23\5\L\16-02-30.csv";
+
+
+                getCheckedFiles(); // TODO
+                playFile pf = new playFile(filePath, stops_granulation);
+                //TODO add new functions added by Olek +  save file
+                b1 = pf.getAttributeCorrectAnswer();
+
+                i1 = pf.getAttributeStops();
+                i2 = pf.getAttributeGameTime();
+
+                d1 = pf.getAttributePath();
+                d2 = pf.getAttributeDistance();
+                d3 = pf.getAttributeDistanceToPath();
+                d4 = pf.getAttributeMovingTime();
+                d5 = pf.getAttributeAverageSpeed();
+                d6 = pf.getAttributeTimeAfterStop();
+                d7 = pf.getAttributeTimeBeforeStart();
+                d8 = pf.getAttributeMaxSpeed();
+            }
+        }
+
+        private void getCheckedFiles()
+        { 
+            
+        }
+
+        private void granulationTextbox_TextChanged(object sender, EventArgs e)
+        {
+            string granulationValue = "";
+            int granulationValidator = 0;
+            if (granulationTextbox.Text != "")
+            {
+                try
+                {
+                    granulationValue = granulationTextbox.Text;
+                    granulationValidator = Convert.ToInt32(granulationValue);
+                    granulationValue = "0";
+                }
+                catch
+                {
+                    MessageBox.Show("Please enter only numbers.");
+                    granulationTextbox.Text = "";
+                    granulationValue = "1000";
+                }
+            }
+            if (!String.IsNullOrEmpty(granulationTextbox.Text) && (granulationValidator < 1 || granulationValidator > 25))
+            {
+                MessageBox.Show("Please enter granulation in range from 1 to 25.");
+                granulationTextbox.Text = "";
+            }
+        }
+
+        private void removeAllButton_Click(object sender, EventArgs e)
+        {
+            listboxToAdd.DataSource = null;
+            listboxToAdd.Items.Clear();
+            listboxBase.DataSource = null;
+            dataOriginal.Clear();
+            listboxToAdd.Items.Clear();
+            settingListOfAttributes();
+            listboxBase.DataSource = dataOriginal;
+            listboxBase.DisplayMember = "Name";
+        }
     }
 }
