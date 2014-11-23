@@ -96,7 +96,7 @@ namespace mysz
             }
             this.BeginInvoke((MethodInvoker)delegate()
             {
-                if(firstRun)
+                if (firstRun)
                     moveCursor();
                 graphics.Clear(Color.White);
 
@@ -190,8 +190,8 @@ namespace mysz
 
             if (CoordinateSaver.IsAlive)
                 CoordinateSaver.Abort();
+            gameId = writeCoordinatesToFile((Convert.ToDouble(maxGameTime) - Convert.ToDouble(timeLabel.Text.Remove(timeLabel.Text.Length - 1))) * 1000);
 
-            WriteCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now - startTime).TotalSeconds));
 
             decreaseGameTime();
 
@@ -216,7 +216,11 @@ namespace mysz
             if (Timer.IsAlive)
                 Timer.Abort();
             if (CoordinateSaver.IsAlive) CoordinateSaver.Abort();
-            WriteCoordinatesToFile(String.Format("{0:N2} s", (DateTime.Now - startTime).TotalSeconds));
+
+
+            gameId = writeCoordinatesToFile((Convert.ToDouble(maxGameTime) - Convert.ToDouble(timeLabel.Text.Remove(timeLabel.Text.Length - 1))) * 1000);
+
+            //riteCoordinatesToFile((maxGameTime - Convert.ToDouble(timeLabel.Text)) * 1000);
 
             decreaseGameTime();
 
@@ -239,48 +243,11 @@ namespace mysz
             base.SaveCoordinates(GRANULATION, CoordsList);
         }
 
-        void WriteCoordinatesToFile(String gameTimeString)
-        {//TODO please use methods from MouseForm instead of this
+        int writeCoordinatesToFile(double gameTime)
+        {
             firstRun = false;
-            String name;
-            String dirPath = @".\ColorsGame\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now);
-
-            if (gameId == 0)
-            {
-                if (!Directory.Exists(dirPath))
-                {
-                    Directory.CreateDirectory(dirPath);
-                    gameId = 1;
-                }
-                else
-                {
-                    gameId = ((new DirectoryInfo(dirPath)).GetDirectories().Length + 1);
-                }
-            }
-            if (useLeftButtonYES)
-                dirPath += @"\" + gameId.ToString() + @"\L";
-            else
-                dirPath += @"\" + gameId.ToString() + @"\P";
-
-            if (!Directory.Exists(dirPath))
-            {
-                Directory.CreateDirectory(dirPath);
-            }
-
-            name = dirPath + @"\" + String.Format("{0:HH-mm-ss}", DateTime.Now) + ".csv";
-
-            using (StreamWriter sw = new StreamWriter(name))
-            {
-                sw.WriteLine("Correct Answer: " + (correctAnswer == true ? "YES" : "NO"));
-                sw.WriteLine(gameTimeString + " , " + maxGameTime + " s"); // TODO gameTimeString change to miliseconds
-
-                foreach (TimePoint p in CoordsList)
-                {
-                    sw.WriteLine(p.X + " , " + p.Y + " , " + p.timeFromGameStart.ToString("F0"));
-                }
-            }
-            useRightButtonNO = false;
-            useLeftButtonYES = false;
+            return base.writeCoordinatesToFile(gameId, "ColorsGame", useLeftButtonYES, userName, CoordsList, 
+                "Correct answer:" + ((correctAnswer == true) ? "YES" : "NO"), gameTime.ToString("F0") + "," + maxGameTime * 1000);
         }
 
         private void TimeCountdown()
@@ -332,7 +299,7 @@ namespace mysz
         }
         private void writeGameDetails()
         {
-            base.writeGameDetails("ColorsGame", userName, gameId, "Score: " + scoreLabel.Text, "Initial game time: " + INITIAL_GAME_TIME.ToString());
+            base.writeGameDetails("ColorsGame", userName, gameId, "Score: " + scoreNumber.Text, "Initial game time: " + INITIAL_GAME_TIME.ToString());
         }
 
         private void ColorsGameWindow_FormClosing(object sender, FormClosingEventArgs e)
