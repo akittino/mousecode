@@ -40,11 +40,12 @@ namespace analyzingApp
 
         List<TimePoint> coordsList = null;
 
-        int? perfectLineCrosses = null;
-        int? gameTime = null;
         int? stops = null;
+        int? gameTime = null;
+        int? happyMood = null;
+        int? excitedMood = null;
+        int? perfectLineCrosses = null;
 
-        bool fileValid = true;
         bool correctAnswer = true;
 
         double? path = null;
@@ -60,6 +61,8 @@ namespace analyzingApp
         double? perfectLineOnTopPercentage = null;
         double? startButtonPercentageWidth = null;
         double? startButtonPercentageHeight = null;
+
+        string fileLog = null;
 
         public playFile(string path, int _stopsGranulation)
         {
@@ -106,12 +109,6 @@ namespace analyzingApp
                         }
                         s = sr.ReadLine();
 
-                        if (s.Split(':').Length != 2)
-                        {
-                            fileValid = false;
-                            return;
-                        }
-
                         if (s.Split(':')[1] == " NO")
                         {
                             correctAnswer = false;
@@ -150,7 +147,7 @@ namespace analyzingApp
                         }
                         else
                         {
-                            fileValid = false;
+                            fileLog = "Coordinates line hadn't three values in line. Couldn't proceed it!";
                             coordsList = null;
                             gameTime = null;
                             return;
@@ -158,16 +155,69 @@ namespace analyzingApp
                     }
 
                 }
+
+                string[] pathParts = path.Split('\\');
+                string moodPath = "";
+                
+                for (int i = 0; i < pathParts.Length - 2; ++i)
+                {
+                    moodPath += pathParts[i] + '\\';
+                }
+
+                moodPath += "gameDetails.txt";
+
+                using (StreamReader sr = new StreamReader(moodPath))
+                {
+                    string s = sr.ReadLine().Split(':')[1];
+                    happyMood = getHappyMood(s);
+
+                    s = sr.ReadLine().Split(':')[1];
+                    excitedMood = getExcitedMood(s);
+                }
             }
-            catch (IOException e)
+            catch (Exception e)
             {
-                Console.Write(e.ToString());
-                fileValid = false;
-                //TODO log
+                fileLog = e.ToString();
                 return;
             }
         }
 
+        private int getHappyMood(string s)
+        {
+            switch (s)
+            {
+                case " Very_Happy":
+                    return 1;
+                case " Happy":
+                    return 2;
+                case " Normal":
+                    return 3;
+                case " Angry":
+                    return 4;
+                case " Very_Angry":
+                    return 5;
+                default:
+                    return 0;
+            }
+        }
+        private int getExcitedMood(string s)
+        {
+            switch (s)
+            {
+                case " Very_Excited":
+                    return 1;
+                case " Excited":
+                    return 2;
+                case " Normal":
+                    return 3;
+                case " Bored":
+                    return 4;
+                case " Very_Bored":
+                    return 5;
+                default:
+                    return 0;
+            }
+        }
         private void perfectLineAnalyze()
         {
             perfectLineCrosses = 0;
@@ -216,9 +266,20 @@ namespace analyzingApp
 
         }
 
+        public string getFileLog()
+        {
+            return fileLog;
+        }
         public bool getAttributeFileValid()
         {
-            return fileValid;
+            if (fileLog == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public bool getAttributeCorrectAnswer()
         {
@@ -252,6 +313,14 @@ namespace analyzingApp
                 }
             }
             return (int)stops;
+        }
+        public int getAttributeExcitement()
+        {
+            return (int)excitedMood;
+        }
+        public int getAttributeHappiness()
+        {
+            return (int)happyMood;
         }
         public double getAttributePath()
         {
