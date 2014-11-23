@@ -28,8 +28,7 @@ namespace mysz
         bool firstRun = true;
         int quantityOfAnswers = 0;
         string userName;
-        bool useLeftButtonYES = false;
-        bool useRightButtonNO = false;
+        bool leftButtonYESClicked = false;
         int seconds = 0;
         int gameId = 0;
         int maxGameTime = 5;
@@ -184,7 +183,7 @@ namespace mysz
                 correctAnswer = true;
             }
             quantityOfAnswers++;
-            useLeftButtonYES = true;
+            leftButtonYESClicked = true;
             if (Timer.IsAlive)
                 Timer.Abort();
 
@@ -199,6 +198,7 @@ namespace mysz
             continueButton.Visible = true;
             gameWindow.Refresh();
             timeLabel.Visible = false;
+            correctAnswer = false;
         }
 
         private void noButton_Click(object sender, EventArgs e)
@@ -210,9 +210,10 @@ namespace mysz
                 gameScore++;
                 scoreNumber.Text = gameScore.ToString();
                 scoreNumber.Refresh();
+                correctAnswer = true;
             }
             quantityOfAnswers++;
-            useRightButtonNO = true;
+            leftButtonYESClicked = false;
             if (Timer.IsAlive)
                 Timer.Abort();
             if (CoordinateSaver.IsAlive) CoordinateSaver.Abort();
@@ -220,14 +221,13 @@ namespace mysz
 
             gameId = writeCoordinatesToFile((Convert.ToDouble(maxGameTime) - Convert.ToDouble(timeLabel.Text.Remove(timeLabel.Text.Length - 1))) * 1000);
 
-            //riteCoordinatesToFile((maxGameTime - Convert.ToDouble(timeLabel.Text)) * 1000);
-
             decreaseGameTime();
 
             CoordsList.Clear();
             continueButton.Visible = true;
             gameWindow.Refresh();
             timeLabel.Visible = false;
+            correctAnswer = false;
         }
 
         private void moveCursor()
@@ -246,7 +246,7 @@ namespace mysz
         int writeCoordinatesToFile(double gameTime)
         {
             firstRun = false;
-            return base.writeCoordinatesToFile(gameId, "ColorsGame", useLeftButtonYES, userName, CoordsList, 
+            return base.writeCoordinatesToFile(gameId, "ColorsGame", leftButtonYESClicked, userName, CoordsList, 
                 "Correct answer:" + ((correctAnswer == true) ? "YES" : "NO"), gameTime.ToString("F0") + "," + maxGameTime * 1000);
         }
 
@@ -310,7 +310,7 @@ namespace mysz
                 CoordinateSaver.Abort();
             if (BackgroundProcessing != null && BackgroundProcessing.IsAlive)
                 BackgroundProcessing.Abort();
-            if (gameScore != 0)
+            if (gameId != 0)
                 writeGameDetails();
         }
     }
