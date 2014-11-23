@@ -50,9 +50,13 @@
     <Compile Include="AnalyzingAppWindow.Designer.cs">
       <DependentUpon>AnalyzingAppWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Attributes.cs" />
     <Compile Include="playFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AnalyzingAppWindow.resx">
+      <DependentUpon>AnalyzingAppWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,6 +66,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\analyzingApp.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\analyzingApp.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\analyzingAppWindow.datasource" />
+    <None Include="Properties\DataSources\Attributes.datasource" />
+    <None Include="Properties\DataSources\buttonCoordinates.datasource" />
+    <None Include="Properties\DataSources\playFile.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\DataSources\TimePoint.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
