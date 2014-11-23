@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace analyzingApp
 {
-
     public class TimePoint
     {
         public int X, Y;
@@ -34,6 +33,7 @@ namespace analyzingApp
 
         double? path = null;
         double? distance = null;
+        double? maxSpeed = null;
         double? movingTime = null;
         double? averageSpeed = null;
         double? timeAfterStop = null;
@@ -102,20 +102,19 @@ namespace analyzingApp
             }
         }
 
-        public bool getFileValid()
+        public bool getAttributeFileValid()
         {
             return fileValid;
         }
-        public bool getCorrectAnswer()
+        public bool getAttributeCorrectAnswer()
         {
             return correctAnswer;
         }
-        public int getGameTime()
+        public int getAttributeGameTime()
         {
-            //TODO check exception
             return (int)gameTime;
         }
-        public double getPath()
+        public double getAttributePath()
         {
             if (path == null)
             {
@@ -131,7 +130,7 @@ namespace analyzingApp
             }
             return (double)path;
         }
-        public double getDistance()
+        public double getAttributeDistance()
         {
             if (distance == null)
             {
@@ -144,21 +143,21 @@ namespace analyzingApp
             }
             return (double)distance;
         }
-        public double getDistanceToPath()
+        public double getAttributeDistanceToPath()
         {
             if (distanceToPath == null)
             {
                 if (distance == null)
-                    this.getDistance();
+                    this.getAttributeDistance();
 
                 if (path == null)
-                    this.getPath();
+                    this.getAttributePath();
 
                 distanceToPath = distance / path;
             }
             return (double)distanceToPath;
         }
-        public double getMovingTime()
+        public double getAttributeMovingTime()
         {
             if (movingTime == null)
             {
@@ -166,21 +165,21 @@ namespace analyzingApp
             }
             return (double)movingTime;
         }
-        public double getAverageSpeed()
+        public double getAttributeAverageSpeed()
         {
             if (averageSpeed == null)
             {
                 if (path == null)
-                    this.getPath();
+                    this.getAttributePath();
 
                 if (movingTime == null)
-                    this.getMovingTime();
+                    this.getAttributeMovingTime();
 
                 averageSpeed = path / movingTime;
             }
             return (double)averageSpeed;
         }
-        public double getTimeBeforeStart()
+        public double getAttributeTimeBeforeStart()
         {
             if (timeBeforeStart == null)
             {
@@ -188,7 +187,7 @@ namespace analyzingApp
             }
             return (double)timeBeforeStart;
         }
-        public double getTimeAfterStop()
+        public double getAttributeTimeAfterStop()
         {
             if (timeAfterStop == null)
             {
@@ -196,7 +195,7 @@ namespace analyzingApp
             }
             return (double)timeAfterStop;
         }
-        public int getStops()
+        public int getAttributeStops()
         {
             if (stops == null)
             {
@@ -212,6 +211,26 @@ namespace analyzingApp
                 }
             }
             return (int)stops;
+        }
+        public double getAttributeMaxSpeed()
+        {
+            if(maxSpeed == null)
+            {
+                maxSpeed = 0;
+                for (int i = 1; i < coordsList.Count; ++i)
+                {
+                    int dX = coordsList[i - 1].X - coordsList[i].X;
+                    int dY = coordsList[i - 1].Y - coordsList[i].Y;
+                    double dT = Math.Abs(coordsList[i - 1].timeFromGameStart - coordsList[i].timeFromGameStart);
+                    double distance = Math.Sqrt((double)((dX * dX) + (dY * dY)));
+
+                    double tmpMaxSpeed = distance / dT;
+
+                    if (tmpMaxSpeed > maxSpeed)
+                        maxSpeed = tmpMaxSpeed;
+                }
+            }
+            return (double)maxSpeed;
         }
     }
 }

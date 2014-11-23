@@ -16,23 +16,26 @@ namespace analyzingApp
         public analyzingAppWindow()
         {
             InitializeComponent();
+            int stops_granulation = 20; // TODO@DAX this should be parameter to pf readed from window
+            string filePath = @"C:\Users\akantak\Personal Data\inz\mousecode\mouse\bin\Debug\ReflexGame\q\2014-11-22\1\P\14-47-41.csv";
 
-            playFile pf = new playFile(@"C:\Users\akantak\Personal Data\inz\mousecode\mouse\bin\Debug\ReflexGame\q\2014-11-22\1\P\14-47-41.csv", 20);
+            playFile pf = new playFile(filePath, stops_granulation);
 
-            bool b1 = pf.getCorrectAnswer();
+            bool b1 = pf.getAttributeCorrectAnswer();
 
-            int i1 = pf.getStops();
-            int i2 = pf.getGameTime();
+            int i1 = pf.getAttributeStops();
+            int i2 = pf.getAttributeGameTime();
 
-            double d1 = pf.getPath();
-            double d2 = pf.getDistance();
-            double d3 = pf.getDistanceToPath();
-            double d4 = pf.getMovingTime();
-            double d5 = pf.getAverageSpeed();
-            double d6 = pf.getTimeAfterStop();
-            double d7 = pf.getTimeBeforeStart();
+            double d1 = pf.getAttributePath();
+            double d2 = pf.getAttributeDistance();
+            double d3 = pf.getAttributeDistanceToPath();
+            double d4 = pf.getAttributeMovingTime();
+            double d5 = pf.getAttributeAverageSpeed();
+            double d6 = pf.getAttributeTimeAfterStop();
+            double d7 = pf.getAttributeTimeBeforeStart();
+            double d8 = pf.getAttributeMaxSpeed();
 
-
+            
         }
 
     }
