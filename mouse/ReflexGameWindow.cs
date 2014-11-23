@@ -261,7 +261,7 @@ namespace mysz
 
         private void drawEllipse(SolidBrush brush)
         {
-            graphics.FillEllipse(brush, 300, 500, 200, 200);
+            graphics.FillEllipse(brush, 250, 470, 300, 300);
         }
 
         public new void highlightLabel(object sender, EventArgs e)

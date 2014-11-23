@@ -28,28 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.stopRButton = new System.Windows.Forms.Button();
             this.gameWindow = new System.Windows.Forms.PictureBox();
-            this.startButton = new System.Windows.Forms.Button();
             this.endGameLabel = new System.Windows.Forms.Label();
             this.timeTextLabel = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
-            this.stopLButton = new System.Windows.Forms.Button();
             this.scoreTextLabel = new System.Windows.Forms.Label();
             this.scoreLabel = new System.Windows.Forms.Label();
+            this.stopLButton = new System.Windows.Forms.Button();
+            this.stopRButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).BeginInit();
             this.SuspendLayout();
-            // 
-            // stopRButton
-            // 
-            this.stopRButton.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.stopRButton.Location = new System.Drawing.Point(915, 31);
-            this.stopRButton.Name = "stopRButton";
-            this.stopRButton.Size = new System.Drawing.Size(57, 23);
-            this.stopRButton.TabIndex = 17;
-            this.stopRButton.Text = "Stop";
-            this.stopRButton.UseVisualStyleBackColor = true;
-            this.stopRButton.Click += new System.EventHandler(this.stopRButton_Click);
             // 
             // gameWindow
             // 
@@ -59,17 +48,6 @@
             this.gameWindow.Size = new System.Drawing.Size(800, 600);
             this.gameWindow.TabIndex = 15;
             this.gameWindow.TabStop = false;
-            // 
-            // startButton
-            // 
-            this.startButton.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.startButton.Location = new System.Drawing.Point(542, 607);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(60, 24);
-            this.startButton.TabIndex = 12;
-            this.startButton.Text = "Start";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // endGameLabel
             // 
@@ -104,17 +82,6 @@
             this.timeLabel.TabIndex = 24;
             this.timeLabel.Text = " ";
             // 
-            // stopLButton
-            // 
-            this.stopLButton.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.stopLButton.Location = new System.Drawing.Point(172, 31);
-            this.stopLButton.Name = "stopLButton";
-            this.stopLButton.Size = new System.Drawing.Size(57, 23);
-            this.stopLButton.TabIndex = 26;
-            this.stopLButton.Text = "Stop";
-            this.stopLButton.UseVisualStyleBackColor = true;
-            this.stopLButton.Click += new System.EventHandler(this.stopLButton_Click);
-            // 
             // scoreTextLabel
             // 
             this.scoreTextLabel.AutoSize = true;
@@ -135,19 +102,54 @@
             this.scoreLabel.TabIndex = 28;
             this.scoreLabel.Text = " ";
             // 
+            // stopLButton
+            // 
+            this.stopLButton.Font = new System.Drawing.Font("Gabriola", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stopLButton.Location = new System.Drawing.Point(172, 31);
+            this.stopLButton.Name = "stopLButton";
+            this.stopLButton.Size = new System.Drawing.Size(118, 82);
+            this.stopLButton.TabIndex = 34;
+            this.stopLButton.Text = "STOP";
+            this.stopLButton.UseVisualStyleBackColor = true;
+            this.stopLButton.Visible = false;
+            this.stopLButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
+            // stopRButton
+            // 
+            this.stopRButton.Font = new System.Drawing.Font("Gabriola", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stopRButton.Location = new System.Drawing.Point(854, 31);
+            this.stopRButton.Name = "stopRButton";
+            this.stopRButton.Size = new System.Drawing.Size(118, 82);
+            this.stopRButton.TabIndex = 35;
+            this.stopRButton.Text = "STOP";
+            this.stopRButton.UseVisualStyleBackColor = true;
+            this.stopRButton.Visible = false;
+            this.stopRButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
+            // startButton
+            // 
+            this.startButton.Font = new System.Drawing.Font("Gabriola", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.startButton.Location = new System.Drawing.Point(518, 549);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(118, 82);
+            this.startButton.TabIndex = 36;
+            this.startButton.Text = "START";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
             // ReflexGameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.startButton);
+            this.Controls.Add(this.stopRButton);
+            this.Controls.Add(this.stopLButton);
             this.Controls.Add(this.scoreLabel);
             this.Controls.Add(this.scoreTextLabel);
-            this.Controls.Add(this.stopLButton);
             this.Controls.Add(this.timeTextLabel);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.endGameLabel);
-            this.Controls.Add(this.startButton);
-            this.Controls.Add(this.stopRButton);
             this.Controls.Add(this.gameWindow);
             this.Location = new System.Drawing.Point(172, 41);
             this.MaximizeBox = false;
@@ -165,14 +167,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Button stopRButton;
         private System.Windows.Forms.PictureBox gameWindow;
-        private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Label endGameLabel;
         private System.Windows.Forms.Label timeTextLabel;
         private System.Windows.Forms.Label timeLabel;
-        private System.Windows.Forms.Button stopLButton;
         private System.Windows.Forms.Label scoreTextLabel;
         private System.Windows.Forms.Label scoreLabel;
+        private System.Windows.Forms.Button stopLButton;
+        private System.Windows.Forms.Button stopRButton;
+        private System.Windows.Forms.Button startButton;
     }
 }
