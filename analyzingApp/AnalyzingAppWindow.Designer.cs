@@ -58,6 +58,7 @@
             this.fileViewer.Name = "fileViewer";
             this.fileViewer.Size = new System.Drawing.Size(228, 598);
             this.fileViewer.TabIndex = 0;
+            this.fileViewer.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.fileViewer_AfterCheck);
             // 
             // listboxBase
             // 

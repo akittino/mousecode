@@ -22,7 +22,7 @@ namespace analyzingApp
         List<Attributes> listOfAttributes = new List<Attributes>();
         BindingList<Attributes> dataOriginal = new BindingList<Attributes>();
         BindingList<Attributes> dataToAdd = new BindingList<Attributes>();
-
+        List<string> pathList = new List<string>();
 
         public analyzingAppWindow()
         {
@@ -52,8 +52,6 @@ namespace analyzingApp
                     }
                 }
             }
-            fileViewer.ExpandAll();
-
             attributesToChoose();
         }
         private void readChildNodes(TreeNode t)
@@ -152,40 +150,36 @@ namespace analyzingApp
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                int stops_granulation = Convert.ToInt32(granulationTextbox.Text); // TODO@DAX this should be parameter to pf readed from window
-                string filePath = @"C:\Users\dkotecka\Documents\mousecode\mousecode\mouse\bin\Debug\ColorsGame\Dagmara\2014-11-23\5\L\16-02-30.csv";
+                int stops_granulation = Convert.ToInt32(granulationTextbox.Text);
 
+                for (int i = 0; i < pathList.Count; i++)
+                {
+                    playFile pf = new playFile(pathList[i], stops_granulation);
+                    //TODO add new functions added by Olek +  save file
+                    //TODO check which attributes were selected and add to file
+                    b1 = pf.getAttributeCorrectAnswer();
 
-                getCheckedFiles(); // TODO
-                playFile pf = new playFile(filePath, stops_granulation);
-                //TODO add new functions added by Olek +  save file
-                b1 = pf.getAttributeCorrectAnswer();
+                    i1 = pf.getAttributeStops();
+                    i2 = pf.getAttributeGameTime();
+                    i3 = pf.getAttributePerfectLineCrosses();
+                    i4 = pf.getAttributeExcitement();
+                    i5 = pf.getAttributeHappiness();
 
-                i1 = pf.getAttributeStops();
-                i2 = pf.getAttributeGameTime();
-                i3 = pf.getAttributePerfectLineCrosses();
-                i4 = pf.getAttributeExcitement();
-                i5 = pf.getAttributeHappiness();
-
-                d1 = pf.getAttributePath();
-                d2 = pf.getAttributeDistance();
-                d3 = pf.getAttributeDistanceToPath();
-                d4 = pf.getAttributeMovingTime();
-                d5 = pf.getAttributeAverageSpeed();
-                d6 = pf.getAttributeTimeAfterStop();
-                d7 = pf.getAttributeTimeBeforeStart();
-                d8 = pf.getAttributeMaxSpeed();
-                d9 = pf.getAttributePerfectLineOnTopPercentage();
-                d10 = pf.getAttributeStopButtonPercentageHeight();
-                d11 = pf.getAttributeStopButtonPercentageWidth();
-                d12 = pf.getAttributeStartButtonPercentageHeight();
-                d13 = pf.getAttributeStartButtonPercentageWidth();
+                    d1 = pf.getAttributePath();
+                    d2 = pf.getAttributeDistance();
+                    d3 = pf.getAttributeDistanceToPath();
+                    d4 = pf.getAttributeMovingTime();
+                    d5 = pf.getAttributeAverageSpeed();
+                    d6 = pf.getAttributeTimeAfterStop();
+                    d7 = pf.getAttributeTimeBeforeStart();
+                    d8 = pf.getAttributeMaxSpeed();
+                    d9 = pf.getAttributePerfectLineOnTopPercentage();
+                    d10 = pf.getAttributeStopButtonPercentageHeight();
+                    d11 = pf.getAttributeStopButtonPercentageWidth();
+                    d12 = pf.getAttributeStartButtonPercentageHeight();
+                    d13 = pf.getAttributeStartButtonPercentageWidth();
+                }
             }
-        }
-
-        private void getCheckedFiles()
-        {
-
         }
 
         private void granulationTextbox_TextChanged(object sender, EventArgs e)
@@ -238,6 +232,21 @@ namespace analyzingApp
             settingListOfAttributes(dataToAdd);
             listboxToAdd.DataSource = dataToAdd;
             listboxToAdd.DisplayMember = "Name";
+        }
+
+        private void fileViewer_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            bool c = e.Node.Checked;
+            string path = "";
+            if (e.Node.FullPath.Contains(".csv"))
+            {
+                path = Path.GetFullPath(".") + @"\" + e.Node.FullPath;
+                pathList.Add(path);
+            }
+            else// TODO for other dirs to get csv files
+            { 
+                
+            }
         }
     }
 }
