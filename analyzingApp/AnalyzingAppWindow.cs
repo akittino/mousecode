@@ -23,12 +23,12 @@ namespace analyzingApp
         BindingList<Attributes> dataOriginal = new BindingList<Attributes>();
         BindingList<Attributes> dataToAdd = new BindingList<Attributes>();
         List<string> pathList = new List<string>();
+        List<object> listOfGetAttributes = new List<object>();
+
 
         public analyzingAppWindow()
         {
             InitializeComponent();
-            saveButton.Enabled = false; // TODO save changes
-
         }
         public class Attributes
         {
@@ -145,41 +145,82 @@ namespace analyzingApp
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "CSV Files|*.csv";
-
-            if (sfd.ShowDialog() == DialogResult.OK)
+            if (!granulationTextbox.Text.Equals(""))
             {
-                int stops_granulation = Convert.ToInt32(granulationTextbox.Text);
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "CSV Files|*.csv";
 
-                for (int i = 0; i < pathList.Count; i++)
+                if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    playFile pf = new playFile(pathList[i], stops_granulation);
-                    //TODO add new functions added by Olek +  save file
-                    //TODO check which attributes were selected and add to file
-                    b1 = pf.getAttributeCorrectAnswer();
+                    int stops_granulation = Convert.ToInt32(granulationTextbox.Text);
 
-                    i1 = pf.getAttributeStops();
-                    i2 = pf.getAttributeGameTime();
-                    i3 = pf.getAttributePerfectLineCrosses();
-                    i4 = pf.getAttributeExcitement();
-                    i5 = pf.getAttributeHappiness();
+                    for (int i = 0; i < pathList.Count; i++)
+                    {
+                        listOfGetAttributes.Clear();
+                        playFile pf = new playFile(pathList[i], stops_granulation);
+                        if (pf.getAttributeFileValid() == false)
+                        {
+                            //add to log which file was invalid
+                            break;
+                        }
+                        else
+                        {
+                            addGetAttributesToList(pf);
+                            //TODO add new functions added by Olek +  save file
+                            //TODO check which attributes were selected and add to file
 
-                    d1 = pf.getAttributePath();
-                    d2 = pf.getAttributeDistance();
-                    d3 = pf.getAttributeDistanceToPath();
-                    d4 = pf.getAttributeMovingTime();
-                    d5 = pf.getAttributeAverageSpeed();
-                    d6 = pf.getAttributeTimeAfterStop();
-                    d7 = pf.getAttributeTimeBeforeStart();
-                    d8 = pf.getAttributeMaxSpeed();
-                    d9 = pf.getAttributePerfectLineOnTopPercentage();
-                    d10 = pf.getAttributeStopButtonPercentageHeight();
-                    d11 = pf.getAttributeStopButtonPercentageWidth();
-                    d12 = pf.getAttributeStartButtonPercentageHeight();
-                    d13 = pf.getAttributeStartButtonPercentageWidth();
+
+                            uncheckAllNodes(fileViewer.Nodes);
+                            pathList.Clear();
+                        }
+                        
+                    }
                 }
             }
+            else
+                MessageBox.Show("Granulation textbox should be filled before saving.");
+        }
+
+        private void uncheckAllNodes(TreeNodeCollection nodes)
+        {
+            foreach (TreeNode tn in nodes)
+            {
+                tn.Checked = false;
+                CheckChildren(tn, false);
+            }
+        }
+
+        private void CheckChildren(TreeNode tn, Boolean uncheck)
+        {
+            foreach (TreeNode t in tn.Nodes)
+            {
+                CheckChildren(t, uncheck);
+                t.Checked = true;
+            }
+        }
+
+        private void addGetAttributesToList(playFile pf)
+        {
+
+            listOfGetAttributes.Add(pf.getAttributeCorrectAnswer());
+            listOfGetAttributes.Add(pf.getAttributeStops());
+            listOfGetAttributes.Add(pf.getAttributeGameTime());
+            listOfGetAttributes.Add(pf.getAttributePerfectLineCrosses());
+            listOfGetAttributes.Add(pf.getAttributeExcitement());
+            listOfGetAttributes.Add(pf.getAttributeHappiness());
+            listOfGetAttributes.Add(pf.getAttributePath());
+            listOfGetAttributes.Add(pf.getAttributeDistance());
+            listOfGetAttributes.Add(pf.getAttributeDistanceToPath());
+            listOfGetAttributes.Add(pf.getAttributeMovingTime());
+            listOfGetAttributes.Add(pf.getAttributeAverageSpeed());
+            listOfGetAttributes.Add(pf.getAttributeTimeAfterStop());
+            listOfGetAttributes.Add(pf.getAttributeTimeBeforeStart());
+            listOfGetAttributes.Add(pf.getAttributeMaxSpeed());
+            listOfGetAttributes.Add(pf.getAttributePerfectLineOnTopPercentage());
+            listOfGetAttributes.Add(pf.getAttributeStopButtonPercentageHeight());
+            listOfGetAttributes.Add(pf.getAttributeStopButtonPercentageWidth());
+            listOfGetAttributes.Add(pf.getAttributeStartButtonPercentageHeight());
+            listOfGetAttributes.Add(pf.getAttributeStartButtonPercentageWidth());
         }
 
         private void granulationTextbox_TextChanged(object sender, EventArgs e)
@@ -239,8 +280,11 @@ namespace analyzingApp
             bool c = e.Node.Checked;
             string path = "";
             if (e.Node.FullPath.Contains(".csv"))
-            {
-                path = Path.GetFullPath(".") + @"\" + e.Node.FullPath;
+            {   
+                //temp solution
+                //TODO still something wrong
+                DirectoryInfo dir = new DirectoryInfo(@"..\..\..\mouse\bin\Debug");
+                path =  Path.GetFullPath(dir.FullName) + @"\" + e.Node.FullPath; // tmp
                 pathList.Add(path);
             }
             else// TODO for other dirs to get csv files
