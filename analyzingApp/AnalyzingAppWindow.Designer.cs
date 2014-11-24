@@ -40,7 +40,7 @@
             this.granulationTextbox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.removeAllButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.addAllButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,9 +125,9 @@
             // 
             // granulationTextbox
             // 
-            this.granulationTextbox.Location = new System.Drawing.Point(796, 44);
+            this.granulationTextbox.Location = new System.Drawing.Point(806, 46);
             this.granulationTextbox.Name = "granulationTextbox";
-            this.granulationTextbox.Size = new System.Drawing.Size(61, 20);
+            this.granulationTextbox.Size = new System.Drawing.Size(33, 20);
             this.granulationTextbox.TabIndex = 8;
             this.granulationTextbox.TextChanged += new System.EventHandler(this.granulationTextbox_TextChanged);
             // 
@@ -150,21 +150,22 @@
             this.removeAllButton.UseVisualStyleBackColor = true;
             this.removeAllButton.Click += new System.EventHandler(this.removeAllButton_Click);
             // 
-            // button2
+            // addAllButton
             // 
-            this.button2.Location = new System.Drawing.Point(478, 204);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Add All";
-            this.button2.UseVisualStyleBackColor = true;
+            this.addAllButton.Location = new System.Drawing.Point(478, 204);
+            this.addAllButton.Name = "addAllButton";
+            this.addAllButton.Size = new System.Drawing.Size(75, 23);
+            this.addAllButton.TabIndex = 11;
+            this.addAllButton.Text = "Add All";
+            this.addAllButton.UseVisualStyleBackColor = true;
+            this.addAllButton.Click += new System.EventHandler(this.addAllButton_Click);
             // 
             // analyzingAppWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1077, 628);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.addAllButton);
             this.Controls.Add(this.removeAllButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.granulationTextbox);
@@ -199,7 +200,7 @@
         private System.Windows.Forms.TextBox granulationTextbox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button removeAllButton;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button addAllButton;
     }
 }
 

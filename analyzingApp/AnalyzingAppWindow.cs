@@ -13,8 +13,8 @@ namespace analyzingApp
 {
     public partial class analyzingAppWindow : Form
     {
-        double d1, d2, d3, d4, d5, d6, d7, d8;
-        int i1, i2;
+        double d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13;
+        int i1, i2, i3, i4, i5;
         bool b1;
 
         List<string> addList = new List<string>();
@@ -22,7 +22,7 @@ namespace analyzingApp
         List<Attributes> listOfAttributes = new List<Attributes>();
         BindingList<Attributes> dataOriginal = new BindingList<Attributes>();
         BindingList<Attributes> dataToAdd = new BindingList<Attributes>();
-        
+
 
         public analyzingAppWindow()
         {
@@ -80,7 +80,7 @@ namespace analyzingApp
 
         private void attributesToChoose()
         {
-            settingListOfAttributes();
+            settingListOfAttributes(dataOriginal);
             this.listboxBase.DataSource = dataOriginal;
             this.listboxBase.DisplayMember = "Name";
         }
@@ -93,7 +93,7 @@ namespace analyzingApp
             {
                 if (listboxBase.GetSelected(i))
                 {
-                    dataToAdd.Add(new Attributes { Name = selectedItem.Name});
+                    dataToAdd.Add(new Attributes { Name = selectedItem.Name });
                     listboxToAdd.DataSource = dataToAdd;
                     listboxToAdd.DisplayMember = "Name";
 
@@ -103,20 +103,27 @@ namespace analyzingApp
                 }
             }
         }
-        private void settingListOfAttributes()
+        private void settingListOfAttributes(BindingList<Attributes> list)
         {
-            dataOriginal.Add(new Attributes { Name = "Correct Answer" });
-            dataOriginal.Add(new Attributes { Name = "Stops" });
-            dataOriginal.Add(new Attributes { Name = "Game Time" });
-            dataOriginal.Add(new Attributes { Name = "Path" });
-            dataOriginal.Add(new Attributes { Name = "Distance" });
-            dataOriginal.Add(new Attributes { Name = "Distance to Path" });
-            dataOriginal.Add(new Attributes { Name = "Moving Time" });
-            dataOriginal.Add(new Attributes { Name = "Average Speed" });
-            dataOriginal.Add(new Attributes { Name = "Time After Stop" });
-            dataOriginal.Add(new Attributes { Name = "Time Before Start" });
-            dataOriginal.Add(new Attributes { Name = "Max Speed" });
-
+            list.Add(new Attributes { Name = "Correct Answer" });
+            list.Add(new Attributes { Name = "Stops" });
+            list.Add(new Attributes { Name = "Game Time" });
+            list.Add(new Attributes { Name = "Perfect Line Crosses" });
+            list.Add(new Attributes { Name = "Excitement Mood Attribute"});
+            list.Add(new Attributes { Name = "Mood" });
+            list.Add(new Attributes { Name = "Path" });
+            list.Add(new Attributes { Name = "Distance" });
+            list.Add(new Attributes { Name = "Distance to Path" });
+            list.Add(new Attributes { Name = "Moving Time" });
+            list.Add(new Attributes { Name = "Average Speed" });
+            list.Add(new Attributes { Name = "Time After Stop" });
+            list.Add(new Attributes { Name = "Time Before Start" });
+            list.Add(new Attributes { Name = "Max Speed" });
+            list.Add(new Attributes { Name = "Perfect Line On Top Percentage" });
+            list.Add(new Attributes { Name = "Stop Button Percentage Height" });
+            list.Add(new Attributes { Name = "Stop Button Percentage Width" });
+            list.Add(new Attributes { Name = "Start Button Percentage Height" });
+            list.Add(new Attributes { Name = "Start Button Percentage Width" });
         }
 
         private void removeButton_Click(object sender, EventArgs e)
@@ -127,7 +134,7 @@ namespace analyzingApp
             {
                 if (listboxToAdd.GetSelected(i))
                 {
-                    dataOriginal.Add(new Attributes { Name = selectedItem.Name});
+                    dataOriginal.Add(new Attributes { Name = selectedItem.Name });
                     listboxBase.DataSource = dataOriginal;
                     listboxBase.DisplayMember = "Name";
 
@@ -156,6 +163,9 @@ namespace analyzingApp
 
                 i1 = pf.getAttributeStops();
                 i2 = pf.getAttributeGameTime();
+                i3 = pf.getAttributePerfectLineCrosses();
+                i4 = pf.getAttributeExcitement();
+                i5 = pf.getAttributeHappiness();
 
                 d1 = pf.getAttributePath();
                 d2 = pf.getAttributeDistance();
@@ -165,12 +175,17 @@ namespace analyzingApp
                 d6 = pf.getAttributeTimeAfterStop();
                 d7 = pf.getAttributeTimeBeforeStart();
                 d8 = pf.getAttributeMaxSpeed();
+                d9 = pf.getAttributePerfectLineOnTopPercentage();
+                d10 = pf.getAttributeStopButtonPercentageHeight();
+                d11 = pf.getAttributeStopButtonPercentageWidth();
+                d12 = pf.getAttributeStartButtonPercentageHeight();
+                d13 = pf.getAttributeStartButtonPercentageWidth();
             }
         }
 
         private void getCheckedFiles()
-        { 
-            
+        {
+
         }
 
         private void granulationTextbox_TextChanged(object sender, EventArgs e)
@@ -207,9 +222,22 @@ namespace analyzingApp
             dataOriginal.Clear();
             dataToAdd.Clear();
             listboxToAdd.Items.Clear();
-            settingListOfAttributes();
+            settingListOfAttributes(dataOriginal);
             listboxBase.DataSource = dataOriginal;
             listboxBase.DisplayMember = "Name";
+        }
+
+        private void addAllButton_Click(object sender, EventArgs e)
+        {
+            listboxBase.DataSource = null;
+            listboxBase.Items.Clear();
+            listboxToAdd.DataSource = null;
+            dataOriginal.Clear();
+            dataToAdd.Clear();
+            listboxBase.Items.Clear();
+            settingListOfAttributes(dataToAdd);
+            listboxToAdd.DataSource = dataToAdd;
+            listboxToAdd.DisplayMember = "Name";
         }
     }
 }
