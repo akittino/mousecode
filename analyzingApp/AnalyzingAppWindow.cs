@@ -205,6 +205,7 @@ namespace analyzingApp
             listboxToAdd.Items.Clear();
             listboxBase.DataSource = null;
             dataOriginal.Clear();
+            dataToAdd.Clear();
             listboxToAdd.Items.Clear();
             settingListOfAttributes();
             listboxBase.DataSource = dataOriginal;
