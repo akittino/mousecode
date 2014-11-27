@@ -57,6 +57,7 @@ namespace analyzingApp
         double? timeAfterStop = null;
         double? distanceToPath = null;
         double? timeBeforeStart = null;
+        double? standardDeviation = null;
         double? stopButtonPercentageWidth = null;
         double? stopButtonPercentageHeight = null;
         double? perfectLineOnTopPercentage = null;
@@ -424,11 +425,11 @@ namespace analyzingApp
                     double distance = Math.Sqrt((double)((dX * dX) + (dY * dY)));
 
                     placeDistance += distance;
-                    double tmpMaxSpeed = distance / dT;
+                    double tmpSpeed = distance / dT;
 
-                    if (tmpMaxSpeed > maxSpeed)
+                    if (tmpSpeed > maxSpeed)
                     {
-                        maxSpeed = tmpMaxSpeed;
+                        maxSpeed = tmpSpeed;
                         maxSpeedPlace = placeDistance / path;
                     }
                 }
@@ -442,6 +443,28 @@ namespace analyzingApp
                 getAttributeMaxSpeed();
             }
             return (double)maxSpeedPlace;
+        }
+        public double getAttributeStandardDeviation()
+        {
+            if (standardDeviation == null)
+            {
+                if (averageSpeed == null)
+                    getAttributeAverageSpeed();
+
+                double sum = 0;
+                for (int i = 1; i < coordsList.Count; ++i)
+                {
+                    int dX = coordsList[i - 1].X - coordsList[i].X;
+                    int dY = coordsList[i - 1].Y - coordsList[i].Y;
+                    double dT = Math.Abs(coordsList[i - 1].timeFromGameStart - coordsList[i].timeFromGameStart);
+                    double distance = Math.Sqrt((double)((dX * dX) + (dY * dY)));
+
+                    double tmpSpeed = distance / dT;
+                    sum += Math.Pow(tmpSpeed - (double)averageSpeed, 2);
+                }
+                standardDeviation = sum / (coordsList.Count - 1);
+            }
+            return (double)standardDeviation;
         }
         public double getAttributePerfectLineOnTopPercentage()
         {
