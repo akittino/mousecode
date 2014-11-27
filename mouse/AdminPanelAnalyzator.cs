@@ -261,4 +261,6 @@ namespace mysz
     }
 }
 //TODO files validate
-//TODO add bitmap click to get play reading
+//TODO add checking methods
+//TODO new attribute
+//TODO change fonts!
