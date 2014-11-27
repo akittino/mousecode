@@ -52,10 +52,10 @@
             // endGameLabel
             // 
             this.endGameLabel.AutoSize = true;
-            this.endGameLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endGameLabel.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.endGameLabel.Location = new System.Drawing.Point(9, 591);
             this.endGameLabel.Name = "endGameLabel";
-            this.endGameLabel.Size = new System.Drawing.Size(85, 40);
+            this.endGameLabel.Size = new System.Drawing.Size(92, 23);
             this.endGameLabel.TabIndex = 22;
             this.endGameLabel.Text = "End game";
             this.endGameLabel.Click += new System.EventHandler(this.exitGame);
@@ -65,46 +65,46 @@
             // timeTextLabel
             // 
             this.timeTextLabel.AutoSize = true;
-            this.timeTextLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeTextLabel.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.timeTextLabel.Location = new System.Drawing.Point(12, 31);
             this.timeTextLabel.Name = "timeTextLabel";
-            this.timeTextLabel.Size = new System.Drawing.Size(55, 40);
+            this.timeTextLabel.Size = new System.Drawing.Size(58, 23);
             this.timeTextLabel.TabIndex = 25;
             this.timeTextLabel.Text = "Time:";
             // 
             // timeLabel
             // 
             this.timeLabel.AutoSize = true;
-            this.timeLabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.timeLabel.Location = new System.Drawing.Point(16, 71);
+            this.timeLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.timeLabel.Location = new System.Drawing.Point(12, 54);
             this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(12, 18);
+            this.timeLabel.Size = new System.Drawing.Size(13, 19);
             this.timeLabel.TabIndex = 24;
             this.timeLabel.Text = " ";
             // 
             // scoreTextLabel
             // 
             this.scoreTextLabel.AutoSize = true;
-            this.scoreTextLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scoreTextLabel.Location = new System.Drawing.Point(12, 94);
+            this.scoreTextLabel.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.scoreTextLabel.Location = new System.Drawing.Point(12, 90);
             this.scoreTextLabel.Name = "scoreTextLabel";
-            this.scoreTextLabel.Size = new System.Drawing.Size(57, 40);
+            this.scoreTextLabel.Size = new System.Drawing.Size(63, 23);
             this.scoreTextLabel.TabIndex = 27;
             this.scoreTextLabel.Text = "Score:";
             // 
             // scoreLabel
             // 
             this.scoreLabel.AutoSize = true;
-            this.scoreLabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.scoreLabel.Location = new System.Drawing.Point(16, 134);
+            this.scoreLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.scoreLabel.Location = new System.Drawing.Point(12, 113);
             this.scoreLabel.Name = "scoreLabel";
-            this.scoreLabel.Size = new System.Drawing.Size(12, 18);
+            this.scoreLabel.Size = new System.Drawing.Size(13, 19);
             this.scoreLabel.TabIndex = 28;
             this.scoreLabel.Text = " ";
             // 
             // stopLButton
             // 
-            this.stopLButton.Font = new System.Drawing.Font("Gabriola", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stopLButton.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.stopLButton.Location = new System.Drawing.Point(172, 31);
             this.stopLButton.Name = "stopLButton";
             this.stopLButton.Size = new System.Drawing.Size(118, 82);
@@ -116,7 +116,7 @@
             // 
             // stopRButton
             // 
-            this.stopRButton.Font = new System.Drawing.Font("Gabriola", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stopRButton.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.stopRButton.Location = new System.Drawing.Point(854, 31);
             this.stopRButton.Name = "stopRButton";
             this.stopRButton.Size = new System.Drawing.Size(118, 82);
@@ -128,7 +128,7 @@
             // 
             // startButton
             // 
-            this.startButton.Font = new System.Drawing.Font("Gabriola", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.startButton.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.startButton.Location = new System.Drawing.Point(518, 549);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(118, 82);

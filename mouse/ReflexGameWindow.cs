@@ -122,7 +122,7 @@ namespace mysz
         {
             graphics.Clear(BACKGROUND_COLOR);
             drawEllipse(redBrush);
-            writeToPictureBox(graphics, "Don't move mouse cursor out of Start button until circle color change to green.", 150, 280, 15);
+            writeToPictureBox(graphics, "Don't move mouse cursor out of Start button until circle color change to green.", 80, 280, 15);
 
         }
 
@@ -130,7 +130,7 @@ namespace mysz
         {
             graphics.Clear(BACKGROUND_COLOR);
             drawEllipse(greenBrush);
-            writeToPictureBox(graphics, "Now! Push Stop button as fast as you can!", 250, 280, 15);
+            writeToPictureBox(graphics, "Now! Push Stop button as fast as you can!", 230, 280, 15);
 
             Timer = new Thread(TimeCountdown);
             Timer.Start();
@@ -170,7 +170,7 @@ namespace mysz
                 gameState = GameStates.BeforeGame;
                 
                 writeToPictureBox(graphics, "Game paused, please start again.", 270, 250, 15);
-                writeToPictureBox(graphics, "Moved out from Start button before circle changed to green.", 200, 280, 15);
+                writeToPictureBox(graphics, "Moved out from Start button before circle changed to green.", 170, 280, 15);
             }
             else
             {
@@ -200,7 +200,7 @@ namespace mysz
 
             if (timeLabel.Text.Equals("Time out!"))
             {
-                writeToPictureBox(graphics, "Game has just ended due to time out!", 300, 280, 15);
+                writeToPictureBox(graphics, "Game has just ended due to time out!", 245, 280, 15);
 
                 if (gameId != 0)
                     writeGameDetails();
@@ -222,7 +222,7 @@ namespace mysz
                 scoreLabel.Text = score.ToString();
 
                 decreaseGameTime();
-                writeToPictureBox(graphics, "Great job! Play next level!", 315, 280, 15);
+                writeToPictureBox(graphics, "Great job! Play next level!", 290, 280, 15);
             }
         }
 

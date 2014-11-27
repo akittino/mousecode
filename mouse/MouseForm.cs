@@ -197,7 +197,7 @@ namespace mysz
 
         protected void writeToPictureBox(Graphics graphics, String text, int X, int Y, int fontSize)
         {
-            using (Font myFont = new Font("Gabriola", fontSize))
+            using (Font myFont = new Font("Times New Roman", fontSize))
             {
                 graphics.DrawString(text, myFont, Brushes.Black, new Point(X, Y));
             }
