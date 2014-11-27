@@ -16,7 +16,8 @@ namespace mysz
         const string DATABASE_PATH = @"..\..\..\ThingsDatabase\"; //TODO change path when build .exe!!!
         readonly string USER_NAME;
         readonly int INITIAL_QUESTION_TIME;
-
+        //TODO writeToPictureVox unificate!
+        //TODO answers length validate
         public bool databaseCorrupted;
         Graphics graphics, questionGraphics;
         List<TimePoint> coordsList;
@@ -117,7 +118,7 @@ namespace mysz
 
             /*** below, nothing appears anyways ***/
             graphics.Clear(Color.White);
-            writeToPictureBox("Please start a game!", 340, 520);
+            writeToPictureBox("Please start a game!", 315, 520);
         }
 
         private void setNewQuestion()
@@ -191,7 +192,7 @@ namespace mysz
             decreaseGameTime();
 
             graphics.Clear(Color.White);
-            writeToPictureBox("Now quick, answer the question!", 300, 520);
+            writeToPictureBox("Now quick, answer the question!", 270, 520);
 
             Timer = new Thread(TimeCountdown);
             CoordinateSaver = new Thread(saveCoordinates);
@@ -226,7 +227,7 @@ namespace mysz
             if (timeLabel.Text == "Time out!")
             {
                 startButton.Text = "Start new game";
-                writeToPictureBox("Please start a game!", 340, 520);
+                writeToPictureBox("Please start a game!", 315, 520);
                 questionsRnd.Clear();
                 if (gameId != 0)
                     writeGameDetails();
@@ -242,11 +243,11 @@ namespace mysz
                 if (leftButtonClicked == leftButtonCorrect)
                 {
                     ++score;
-                    writeToPictureBox("Good job! Please take next question!", 280, 520);
+                    writeToPictureBox("Good job! Please take next question!", 240, 520);
                 }
                 else
                 {
-                    writeToPictureBox("You were wrong! Please take next question!", 260, 520);
+                    writeToPictureBox("You were wrong! Please take next question!", 210, 520);
                 }
 
                 scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
@@ -259,7 +260,7 @@ namespace mysz
 
         public void writeToPictureBox(String text, int X, int Y)
         {
-            using (Font myFont = new Font("Gabriola", 15))
+            using (Font myFont = new Font("Times New Roman", 15))
             {
                 graphics.DrawString(text, myFont, Brushes.Black, new Point(X, Y));
             }

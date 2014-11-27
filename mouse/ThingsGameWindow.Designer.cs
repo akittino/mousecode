@@ -44,7 +44,7 @@
             // 
             // answerRButton
             // 
-            this.answerRButton.Font = new System.Drawing.Font("Gabriola", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.answerRButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.answerRButton.Location = new System.Drawing.Point(854, 31);
             this.answerRButton.Name = "answerRButton";
             this.answerRButton.Size = new System.Drawing.Size(118, 82);
@@ -56,7 +56,7 @@
             // 
             // answerLButton
             // 
-            this.answerLButton.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.answerLButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.answerLButton.Location = new System.Drawing.Point(172, 31);
             this.answerLButton.Name = "answerLButton";
             this.answerLButton.Size = new System.Drawing.Size(118, 82);
@@ -69,20 +69,20 @@
             // scoreLabel
             // 
             this.scoreLabel.AutoSize = true;
-            this.scoreLabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.scoreLabel.Location = new System.Drawing.Point(16, 129);
+            this.scoreLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.scoreLabel.Location = new System.Drawing.Point(12, 113);
             this.scoreLabel.Name = "scoreLabel";
-            this.scoreLabel.Size = new System.Drawing.Size(12, 18);
+            this.scoreLabel.Size = new System.Drawing.Size(13, 19);
             this.scoreLabel.TabIndex = 29;
             this.scoreLabel.Text = " ";
             // 
             // scoreTextLabel
             // 
             this.scoreTextLabel.AutoSize = true;
-            this.scoreTextLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scoreTextLabel.Location = new System.Drawing.Point(12, 89);
+            this.scoreTextLabel.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.scoreTextLabel.Location = new System.Drawing.Point(12, 90);
             this.scoreTextLabel.Name = "scoreTextLabel";
-            this.scoreTextLabel.Size = new System.Drawing.Size(57, 40);
+            this.scoreTextLabel.Size = new System.Drawing.Size(63, 23);
             this.scoreTextLabel.TabIndex = 28;
             this.scoreTextLabel.Text = "Score:";
             // 
@@ -98,20 +98,20 @@
             // timeTextLabel
             // 
             this.timeTextLabel.AutoSize = true;
-            this.timeTextLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeTextLabel.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.timeTextLabel.Location = new System.Drawing.Point(12, 31);
             this.timeTextLabel.Name = "timeTextLabel";
-            this.timeTextLabel.Size = new System.Drawing.Size(80, 40);
+            this.timeTextLabel.Size = new System.Drawing.Size(58, 23);
             this.timeTextLabel.TabIndex = 25;
-            this.timeTextLabel.Text = "Time left:";
+            this.timeTextLabel.Text = "Time:";
             // 
             // timeLabel
             // 
             this.timeLabel.AutoSize = true;
-            this.timeLabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.timeLabel.Location = new System.Drawing.Point(16, 71);
+            this.timeLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.timeLabel.Location = new System.Drawing.Point(12, 54);
             this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(12, 18);
+            this.timeLabel.Size = new System.Drawing.Size(13, 19);
             this.timeLabel.TabIndex = 24;
             this.timeLabel.Text = " ";
             this.timeLabel.Visible = false;
@@ -119,10 +119,10 @@
             // endGameLabel
             // 
             this.endGameLabel.AutoSize = true;
-            this.endGameLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endGameLabel.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.endGameLabel.Location = new System.Drawing.Point(9, 591);
             this.endGameLabel.Name = "endGameLabel";
-            this.endGameLabel.Size = new System.Drawing.Size(85, 40);
+            this.endGameLabel.Size = new System.Drawing.Size(92, 23);
             this.endGameLabel.TabIndex = 22;
             this.endGameLabel.Text = "End game";
             this.endGameLabel.Click += new System.EventHandler(this.exitGame);
@@ -131,7 +131,7 @@
             // 
             // startButton
             // 
-            this.startButton.Font = new System.Drawing.Font("Gabriola", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.startButton.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.startButton.Location = new System.Drawing.Point(492, 577);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(157, 54);
