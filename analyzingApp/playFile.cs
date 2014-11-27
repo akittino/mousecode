@@ -463,6 +463,7 @@ namespace analyzingApp
                     sum += Math.Pow(tmpSpeed - (double)averageSpeed, 2);
                 }
                 standardDeviation = sum / (coordsList.Count - 1);
+                // c4 factor is omitted, we don't need so much precision
             }
             return (double)standardDeviation;
         }
