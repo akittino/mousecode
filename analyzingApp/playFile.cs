@@ -273,7 +273,7 @@ namespace analyzingApp
         {
             return fileLog;
         }
-        public bool getAttributeFileValid()
+        public bool getFileValid()
         {
             if (fileLog == null)
             {

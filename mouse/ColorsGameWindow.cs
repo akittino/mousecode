@@ -12,7 +12,7 @@ namespace mysz
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
-
+        //TODO fix double the same color
         readonly int INITIAL_GAME_TIME;
         DateTime startTime;
 

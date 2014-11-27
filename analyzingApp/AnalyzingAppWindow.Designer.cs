@@ -54,6 +54,7 @@
             // 
             // fileViewer
             // 
+            this.fileViewer.CheckBoxes = true;
             this.fileViewer.Location = new System.Drawing.Point(3, 3);
             this.fileViewer.Name = "fileViewer";
             this.fileViewer.Size = new System.Drawing.Size(228, 598);
@@ -65,7 +66,7 @@
             this.listboxBase.FormattingEnabled = true;
             this.listboxBase.Location = new System.Drawing.Point(293, 44);
             this.listboxBase.Name = "listboxBase";
-            this.listboxBase.Size = new System.Drawing.Size(157, 251);
+            this.listboxBase.Size = new System.Drawing.Size(157, 303);
             this.listboxBase.TabIndex = 1;
             // 
             // label1
@@ -100,9 +101,9 @@
             // listboxToAdd
             // 
             this.listboxToAdd.FormattingEnabled = true;
-            this.listboxToAdd.Location = new System.Drawing.Point(595, 44);
+            this.listboxToAdd.Location = new System.Drawing.Point(595, 46);
             this.listboxToAdd.Name = "listboxToAdd";
-            this.listboxToAdd.Size = new System.Drawing.Size(157, 251);
+            this.listboxToAdd.Size = new System.Drawing.Size(157, 303);
             this.listboxToAdd.TabIndex = 5;
             // 
             // label2
@@ -130,6 +131,7 @@
             this.granulationTextbox.Name = "granulationTextbox";
             this.granulationTextbox.Size = new System.Drawing.Size(33, 20);
             this.granulationTextbox.TabIndex = 8;
+            this.granulationTextbox.Text = "10";
             this.granulationTextbox.TextChanged += new System.EventHandler(this.granulationTextbox_TextChanged);
             // 
             // label3

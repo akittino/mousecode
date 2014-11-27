@@ -18,6 +18,7 @@ namespace mysz
         readonly int INITIAL_QUESTION_TIME;
         //TODO writeToPictureVox unificate!
         //TODO answers length validate
+        //TODO start button make vertical center
         public bool databaseCorrupted;
         Graphics graphics, questionGraphics;
         List<TimePoint> coordsList;
