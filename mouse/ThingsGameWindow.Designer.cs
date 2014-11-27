@@ -72,9 +72,9 @@
             this.scoreLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.scoreLabel.Location = new System.Drawing.Point(12, 113);
             this.scoreLabel.Name = "scoreLabel";
-            this.scoreLabel.Size = new System.Drawing.Size(13, 19);
+            this.scoreLabel.Size = new System.Drawing.Size(21, 19);
             this.scoreLabel.TabIndex = 29;
-            this.scoreLabel.Text = " ";
+            this.scoreLabel.Text = " 0";
             // 
             // scoreTextLabel
             // 
@@ -111,9 +111,9 @@
             this.timeLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.timeLabel.Location = new System.Drawing.Point(12, 54);
             this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(13, 19);
+            this.timeLabel.Size = new System.Drawing.Size(38, 19);
             this.timeLabel.TabIndex = 24;
-            this.timeLabel.Text = " ";
+            this.timeLabel.Text = " time";
             this.timeLabel.Visible = false;
             // 
             // endGameLabel

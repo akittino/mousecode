@@ -120,7 +120,10 @@ namespace mysz
         private void animationFun(string sign)
         {
             graphics.Clear(Color.White);
-            writeToPictureBox(graphics, sign, 320, 180, 100);
+            if(sign == "GO!")
+                writeToPictureBox(graphics, sign, 250, 180, 100);
+            else
+                writeToPictureBox(graphics, sign, 320, 180, 100);
         }
 
         private void animation()
@@ -150,7 +153,7 @@ namespace mysz
                 circleBrushColor = circleColorsBase[r];
                 graphics.FillEllipse(new SolidBrush(circleBrushColor), 200, 80, 400, 400);
                 textColor = textColorsBase[r];
-                graphics.DrawString(textColor, new Font("Gabriola", 80), Brushes.White, new Point(280, 180));
+                graphics.DrawString(textColor, new Font("Times New Roman", 80), Brushes.White, new Point(250, 210));
             }
             //case when colors of text and eclipse are different
             else
@@ -167,7 +170,7 @@ namespace mysz
                 circleBrushColor = circleColorsBase[r1];
                 graphics.FillEllipse(new SolidBrush(circleBrushColor), 200, 80, 400, 400);
                 textColor = textColorsBase[r2];
-                graphics.DrawString(textColor, new Font("Gabriola", 80), Brushes.White, new Point(280, 180));
+                graphics.DrawString(textColor, new Font("Times New Roman", 80), Brushes.White, new Point(250, 210));
             }
         }
 

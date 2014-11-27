@@ -57,7 +57,8 @@ namespace mysz
             USER_NAME = userName;
             rnd = new Random();
             
-            scoreLabel.Text = score.ToString();
+            scoreLabel.Text = "";
+            timeLabel.Text = "";
 
             stopRButton.Enabled = false;
             stopLButton.Enabled = false;

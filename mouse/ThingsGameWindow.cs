@@ -82,9 +82,11 @@ namespace mysz
             graphics = gameWindow.CreateGraphics();
             questionGraphics = questionBox.CreateGraphics();
 
+            timeLabel.Text = "";
+            scoreLabel.Text = "";
+
             USER_NAME = userName;
             questionTime = INITIAL_QUESTION_TIME = timePerQuestion;
-            scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
 
             setQuestionTime((double)questionTime);
 

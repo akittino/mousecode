@@ -54,20 +54,20 @@
             // timeTextLabel
             // 
             this.timeTextLabel.AutoSize = true;
-            this.timeTextLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeTextLabel.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.timeTextLabel.Location = new System.Drawing.Point(12, 31);
             this.timeTextLabel.Name = "timeTextLabel";
-            this.timeTextLabel.Size = new System.Drawing.Size(51, 40);
+            this.timeTextLabel.Size = new System.Drawing.Size(58, 23);
             this.timeTextLabel.TabIndex = 29;
-            this.timeTextLabel.Text = "Time";
+            this.timeTextLabel.Text = "Time:";
             // 
             // endGameLabel
             // 
             this.endGameLabel.AutoSize = true;
-            this.endGameLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endGameLabel.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.endGameLabel.Location = new System.Drawing.Point(9, 591);
             this.endGameLabel.Name = "endGameLabel";
-            this.endGameLabel.Size = new System.Drawing.Size(85, 40);
+            this.endGameLabel.Size = new System.Drawing.Size(92, 23);
             this.endGameLabel.TabIndex = 26;
             this.endGameLabel.Text = "End game";
             this.endGameLabel.Click += new System.EventHandler(this.endGame);
@@ -77,10 +77,10 @@
             // timeLabel
             // 
             this.timeLabel.AutoSize = true;
-            this.timeLabel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeLabel.Location = new System.Drawing.Point(32, 71);
+            this.timeLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.timeLabel.Location = new System.Drawing.Point(12, 54);
             this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(29, 15);
+            this.timeLabel.Size = new System.Drawing.Size(34, 19);
             this.timeLabel.TabIndex = 30;
             this.timeLabel.Text = "time";
             this.timeLabel.Visible = false;
@@ -101,7 +101,7 @@
             // 
             // yesButton
             // 
-            this.yesButton.Font = new System.Drawing.Font("Gabriola", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.yesButton.Font = new System.Drawing.Font("Times New Roman", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.yesButton.Location = new System.Drawing.Point(172, 549);
             this.yesButton.Name = "yesButton";
             this.yesButton.Size = new System.Drawing.Size(118, 82);
@@ -113,7 +113,7 @@
             // 
             // noButton
             // 
-            this.noButton.Font = new System.Drawing.Font("Gabriola", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noButton.Font = new System.Drawing.Font("Times New Roman", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.noButton.Location = new System.Drawing.Point(854, 549);
             this.noButton.Name = "noButton";
             this.noButton.Size = new System.Drawing.Size(118, 82);
@@ -126,20 +126,20 @@
             // scoreLabel
             // 
             this.scoreLabel.AutoSize = true;
-            this.scoreLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scoreLabel.Location = new System.Drawing.Point(12, 379);
+            this.scoreLabel.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.scoreLabel.Location = new System.Drawing.Point(12, 90);
             this.scoreLabel.Name = "scoreLabel";
-            this.scoreLabel.Size = new System.Drawing.Size(53, 40);
+            this.scoreLabel.Size = new System.Drawing.Size(63, 23);
             this.scoreLabel.TabIndex = 35;
-            this.scoreLabel.Text = "Score";
+            this.scoreLabel.Text = "Score:";
             // 
             // scoreNumber
             // 
             this.scoreNumber.AutoSize = true;
-            this.scoreNumber.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scoreNumber.Location = new System.Drawing.Point(28, 408);
+            this.scoreNumber.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.scoreNumber.Location = new System.Drawing.Point(12, 113);
             this.scoreNumber.Name = "scoreNumber";
-            this.scoreNumber.Size = new System.Drawing.Size(26, 40);
+            this.scoreNumber.Size = new System.Drawing.Size(17, 19);
             this.scoreNumber.TabIndex = 37;
             this.scoreNumber.Text = "0";
             this.scoreNumber.Visible = false;
