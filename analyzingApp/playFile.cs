@@ -53,6 +53,7 @@ namespace analyzingApp
         double? maxSpeed = null;
         double? movingTime = null;
         double? averageSpeed = null;
+        double? maxSpeedPlace = null;
         double? timeAfterStop = null;
         double? distanceToPath = null;
         double? timeBeforeStart = null;
@@ -233,6 +234,7 @@ namespace analyzingApp
             int By = coordsList[coordsList.Count - 1].Y;
             int lastSign = -1;
             //TODO maths below is very naive, fix it! find better way to split the segment when sign changes
+            //it's okey, can be. maybe small change to get half point if isn't
 
             for (int i = 1; i < coordsList.Count - 2; ++i)
             {
@@ -407,7 +409,13 @@ namespace analyzingApp
         {
             if(maxSpeed == null)
             {
+                if(path == null)
+                {
+                    getAttributePath();
+                }
+
                 maxSpeed = 0;
+                double placeDistance = 0;
                 for (int i = 1; i < coordsList.Count; ++i)
                 {
                     int dX = coordsList[i - 1].X - coordsList[i].X;
@@ -415,13 +423,25 @@ namespace analyzingApp
                     double dT = Math.Abs(coordsList[i - 1].timeFromGameStart - coordsList[i].timeFromGameStart);
                     double distance = Math.Sqrt((double)((dX * dX) + (dY * dY)));
 
+                    placeDistance += distance;
                     double tmpMaxSpeed = distance / dT;
 
                     if (tmpMaxSpeed > maxSpeed)
+                    {
                         maxSpeed = tmpMaxSpeed;
+                        maxSpeedPlace = placeDistance / path;
+                    }
                 }
             }
             return (double)maxSpeed;
+        }
+        public double getAttributeMaxSpeedPlace()
+        {
+            if(maxSpeedPlace == null)
+            {
+                getAttributeMaxSpeed();
+            }
+            return (double)maxSpeedPlace;
         }
         public double getAttributePerfectLineOnTopPercentage()
         {

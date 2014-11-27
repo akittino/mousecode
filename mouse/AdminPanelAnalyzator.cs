@@ -262,5 +262,4 @@ namespace mysz
 }
 //TODO files validate
 //TODO add checking methods
-//TODO new attribute
 //TODO change fonts!
