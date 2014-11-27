@@ -136,7 +136,7 @@
             // 
             this.setTimeButton.Enabled = false;
             this.setTimeButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.setTimeButton.Location = new System.Drawing.Point(528, 129);
+            this.setTimeButton.Location = new System.Drawing.Point(527, 129);
             this.setTimeButton.Name = "setTimeButton";
             this.setTimeButton.Size = new System.Drawing.Size(75, 33);
             this.setTimeButton.TabIndex = 25;
