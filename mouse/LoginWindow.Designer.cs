@@ -77,9 +77,9 @@
             // loginStatusLabel
             // 
             this.loginStatusLabel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginStatusLabel.Location = new System.Drawing.Point(9, 183);
+            this.loginStatusLabel.Location = new System.Drawing.Point(9, 176);
             this.loginStatusLabel.Name = "loginStatusLabel";
-            this.loginStatusLabel.Size = new System.Drawing.Size(310, 23);
+            this.loginStatusLabel.Size = new System.Drawing.Size(310, 40);
             this.loginStatusLabel.TabIndex = 10;
             this.loginStatusLabel.Text = "Please enter name before play.";
             this.loginStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -181,10 +181,10 @@
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(108, 2);
+            this.titleLabel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.titleLabel.Location = new System.Drawing.Point(99, 9);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(115, 40);
+            this.titleLabel.Size = new System.Drawing.Size(123, 21);
             this.titleLabel.TabIndex = 16;
             this.titleLabel.Text = "Mouse Tracker";
             // 

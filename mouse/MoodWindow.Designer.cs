@@ -57,10 +57,10 @@
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(86, 21);
+            this.titleLabel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.titleLabel.Location = new System.Drawing.Point(73, 23);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(178, 40);
+            this.titleLabel.Size = new System.Drawing.Size(197, 21);
             this.titleLabel.TabIndex = 21;
             this.titleLabel.Text = "Now choose your mood:";
             // 
@@ -235,16 +235,16 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Gabriola", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(41, 153);
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label7.Location = new System.Drawing.Point(26, 157);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(271, 40);
+            this.label7.Size = new System.Drawing.Size(292, 21);
             this.label7.TabIndex = 49;
             this.label7.Text = "And how the game influenced on you:";
             // 
             // answerRButton
             // 
-            this.answerRButton.Font = new System.Drawing.Font("Gabriola", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.answerRButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.answerRButton.Location = new System.Drawing.Point(113, 288);
             this.answerRButton.Name = "answerRButton";
             this.answerRButton.Size = new System.Drawing.Size(126, 40);

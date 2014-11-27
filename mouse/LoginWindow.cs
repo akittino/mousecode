@@ -7,6 +7,7 @@ namespace mysz
     {
         //TODO set the same font to all windows
         //TODO change windows names
+        //TODO change min times to 1 sec
         const String AdminPassword = "admin";
         AdminPanelAnalyzator AdminWindow;
         ThingsGameMenuWindow ThingsWindow;
@@ -147,7 +148,7 @@ namespace mysz
                 logThis("Please enter name before play.");
                 GamesButtonsOff();
             }
-            else if (userNameTextbox.Text.Length >= 12)
+            else if (userNameTextbox.Text.Length > 12)
             {
                 MessageBox.Show("User name allows only 12 characters.");
                 logThis("User name is too long. Please use valid name.");
@@ -155,7 +156,7 @@ namespace mysz
             }
             else
             {
-                logThis("Access to games granted. Hello " + userNameTextbox.Text + "!");
+                logThis("Access to games granted.\n Hello " + userNameTextbox.Text + "!");
                 GamesButtonsOn();
             }
         }

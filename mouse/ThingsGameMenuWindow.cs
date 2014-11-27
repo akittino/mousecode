@@ -16,7 +16,7 @@ namespace mysz
             MainGameWindowBase BaseWindow = new MainGameWindowBase(helpLabel, titleLabel1, exitLabel, backLabel, settingsLabel,
             playButton, instructionTextBox);
             this.userName = userName;
-            titleLabel1.Text = "Welcome " + userName + "!";
+            titleLabel1.Text = "Welcome \n" + userName + "!";
         }
 
         public void playButtonClick(object sender, EventArgs e)
