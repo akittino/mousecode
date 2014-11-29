@@ -230,12 +230,13 @@ namespace mysz
             return MoodWindow.getMoods();
         }
 
-        protected override void WndProc(ref Message m)
+        protected override void WndProc(ref Message msg)
         //workaround to not repaint windows when ALT is pressed
         {
-            // Suppress the WM_UPDATEUISTATE message
-            if (m.Msg == 0x128) return;
-            base.WndProc(ref m);
+            if (msg.Msg != 0x128)
+            {
+                base.WndProc(ref msg);
+            }
         }
     }
 }
