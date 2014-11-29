@@ -53,6 +53,7 @@ namespace analyzingApp
         double? maxSpeed = null;
         double? movingTime = null;
         double? averageSpeed = null;
+        double? maxSpeedTime = null;
         double? maxSpeedPlace = null;
         double? timeAfterStop = null;
         double? distanceToPath = null;
@@ -158,6 +159,12 @@ namespace analyzingApp
 
                 }
 
+                if(coordsList.Count < 3)
+                {
+                    fileLog = "For file:\n" + path + "\nFile was corrupted. Couldn't proceed it!\n";
+                    return;
+                }
+
                 string[] pathParts = path.Split('\\');
                 string moodPath = "";
                 
@@ -167,6 +174,12 @@ namespace analyzingApp
                 }
 
                 moodPath += "gameDetails.txt";
+
+                if(!File.Exists(moodPath))
+                {
+                    fileLog = "For file:\n" + path + "\nThere was no mood file. Couldn't proceed it!\n";
+                    return;
+                }
 
                 using (StreamReader sr = new StreamReader(moodPath))
                 {
@@ -433,7 +446,7 @@ namespace analyzingApp
                 {
                     int dX = coordsList[i - 1].X - coordsList[i].X;
                     int dY = coordsList[i - 1].Y - coordsList[i].Y;
-                    double dT = Math.Abs(coordsList[i - 1].timeFromGameStart - coordsList[i].timeFromGameStart);
+                    double dT = coordsList[i].timeFromGameStart - coordsList[i - 1].timeFromGameStart;
                     double distance = Math.Sqrt((double)((dX * dX) + (dY * dY)));
 
                     placeDistance += distance;
@@ -443,10 +456,19 @@ namespace analyzingApp
                     {
                         maxSpeed = tmpSpeed;
                         maxSpeedPlace = placeDistance / path;
+                        maxSpeedTime = (coordsList[i].timeFromGameStart - (dT / 2)) / movingTime;
                     }
                 }
             }
             return (double)maxSpeed;
+        }
+        public double getAttributeMaxSpeedTime()
+        {
+            if(maxSpeedTime == null)
+            {
+                getAttributeMaxSpeed();
+            }
+            return (double)maxSpeedTime;
         }
         public double getAttributeMaxSpeedPlace()
         {
