@@ -359,7 +359,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(364, 320);
             this.Name = "MoodWindow";
-            this.Text = "MoodWindow";
+            this.Text = "Choose your mood";
             this.ResumeLayout(false);
             this.PerformLayout();
 

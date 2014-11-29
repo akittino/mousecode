@@ -184,9 +184,9 @@
             this.titleLabel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.titleLabel.Location = new System.Drawing.Point(99, 9);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(123, 21);
+            this.titleLabel.Size = new System.Drawing.Size(117, 21);
             this.titleLabel.TabIndex = 16;
-            this.titleLabel.Text = "Mouse Tracker";
+            this.titleLabel.Text = "Mouse Moves";
             // 
             // login_main_window
             // 
@@ -206,7 +206,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(350, 383);
             this.Name = "login_main_window";
-            this.Text = "LoginWindow";
+            this.Text = "Mouse Moves";
             this.Load += new System.EventHandler(this.login_main_window_Load);
             this.gamesGroupBox.ResumeLayout(false);
             this.gamesGroupBox.PerformLayout();

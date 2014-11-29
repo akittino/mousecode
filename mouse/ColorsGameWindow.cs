@@ -12,7 +12,6 @@ namespace mysz
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
-        //TODO fix double the same color
         readonly int INITIAL_GAME_TIME;
         DateTime startTime;
 
@@ -29,7 +28,6 @@ namespace mysz
         int quantityOfAnswers = 0;
         string userName;
         bool leftButtonYESClicked = false;
-        int seconds = 0;
         int gameId = 0;
         int maxGameTime = 5;
 
@@ -153,25 +151,46 @@ namespace mysz
                 circleBrushColor = circleColorsBase[r];
                 graphics.FillEllipse(new SolidBrush(circleBrushColor), 200, 80, 400, 400);
                 textColor = textColorsBase[r];
-                graphics.DrawString(textColor, new Font("Times New Roman", 80), Brushes.White, new Point(250, 210));
+                drawColorName(textColor);
             }
             //case when colors of text and eclipse are different
             else
             {
                 int r1 = rnd.Next(0, 5);
-                int r2 = rnd.Next(0, 5);
-                if (r2 == r1)
+                int r2 = rnd.Next(0, 500)%6;
+                while (r2 == r1)
                 {
-                    while (r2 == r1)
-                    {
-                        r2 = rnd.Next(0, 5);
-                    }
+                    r2 = rnd.Next(0, 50)%6;
                 }
                 circleBrushColor = circleColorsBase[r1];
                 graphics.FillEllipse(new SolidBrush(circleBrushColor), 200, 80, 400, 400);
                 textColor = textColorsBase[r2];
-                graphics.DrawString(textColor, new Font("Times New Roman", 80), Brushes.White, new Point(250, 210));
+                drawColorName(textColor);
             }
+        }
+
+        private void drawColorName(string textColor)
+        {
+            int X = 250;
+            switch(textColor)
+            {
+                case "Red":
+                    X = 290;
+                    break;
+                case "Blue":
+                    X = 280;
+                    break;
+                case "Pink":
+                    X = 280;
+                    break;
+                case "Yellow":
+                    X = 230;
+                    break;
+                case "Purple":
+                    X = 240;
+                    break;
+            }
+            graphics.DrawString(textColor, new Font("Times New Roman", 80), Brushes.White, new Point(X, 210));
         }
 
         private void yesButton_Click(object sender, EventArgs e)
@@ -253,7 +272,7 @@ namespace mysz
                 "Correct answer:" + ((correctAnswer == true) ? "YES" : "NO"), gameTime.ToString("F0") + "," + maxGameTime * 1000);
         }
 
-        private void TimeCountdown()
+        private new void TimeCountdown()
         {
             DateTime endTime = DateTime.Now.AddSeconds((double)maxGameTime);
 

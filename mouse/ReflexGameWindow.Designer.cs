@@ -78,9 +78,9 @@
             this.timeLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.timeLabel.Location = new System.Drawing.Point(12, 54);
             this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(38, 19);
+            this.timeLabel.Size = new System.Drawing.Size(34, 19);
             this.timeLabel.TabIndex = 24;
-            this.timeLabel.Text = " time";
+            this.timeLabel.Text = "time";
             // 
             // scoreTextLabel
             // 
@@ -157,7 +157,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "ReflexGameWindow";
-            this.Text = "ReflexGameWindow";
+            this.Text = "Reflex game";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReflexGameWindow_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).EndInit();
             this.ResumeLayout(false);

@@ -203,7 +203,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(676, 380);
             this.Name = "ThingsGameMenuWindow";
-            this.Text = "Things Game";
+            this.Text = "Things game settings";
             this.ResumeLayout(false);
             this.PerformLayout();
 

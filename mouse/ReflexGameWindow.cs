@@ -28,7 +28,7 @@ namespace mysz
         
         bool useLeftButton = true;        
         int gameId = 0;        
-        int maxGameTime = 5;        
+        int maxGameTime = 4;        
         int score = 0;
 
         enum GameStates
@@ -62,10 +62,6 @@ namespace mysz
 
             stopRButton.Enabled = false;
             stopLButton.Enabled = false;
-
-            /*** below, nothing appears anyways ***/
-            graphics.Clear(BACKGROUND_COLOR);
-            drawEllipse(blueBrush);
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -229,7 +225,7 @@ namespace mysz
 
         private void decreaseGameTime()
         {
-            if ((score % 10 == 0) && (maxGameTime > 2))
+            if ((score % 10 == 0) && (maxGameTime > 1))
             {
                 setQuestionTime((double)--maxGameTime);
             }

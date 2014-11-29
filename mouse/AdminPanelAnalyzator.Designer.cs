@@ -70,7 +70,7 @@
             this.Controls.Add(this.coordinatesViewer);
             this.Controls.Add(this.panel1);
             this.Name = "AdminPanelAnalyzator";
-            this.Text = "AdminPanelAnalyzator";
+            this.Text = "Admin panel analyzator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminPanelAnalyzator_FormClosing);
             this.Load += new System.EventHandler(this.AdminPanelAnalyzator_Load);
             this.panel1.ResumeLayout(false);

@@ -187,6 +187,10 @@ namespace analyzingApp
                 {
                     fileLog = "File not found exception for file: \n" + path + "\n";
                 }
+                else if (e is FormatException)
+                {
+                    fileLog = "Data was corrupted for file: \n" + path + "\n";
+                }
                 else
                 {
                     fileLog = e.ToString();

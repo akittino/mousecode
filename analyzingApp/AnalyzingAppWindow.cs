@@ -14,8 +14,8 @@ namespace analyzingApp
 {
     public partial class analyzingAppWindow : Form
     {
-        const string GAMES_DIR = @"..\..\..\mouse\bin\Debug";
-
+        const string GAMES_DIR = @"..\..\..\mouse\bin\Debug";//TODORELEASE change it when releasing
+        
         DateTime checkedTime;
         bool checkingDown;
         int checkedLevel;
@@ -197,6 +197,12 @@ namespace analyzingApp
                 MessageBox.Show("Add at lease one attribute before saving.");
                 return;
             }
+            getCheckedFiles();
+            if(pathList.Count == 0)
+            {
+                MessageBox.Show("Add at lease one file before saving.");
+                return;
+            }
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "CSV Files|*.csv";
 
@@ -204,7 +210,6 @@ namespace analyzingApp
             {
                 int stops_granulation = Convert.ToInt32(granulationTextbox.Text);
                 logTextBox.Text = "";
-                getCheckedFiles();
                 try
                 {
                     using (StreamWriter sw = new StreamWriter(sfd.FileName))

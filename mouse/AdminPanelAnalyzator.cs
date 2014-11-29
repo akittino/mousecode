@@ -82,7 +82,7 @@ namespace mysz
 
         private void readFileAndDraw(string path, Pen pen)
         {
-            if (path.Split('.')[path.Split('.').Length - 1] != "csv")
+            if (path.EndsWith(".csv"))
             {
                 //MessageBox.Show("You should select csv file");
                 return;
@@ -261,5 +261,3 @@ namespace mysz
     }
 }
 //TODO files validate
-//TODO add checking methods
-//TODO change fonts!

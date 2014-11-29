@@ -198,7 +198,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(676, 380);
             this.Name = "ReflexGameMenuWindow";
-            this.Text = "ReflexGameMainWindow";
+            this.Text = "Reflex game settings";
             this.ResumeLayout(false);
             this.PerformLayout();
 

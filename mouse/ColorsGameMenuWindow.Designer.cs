@@ -202,7 +202,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(676, 380);
             this.Name = "ColorsGameMenuWindow";
-            this.Text = "ColorsGameWindow";
+            this.Text = "Colors game settings";
             this.ResumeLayout(false);
             this.PerformLayout();
 

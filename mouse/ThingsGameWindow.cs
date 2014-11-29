@@ -13,12 +13,10 @@ namespace mysz
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
-        const string DATABASE_PATH = @"..\..\..\ThingsDatabase\"; //TODO change path when build .exe!!!
+        const string DATABASE_PATH = @"..\..\..\ThingsDatabase\"; //TODORELEASE change path when build .exe!!!
         readonly string USER_NAME;
         readonly int INITIAL_QUESTION_TIME;
-        //TODO writeToPictureVox unificate!
-        //TODO answers length validate
-        //TODO start button make vertical center
+        
         public bool databaseCorrupted;
         Graphics graphics, questionGraphics;
         List<TimePoint> coordsList;
@@ -66,6 +64,10 @@ namespace mysz
                     correctAnswer = commaList[1];
                     wrongAnswer = commaList[2].Remove(commaList[2].Length - 4);
                     //above remove 4 because of deleting ".jpg"
+                    if(correctAnswer.Length > 13 || wrongAnswer.Length > 13)
+                    {
+                        name = correctAnswer = wrongAnswer = "corrupted";
+                    }
                 }
             }
         };
@@ -118,10 +120,6 @@ namespace mysz
             {
                 databaseCorrupted = false;
             }
-
-            /*** below, nothing appears anyways ***/
-            graphics.Clear(Color.White);
-            writeToPictureBox("Please start a game!", 315, 520);
         }
 
         private void setNewQuestion()
@@ -174,7 +172,7 @@ namespace mysz
 
         private void decreaseGameTime()
         {
-            if (questionCounter % 10 == 0 && questionTime > 2)
+            if (questionCounter % 10 == 0 && questionTime > 1)
             {
                 setQuestionTime((double)--questionTime);
             }
@@ -190,7 +188,7 @@ namespace mysz
             answerLButton.Visible = true;
             timeLabel.Visible = true;
 
-            startButton.Text = "Next question";
+            startButton.Text = "Next";
             ++questionCounter;
             decreaseGameTime();
 
@@ -229,7 +227,7 @@ namespace mysz
 
             if (timeLabel.Text == "Time out!")
             {
-                startButton.Text = "Start new game";
+                startButton.Text = "Start";
                 writeToPictureBox("Please start a game!", 315, 520);
                 questionsRnd.Clear();
                 if (gameId != 0)
@@ -255,7 +253,8 @@ namespace mysz
 
                 scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
 
-                gameId = writeCoordinatesToFile(1000 * (questionTime - double.Parse(timeLabel.Text.Remove(timeLabel.Text.Length - 1))));//TODO this is very ugly
+                double usedTime = 1000 * (questionTime - double.Parse(timeLabel.Text.Remove(timeLabel.Text.Length - 1)));
+                gameId = writeCoordinatesToFile(usedTime);
 
                 coordsList.Clear();
             }

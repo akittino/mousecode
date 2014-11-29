@@ -170,7 +170,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "ThingsGameWindow";
-            this.Text = "ThingsGameWindow";
+            this.Text = "Things game";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ThingsGameWindow_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.questionBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).EndInit();

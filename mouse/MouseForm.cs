@@ -199,7 +199,6 @@ namespace mysz
         {
             using (Font myFont = new Font("Times New Roman", fontSize))
             {
-                //TODO think about centering written text!
                 graphics.DrawString(text, myFont, Brushes.Black, new Point(X, Y));
             }
         }
