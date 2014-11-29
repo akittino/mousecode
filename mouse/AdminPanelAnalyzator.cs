@@ -82,7 +82,7 @@ namespace mysz
 
         private void readFileAndDraw(string path, Pen pen)
         {
-            if (path.EndsWith(".csv"))
+            if (!path.EndsWith(".csv"))
             {
                 //MessageBox.Show("You should select csv file");
                 return;
