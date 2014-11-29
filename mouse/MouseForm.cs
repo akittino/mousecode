@@ -202,6 +202,7 @@ namespace mysz
                 graphics.DrawString(text, myFont, Brushes.Black, new Point(X, Y));
             }
         }
+
         protected void SaveCoordinates(int GRANULATION, List<TimePoint> CoordsList)
         // writing coordinates to list of coords
         {
@@ -221,11 +222,20 @@ namespace mysz
                 Thread.Sleep(10);
             }
         }
+
         protected Tuple<MoodWindow.MoodFromHappyToAngryScale, MoodWindow.MoodFromExcitedToBoredScale> getMood()
         {
             MoodWindow = new MoodWindow();
             MoodWindow.ShowDialog();
             return MoodWindow.getMoods();
+        }
+
+        protected override void WndProc(ref Message m)
+        //workaround to not repaint windows when ALT is pressed
+        {
+            // Suppress the WM_UPDATEUISTATE message
+            if (m.Msg == 0x128) return;
+            base.WndProc(ref m);
         }
     }
 }
