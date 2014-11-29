@@ -149,7 +149,7 @@ namespace analyzingApp
                         }
                         else
                         {
-                            fileLog = "Coordinates line hadn't three values in line. Couldn't proceed it!";
+                            fileLog = "For file:\n" + path + "\nCoordinates line hadn't three values in line. Couldn't proceed it!\n";
                             coordsList = null;
                             gameTime = null;
                             return;
@@ -179,7 +179,18 @@ namespace analyzingApp
             }
             catch (Exception e)
             {
-                fileLog = e.ToString();
+                if (e is DirectoryNotFoundException)
+                {
+                    fileLog = "Directory not found exception for file: \n" + path + "\n";
+                }
+                else if (e is FileNotFoundException)
+                {
+                    fileLog = "File not found exception for file: \n" + path + "\n";
+                }
+                else
+                {
+                    fileLog = e.ToString();
+                }
                 return;
             }
         }
@@ -234,24 +245,21 @@ namespace analyzingApp
             int Bx = coordsList[coordsList.Count - 1].X;
             int By = coordsList[coordsList.Count - 1].Y;
             int lastSign = -1;
-            //TODO maths below is very naive, fix it! find better way to split the segment when sign changes
-            //it's okey, can be. maybe small change to get half point if isn't
 
             for (int i = 1; i < coordsList.Count - 2; ++i)
             {
                 int sign = Math.Sign((Bx - Ax) * (coordsList[i].Y - Ay) - (By - Ay) * (coordsList[i].X - Ax));
+                int dX = coordsList[i].X - coordsList[i - 1].X;
+                int dY = coordsList[i].Y - coordsList[i - 1].Y;
 
                 if(sign != 0 && sign != lastSign)
                 {
                     ++perfectLineCrosses;
+                    pathOnTop += Math.Sqrt((double)((dX * dX) + (dY * dY))) / 2;
                     lastSign = sign;
                 }
-
-                if(lastSign == -1)
+                else if((sign == 0 && lastSign == -1) || lastSign == -1)
                 {
-                    int dX = coordsList[i].X - coordsList[i - 1].X;
-                    int dY = coordsList[i].Y - coordsList[i - 1].Y;
-
                     pathOnTop += Math.Sqrt((double)((dX * dX) + (dY * dY)));
                 }
             }
@@ -284,9 +292,9 @@ namespace analyzingApp
                 return false;
             }
         }
-        public bool getAttributeCorrectAnswer()
+        public int getAttributeCorrectAnswer()
         {
-            return correctAnswer;
+            return Convert.ToInt32(correctAnswer);
         }
         public int getAttributeGameTime()
         {

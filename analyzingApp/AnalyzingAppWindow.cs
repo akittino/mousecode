@@ -56,6 +56,7 @@ namespace analyzingApp
                 }
             }
         }
+        
         private void analyzingAppWindow_Load(object sender, EventArgs e)
         {
             string[] games = { "ColorsGame", "ReflexGame", "ThingsGame" };
@@ -96,6 +97,31 @@ namespace analyzingApp
             }
         }
 
+        private void getCheckedFiles()
+        {
+            pathList.Clear();
+            foreach(TreeNode tn in fileViewer.Nodes)
+            {
+                addCheckedCsvFiles(tn);
+            }
+        }
+
+        private void addCheckedCsvFiles(TreeNode tn)
+        {
+            if(tn.Text.EndsWith(".csv"))
+            {
+                if(tn.Checked)
+                    pathList.Add(tn.FullPath);
+            }
+            else
+            {
+                foreach(TreeNode t in tn.Nodes)
+                {
+                    addCheckedCsvFiles(t);
+                }
+            }
+        }
+
         private void attributesToChoose()
         {
             settingListOfAttributes(dataOriginal);
@@ -127,6 +153,7 @@ namespace analyzingApp
                 }
             }
         }
+
         private void settingListOfAttributes(BindingList<Attribute> list)
         {
             foreach(var a in playFileMethods)
@@ -160,40 +187,66 @@ namespace analyzingApp
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            if (!granulationTextbox.Text.Equals(""))
+            if (granulationTextbox.Text.Equals(""))
             {
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "CSV Files|*.csv";
+                MessageBox.Show("Stops precision textbox should be filled before saving.");
+                return;
+            }
+            if(listboxToAdd.Items.Count == 0)
+            {
+                MessageBox.Show("Add at lease one attribute before saving.");
+                return;
+            }
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "CSV Files|*.csv";
 
-                if (sfd.ShowDialog() == DialogResult.OK)
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                int stops_granulation = Convert.ToInt32(granulationTextbox.Text);
+                logTextBox.Text = "";
+                getCheckedFiles();
+                try
                 {
-                    int stops_granulation = Convert.ToInt32(granulationTextbox.Text);
-
-                    for (int i = 0; i < pathList.Count; i++)
+                    using (StreamWriter sw = new StreamWriter(sfd.FileName))
                     {
-                        listOfGetAttributes.Clear();
-                        playFile pf = new playFile(pathList[i], stops_granulation);
-                        if (pf.getFileValid() == false)
-                        {
-                            //add to log which file was invalid
-                            break;
-                        }
-                        else
-                        {
-                            addGetAttributesToList(pf);
-                            //TODO add new functions added by Olek +  save file
-                            //TODO check which attributes were selected and add to file
 
+                        for (int i = 0; i < pathList.Count; i++)
+                        {
+                            playFile pf = new playFile(GAMES_DIR + @"\" + pathList[i], stops_granulation);
+                            if (pf.getFileValid() == false)
+                            {
+                                logTextBox.Text += pf.getFileLog() + "\n";
+                            }
+                            else
+                            {
+                                bool first = true;
+                                foreach (var it in listboxToAdd.Items)
+                                {
+                                    if (first)
+                                        first = false;
+                                    else
+                                        sw.Write(",");
 
-                            uncheckAllNodes(fileViewer.Nodes);
-                            pathList.Clear();
+                                    Attribute a = (Attribute)it;
+                                    string value = playFileMethods[a.Name].Invoke(pf, null).ToString();
+                                    sw.Write(value);
+                                }
+                                sw.Write("\n");
+                            }
                         }
-                        
                     }
                 }
+                catch(IOException ex)
+                {
+                    logTextBox.Text = "Saving unsuccessful!\n";
+                    Console.WriteLine(ex.ToString());
+                    MessageBox.Show("File you want to save to is used now.");
+                }
+                if(logTextBox.Text == "")
+                {
+                    logTextBox.Text = "Saving successful!\n";
+                }
             }
-            else
-                MessageBox.Show("Granulation textbox should be filled before saving.");
         }
 
         private void uncheckAllNodes(TreeNodeCollection nodes)
@@ -212,30 +265,6 @@ namespace analyzingApp
                 CheckChildren(t, uncheck);
                 t.Checked = true;
             }
-        }
-
-        private void addGetAttributesToList(playFile pf)
-        {
-
-            listOfGetAttributes.Add(pf.getAttributeCorrectAnswer());
-            listOfGetAttributes.Add(pf.getAttributeStops());
-            listOfGetAttributes.Add(pf.getAttributeGameTime());
-            listOfGetAttributes.Add(pf.getAttributePerfectLineCrosses());
-            listOfGetAttributes.Add(pf.getAttributeExcitement());
-            listOfGetAttributes.Add(pf.getAttributeHappiness());
-            listOfGetAttributes.Add(pf.getAttributePath());
-            listOfGetAttributes.Add(pf.getAttributeDistance());
-            listOfGetAttributes.Add(pf.getAttributeDistanceToPath());
-            listOfGetAttributes.Add(pf.getAttributeMovingTime());
-            listOfGetAttributes.Add(pf.getAttributeAverageSpeed());
-            listOfGetAttributes.Add(pf.getAttributeTimeAfterStop());
-            listOfGetAttributes.Add(pf.getAttributeTimeBeforeStart());
-            listOfGetAttributes.Add(pf.getAttributeMaxSpeed());
-            listOfGetAttributes.Add(pf.getAttributePerfectLineOnTopPercentage());
-            listOfGetAttributes.Add(pf.getAttributeStopButtonPercentageHeight());
-            listOfGetAttributes.Add(pf.getAttributeStopButtonPercentageWidth());
-            listOfGetAttributes.Add(pf.getAttributeStartButtonPercentageHeight());
-            listOfGetAttributes.Add(pf.getAttributeStartButtonPercentageWidth());
         }
 
         private void granulationTextbox_TextChanged(object sender, EventArgs e)

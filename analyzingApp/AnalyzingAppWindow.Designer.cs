@@ -41,6 +41,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.removeAllButton = new System.Windows.Forms.Button();
             this.addAllButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -137,11 +139,12 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(793, 15);
+            this.label3.Location = new System.Drawing.Point(786, 15);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 13);
+            this.label3.Size = new System.Drawing.Size(79, 26);
             this.label3.TabIndex = 9;
-            this.label3.Text = "Granulation:";
+            this.label3.Text = "Stops precision\r\nin pixels:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // removeAllButton
             // 
@@ -163,11 +166,31 @@
             this.addAllButton.UseVisualStyleBackColor = true;
             this.addAllButton.Click += new System.EventHandler(this.addAllButton_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(290, 372);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(28, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Log:";
+            // 
+            // logTextBox
+            // 
+            this.logTextBox.Location = new System.Drawing.Point(293, 389);
+            this.logTextBox.Name = "logTextBox";
+            this.logTextBox.ReadOnly = true;
+            this.logTextBox.Size = new System.Drawing.Size(572, 227);
+            this.logTextBox.TabIndex = 13;
+            this.logTextBox.Text = "";
+            // 
             // analyzingAppWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(955, 628);
+            this.Controls.Add(this.logTextBox);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.addAllButton);
             this.Controls.Add(this.removeAllButton);
             this.Controls.Add(this.label3);
@@ -208,6 +231,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button removeAllButton;
         private System.Windows.Forms.Button addAllButton;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RichTextBox logTextBox;
     }
 }
 
