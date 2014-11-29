@@ -146,7 +146,7 @@ namespace mysz
             // case if colors of text and eclipse are equal
             if (rnd.Next(0, 100) > 50)
             {
-                int r = rnd.Next(0, 5);
+                int r = rnd.Next(0, 6);
                 circleBrushColor = circleColorsBase[r];
                 graphics.FillEllipse(new SolidBrush(circleBrushColor), 200, 80, 400, 400);
                 textColor = textColorsBase[r];
@@ -155,7 +155,7 @@ namespace mysz
             //case when colors of text and eclipse are different
             else
             {
-                int r1 = rnd.Next(0, 5);
+                int r1 = rnd.Next(0, 6);
                 int r2 = rnd.Next(0, 500)%6;
                 while (r2 == r1)
                 {
@@ -220,6 +220,9 @@ namespace mysz
             gameWindow.Refresh();
             timeLabel.Visible = false;
             correctAnswer = false;
+
+            yesButton.Visible = false;
+            noButton.Visible = false;
         }
 
         private void noButton_Click(object sender, EventArgs e)
@@ -249,6 +252,9 @@ namespace mysz
             gameWindow.Refresh();
             timeLabel.Visible = false;
             correctAnswer = false;
+
+            yesButton.Visible = false;
+            noButton.Visible = false;
         }
 
         private void moveCursor()

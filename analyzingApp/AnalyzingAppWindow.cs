@@ -10,8 +10,9 @@ namespace analyzingApp
 {
     public partial class analyzingAppWindow : Form
     {
+        //const string GAMES_DIR = @"..\Inz Final";// TODORELEASE remove it after release (just for changes while sending Kolakowska)
         const string GAMES_DIR = @"..\..\..\mouse\bin\Debug";//TODORELEASE change it when releasing
-        
+
         DateTime checkedTime;
         bool checkingDown;
         int checkedLevel;
