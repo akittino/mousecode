@@ -111,9 +111,20 @@ namespace mysz
                     drawMouseTrace(coordsList, pen);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Please close all games files when using this analyzer!");
+                if(ex is FormatException)
+                {
+                    MessageBox.Show("File below is corrupted! File was omitted!\n" + path);
+                }
+                else if (ex is IOException)
+                {
+                    MessageBox.Show("File below doesn't exist or it is used by other process! File was omitted!\n" + path);
+                }
+                else
+                {
+                    MessageBox.Show("Unrecognized error with file below! File was omitted!\n" + path);
+                }
             }
         }
 
@@ -260,4 +271,3 @@ namespace mysz
         }
     }
 }
-//TODO files validate
