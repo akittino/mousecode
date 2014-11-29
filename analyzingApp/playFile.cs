@@ -86,10 +86,10 @@ namespace analyzingApp
                     string s;
                     if (!path.Contains("ReflexGame"))
                     {
-                        if(path.Contains("ThingsGame"))
+                        if (path.Contains("ThingsGame"))
                         {
                             startButton = new buttonCoordinates(320, 320 + 157, 600 - 54, 600);
-                            if(usedLeftButton)
+                            if (usedLeftButton)
                             {
                                 stopButton = new buttonCoordinates(0, 118, 0, 82);
                             }
@@ -120,7 +120,7 @@ namespace analyzingApp
                     else
                     {
                         startButton = new buttonCoordinates(346, 346 + 82, 600 - 82, 600);
-                        if(usedLeftButton)
+                        if (usedLeftButton)
                         {
                             stopButton = new buttonCoordinates(0, 118, 0, 82);
                         }
@@ -159,7 +159,7 @@ namespace analyzingApp
 
                 }
 
-                if(coordsList.Count < 3)
+                if (coordsList.Count < 3)
                 {
                     fileLog = "For file:\n" + path + "\nFile was corrupted. Couldn't proceed it!\n";
                     return;
@@ -167,7 +167,7 @@ namespace analyzingApp
 
                 string[] pathParts = path.Split('\\');
                 string moodPath = "";
-                
+
                 for (int i = 0; i < pathParts.Length - 2; ++i)
                 {
                     moodPath += pathParts[i] + '\\';
@@ -175,7 +175,7 @@ namespace analyzingApp
 
                 moodPath += "gameDetails.txt";
 
-                if(!File.Exists(moodPath))
+                if (!File.Exists(moodPath))
                 {
                     fileLog = "For file:\n" + path + "\nThere was no mood file. Couldn't proceed it!\n";
                     return;
@@ -190,26 +190,25 @@ namespace analyzingApp
                     excitedMood = getExcitedMood(s);
                 }
             }
-            //catch (Exception e)
-            //{
-                catch (DirectoryNotFoundException e )
-                {
-                    fileLog = "Directory not found exception for file: \n" + path + "\n";
-                }
-                catch (FileNotFoundException e)
-                {
-                    fileLog = "File not found exception for file: \n" + path + "\n";
-                }
-                //catch (FormatException e)
-                //{
-                //    fileLog = "Data was corrupted for file: \n" + path + "\n";
-                //}
-                catch (Exception e)
-                {
-                    fileLog = e.ToString();
-                }
-                return;
-            //}
+
+            catch (DirectoryNotFoundException e)
+            {
+                fileLog = "Directory not found exception for file: \n" + path + "\n";
+            }
+            catch (FileNotFoundException e)
+            {
+                fileLog = "File not found exception for file: \n" + path + "\n";
+            }
+            catch (FormatException e)
+            {
+                fileLog = "Data was corrupted for file: \n" + path + "\n";
+            }
+            catch (Exception e)
+            {
+                fileLog = e.ToString();
+            }
+            return;
+
         }
 
         private int getHappyMood(string s)
@@ -269,13 +268,13 @@ namespace analyzingApp
                 int dX = coordsList[i].X - coordsList[i - 1].X;
                 int dY = coordsList[i].Y - coordsList[i - 1].Y;
 
-                if(sign != 0 && sign != lastSign)
+                if (sign != 0 && sign != lastSign)
                 {
                     ++perfectLineCrosses;
                     pathOnTop += Math.Sqrt((double)((dX * dX) + (dY * dY))) / 2;
                     lastSign = sign;
                 }
-                else if((sign == 0 && lastSign == -1) || lastSign == -1)
+                else if ((sign == 0 && lastSign == -1) || lastSign == -1)
                 {
                     pathOnTop += Math.Sqrt((double)((dX * dX) + (dY * dY)));
                 }
@@ -433,9 +432,9 @@ namespace analyzingApp
         }
         public double getAttributeMaxSpeed()
         {
-            if(maxSpeed == null)
+            if (maxSpeed == null)
             {
-                if(path == null)
+                if (path == null)
                 {
                     getAttributePath();
                 }
@@ -464,7 +463,7 @@ namespace analyzingApp
         }
         public double getAttributeMaxSpeedTime()
         {
-            if(maxSpeedTime == null)
+            if (maxSpeedTime == null)
             {
                 getAttributeMaxSpeed();
             }
@@ -472,7 +471,7 @@ namespace analyzingApp
         }
         public double getAttributeMaxSpeedPlace()
         {
-            if(maxSpeedPlace == null)
+            if (maxSpeedPlace == null)
             {
                 getAttributeMaxSpeed();
             }
@@ -503,7 +502,7 @@ namespace analyzingApp
         }
         public double getAttributePerfectLineOnTopPercentage()
         {
-            if(perfectLineOnTopPercentage == null)
+            if (perfectLineOnTopPercentage == null)
             {
                 perfectLineAnalyze();
             }
@@ -511,7 +510,7 @@ namespace analyzingApp
         }
         public double getAttributeStopButtonPercentageHeight()
         {
-            if(stopButtonPercentageHeight == null)
+            if (stopButtonPercentageHeight == null)
             {
                 stopButtonPercentageHeight = ((double)coordsList[coordsList.Count - 1].Y - stopButton.Y1) / (stopButton.Y2 - stopButton.Y1);
             }
