@@ -190,26 +190,26 @@ namespace analyzingApp
                     excitedMood = getExcitedMood(s);
                 }
             }
-            catch (Exception e)
-            {
-                if (e is DirectoryNotFoundException)
+            //catch (Exception e)
+            //{
+                catch (DirectoryNotFoundException e )
                 {
                     fileLog = "Directory not found exception for file: \n" + path + "\n";
                 }
-                else if (e is FileNotFoundException)
+                catch (FileNotFoundException e)
                 {
                     fileLog = "File not found exception for file: \n" + path + "\n";
                 }
-                else if (e is FormatException)
-                {
-                    fileLog = "Data was corrupted for file: \n" + path + "\n";
-                }
-                else
+                //catch (FormatException e)
+                //{
+                //    fileLog = "Data was corrupted for file: \n" + path + "\n";
+                //}
+                catch (Exception e)
                 {
                     fileLog = e.ToString();
                 }
                 return;
-            }
+            //}
         }
 
         private int getHappyMood(string s)
