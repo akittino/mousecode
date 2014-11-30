@@ -188,21 +188,21 @@ namespace analyzingApp
                 }
             }
 
-            catch (DirectoryNotFoundException e)
+            catch (DirectoryNotFoundException)
             {
                 fileLog = "Directory not found exception for file: \n" + path + "\n";
             }
-            catch (FileNotFoundException e)
+            catch (FileNotFoundException)
             {
                 fileLog = "File not found exception for file: \n" + path + "\n";
             }
-            catch (FormatException e)
+            catch (FormatException)
             {
                 fileLog = "Data was corrupted for file: \n" + path + "\n";
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                fileLog = e.ToString();
+                fileLog = "Unrecognized error for file: \n" + path + "\n";
             }
             return;
 

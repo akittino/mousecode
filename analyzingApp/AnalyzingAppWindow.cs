@@ -238,10 +238,9 @@ namespace analyzingApp
                         }
                     }
                 }
-                catch(IOException ex)
+                catch(IOException)
                 {
                     logTextBox.Text = "Saving unsuccessful!\n";
-                    Console.WriteLine(ex.ToString());
                     MessageBox.Show("File you want to save to is used now.");
                 }
                 if(logTextBox.Text == "")

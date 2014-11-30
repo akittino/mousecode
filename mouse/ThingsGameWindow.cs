@@ -14,7 +14,8 @@ namespace mysz
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
         //const string DATABASE_PATH = @"ThingsDatabase\"; // TODORELEASE remove it after release (just for changes while sending Kolakowska)
-        const string DATABASE_PATH = @"..\..\..\ThingsDatabase\"; //TODORELEASE change path when build .exe!!!        
+        //const string DATABASE_PATH = @"..\..\..\ThingsDatabase\"; //TODORELEASE change path when build .exe!!!  
+        const string DATABASE_PATH = @"ThingsDatabase";
         readonly string USER_NAME;
         readonly int INITIAL_QUESTION_TIME;
         
@@ -48,9 +49,8 @@ namespace mysz
                 {
                     image = Image.FromFile(filePath);
                 }
-                catch (OutOfMemoryException e)
+                catch (OutOfMemoryException)
                 {
-                    Console.WriteLine(e.Data);
                     imageFailed = true;
                 }
 

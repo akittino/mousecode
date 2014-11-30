@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mouse", "mouse\mouse.csproj", "{C4F58E91-0101-4A72-92F0-C3C3C998A888}"
 EndProject
@@ -32,7 +32,6 @@ Global
 		{1990D92E-E88F-44E1-A3B5-34F81209E5DE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{1990D92E-E88F-44E1-A3B5-34F81209E5DE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{1990D92E-E88F-44E1-A3B5-34F81209E5DE}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{1990D92E-E88F-44E1-A3B5-34F81209E5DE}.Debug|x86.Build.0 = Debug|Any CPU
 		{1990D92E-E88F-44E1-A3B5-34F81209E5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1990D92E-E88F-44E1-A3B5-34F81209E5DE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1990D92E-E88F-44E1-A3B5-34F81209E5DE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
