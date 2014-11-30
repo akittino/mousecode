@@ -45,14 +45,14 @@ namespace analyzingApp
 
         bool correctAnswer = true;
 
-        double? path = null;
-        double? distance = null;
         double? maxSpeed = null;
         double? movingTime = null;
+        double? pathLength = null;
         double? averageSpeed = null;
         double? maxSpeedTime = null;
         double? maxSpeedPlace = null;
         double? timeAfterStop = null;
+        double? distanceLength = null;
         double? distanceToPath = null;
         double? timeBeforeStart = null;
         double? standardDeviation = null;
@@ -249,8 +249,8 @@ namespace analyzingApp
             perfectLineCrosses = 0;
             perfectLineOnTopPercentage = 0;
 
-            if (path == null)
-                getAttributeDistance();
+            if (pathLength == null)
+                getAttributeDistanceLength();
             double pathOnTop = 0;
 
             int Ax = coordsList[0].X;
@@ -285,7 +285,7 @@ namespace analyzingApp
                 pathOnTop += Math.Sqrt((double)((dX * dX) + (dY * dY)));
             }
 
-            perfectLineOnTopPercentage = pathOnTop / path;
+            perfectLineOnTopPercentage = pathOnTop / pathLength;
 
 
         }
@@ -346,46 +346,46 @@ namespace analyzingApp
         {
             return (int)happyMood;
         }
-        public double getAttributePath()
+        public double getAttributePathLength()
         {
-            if (path == null)
+            if (pathLength == null)
             {
-                path = 0;
+                pathLength = 0;
 
                 for (int i = 1; i < coordsList.Count; ++i)
                 {
                     int dX = coordsList[i - 1].X - coordsList[i].X;
                     int dY = coordsList[i - 1].Y - coordsList[i].Y;
 
-                    path += Math.Sqrt((double)((dX * dX) + (dY * dY)));
+                    pathLength += Math.Sqrt((double)((dX * dX) + (dY * dY)));
                 }
             }
-            return (double)path;
+            return (double)pathLength;
         }
-        public double getAttributeDistance()
+        public double getAttributeDistanceLength()
         {
-            if (distance == null)
+            if (distanceLength == null)
             {
-                distance = 0;
+                distanceLength = 0;
 
                 int dX = coordsList[coordsList.Count - 1].X - coordsList[0].X;
                 int dY = coordsList[coordsList.Count - 1].Y - coordsList[0].Y;
 
-                distance = Math.Sqrt((double)((dX * dX) + (dY * dY)));
+                distanceLength = Math.Sqrt((double)((dX * dX) + (dY * dY)));
             }
-            return (double)distance;
+            return (double)distanceLength;
         }
         public double getAttributeDistanceToPath()
         {
             if (distanceToPath == null)
             {
-                if (distance == null)
-                    this.getAttributeDistance();
+                if (distanceLength == null)
+                    this.getAttributeDistanceLength();
 
-                if (path == null)
-                    this.getAttributePath();
+                if (pathLength == null)
+                    this.getAttributePathLength();
 
-                distanceToPath = distance / path;
+                distanceToPath = distanceLength / pathLength;
             }
             return (double)distanceToPath;
         }
@@ -401,13 +401,13 @@ namespace analyzingApp
         {
             if (averageSpeed == null)
             {
-                if (path == null)
-                    this.getAttributePath();
+                if (pathLength == null)
+                    this.getAttributePathLength();
 
                 if (movingTime == null)
                     this.getAttributeMovingTime();
 
-                averageSpeed = path / movingTime;
+                averageSpeed = pathLength / movingTime;
             }
             return (double)averageSpeed;
         }
@@ -431,9 +431,9 @@ namespace analyzingApp
         {
             if (maxSpeed == null)
             {
-                if (path == null)
+                if (pathLength == null)
                 {
-                    getAttributePath();
+                    getAttributePathLength();
                 }
 
                 maxSpeed = 0;
@@ -451,7 +451,7 @@ namespace analyzingApp
                     if (tmpSpeed > maxSpeed)
                     {
                         maxSpeed = tmpSpeed;
-                        maxSpeedPlace = placeDistance / path;
+                        maxSpeedPlace = placeDistance / pathLength;
                         maxSpeedTime = (coordsList[i].timeFromGameStart - (dT / 2)) / movingTime;
                     }
                 }
