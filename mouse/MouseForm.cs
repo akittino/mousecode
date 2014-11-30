@@ -86,7 +86,7 @@ namespace mysz
             if (leftButtonClicked)
                 dirPath += @"\" + gameId.ToString() + @"\L";
             else
-                dirPath += @"\" + gameId.ToString() + @"\P";
+                dirPath += @"\" + gameId.ToString() + @"\R";
 
             if (!System.IO.Directory.Exists(dirPath))
             {

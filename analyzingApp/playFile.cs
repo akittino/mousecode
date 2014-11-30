@@ -156,7 +156,7 @@ namespace analyzingApp
 
                 }
 
-                if (coordsList.Count < 3)
+                if (coordsList.Count < 5)
                 {
                     fileLog = "For file:\n" + path + "\nFile was corrupted. Couldn't proceed it!\n";
                     return;
