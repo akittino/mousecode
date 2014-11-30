@@ -46,13 +46,13 @@ namespace analyzingApp
         bool correctAnswer = true;
 
         double? maxSpeed = null;
+        double? distance = null;
         double? movingTime = null;
         double? pathLength = null;
         double? averageSpeed = null;
         double? maxSpeedTime = null;
         double? maxSpeedPlace = null;
         double? timeAfterStop = null;
-        double? distanceLength = null;
         double? distanceToPath = null;
         double? timeBeforeStart = null;
         double? standardDeviation = null;
@@ -250,7 +250,7 @@ namespace analyzingApp
             perfectLineOnTopPercentage = 0;
 
             if (pathLength == null)
-                getAttributeDistanceLength();
+                getAttributeDistance();
             double pathOnTop = 0;
 
             int Ax = coordsList[0].X;
@@ -362,30 +362,30 @@ namespace analyzingApp
             }
             return (double)pathLength;
         }
-        public double getAttributeDistanceLength()
+        public double getAttributeDistance()
         {
-            if (distanceLength == null)
+            if (distance == null)
             {
-                distanceLength = 0;
+                distance = 0;
 
                 int dX = coordsList[coordsList.Count - 1].X - coordsList[0].X;
                 int dY = coordsList[coordsList.Count - 1].Y - coordsList[0].Y;
 
-                distanceLength = Math.Sqrt((double)((dX * dX) + (dY * dY)));
+                distance = Math.Sqrt((double)((dX * dX) + (dY * dY)));
             }
-            return (double)distanceLength;
+            return (double)distance;
         }
         public double getAttributeDistanceToPath()
         {
             if (distanceToPath == null)
             {
-                if (distanceLength == null)
-                    this.getAttributeDistanceLength();
+                if (distance == null)
+                    this.getAttributeDistance();
 
                 if (pathLength == null)
                     this.getAttributePathLength();
 
-                distanceToPath = distanceLength / pathLength;
+                distanceToPath = distance / pathLength;
             }
             return (double)distanceToPath;
         }
