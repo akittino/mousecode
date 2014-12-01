@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace mysz
 {
-    public partial class ThingsGameMenuWindow : MainGameWindowBase
+    public partial class ThingsGameMenuWindow : GameMenuWindowBase
     {
         ThingsGameWindow ThingsWindow;
         public string userName;
@@ -13,7 +13,7 @@ namespace mysz
         public ThingsGameMenuWindow(string userName)
         {
             InitializeComponent();
-            MainGameWindowBase BaseWindow = new MainGameWindowBase(helpLabel, titleLabel1, exitLabel, backLabel, settingsLabel,
+            GameMenuWindowBase BaseWindow = new GameMenuWindowBase(helpLabel, titleLabel1, exitLabel, backLabel, settingsLabel,
             playButton, instructionTextBox);
             this.userName = userName;
             titleLabel1.Text = "Welcome \n" + userName + "!";

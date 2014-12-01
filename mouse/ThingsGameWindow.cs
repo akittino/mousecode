@@ -13,9 +13,9 @@ namespace mysz
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
-        //const string DATABASE_PATH = @"ThingsDatabase\"; // TODORELEASE remove it after release (just for changes while sending Kolakowska)
+        const string DATABASE_PATH = @"ThingsDatabase\"; // TODORELEASE remove it after release (just for changes while sending Kolakowska)
         //const string DATABASE_PATH = @"..\..\..\ThingsDatabase\"; //TODORELEASE change path when build .exe!!!  
-        const string DATABASE_PATH = @"ThingsDatabase";
+        //const string DATABASE_PATH = @"ThingsDatabase";
         readonly string USER_NAME;
         readonly int INITIAL_QUESTION_TIME;
         

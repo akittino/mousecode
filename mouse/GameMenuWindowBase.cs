@@ -4,12 +4,12 @@ using System.Windows.Forms;
 
 namespace mysz
 {
-    public partial class MainGameWindowBase : Form
+    public partial class GameMenuWindowBase : Form
     {
         readonly Label helpLabel, titleLabel, exitLabel, backLabel, settingsLabel;
         Button playButton;
         TextBox instructionTextBox;
-        public MainGameWindowBase(Label helpLabel, Label titleLabel, Label exitLabel, Label backLabel, Label settingsLabel,
+        public GameMenuWindowBase(Label helpLabel, Label titleLabel, Label exitLabel, Label backLabel, Label settingsLabel,
             Button playButton, TextBox instructionTextBox)
         {
             this.helpLabel = helpLabel;
@@ -22,7 +22,7 @@ namespace mysz
 
         }
 
-        public MainGameWindowBase()
+        public GameMenuWindowBase()
         { }
 
         public void highlightLabel(object sender, EventArgs e)
