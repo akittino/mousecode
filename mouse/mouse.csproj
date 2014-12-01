@@ -89,7 +89,7 @@
     <Compile Include="AdminPanelWindow.Designer.cs">
       <DependentUpon>AdminPanelWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainGameWindowBase.cs">
+    <Compile Include="GameMenuWindowBase.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MouseForm.cs">

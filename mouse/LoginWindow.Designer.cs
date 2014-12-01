@@ -51,7 +51,7 @@
             this.userNameTextbox.Name = "userNameTextbox";
             this.userNameTextbox.Size = new System.Drawing.Size(150, 20);
             this.userNameTextbox.TabIndex = 0;
-            this.userNameTextbox.TextChanged += new System.EventHandler(this.userNameTextbox_TextChanged);
+            this.userNameTextbox.TextChanged += new System.EventHandler(this.UserNameTextbox_TextChanged);
             // 
             // userNameLabel
             // 
@@ -72,7 +72,7 @@
             this.adminPanelButton.TabIndex = 9;
             this.adminPanelButton.Text = "Run admin panel";
             this.adminPanelButton.UseVisualStyleBackColor = true;
-            this.adminPanelButton.Click += new System.EventHandler(this.admin_panel_button_Click);
+            this.adminPanelButton.Click += new System.EventHandler(this.RunAdminPanelButton_Click);
             // 
             // loginStatusLabel
             // 
@@ -95,7 +95,7 @@
             this.colorsButton.Size = new System.Drawing.Size(81, 47);
             this.colorsButton.TabIndex = 11;
             this.colorsButton.UseVisualStyleBackColor = true;
-            this.colorsButton.Click += new System.EventHandler(this.colors_button_Click);
+            this.colorsButton.Click += new System.EventHandler(this.ColorsButton_Click);
             // 
             // reflexButton
             // 
@@ -107,7 +107,7 @@
             this.reflexButton.Size = new System.Drawing.Size(81, 47);
             this.reflexButton.TabIndex = 12;
             this.reflexButton.UseVisualStyleBackColor = true;
-            this.reflexButton.Click += new System.EventHandler(this.reflex_button_Click);
+            this.reflexButton.Click += new System.EventHandler(this.ReflexButton_Click);
             // 
             // thingsButton
             // 
@@ -119,7 +119,7 @@
             this.thingsButton.Size = new System.Drawing.Size(81, 47);
             this.thingsButton.TabIndex = 13;
             this.thingsButton.UseVisualStyleBackColor = true;
-            this.thingsButton.Click += new System.EventHandler(this.things_button_Click);
+            this.thingsButton.Click += new System.EventHandler(this.ThingsButton_Click);
             // 
             // gamesGroupBox
             // 
@@ -207,7 +207,7 @@
             this.MinimumSize = new System.Drawing.Size(350, 383);
             this.Name = "login_main_window";
             this.Text = "Mouse Moves";
-            this.Load += new System.EventHandler(this.login_main_window_Load);
+            this.Load += new System.EventHandler(this.LoginMainWindow_Load);
             this.gamesGroupBox.ResumeLayout(false);
             this.gamesGroupBox.PerformLayout();
             this.ResumeLayout(false);

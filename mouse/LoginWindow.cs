@@ -17,16 +17,16 @@ namespace mysz
             InitializeComponent();            
         }
 
-        private void admin_panel_button_Click(object sender, EventArgs e)
+        private void RunAdminPanelButton_Click(object sender, EventArgs e)
         {
             switch(adminPasswordTextbox.Text)
             {
                 case "":
-                    logThis("Please enter password to use admin panel.");
+                    LogThis("Please enter password to use admin panel.");
                 break;
 
                 case AdminPassword:
-                    logThis("Password correct. Access granted.");
+                    LogThis("Password correct. Access granted.");
                     AdminWindow = new AdminPanelAnalyzator();
                     AdminWindow.FormClosed += new FormClosedEventHandler(AdminWindow_FormClosed);
                     AdminWindow.Show();
@@ -34,42 +34,42 @@ namespace mysz
                 break;
 
                 default:
-                    logThis("Password incorrect. Access denied.");
+                    LogThis("Password incorrect. Access denied.");
                 break;
             }
 
         }
 
-        private void logThis(String message)
+        private void LogThis(String message)
         {
             loginStatusLabel.Text = message;
         }
 
 
-        private void things_button_Click(object sender, EventArgs e)
+        private void ThingsButton_Click(object sender, EventArgs e)
         {
             ThingsWindow = new ThingsGameMenuWindow(userNameTextbox.Text);
-            logThis("Things game is running now...");
+            LogThis("Things game is running now...");
             ThingsWindow.FormClosed += new FormClosedEventHandler(ThingsWindow_FormClosed);
             GamesButtonsOff();
             ThingsWindow.Show();
             this.Hide();
         }
 
-        private void reflex_button_Click(object sender, EventArgs e)
+        private void ReflexButton_Click(object sender, EventArgs e)
         {
             ReflexWindow = new ReflexGameMenuWindow(userNameTextbox.Text);
-            logThis("Reflex game is running now...");
+            LogThis("Reflex game is running now...");
             ReflexWindow.FormClosed += new FormClosedEventHandler(ReflexWindow_FormClosed);
             GamesButtonsOff();
             ReflexWindow.Show();
             this.Hide();
         }
 
-        private void colors_button_Click(object sender, EventArgs e)
+        private void ColorsButton_Click(object sender, EventArgs e)
         {
             ColorsWindow = new ColorsGameMenuWindow(userNameTextbox.Text);
-            logThis("Colors game is running now...");
+            LogThis("Colors game is running now...");
             ColorsWindow.FormClosed += new FormClosedEventHandler(ColorsWindow_FormClosed);
             GamesButtonsOff();
             ColorsWindow.Show();
@@ -80,21 +80,21 @@ namespace mysz
         {
             this.Show();
             GamesButtonsOn();
-            logThis("Reflex game ended.");
+            LogThis("Reflex game ended.");
         }
 
         void ColorsWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
             GamesButtonsOn();
-            logThis("Colors game ended.");
+            LogThis("Colors game ended.");
         }
 
         void ThingsWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
             GamesButtonsOn();
-            logThis("Things game ended.");
+            LogThis("Things game ended.");
         }
 
         void AdminWindow_FormClosed(object sender, FormClosedEventArgs e)
@@ -126,7 +126,7 @@ namespace mysz
             thingsLabel.Enabled = false;
         }
 
-        private void userNameTextbox_TextChanged(object sender, EventArgs e)
+        private void UserNameTextbox_TextChanged(object sender, EventArgs e)
         {
             if (resetedName)
             {
@@ -136,29 +136,29 @@ namespace mysz
 
             if (!System.Text.RegularExpressions.Regex.IsMatch(userNameTextbox.Text, "^[0-9a-zA-Z]+$") && !String.IsNullOrEmpty(userNameTextbox.Text))
             {
-                logThis("Username accepts only alphanumeric characters!");
+                LogThis("Username accepts only alphanumeric characters!");
                 resetedName = true;
                 userNameTextbox.ResetText();
             }
             else if (userNameTextbox.Text == "")
             {
-                logThis("Please enter name before play.");
+                LogThis("Please enter name before play.");
                 GamesButtonsOff();
             }
             else if (userNameTextbox.Text.Length > 12)
             {
                 MessageBox.Show("User name allows only 12 characters.");
-                logThis("User name is too long. Please use valid name.");
+                LogThis("User name is too long. Please use valid name.");
                 userNameTextbox.Text = "";
             }
             else
             {
-                logThis("Access to games granted.\n Hello " + userNameTextbox.Text + "!");
+                LogThis("Access to games granted.\n Hello " + userNameTextbox.Text + "!");
                 GamesButtonsOn();
             }
         }
 
-        private void login_main_window_Load(object sender, EventArgs e)
+        private void LoginMainWindow_Load(object sender, EventArgs e)
         {
             String path = System.IO.Path.GetFullPath(".");
             if (path.Length > 150)
