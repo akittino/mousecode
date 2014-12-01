@@ -5,6 +5,7 @@ namespace mysz
 {
     public partial class login_main_window : Form
     {
+        //TODO user does not have access to directory and application crashes while user wants to save file in game 
         const String AdminPassword = "admin";
         AdminPanelAnalyzator AdminWindow;
         ThingsGameMenuWindow ThingsWindow;
