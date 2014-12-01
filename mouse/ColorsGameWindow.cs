@@ -29,6 +29,7 @@ namespace mysz
         bool leftButtonYESClicked = false;
         int gameId = 0;
         int maxGameTime = 5;
+        int questionCounter = 0;
 
         Thread BackgroundProcessing;
         Thread CoordinateSaver;
@@ -75,7 +76,7 @@ namespace mysz
 
         private void playButton_Click(object sender, EventArgs e)
         {
-            scoreNumber.Text = gameScore.ToString();
+            scoreNumber.Text = gameScore.ToString() + "/" + quantityOfAnswers.ToString();
             scoreNumber.Refresh();
             playButton.Visible = false;
             continueButton.Visible = false;
@@ -141,7 +142,6 @@ namespace mysz
         {
             gameWindow.Refresh();
             scoreNumber.Visible = true;
-            gameScore = Convert.ToInt32(scoreNumber.Text);
             Random rnd = new Random();
             // case if colors of text and eclipse are equal
             if (rnd.Next(0, 100) > 50)
@@ -195,15 +195,17 @@ namespace mysz
         private void yesButton_Click(object sender, EventArgs e)
         {
             startTime = DateTime.Now;
+            quantityOfAnswers++;
 
             if ((textColor == circleBrushColor.Name.ToString()))
             {
                 gameScore++;
-                scoreNumber.Text = gameScore.ToString();
-                scoreNumber.Refresh();
                 correctAnswer = true;
             }
-            quantityOfAnswers++;
+
+            scoreNumber.Text = gameScore.ToString() + "/" + quantityOfAnswers.ToString();
+            scoreNumber.Refresh();
+
             leftButtonYESClicked = true;
             if (Timer.IsAlive)
                 Timer.Abort();
@@ -228,15 +230,17 @@ namespace mysz
         private void noButton_Click(object sender, EventArgs e)
         {
             startTime = DateTime.Now;
-
+            questionCounter++;
+            quantityOfAnswers++;
             if (textColor != circleBrushColor.Name.ToString())
             {
                 gameScore++;
-                scoreNumber.Text = gameScore.ToString();
-                scoreNumber.Refresh();
+                
                 correctAnswer = true;
             }
-            quantityOfAnswers++;
+            scoreNumber.Text = gameScore.ToString() + "/" + quantityOfAnswers.ToString();
+            scoreNumber.Refresh();
+
             leftButtonYESClicked = false;
             if (Timer.IsAlive)
                 Timer.Abort();
@@ -255,6 +259,7 @@ namespace mysz
 
             yesButton.Visible = false;
             noButton.Visible = false;
+            
         }
 
         private void moveCursor()
@@ -306,7 +311,7 @@ namespace mysz
                 if (Timer.IsAlive) Timer.Abort();
                 playButton.Visible = true;
                 writeToPictureBox(graphics, "Time's up, your score is " + scoreNumber.Text + ". Congratulations!", 200, 300, 20);
-                if (gameScore != 0)
+                if (gameId != 0)
                     writeGameDetails();
 
                 gameScore = 0;
