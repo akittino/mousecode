@@ -29,7 +29,6 @@ namespace mysz
         bool leftButtonYESClicked = false;
         int gameId = 0;
         int maxGameTime = 5;
-        int questionCounter = 0;
 
         Thread BackgroundProcessing;
         Thread CoordinateSaver;

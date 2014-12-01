@@ -14,7 +14,7 @@ namespace mysz
         int CHART_WIDTH = 0;
         int CHART_HEIGHT = 0;
         double questionTime = 0;
-        PictureBox picture_box;
+        PictureBox pictureBox;
 
         protected class TimePoint
         {
@@ -33,7 +33,7 @@ namespace mysz
         {
             CHART_WIDTH = _chart_width;
             CHART_HEIGHT = _chart_height;
-            picture_box = _picture_box;
+            pictureBox = _picture_box;
             timeLabel = _timeLabel;
         }
 
@@ -138,7 +138,7 @@ namespace mysz
         protected int GetX()
         // return X mouse position
         {
-            int X = MousePosition.X - this.Left - picture_box.Location.X - 8;
+            int X = MousePosition.X - this.Left - pictureBox.Location.X - 8;
             // -8 is shifted because of strange window coordinates
             if (X < 0)
                 return 0;
@@ -150,7 +150,7 @@ namespace mysz
         protected int GetY()
         // return Y mouse position
         {
-            int Y = MousePosition.Y - this.Top - picture_box.Location.Y - 30;
+            int Y = MousePosition.Y - this.Top - pictureBox.Location.Y - 30;
             // -30 is shifted because of strange window coordinates
             if (Y < 0)
                 return 0;
@@ -230,6 +230,7 @@ namespace mysz
             return MoodWindow.getMoods();
         }
 
+        //TODO do it also when space is pressed 
         protected override void WndProc(ref Message msg)
         //workaround to not repaint windows when ALT is pressed
         {
