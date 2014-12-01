@@ -7,8 +7,8 @@ namespace mysz
     public partial class GameMenuWindowBase : Form
     {
         readonly Label helpLabel, titleLabel, exitLabel, backLabel, settingsLabel;
-        Button playButton;
-        TextBox instructionTextBox;
+        readonly Button playButton;
+        readonly TextBox instructionTextBox;
         public GameMenuWindowBase(Label helpLabel, Label titleLabel, Label exitLabel, Label backLabel, Label settingsLabel,
             Button playButton, TextBox instructionTextBox)
         {
