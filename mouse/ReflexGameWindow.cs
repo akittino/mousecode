@@ -12,7 +12,7 @@ namespace mysz
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
 
-        readonly string USER_NAME;
+        readonly string userName;
         readonly int INITIAL_GAME_TIME;
         readonly Color BACKGROUND_COLOR = Color.White;
 
@@ -28,7 +28,7 @@ namespace mysz
         bool useLeftButton = true;        
         int gameId = 0;        
         int maxGameTime = 4;        
-        int score = 0;
+        int gameScore = 0;
 
         enum GameStates
         {
@@ -50,10 +50,10 @@ namespace mysz
             blueBrush = new SolidBrush(Color.Blue);
             redBrush = new SolidBrush(Color.Red);
 
-            maxGameTime = INITIAL_GAME_TIME = initialGameTime;
+            this.maxGameTime = INITIAL_GAME_TIME = initialGameTime;
             graphics = gameWindow.CreateGraphics();
             gameState = GameStates.OutOfGame;
-            USER_NAME = userName;
+            this.userName = userName;
             rnd = new Random();
             
             scoreLabel.Text = "";
@@ -201,12 +201,12 @@ namespace mysz
                 if (gameId != 0)
                     writeGameDetails();
                 
-                score = 0;
+                gameScore = 0;
                 gameId = 0;
                 maxGameTime = INITIAL_GAME_TIME;
                 setQuestionTime((double)maxGameTime);
                 gameState = GameStates.OutOfGame;
-                scoreLabel.Text = score.ToString();
+                scoreLabel.Text = gameScore.ToString();
                 
             }
             else
@@ -214,8 +214,8 @@ namespace mysz
 
                 gameId = writeCoordinatesToFile((DateTime.Now - startTime).TotalMilliseconds);
 
-                ++score;
-                scoreLabel.Text = score.ToString();
+                ++gameScore;
+                scoreLabel.Text = gameScore.ToString();
 
                 decreaseGameTime();
                 writeToPictureBox(graphics, "Great job! Play next level!", 290, 280, 15);
@@ -224,7 +224,7 @@ namespace mysz
 
         private void decreaseGameTime()
         {
-            if ((score % 10 == 0) && (maxGameTime > 1))
+            if ((gameScore % 10 == 0) && (maxGameTime > 1))
             {
                 setQuestionTime((double)--maxGameTime);
             }
@@ -241,14 +241,14 @@ namespace mysz
 
         private int writeCoordinatesToFile(double gameTime)
         {
-            return base.writeCoordinatesToFile(gameId, "ReflexGame", useLeftButton, USER_NAME, CoordsList,
+            return base.writeCoordinatesToFile(gameId, "ReflexGame", useLeftButton, userName, CoordsList,
                 gameTime.ToString("F0") + " , " + maxGameTime * 1000);
         }
 
         private void writeGameDetails()
         {
-            base.writeGameDetails("ReflexGame", USER_NAME, gameId,
-                "Score: " + score.ToString(), "Initial game time: " + INITIAL_GAME_TIME.ToString());
+            base.writeGameDetails("ReflexGame", userName, gameId,
+                "Score: " + gameScore.ToString(), "Initial game time: " + INITIAL_GAME_TIME.ToString());
         }
 
         private void saveCoordinates()
@@ -292,7 +292,7 @@ namespace mysz
                 Timer.Abort();
             if (CoordinateSaver != null && CoordinateSaver.IsAlive)
                 CoordinateSaver.Abort();
-            if (gameState != GameStates.OutOfGame && score != 0)
+            if (gameState != GameStates.OutOfGame && gameScore != 0)
                 writeGameDetails();
         }
     }

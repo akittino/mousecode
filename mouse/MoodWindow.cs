@@ -7,10 +7,9 @@ namespace mysz
     public partial class MoodWindow : Form
     {
         MoodFromHappyToAngryScale moodHAScale = MoodFromHappyToAngryScale.Normal;
-        MoodFromExcitedToBoredScale moodBEScale = MoodFromExcitedToBoredScale.Bored;
+        MoodFromExcitedToBoredScale moodBEScale = MoodFromExcitedToBoredScale.Normal;
         bool buttonMoodHSClicked = false;
         bool buttonMoodBEClicked = false;
-        Bitmap whiteBitmap = new Bitmap(60, 60);
 
         MoodFromHappyToAngryScale getHS;
         MoodFromExcitedToBoredScale getBE;
@@ -90,12 +89,20 @@ namespace mysz
             buttonChoosen(veryExcitedLabel);
         }
 
-        private void answerRButton_Click(object sender, EventArgs e)
+        private void excitedButton_Click(object sender, EventArgs e)
         {
-            if (buttonMoodBEClicked == true && buttonMoodHSClicked == true)
-            {
-                this.Close();
-            }
+            moodBEScale = MoodFromExcitedToBoredScale.Excited;
+            buttonMoodBEClicked = true;
+            resetLabelsBE();
+            buttonChoosen(excitedLabel);
+        }
+
+        private void normalBEButton_Click(object sender, EventArgs e)
+        {
+            moodBEScale = MoodFromExcitedToBoredScale.Normal;
+            buttonMoodBEClicked = true;
+            resetLabelsBE();
+            buttonChoosen(normalBELabel);
         }
 
         private void boredButton_Click(object sender, EventArgs e)
@@ -105,6 +112,23 @@ namespace mysz
             resetLabelsBE();
             buttonChoosen(boredLabel);
         }
+
+        private void veryBoredButton_Click(object sender, EventArgs e)
+        {
+            moodBEScale = MoodFromExcitedToBoredScale.Very_Bored;
+            buttonMoodBEClicked = true;
+            resetLabelsBE();
+            buttonChoosen(veryBoredLabel);
+        }
+        private void approveMoodsButton_Click(object sender, EventArgs e)
+        {
+            if (buttonMoodBEClicked == true && buttonMoodHSClicked == true)
+            {
+                this.Close();
+            }
+        }
+
+        
 
         private void buttonChoosen(Label label)
         {
@@ -138,30 +162,6 @@ namespace mysz
             boredLabel.ForeColor = Color.Black;
             veryBoredLabel.Text = "Very Bored";
             veryBoredLabel.ForeColor = Color.Black;
-        }
-
-        private void excitedButton_Click(object sender, EventArgs e)
-        {
-            moodBEScale = MoodFromExcitedToBoredScale.Excited;
-            buttonMoodBEClicked = true;
-            resetLabelsBE();
-            buttonChoosen(excitedLabel);
-        }
-
-        private void normalBEButton_Click(object sender, EventArgs e)
-        {
-            moodBEScale = MoodFromExcitedToBoredScale.Normal;
-            buttonMoodBEClicked = true;
-            resetLabelsBE();
-            buttonChoosen(normalBELabel);
-        }
-
-        private void veryBoredButton_Click(object sender, EventArgs e)
-        {
-            moodBEScale = MoodFromExcitedToBoredScale.Very_Bored;
-            buttonMoodBEClicked = true;
-            resetLabelsBE();
-            buttonChoosen(veryBoredLabel);
         }
 
         public Tuple<MoodFromHappyToAngryScale, MoodFromExcitedToBoredScale> getMoods()

@@ -45,7 +45,7 @@
             this.boredButton = new System.Windows.Forms.Button();
             this.veryExcitedButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.answerRButton = new System.Windows.Forms.Button();
+            this.approveMoodsButton = new System.Windows.Forms.Button();
             this.normalBEButton = new System.Windows.Forms.Button();
             this.normalBELabel = new System.Windows.Forms.Label();
             this.excitedButton = new System.Windows.Forms.Button();
@@ -242,16 +242,16 @@
             this.label7.TabIndex = 49;
             this.label7.Text = "And how the game influenced on you:";
             // 
-            // answerRButton
+            // approveMoodsButton
             // 
-            this.answerRButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.answerRButton.Location = new System.Drawing.Point(113, 288);
-            this.answerRButton.Name = "answerRButton";
-            this.answerRButton.Size = new System.Drawing.Size(126, 40);
-            this.answerRButton.TabIndex = 50;
-            this.answerRButton.Text = "Approve moods";
-            this.answerRButton.UseVisualStyleBackColor = true;
-            this.answerRButton.Click += new System.EventHandler(this.answerRButton_Click);
+            this.approveMoodsButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.approveMoodsButton.Location = new System.Drawing.Point(113, 288);
+            this.approveMoodsButton.Name = "approveMoodsButton";
+            this.approveMoodsButton.Size = new System.Drawing.Size(126, 40);
+            this.approveMoodsButton.TabIndex = 50;
+            this.approveMoodsButton.Text = "Approve moods";
+            this.approveMoodsButton.UseVisualStyleBackColor = true;
+            this.approveMoodsButton.Click += new System.EventHandler(this.approveMoodsButton_Click);
             // 
             // normalBEButton
             // 
@@ -337,7 +337,7 @@
             this.Controls.Add(this.excitedButton);
             this.Controls.Add(this.normalBELabel);
             this.Controls.Add(this.normalBEButton);
-            this.Controls.Add(this.answerRButton);
+            this.Controls.Add(this.approveMoodsButton);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.boredLabel);
             this.Controls.Add(this.veryExcitedLabel);
@@ -383,7 +383,7 @@
         private System.Windows.Forms.Button boredButton;
         private System.Windows.Forms.Button veryExcitedButton;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button answerRButton;
+        private System.Windows.Forms.Button approveMoodsButton;
         private System.Windows.Forms.Button normalBEButton;
         private System.Windows.Forms.Label normalBELabel;
         private System.Windows.Forms.Button excitedButton;

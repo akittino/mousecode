@@ -10,18 +10,20 @@ namespace mysz
 {
     public partial class ThingsGameWindow : MouseForm
     {
+
+        //TODO sth is wrong with time after first game -> first game has correct initial time but second game time equals last time from firstgame
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
         const string DATABASE_PATH = @"ThingsDatabase\"; // TODORELEASE remove it after release (just for changes while sending Kolakowska)
         //const string DATABASE_PATH = @"..\..\..\ThingsDatabase\"; //TODORELEASE change path when build .exe!!!  
         //const string DATABASE_PATH = @"ThingsDatabase";
-        readonly string USER_NAME;
+        readonly string userName;
         readonly int INITIAL_QUESTION_TIME;
         
         public bool databaseCorrupted;
         Graphics graphics, questionGraphics;
-        List<TimePoint> coordsList;
+        List<TimePoint> CoordsList;
         Thread CoordinateSaver;
         ArrayList questions;
         Thread Timer;
@@ -33,15 +35,15 @@ namespace mysz
         int questionCounter = 0;
         int questionTime = 5;
         int gameId = 0;
-        int score = 0;
+        int gameScore = 0;
         int nextQuestionNumber = 0;
 
-        class question
+        class Question
         {
             public string name, correctAnswer, wrongAnswer;
             public Image image;
 
-            public question(string filePath)
+            public Question(string filePath)
             {
                 bool imageFailed = false;
 
@@ -82,14 +84,14 @@ namespace mysz
 
             rnd = new Random();
             questions = new ArrayList();
-            coordsList = new List<TimePoint>();
+            CoordsList = new List<TimePoint>();
             graphics = gameWindow.CreateGraphics();
             questionGraphics = questionBox.CreateGraphics();
 
             timeLabel.Text = "";
             scoreLabel.Text = "";
 
-            USER_NAME = userName;
+            userName = userName;
             questionTime = INITIAL_QUESTION_TIME = timePerQuestion;
 
             setQuestionTime((double)questionTime);
@@ -103,7 +105,7 @@ namespace mysz
 
                 foreach (string path in files)
                 {
-                    question tmp = new question(path);
+                    Question tmp = new Question(path);
                     if (tmp.name != "corrupted")
                     {
                         questions.Add(tmp);
@@ -136,7 +138,7 @@ namespace mysz
             
             int rndNumber = rnd.Next(questionsRnd.Count);
             nextQuestionNumber = questionsRnd[rndNumber];
-            question currentQuestion = (question)questions[nextQuestionNumber];
+            Question currentQuestion = (Question)questions[nextQuestionNumber];
             questionsRnd.RemoveAll(x => x == nextQuestionNumber);
 
 
@@ -200,7 +202,7 @@ namespace mysz
             CoordinateSaver = new Thread(saveCoordinates);
 
             setNewQuestion();
-            coordsList.Clear();
+            CoordsList.Clear();
 
             Timer.Start();
             CoordinateSaver.Start();
@@ -234,17 +236,17 @@ namespace mysz
                 if (gameId != 0)
                     writeGameDetails();
 
-                score = 0;
+                gameScore = 0;
                 gameId = 0;
-                coordsList.Clear();
+                CoordsList.Clear();
                 questionCounter = 0;
-                scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
+                scoreLabel.Text = gameScore.ToString() + " / " + questionCounter.ToString();
             }
             else
             {
                 if (leftButtonClicked == leftButtonCorrect)
                 {
-                    ++score;
+                    ++gameScore;
                     writeToPictureBox("Good job! Please take next question!", 240, 520);
                 }
                 else
@@ -252,12 +254,12 @@ namespace mysz
                     writeToPictureBox("You were wrong! Please take next question!", 210, 520);
                 }
 
-                scoreLabel.Text = score.ToString() + " / " + questionCounter.ToString();
+                scoreLabel.Text = gameScore.ToString() + " / " + questionCounter.ToString();
 
                 double usedTime = 1000 * (questionTime - double.Parse(timeLabel.Text.Remove(timeLabel.Text.Length - 1)));
                 gameId = writeCoordinatesToFile(usedTime);
 
-                coordsList.Clear();
+                CoordsList.Clear();
             }
         }
 
@@ -280,18 +282,18 @@ namespace mysz
 
         private int writeCoordinatesToFile(double gameTime)
         {
-            return base.writeCoordinatesToFile(gameId, "ThingsGame", leftButtonClicked, USER_NAME, coordsList,
+            return base.writeCoordinatesToFile(gameId, "ThingsGame", leftButtonClicked, userName, CoordsList,
                 "Correct Answer: " + ((leftButtonClicked == leftButtonCorrect) ? "YES" : "NO"), gameTime.ToString("F0") + " , " + questionTime * 1000);
         }
 
         private void writeGameDetails()
         {
-            base.writeGameDetails("ThingsGame", USER_NAME, gameId, "Score: " + scoreLabel.Text, "Initial game time: " + INITIAL_QUESTION_TIME.ToString());
+            base.writeGameDetails("ThingsGame", userName, gameId, "Score: " + scoreLabel.Text, "Initial game time: " + INITIAL_QUESTION_TIME.ToString());
         }
 
         private void saveCoordinates()
         {
-            base.SaveCoordinates(GRANULATION, coordsList);
+            base.SaveCoordinates(GRANULATION, CoordsList);
         }
 
         public new void highlightLabel(object sender, EventArgs e)

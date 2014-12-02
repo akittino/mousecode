@@ -229,7 +229,7 @@ namespace mysz
         private void noButton_Click(object sender, EventArgs e)
         {
             startTime = DateTime.Now;
-            questionCounter++;
+
             quantityOfAnswers++;
             if (textColor != circleBrushColor.Name.ToString())
             {
@@ -281,7 +281,7 @@ namespace mysz
                 "Correct answer:" + ((correctAnswer == true) ? "YES" : "NO"), gameTime.ToString("F0") + "," + maxGameTime * 1000);
         }
 
-        private new void TimeCountdown()
+        private void TimeCountdown()
         {
             DateTime endTime = DateTime.Now.AddSeconds((double)maxGameTime);
 
