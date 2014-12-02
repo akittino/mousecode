@@ -141,9 +141,9 @@
             this.scoreNumber.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.scoreNumber.Location = new System.Drawing.Point(12, 113);
             this.scoreNumber.Name = "scoreNumber";
-            this.scoreNumber.Size = new System.Drawing.Size(17, 19);
+            this.scoreNumber.Size = new System.Drawing.Size(29, 19);
             this.scoreNumber.TabIndex = 37;
-            this.scoreNumber.Text = "0";
+            this.scoreNumber.Text = "0/0";
             this.scoreNumber.Visible = false;
             // 
             // continueButton
