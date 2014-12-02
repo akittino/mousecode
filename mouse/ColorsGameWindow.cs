@@ -282,7 +282,7 @@ namespace mysz
                 "Correct answer:" + ((correctAnswer == true) ? "YES" : "NO"), gameTime.ToString("F0") + "," + maxGameTime * 1000);
         }
 
-        private void TimeCountdown()
+        private new void TimeCountdown()
         {
             DateTime endTime = DateTime.Now.AddSeconds((double)maxGameTime);
 

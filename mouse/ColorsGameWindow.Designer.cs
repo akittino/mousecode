@@ -106,6 +106,7 @@
             this.yesButton.Name = "yesButton";
             this.yesButton.Size = new System.Drawing.Size(118, 82);
             this.yesButton.TabIndex = 32;
+            this.yesButton.TabStop = false;
             this.yesButton.Text = "YES";
             this.yesButton.UseVisualStyleBackColor = true;
             this.yesButton.Visible = false;
@@ -118,6 +119,7 @@
             this.noButton.Name = "noButton";
             this.noButton.Size = new System.Drawing.Size(118, 82);
             this.noButton.TabIndex = 33;
+            this.noButton.TabStop = false;
             this.noButton.Text = "NO";
             this.noButton.UseVisualStyleBackColor = true;
             this.noButton.Visible = false;
@@ -154,6 +156,7 @@
             this.continueButton.Name = "continueButton";
             this.continueButton.Size = new System.Drawing.Size(198, 136);
             this.continueButton.TabIndex = 38;
+            this.continueButton.TabStop = false;
             this.continueButton.Text = "Continue Game";
             this.continueButton.UseVisualStyleBackColor = false;
             this.continueButton.Visible = false;

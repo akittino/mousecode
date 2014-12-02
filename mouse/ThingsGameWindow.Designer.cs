@@ -49,6 +49,7 @@
             this.answerRButton.Name = "answerRButton";
             this.answerRButton.Size = new System.Drawing.Size(118, 82);
             this.answerRButton.TabIndex = 36;
+            this.answerRButton.TabStop = false;
             this.answerRButton.Text = "STOP";
             this.answerRButton.UseVisualStyleBackColor = true;
             this.answerRButton.Visible = false;
@@ -61,6 +62,7 @@
             this.answerLButton.Name = "answerLButton";
             this.answerLButton.Size = new System.Drawing.Size(118, 82);
             this.answerLButton.TabIndex = 35;
+            this.answerLButton.TabStop = false;
             this.answerLButton.Text = "STOP";
             this.answerLButton.UseVisualStyleBackColor = true;
             this.answerLButton.Visible = false;
@@ -136,6 +138,7 @@
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(157, 54);
             this.startButton.TabIndex = 12;
+            this.startButton.TabStop = false;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);

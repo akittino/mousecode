@@ -15,9 +15,8 @@ namespace mysz
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
-        const string DATABASE_PATH = @"ThingsDatabase\"; // TODORELEASE remove it after release (just for changes while sending Kolakowska)
-        //const string DATABASE_PATH = @"..\..\..\ThingsDatabase\"; //TODORELEASE change path when build .exe!!!  
-        //const string DATABASE_PATH = @"ThingsDatabase";
+        const string DATABASE_PATH = @"..\..\..\Things Images\"; //TODORELEASE change path when build .exe!!!  
+        //const string DATABASE_PATH = @"Things Images";
         readonly string userName;
         readonly int INITIAL_QUESTION_TIME;
         
@@ -40,7 +39,7 @@ namespace mysz
 
         class Question
         {
-            public string name, correctAnswer, wrongAnswer;
+            public string correctAnswer, wrongAnswer;
             public Image image;
 
             public Question(string filePath)
@@ -51,7 +50,7 @@ namespace mysz
                 {
                     image = Image.FromFile(filePath);
                 }
-                catch (OutOfMemoryException)
+                catch (Exception)
                 {
                     imageFailed = true;
                 }
@@ -60,16 +59,15 @@ namespace mysz
                 string[] commaList = slashList[slashList.Length - 1].Split(',');
 
                 if (commaList.Length != 3 || imageFailed)
-                    name = correctAnswer = wrongAnswer = "corrupted";
+                    correctAnswer = wrongAnswer = "corrupted";
                 else
                 {
-                    name = commaList[0];
                     correctAnswer = commaList[1];
                     wrongAnswer = commaList[2].Remove(commaList[2].Length - 4);
                     //above remove 4 because of deleting ".jpg"
-                    if(correctAnswer.Length > 13 || wrongAnswer.Length > 13)
+                    if(correctAnswer.Length >= 15 || wrongAnswer.Length >= 15)
                     {
-                        name = correctAnswer = wrongAnswer = "corrupted";
+                        correctAnswer = wrongAnswer = "corrupted";
                     }
                 }
             }
@@ -91,7 +89,7 @@ namespace mysz
             timeLabel.Text = "";
             scoreLabel.Text = "";
 
-            userName = userName;
+            this.userName = userName;
             questionTime = INITIAL_QUESTION_TIME = timePerQuestion;
 
             setQuestionTime((double)questionTime);
@@ -106,7 +104,7 @@ namespace mysz
                 foreach (string path in files)
                 {
                     Question tmp = new Question(path);
-                    if (tmp.name != "corrupted")
+                    if (tmp.correctAnswer != "corrupted")
                     {
                         questions.Add(tmp);
                     }

@@ -109,6 +109,7 @@
             this.stopLButton.Name = "stopLButton";
             this.stopLButton.Size = new System.Drawing.Size(118, 82);
             this.stopLButton.TabIndex = 34;
+            this.stopLButton.TabStop = false;
             this.stopLButton.Text = "STOP";
             this.stopLButton.UseVisualStyleBackColor = true;
             this.stopLButton.Visible = false;
@@ -121,6 +122,7 @@
             this.stopRButton.Name = "stopRButton";
             this.stopRButton.Size = new System.Drawing.Size(118, 82);
             this.stopRButton.TabIndex = 35;
+            this.stopRButton.TabStop = false;
             this.stopRButton.Text = "STOP";
             this.stopRButton.UseVisualStyleBackColor = true;
             this.stopRButton.Visible = false;
@@ -133,6 +135,7 @@
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(118, 82);
             this.startButton.TabIndex = 36;
+            this.startButton.TabStop = false;
             this.startButton.Text = "START";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);

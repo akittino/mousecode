@@ -230,7 +230,6 @@ namespace mysz
             return MoodWindow.getMoods();
         }
 
-        //TODO do it also when space is pressed 
         protected override void WndProc(ref Message msg)
         //workaround to not repaint windows when ALT is pressed
         {
