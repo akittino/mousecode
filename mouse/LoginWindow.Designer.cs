@@ -40,7 +40,6 @@
             this.thingsLabel = new System.Windows.Forms.Label();
             this.reflexLabel = new System.Windows.Forms.Label();
             this.colorsLabel = new System.Windows.Forms.Label();
-            this.adminPasswordTextbox = new System.Windows.Forms.TextBox();
             this.titleLabel = new System.Windows.Forms.Label();
             this.gamesGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -169,15 +168,6 @@
             this.colorsLabel.TabIndex = 39;
             this.colorsLabel.Text = "Colors";
             // 
-            // adminPasswordTextbox
-            // 
-            this.adminPasswordTextbox.Location = new System.Drawing.Point(12, 153);
-            this.adminPasswordTextbox.Name = "adminPasswordTextbox";
-            this.adminPasswordTextbox.Size = new System.Drawing.Size(100, 20);
-            this.adminPasswordTextbox.TabIndex = 15;
-            this.adminPasswordTextbox.Text = "admin";
-            this.adminPasswordTextbox.UseSystemPasswordChar = true;
-            // 
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
@@ -194,7 +184,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 344);
             this.Controls.Add(this.titleLabel);
-            this.Controls.Add(this.adminPasswordTextbox);
             this.Controls.Add(this.gamesGroupBox);
             this.Controls.Add(this.loginStatusLabel);
             this.Controls.Add(this.adminPanelButton);
@@ -225,7 +214,6 @@
         private System.Windows.Forms.Button reflexButton;
         private System.Windows.Forms.Button thingsButton;
         private System.Windows.Forms.GroupBox gamesGroupBox;
-        private System.Windows.Forms.TextBox adminPasswordTextbox;
         private System.Windows.Forms.Label colorsLabel;
         private System.Windows.Forms.Label thingsLabel;
         private System.Windows.Forms.Label reflexLabel;

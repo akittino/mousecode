@@ -6,7 +6,6 @@ namespace mysz
     public partial class login_main_window : Form
     {
         //TODO user does not have access to directory and application crashes while user wants to save file in game 
-        const String AdminPassword = "admin";
         AdminPanelAnalyzator AdminWindow;
         ThingsGameMenuWindow ThingsWindow;
         ReflexGameMenuWindow ReflexWindow;
@@ -20,24 +19,11 @@ namespace mysz
 
         private void RunAdminPanelButton_Click(object sender, EventArgs e)
         {
-            switch(adminPasswordTextbox.Text)
-            {
-                case "":
-                    LogThis("Please enter password to use admin panel.");
-                break;
-
-                case AdminPassword:
-                    LogThis("Password correct. Access granted.");
-                    AdminWindow = new AdminPanelAnalyzator();
-                    AdminWindow.FormClosed += new FormClosedEventHandler(AdminWindow_FormClosed);
-                    AdminWindow.Show();
-                    this.Hide();
-                break;
-
-                default:
-                    LogThis("Password incorrect. Access denied.");
-                break;
-            }
+            LogThis("Admin panel is running now...");
+            AdminWindow = new AdminPanelAnalyzator();
+            AdminWindow.FormClosed += new FormClosedEventHandler(AdminWindow_FormClosed);
+            AdminWindow.Show();
+            this.Hide();
 
         }
 
@@ -102,6 +88,7 @@ namespace mysz
         {
             adminPanelButton.Enabled = true;
             this.Show();
+            LogThis("Admin panel ended.");
         }
 
         void GamesButtonsOn()
