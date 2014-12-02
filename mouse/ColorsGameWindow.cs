@@ -104,7 +104,7 @@ namespace mysz
 
                 startTime = DateTime.Now;
 
-                drawEclipse();
+                drawEllipse();
                 CoordsList.Clear();
             });
 
@@ -138,7 +138,7 @@ namespace mysz
             }
         }
 
-        private void drawEclipse()
+        private void drawEllipse()
         {
             gameWindow.Refresh();
             scoreNumber.Visible = true;
