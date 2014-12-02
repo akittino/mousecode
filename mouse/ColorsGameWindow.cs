@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace mysz
 {
+    //TODO sth is wrong with score - it is not resetting
     public partial class ColorsGameWindow : MouseForm
     {
         const int CHART_WIDTH = 800;

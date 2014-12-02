@@ -128,11 +128,9 @@ namespace mysz
             }
         }
 
-        
-
         private void buttonChoosen(Label label)
         {
-            label.Text = "Choosen";
+            label.Text = "Chosen";
             label.ForeColor = Color.Green;
         }
 
