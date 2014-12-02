@@ -16,10 +16,10 @@ namespace analyzingApp
         }
     }
 
-    public class buttonCoordinates
+    public class ButtonCoordinates
     {
         public int X1, X2, Y1, Y2;
-        public buttonCoordinates(int _X1, int _X2, int _Y1, int _Y2)
+        public ButtonCoordinates(int _X1, int _X2, int _Y1, int _Y2)
         {
             X1 = _X1;
             X2 = _X2;
@@ -28,12 +28,12 @@ namespace analyzingApp
         }
     }
 
-    public class playFile
+    public class PlayFile
     {
         readonly int STOPS_GRANULATION;
         readonly bool usedLeftButton;
-        readonly buttonCoordinates stopButton;
-        readonly buttonCoordinates startButton;
+        readonly ButtonCoordinates stopButton;
+        readonly ButtonCoordinates startButton;
 
         List<TimePoint> coordsList = null;
 
@@ -64,7 +64,7 @@ namespace analyzingApp
 
         string fileLog = null;
 
-        public playFile(string path, int _stopsGranulation)
+        public PlayFile(string path, int _stopsGranulation)
         {
             STOPS_GRANULATION = _stopsGranulation;
             try
@@ -85,26 +85,26 @@ namespace analyzingApp
                     {
                         if (path.Contains("ThingsGame"))
                         {
-                            startButton = new buttonCoordinates(320, 320 + 157, 600 - 54, 600);
+                            startButton = new ButtonCoordinates(320, 320 + 157, 600 - 54, 600);
                             if (usedLeftButton)
                             {
-                                stopButton = new buttonCoordinates(0, 118, 0, 82);
+                                stopButton = new ButtonCoordinates(0, 118, 0, 82);
                             }
                             else
                             {
-                                stopButton = new buttonCoordinates(800 - 118, 800, 0, 82);
+                                stopButton = new ButtonCoordinates(800 - 118, 800, 0, 82);
                             }
                         }
                         else
                         {
-                            startButton = new buttonCoordinates(318, 318 + 198, 0, 136);
+                            startButton = new ButtonCoordinates(318, 318 + 198, 0, 136);
                             if (usedLeftButton)
                             {
-                                stopButton = new buttonCoordinates(0, 118, 600 - 82, 600);
+                                stopButton = new ButtonCoordinates(0, 118, 600 - 82, 600);
                             }
                             else
                             {
-                                stopButton = new buttonCoordinates(800 - 118, 800, 600 - 82, 600);
+                                stopButton = new ButtonCoordinates(800 - 118, 800, 600 - 82, 600);
                             }
                         }
                         s = sr.ReadLine();
@@ -116,14 +116,14 @@ namespace analyzingApp
                     }
                     else
                     {
-                        startButton = new buttonCoordinates(346, 346 + 82, 600 - 82, 600);
+                        startButton = new ButtonCoordinates(346, 346 + 82, 600 - 82, 600);
                         if (usedLeftButton)
                         {
-                            stopButton = new buttonCoordinates(0, 118, 0, 82);
+                            stopButton = new ButtonCoordinates(0, 118, 0, 82);
                         }
                         else
                         {
-                            stopButton = new buttonCoordinates(800 - 118, 800, 0, 82);
+                            stopButton = new ButtonCoordinates(800 - 118, 800, 0, 82);
                         }
                     }
 

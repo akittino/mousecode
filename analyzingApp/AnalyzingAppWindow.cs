@@ -41,7 +41,7 @@ namespace analyzingApp
         }
         private void getListOfAttributes()
         {
-            MethodInfo[] methods = typeof(playFile).GetMethods();
+            MethodInfo[] methods = typeof(PlayFile).GetMethods();
             foreach(MethodInfo method in methods)
             {
                 if(method.Name.StartsWith("getAttribute"))
@@ -214,7 +214,7 @@ namespace analyzingApp
 
                         for (int i = 0; i < pathList.Count; i++)
                         {
-                            playFile pf = new playFile(GAMES_DIR + @"\" + pathList[i], stops_granulation);
+                            PlayFile pf = new PlayFile(GAMES_DIR + @"\" + pathList[i], stops_granulation);
                             if (pf.getFileValid() == false)
                             {
                                 logTextBox.Text += pf.getFileLog() + "\n";
