@@ -54,7 +54,7 @@ namespace mysz
             textColorsBase.Add("Yellow");
             textColorsBase.Add("Pink");
             CoordsList = new List<TimePoint>();
-            CoordinateSaver = new Thread(SaveCoordinates);
+            CoordinateSaver = new Thread(saveCoordinates);
             this.userName = userName;
             maxGameTime = INITIAL_GAME_TIME = initialGameTime;
         }
@@ -69,7 +69,7 @@ namespace mysz
             base.removeHighlightLabel(sender, e);
         }
 
-        private void endGame(object sender, EventArgs e)
+        private void exitGame(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -111,7 +111,7 @@ namespace mysz
             Timer = new Thread(TimeCountdown);
             Timer.Start();
 
-            CoordinateSaver = new Thread(SaveCoordinates);
+            CoordinateSaver = new Thread(saveCoordinates);
             CoordinateSaver.Start();
         }
 
@@ -269,7 +269,7 @@ namespace mysz
                 30 + gameWindow.Location.Y + this.Location.Y);
         }
 
-        void SaveCoordinates()
+        void saveCoordinates()
         // writing coordinates to list of coords
         {
             base.SaveCoordinates(GRANULATION, CoordsList);

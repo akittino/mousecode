@@ -47,10 +47,10 @@ namespace mysz
             questionTime = _qT;
         }
 
-        protected void writeGameDetails(string gameName, string USER_NAME, int gameId, params string[] strings)
+        protected void writeGameDetails(string gameName, string userName, int gameId, params string[] strings)
         {
             Tuple<MoodWindow.MoodFromHappyToAngryScale, MoodWindow.MoodFromExcitedToBoredScale> moods = getMood();
-            String fileName = @".\" + gameName + @"\" + USER_NAME + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) +
+            String fileName = @".\" + gameName + @"\" + userName + @"\" + String.Format("{0:yyyy-MM-dd}", DateTime.Now) +
                               @"\" + gameId.ToString() + @"\gameDetails.txt";
 
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(fileName))
