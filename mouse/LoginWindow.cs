@@ -5,7 +5,6 @@ namespace mysz
 {
     public partial class login_main_window : Form
     {
-        //TODO user does not have access to directory and application crashes while user wants to save file in game 
         AdminPanelAnalyzator AdminWindow;
         ThingsGameMenuWindow ThingsWindow;
         ReflexGameMenuWindow ReflexWindow;
@@ -14,7 +13,7 @@ namespace mysz
 
         public login_main_window()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private void RunAdminPanelButton_Click(object sender, EventArgs e)
@@ -152,6 +151,24 @@ namespace mysz
             if (path.Length > 150)
             {
                 MessageBox.Show("Please place this application in directory with shorter path!");
+                this.Close();
+            }
+
+            string dirName;
+            Random rand = new Random();
+            do
+            {
+                dirName = rand.Next().ToString();
+            }
+            while (System.IO.Directory.Exists(dirName));
+            try
+            {
+                System.IO.Directory.CreateDirectory(dirName);
+                System.IO.Directory.Delete(dirName);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("You don't have required rights to make files in current directory.\nPlease move application files and run it in place where you have rights!");
                 this.Close();
             }
         }

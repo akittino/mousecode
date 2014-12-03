@@ -74,9 +74,9 @@
             this.scoreLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.scoreLabel.Location = new System.Drawing.Point(12, 113);
             this.scoreLabel.Name = "scoreLabel";
-            this.scoreLabel.Size = new System.Drawing.Size(21, 19);
+            this.scoreLabel.Size = new System.Drawing.Size(41, 19);
             this.scoreLabel.TabIndex = 29;
-            this.scoreLabel.Text = " 0";
+            this.scoreLabel.Text = " 0 / 0";
             // 
             // scoreTextLabel
             // 

@@ -67,9 +67,9 @@
             this.adminPanelButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.adminPanelButton.Location = new System.Drawing.Point(12, 123);
             this.adminPanelButton.Name = "adminPanelButton";
-            this.adminPanelButton.Size = new System.Drawing.Size(102, 23);
+            this.adminPanelButton.Size = new System.Drawing.Size(133, 23);
             this.adminPanelButton.TabIndex = 9;
-            this.adminPanelButton.Text = "Run admin panel";
+            this.adminPanelButton.Text = "Visualise coordinates";
             this.adminPanelButton.UseVisualStyleBackColor = true;
             this.adminPanelButton.Click += new System.EventHandler(this.RunAdminPanelButton_Click);
             // 

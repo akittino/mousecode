@@ -11,7 +11,6 @@ namespace mysz
     public partial class ThingsGameWindow : MouseForm
     {
 
-        //TODO sth is wrong with time after first game -> first game has correct initial time but second game time equals last time from firstgame
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
@@ -87,12 +86,11 @@ namespace mysz
             questionGraphics = questionBox.CreateGraphics();
 
             timeLabel.Text = "";
-            scoreLabel.Text = "";
 
             this.userName = userName;
             questionTime = INITIAL_QUESTION_TIME = timePerQuestion;
 
-            setQuestionTime((double)questionTime);
+            setQuestionTime((double)INITIAL_QUESTION_TIME);
 
             answerRButton.Enabled = false;
             answerLButton.Enabled = false;
@@ -188,6 +186,7 @@ namespace mysz
             answerRButton.Visible = true;
             answerLButton.Visible = true;
             timeLabel.Visible = true;
+            scoreLabel.Text = gameScore.ToString() + " / " + questionCounter.ToString();
 
             startButton.Text = "Next";
             ++questionCounter;
@@ -229,7 +228,7 @@ namespace mysz
             if (timeLabel.Text == "Time out!")
             {
                 startButton.Text = "Start";
-                writeToPictureBox("Please start a game!", 315, 520);
+                writeToPictureBox("Please start new game!", 310, 520);
                 questionsRnd.Clear();
                 if (gameId != 0)
                     writeGameDetails();
@@ -238,7 +237,7 @@ namespace mysz
                 gameId = 0;
                 CoordsList.Clear();
                 questionCounter = 0;
-                scoreLabel.Text = gameScore.ToString() + " / " + questionCounter.ToString();
+                setQuestionTime((double)INITIAL_QUESTION_TIME);
             }
             else
             {
