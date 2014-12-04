@@ -69,6 +69,10 @@
             this.ClientSize = new System.Drawing.Size(1077, 628);
             this.Controls.Add(this.coordinatesViewer);
             this.Controls.Add(this.panel1);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1093, 667);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1093, 667);
             this.Name = "AdminPanelAnalyzator";
             this.Text = "Admin panel analyzator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminPanelAnalyzator_FormClosing);

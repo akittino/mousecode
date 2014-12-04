@@ -83,12 +83,6 @@
     <Compile Include="LoginWindow.Designer.cs">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminPanelWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AdminPanelWindow.Designer.cs">
-      <DependentUpon>AdminPanelWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="GameMenuWindowBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,10 +129,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AdminPanelWindow.resx">
-      <DependentUpon>AdminPanelWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

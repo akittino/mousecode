@@ -90,7 +90,7 @@ namespace mysz
             this.userName = userName;
             questionTime = INITIAL_QUESTION_TIME = timePerQuestion;
 
-            setQuestionTime((double)INITIAL_QUESTION_TIME);
+            setQuestionTime((double)questionTime);
 
             answerRButton.Enabled = false;
             answerLButton.Enabled = false;
@@ -189,8 +189,8 @@ namespace mysz
             scoreLabel.Text = gameScore.ToString() + " / " + questionCounter.ToString();
 
             startButton.Text = "Next";
-            ++questionCounter;
             decreaseGameTime();
+            ++questionCounter;
 
             graphics.Clear(Color.White);
             writeToPictureBox("Now quick, answer the question!", 270, 520);
@@ -237,7 +237,8 @@ namespace mysz
                 gameId = 0;
                 CoordsList.Clear();
                 questionCounter = 0;
-                setQuestionTime((double)INITIAL_QUESTION_TIME);
+                questionTime = INITIAL_QUESTION_TIME;
+                setQuestionTime((double)questionTime);
             }
             else
             {
