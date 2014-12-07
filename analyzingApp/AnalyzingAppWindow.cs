@@ -18,14 +18,10 @@ namespace analyzingApp
         int checkedLevel;
 
         Dictionary<string, MethodInfo> playFileMethods = new Dictionary<string, MethodInfo>();
-        List<string> addList = new List<string>();
-        List<Attribute> attributesToAdd = new List<Attribute>();
         List<Attribute> listOfAttributes = new List<Attribute>();
         BindingList<Attribute> dataOriginal = new BindingList<Attribute>();
         BindingList<Attribute> dataToAdd = new BindingList<Attribute>();
         List<string> pathList = new List<string>();
-        List<object> listOfGetAttributes = new List<object>();
-
 
         public analyzingAppWindow()
         {
