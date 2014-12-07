@@ -246,24 +246,6 @@ namespace analyzingApp
             }
         }
 
-        private void uncheckAllNodes(TreeNodeCollection nodes)
-        {
-            foreach (TreeNode tn in nodes)
-            {
-                tn.Checked = false;
-                CheckChildren(tn, false);
-            }
-        }
-
-        private void CheckChildren(TreeNode tn, Boolean uncheck)
-        {
-            foreach (TreeNode t in tn.Nodes)
-            {
-                CheckChildren(t, uncheck);
-                t.Checked = true;
-            }
-        }
-
         private void granulationTextbox_TextChanged(object sender, EventArgs e)
         {
             string granulationValue = "";
