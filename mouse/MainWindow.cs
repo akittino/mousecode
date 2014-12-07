@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace mysz
 {
-    public partial class login_main_window : Form
+    public partial class main_window : Form
     {
         AdminPanelAnalyzator AdminWindow;
         ThingsGameMenuWindow ThingsWindow;
@@ -11,7 +11,7 @@ namespace mysz
         ColorsGameMenuWindow ColorsWindow;
         bool resetedName = false;
 
-        public login_main_window()
+        public main_window()
         {
             InitializeComponent();
         }
