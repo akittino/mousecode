@@ -250,7 +250,7 @@ namespace analyzingApp
             perfectLineOnTopPercentage = 0;
 
             if (pathLength == null)
-                getAttributeDistance();
+                getAttributePathLength();
             double pathOnTop = 0;
 
             int Ax = coordsList[0].X;
@@ -284,8 +284,14 @@ namespace analyzingApp
 
                 pathOnTop += Math.Sqrt((double)((dX * dX) + (dY * dY)));
             }
-
-            perfectLineOnTopPercentage = pathOnTop / pathLength;
+            if (usedLeftButton)
+            {
+                perfectLineOnTopPercentage = 1 - (pathOnTop / pathLength);
+            }
+            else
+            {
+                perfectLineOnTopPercentage = pathOnTop / pathLength;
+            }
 
 
         }
