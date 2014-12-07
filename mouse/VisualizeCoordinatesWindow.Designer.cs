@@ -1,6 +1,6 @@
 ﻿namespace mysz
 {
-    partial class AdminPanelAnalyzator
+    partial class VisualizeCoordinatesWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -62,7 +62,7 @@
             this.coordinatesViewer.TabIndex = 11;
             this.coordinatesViewer.TabStop = false;
             // 
-            // AdminPanelAnalyzator
+            // VisualizeCoordinatesWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -73,10 +73,10 @@
             this.MaximumSize = new System.Drawing.Size(1093, 667);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1093, 667);
-            this.Name = "AdminPanelAnalyzator";
-            this.Text = "Admin panel analyzator";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminPanelAnalyzator_FormClosing);
-            this.Load += new System.EventHandler(this.AdminPanelAnalyzator_Load);
+            this.Name = "VisualizeCoordinatesWindow";
+            this.Text = "Visualise coordinates";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VisualizeCoordinatesWindow_FormClosing);
+            this.Load += new System.EventHandler(this.VisualizeCoordinatesWindow_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.coordinatesViewer)).EndInit();
             this.ResumeLayout(false);

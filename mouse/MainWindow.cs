@@ -5,7 +5,7 @@ namespace mysz
 {
     public partial class main_window : Form
     {
-        AdminPanelAnalyzator AdminWindow;
+        VisualizeCoordinatesWindow AdminWindow;
         ThingsGameMenuWindow ThingsWindow;
         ReflexGameMenuWindow ReflexWindow;
         ColorsGameMenuWindow ColorsWindow;
@@ -19,7 +19,7 @@ namespace mysz
         private void RunAdminPanelButton_Click(object sender, EventArgs e)
         {
             LogThis("Admin panel is running now...");
-            AdminWindow = new AdminPanelAnalyzator();
+            AdminWindow = new VisualizeCoordinatesWindow();
             AdminWindow.FormClosed += new FormClosedEventHandler(AdminWindow_FormClosed);
             AdminWindow.Show();
             this.Hide();

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace mysz
 {
-    public partial class AdminPanelAnalyzator : MouseForm
+    public partial class VisualizeCoordinatesWindow : MouseForm
     {
         readonly Color BACKGROUND_COLOR = Color.Black;
 
@@ -20,7 +20,7 @@ namespace mysz
         int checkedLevel;
         Thread refreshThread;
 
-        public AdminPanelAnalyzator()
+        public VisualizeCoordinatesWindow()
         {
             InitializeComponent();
             bluePen = new Pen(Color.Blue, 2f);
@@ -32,7 +32,7 @@ namespace mysz
             checkedLevel = 0;
         }
 
-        private void AdminPanelAnalyzator_Load(object sender, EventArgs e)
+        private void VisualizeCoordinatesWindow_Load(object sender, EventArgs e)
         {
             string [] games = {"ColorsGame", "ReflexGame", "ThingsGame"};
 
@@ -255,7 +255,7 @@ namespace mysz
             
         }
 
-        private void AdminPanelAnalyzator_FormClosing(object sender, FormClosingEventArgs e)
+        private void VisualizeCoordinatesWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             if(refreshThread != null && refreshThread.IsAlive)
             {
