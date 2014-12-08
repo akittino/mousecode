@@ -52,6 +52,13 @@ namespace analyzingApp
         
         private void analyzingAppWindow_Load(object sender, EventArgs e)
         {
+            fillFileViewer(null, null);
+            attributesToChoose();
+        }
+
+        private void fillFileViewer(object sender, EventArgs e)
+        {
+            fileViewer.Nodes.Clear();
             string[] games = { "ColorsGame", "ReflexGame", "ThingsGame" };
 
             foreach (DirectoryInfo d in (new DirectoryInfo(GAMES_DIR)).GetDirectories())
@@ -65,9 +72,9 @@ namespace analyzingApp
                     }
                 }
             }
-            attributesToChoose();
             fileViewer.ExpandAll();
         }
+
         private void readChildNodes(TreeNode t)
         {
             DirectoryInfo[] dirsInfo = (new DirectoryInfo(GAMES_DIR + @"\" + t.FullPath)).GetDirectories();
@@ -76,8 +83,27 @@ namespace analyzingApp
             {
                 foreach (DirectoryInfo d in dirsInfo)
                 {
-                    TreeNode tn = t.Nodes.Add(d.Name);
-                    readChildNodes(tn);
+                    if (d.Name == "L")
+                    {
+                        if (leftCheckBox.Checked)
+                        {
+                            TreeNode tn = t.Nodes.Add(d.Name);
+                            readChildNodes(tn);
+                        }
+                    }
+                    else if (d.Name == "R")
+                    {
+                        if (rightCheckBox.Checked)
+                        {
+                            TreeNode tn = t.Nodes.Add(d.Name);
+                            readChildNodes(tn);
+                        }
+                    }
+                    else
+                    {
+                        TreeNode tn = t.Nodes.Add(d.Name);
+                        readChildNodes(tn);
+                    }
                 }
             }
             else
@@ -207,6 +233,18 @@ namespace analyzingApp
                 {
                     using (StreamWriter sw = new StreamWriter(sfd.FileName))
                     {
+                        bool first = true;
+                        foreach (var it in listboxToAdd.Items)
+                        {
+                            if (first)
+                                first = false;
+                            else
+                                sw.Write(",");
+
+                            Attribute a = (Attribute)it;
+                            sw.Write(a.Name);
+                        }
+                        sw.Write("\n");
 
                         for (int i = 0; i < pathList.Count; i++)
                         {
@@ -217,7 +255,7 @@ namespace analyzingApp
                             }
                             else
                             {
-                                bool first = true;
+                                first = true;
                                 foreach (var it in listboxToAdd.Items)
                                 {
                                     if (first)

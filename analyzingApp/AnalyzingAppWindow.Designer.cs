@@ -43,23 +43,25 @@
             this.addAllButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.logTextBox = new System.Windows.Forms.RichTextBox();
+            this.leftCheckBox = new System.Windows.Forms.CheckBox();
+            this.rightCheckBox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.fileViewer);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(12, 44);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(234, 604);
+            this.panel1.Size = new System.Drawing.Size(234, 572);
             this.panel1.TabIndex = 0;
             // 
             // fileViewer
             // 
             this.fileViewer.CheckBoxes = true;
-            this.fileViewer.Location = new System.Drawing.Point(3, 3);
+            this.fileViewer.Location = new System.Drawing.Point(3, 0);
             this.fileViewer.Name = "fileViewer";
-            this.fileViewer.Size = new System.Drawing.Size(228, 598);
+            this.fileViewer.Size = new System.Drawing.Size(228, 569);
             this.fileViewer.TabIndex = 0;
             this.fileViewer.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.fileViewer_AfterCheck);
             // 
@@ -184,11 +186,39 @@
             this.logTextBox.TabIndex = 13;
             this.logTextBox.Text = "";
             // 
+            // leftCheckBox
+            // 
+            this.leftCheckBox.AutoSize = true;
+            this.leftCheckBox.Checked = true;
+            this.leftCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.leftCheckBox.Location = new System.Drawing.Point(12, 15);
+            this.leftCheckBox.Name = "leftCheckBox";
+            this.leftCheckBox.Size = new System.Drawing.Size(91, 17);
+            this.leftCheckBox.TabIndex = 14;
+            this.leftCheckBox.Text = "Show left files";
+            this.leftCheckBox.UseVisualStyleBackColor = true;
+            this.leftCheckBox.CheckedChanged += new System.EventHandler(this.fillFileViewer);
+            // 
+            // rightCheckBox
+            // 
+            this.rightCheckBox.AutoSize = true;
+            this.rightCheckBox.Checked = true;
+            this.rightCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.rightCheckBox.Location = new System.Drawing.Point(149, 15);
+            this.rightCheckBox.Name = "rightCheckBox";
+            this.rightCheckBox.Size = new System.Drawing.Size(97, 17);
+            this.rightCheckBox.TabIndex = 15;
+            this.rightCheckBox.Text = "Show right files";
+            this.rightCheckBox.UseVisualStyleBackColor = true;
+            this.rightCheckBox.CheckedChanged += new System.EventHandler(this.fillFileViewer);
+            // 
             // analyzingAppWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(955, 628);
+            this.Controls.Add(this.rightCheckBox);
+            this.Controls.Add(this.leftCheckBox);
             this.Controls.Add(this.logTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.addAllButton);
@@ -233,6 +263,8 @@
         private System.Windows.Forms.Button addAllButton;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox logTextBox;
+        private System.Windows.Forms.CheckBox leftCheckBox;
+        private System.Windows.Forms.CheckBox rightCheckBox;
     }
 }
 
