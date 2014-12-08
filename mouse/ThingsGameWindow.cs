@@ -14,8 +14,7 @@ namespace mysz
         const int CHART_WIDTH = 800;
         const int CHART_HEIGHT = 600;
         const int GRANULATION = 5;
-        const string DATABASE_PATH = @"..\..\..\Things Images\"; //TODORELEASE change path when build .exe!!!  
-        //const string DATABASE_PATH = @"Things Images";
+        const string DATABASE_PATH = @"Things Images";
         readonly string userName;
         readonly int INITIAL_QUESTION_TIME;
         
