@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="mysz.MoodWindow">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="mysz.MoodWindow.MoodFromHappyToAngryScale">
+        <TypeIdentifier>
+          <NewMemberFileName>MoodWindow.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="mysz.MoodWindow.MoodFromExcitedToBoredScale">
+        <TypeIdentifier>
+          <NewMemberFileName>MoodWindow.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AIDAAgACqCDoIhQ6oELQgDAKAQCECIABggAAACAAGCQ=</HashCode>
+      <FileName>MoodWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
