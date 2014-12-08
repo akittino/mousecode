@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainWindow));
             this.userNameTextbox = new System.Windows.Forms.TextBox();
             this.userNameLabel = new System.Windows.Forms.Label();
-            this.adminPanelButton = new System.Windows.Forms.Button();
-            this.loginStatusLabel = new System.Windows.Forms.Label();
+            this.visualizeButton = new System.Windows.Forms.Button();
+            this.logStatusLabel = new System.Windows.Forms.Label();
             this.colorsButton = new System.Windows.Forms.Button();
             this.reflexButton = new System.Windows.Forms.Button();
             this.thingsButton = new System.Windows.Forms.Button();
@@ -62,26 +62,26 @@
             this.userNameLabel.TabIndex = 1;
             this.userNameLabel.Text = "User name:";
             // 
-            // adminPanelButton
+            // visualizeButton
             // 
-            this.adminPanelButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.adminPanelButton.Location = new System.Drawing.Point(12, 123);
-            this.adminPanelButton.Name = "adminPanelButton";
-            this.adminPanelButton.Size = new System.Drawing.Size(133, 23);
-            this.adminPanelButton.TabIndex = 9;
-            this.adminPanelButton.Text = "Visualise coordinates";
-            this.adminPanelButton.UseVisualStyleBackColor = true;
-            this.adminPanelButton.Click += new System.EventHandler(this.RunAdminPanelButton_Click);
+            this.visualizeButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.visualizeButton.Location = new System.Drawing.Point(12, 123);
+            this.visualizeButton.Name = "visualizeButton";
+            this.visualizeButton.Size = new System.Drawing.Size(133, 23);
+            this.visualizeButton.TabIndex = 9;
+            this.visualizeButton.Text = "Visualise coordinates";
+            this.visualizeButton.UseVisualStyleBackColor = true;
+            this.visualizeButton.Click += new System.EventHandler(this.RunVisualizeButton_Click);
             // 
-            // loginStatusLabel
+            // logStatusLabel
             // 
-            this.loginStatusLabel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginStatusLabel.Location = new System.Drawing.Point(9, 176);
-            this.loginStatusLabel.Name = "loginStatusLabel";
-            this.loginStatusLabel.Size = new System.Drawing.Size(310, 40);
-            this.loginStatusLabel.TabIndex = 10;
-            this.loginStatusLabel.Text = "Please enter name before play.";
-            this.loginStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.logStatusLabel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logStatusLabel.Location = new System.Drawing.Point(9, 176);
+            this.logStatusLabel.Name = "logStatusLabel";
+            this.logStatusLabel.Size = new System.Drawing.Size(310, 40);
+            this.logStatusLabel.TabIndex = 10;
+            this.logStatusLabel.Text = "Please enter name before play.";
+            this.logStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // colorsButton
             // 
@@ -178,15 +178,15 @@
             this.titleLabel.TabIndex = 16;
             this.titleLabel.Text = "Mouse Moves";
             // 
-            // login_main_window
+            // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 344);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.gamesGroupBox);
-            this.Controls.Add(this.loginStatusLabel);
-            this.Controls.Add(this.adminPanelButton);
+            this.Controls.Add(this.logStatusLabel);
+            this.Controls.Add(this.visualizeButton);
             this.Controls.Add(this.userNameLabel);
             this.Controls.Add(this.userNameTextbox);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -194,7 +194,7 @@
             this.MaximumSize = new System.Drawing.Size(350, 383);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(350, 383);
-            this.Name = "login_main_window";
+            this.Name = "mainWindow";
             this.Text = "Mouse Moves";
             this.Load += new System.EventHandler(this.LoginMainWindow_Load);
             this.gamesGroupBox.ResumeLayout(false);
@@ -208,8 +208,8 @@
 
         private System.Windows.Forms.TextBox userNameTextbox;
         private System.Windows.Forms.Label userNameLabel;
-        private System.Windows.Forms.Button adminPanelButton;
-        private System.Windows.Forms.Label loginStatusLabel;
+        private System.Windows.Forms.Button visualizeButton;
+        private System.Windows.Forms.Label logStatusLabel;
         private System.Windows.Forms.Button colorsButton;
         private System.Windows.Forms.Button reflexButton;
         private System.Windows.Forms.Button thingsButton;

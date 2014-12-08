@@ -5,7 +5,7 @@ namespace mysz
 {
     public partial class mainWindow : Form
     {
-        VisualizeCoordinatesWindow AdminWindow;
+        VisualizeCoordinatesWindow VisualizeWindow;
         ThingsGameMenuWindow ThingsWindow;
         ReflexGameMenuWindow ReflexWindow;
         ColorsGameMenuWindow ColorsWindow;
@@ -16,19 +16,19 @@ namespace mysz
             InitializeComponent();
         }
 
-        private void RunAdminPanelButton_Click(object sender, EventArgs e)
+        private void RunVisualizeButton_Click(object sender, EventArgs e)
         {
-            LogThis("Admin panel is running now...");
-            AdminWindow = new VisualizeCoordinatesWindow();
-            AdminWindow.FormClosed += new FormClosedEventHandler(AdminWindow_FormClosed);
-            AdminWindow.Show();
+            LogThis("Visualise coordinates is running now...");
+            VisualizeWindow = new VisualizeCoordinatesWindow();
+            VisualizeWindow.FormClosed += new FormClosedEventHandler(VisualizeWindow_FormClosed);
+            VisualizeWindow.Show();
             this.Hide();
 
         }
 
         private void LogThis(String message)
         {
-            loginStatusLabel.Text = message;
+            logStatusLabel.Text = message;
         }
 
 
@@ -83,11 +83,11 @@ namespace mysz
             LogThis("Things game ended.");
         }
 
-        void AdminWindow_FormClosed(object sender, FormClosedEventArgs e)
+        void VisualizeWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            adminPanelButton.Enabled = true;
+            visualizeButton.Enabled = true;
             this.Show();
-            LogThis("Admin panel ended.");
+            LogThis("Visualise coordinates ended.");
         }
 
         void GamesButtonsOn()

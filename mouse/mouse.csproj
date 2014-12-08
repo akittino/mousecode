@@ -153,6 +153,9 @@
       <DependentUpon>ThingsGameMenuWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="mouse1.cd" />
+    <None Include="mouse3.cd" />
+    <None Include="mouse2.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
