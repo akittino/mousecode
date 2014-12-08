@@ -279,7 +279,7 @@ namespace mysz
         }
         private void decreaseGameTime()
         {
-            if ((quantityOfAnswers % 10 == 0) && (maxGameTime > 1))
+            if (quantityOfAnswers != 0 && quantityOfAnswers % 10 == 0 && maxGameTime > 1)
             {
                 --maxGameTime;
             }

@@ -224,7 +224,7 @@ namespace mysz
 
         private void decreaseGameTime()
         {
-            if ((gameScore % 10 == 0) && (maxGameTime > 1))
+            if (gameScore != 0 && gameScore % 10 == 0 && maxGameTime > 1)
             {
                 setQuestionTime((double)--maxGameTime);
             }

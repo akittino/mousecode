@@ -357,7 +357,7 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(364, 370);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(364, 320);
+            this.MinimumSize = new System.Drawing.Size(364, 370);
             this.Name = "MoodWindow";
             this.Text = "Choose your mood";
             this.ResumeLayout(false);

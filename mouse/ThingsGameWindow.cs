@@ -171,7 +171,7 @@ namespace mysz
 
         private void decreaseGameTime()
         {
-            if (questionCounter % 10 == 0 && questionTime > 1)
+            if (questionCounter != 0 && questionCounter % 10 == 0 && questionTime > 1)
             {
                 setQuestionTime((double)--questionTime);
             }
