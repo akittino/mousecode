@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace mysz
 {
-    public partial class main_window : Form
+    public partial class mainWindow : Form
     {
         VisualizeCoordinatesWindow AdminWindow;
         ThingsGameMenuWindow ThingsWindow;
@@ -11,7 +11,7 @@ namespace mysz
         ColorsGameMenuWindow ColorsWindow;
         bool resetedName = false;
 
-        public main_window()
+        public mainWindow()
         {
             InitializeComponent();
         }

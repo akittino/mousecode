@@ -13,7 +13,7 @@ namespace mysz
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new main_window());
+            Application.Run(new mainWindow());
         }
     }
 }

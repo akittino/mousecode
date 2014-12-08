@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="mysz.ColorsGameWindow">
+    <Position X="2.75" Y="1.25" Width="2.5" />
+    <InheritanceLine Type="mysz.MouseForm" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.5" Y="0.5" />
+        <Point X="1.5" Y="0.197" />
+        <Point X="3.938" Y="0.197" />
+        <Point X="3.938" Y="1.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAABRAACICCCgIKWAZCgzAATgMAAgBoQEEAIAAEkAJA=</HashCode>
+      <FileName>ColorsGameWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mysz.MouseForm">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="mysz.MouseForm.TimePoint">
+        <TypeIdentifier>
+          <NewMemberFileName>MouseForm.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAFABBABAACgEAAAAADAAAAADAAgIAAcEAIQAAAAJA=</HashCode>
+      <FileName>MouseForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mysz.ReflexGameWindow">
+    <Position X="5.5" Y="1.25" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="mysz.ReflexGameWindow.GameStates">
+        <TypeIdentifier>
+          <NewMemberFileName>ReflexGameWindow.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <InheritanceLine Type="mysz.MouseForm" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.5" Y="0.5" />
+        <Point X="1.5" Y="0.197" />
+        <Point X="6.75" Y="0.197" />
+        <Point X="6.75" Y="1.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ACAFBIAIKjCCgEKQgJShBAADgIAAoRiAMMAoAAFEAJI=</HashCode>
+      <FileName>ReflexGameWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mysz.ThingsGameWindow">
+    <Position X="8.25" Y="1.25" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="mysz.ThingsGameWindow.Question">
+        <TypeIdentifier>
+          <NewMemberFileName>ThingsGameWindow.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <InheritanceLine Type="mysz.MouseForm" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.5" Y="0.5" />
+        <Point X="1.5" Y="0.188" />
+        <Point X="9.438" Y="0.188" />
+        <Point X="9.438" Y="1.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>IAgFBBBIIDCigEKQgJyBBgKDgAQAoAkAEkAIIAFGGBA=</HashCode>
+      <FileName>ThingsGameWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mysz.VisualizeCoordinatesWindow">
+    <Position X="11" Y="1.25" Width="3" />
+    <InheritanceLine Type="mysz.MouseForm" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.5" Y="0.5" />
+        <Point X="1.5" Y="0.197" />
+        <Point X="12.438" Y="0.197" />
+        <Point X="12.438" Y="1.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ACAIAJAAACEAIEBAAAKFQAICIIAAAAwAAAQAAQAADIA=</HashCode>
+      <FileName>VisualizeCoordinatesWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
